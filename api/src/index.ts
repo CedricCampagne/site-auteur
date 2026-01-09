@@ -10,7 +10,11 @@ import helmet from 'helmet';
 // utilise middleware pour sanitize le req.body automatiquement si présent
 import { sanitizeBody } from "./middleware/sanitize";
 
-import { testUserRole } from "./test/testUserRole";
+import { testUserRole } from "./tests/testUserRole";
+import { testChronicle } from "./tests/testChronicle"
+import { testBook } from "./tests/testBook";
+import { testComment } from "./tests/testComment";
+
 const app = express();
 app.use(cors({origin: 'http://localhost:5173', credentials:true}));
 app.use(helmet());      // xss-clean n’est plus compatible avec Express 5 / Node 18+ / TypeScript
@@ -27,14 +31,16 @@ sequelize.authenticate()
 .catch((err=>console.error('Erreur de co a la db', err)));
 
 // test des models User Role et relation via UserRole
-// async function main() {
-//   await sequelize.sync({ force: true });
-//   console.log("Tables synchronisées");
+//  async function main() {
+//     await sequelize.sync({ force: true });
+//     console.log("Tables synchronisées");
 
-//   await testUserRole();
-// }
+//     await testUserRole();
+//     await testChronicle();
+//     await testBook();
+//     await testComment();
+//  }
 
-// main();
-
+//  main();
 
 app.listen(process.env.PORT, ()=>console.log('API is running on http://localhost:3000'));
