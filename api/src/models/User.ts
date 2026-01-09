@@ -1,6 +1,7 @@
 import { Table, Column, Model, DataType, PrimaryKey, AutoIncrement, Unique, HasMany, BelongsToMany } from "sequelize-typescript";
 import { Role } from "./Role";
 import { UserRole } from "./UserRole";
+import { Comment } from "./Comment";
 
 interface UserAttributes {
     id_user:number
@@ -58,4 +59,8 @@ export class User extends Model<UserAttributes, UserCreationAttributes> {
     // Relation N:N avec Role via UserRole
     @BelongsToMany(()=>Role, ()=> UserRole)
     roles!: Role[];
+
+    // Relation avec Comment
+    @HasMany(()=> Comment)
+    comments!: Comment;
 }

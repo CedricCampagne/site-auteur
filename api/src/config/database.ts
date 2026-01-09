@@ -4,7 +4,9 @@ import { Sequelize } from "sequelize-typescript";
 import { User } from "../models/User";
 import { Role } from "../models/Role";
 import { UserRole } from "../models/UserRole";
-
+import { Chronicle} from "../models/Chronicle";
+import { Book } from "../models/Book";
+import { Comment } from "../models/Comment";
 export const sequelize = new Sequelize({
     dialect: process.env.DB_DIALECT as 'postgres',
     host: process.env.DB_HOST, database: process.env.DB_NAME,
@@ -12,5 +14,10 @@ export const sequelize = new Sequelize({
     password: process.env.DB_PASSWORD,
     logging: false,
     // models: [join(__dirname, '..', 'models')]
-    models: [User, Role, UserRole]
-});
+    models: [User, 
+        Role,
+        UserRole,
+        Chronicle,
+        Book,
+        Comment
+]});
