@@ -1,0 +1,61 @@
+import { Table, Column, Model, DataType, PrimaryKey, AutoIncrement, Unique, HasMany, BelongsToMany } from "sequelize-typescript";
+import { Role } from "./Role";
+import { UserRole } from "./UserRole";
+
+interface UserAttributes {
+    id_user:number
+    username:string
+    email:string;
+    password:string;
+    is_active:boolean
+} 
+
+interface UserCreationAttributes {
+    username:string
+    email:string;
+    password:string;
+    is_active:boolean
+}
+
+@Table({
+    tableName: "user",
+    // Tables de liaison pas besoin des timesstamps
+    timestamps: false
+})
+
+export class User extends Model<UserAttributes, UserCreationAttributes> {
+    @PrimaryKey
+    @AutoIncrement
+    @Column(DataType.INTEGER)
+    id_user!: number;
+
+    @Unique
+    @Column({
+        type: DataType.STRING(50),
+        allowNull: false
+    })
+    username!:string;
+
+    @Unique
+    @Column({
+        type: DataType.STRING(50),
+        allowNull: false
+    })
+    email!:string;
+
+    // ne jamais mettre @Unique sur un pass qui va etre hash
+    @Column({
+        type: DataType.STRING(50),
+        allowNull: false
+    })
+    password!:string;
+
+    @Column({
+        type:DataType.BOOLEAN
+    })
+    is_active!:boolean
+
+    // Relation N:N avec Role via UserRole
+    @BelongsToMany(()=>Role, ()=> UserRole)
+    roles!: Role[];
+}
