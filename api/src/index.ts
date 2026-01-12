@@ -3,6 +3,8 @@ import "reflect-metadata";
 import dotenv from "dotenv";
 dotenv.config();
 
+import apiRouter from "./routes/index.routes";
+
 import { sequelize } from "./config/database";
 import express from "express";
 import cors from "cors";
@@ -11,11 +13,11 @@ import helmet from 'helmet';
 // utilise middleware pour sanitize le req.body automatiquement si présent
 import { sanitizeBody } from "./middleware/sanitize";
 
-// import { testUserRole } from "./scripts/testUserRole";
-// import { testChronicle } from "./scripts/testChronicle"
-// import { testBook } from "./scripts/testBook";
-// import { testComment } from "./scripts/testComment";
-import { seedBooks } from "./seeds/seedBooks";
+//import { testUserRole } from "./scripts/testUserRole";
+//import { testChronicle } from "./scripts/testChronicle"
+//import { testBook } from "./scripts/testBook";
+//import { testComment } from "./scripts/testComment";
+//import { seedBooks } from "./seeds/seedBooks";
 
 const app = express();
 app.use(cors({origin: 'http://localhost:5173', credentials:true}));
@@ -37,12 +39,14 @@ sequelize.authenticate()
 //      await sequelize.sync({ force: true });
 //      console.log("Tables synchronisées");
 //     //await testUserRole();
-//     //  await testChronicle();
-//     //  await testBook();
-//     //  await testComment();
-//     // await seedBooks();
+//     //await testChronicle();
+//     //await testBook();
+//     //await testComment();
+//     //await seedBooks();
 //   }
 
 //   main();
+
+app.use("/api", apiRouter);
 
 app.listen(process.env.PORT, ()=>console.log('API is running on http://localhost:3000'));
