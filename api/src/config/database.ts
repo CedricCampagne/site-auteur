@@ -14,10 +14,5 @@ export const sequelize = new Sequelize({
     password: process.env.DB_PASSWORD,
     logging: false,
     // models: [join(__dirname, '..', 'models')]
-    models: [User, 
-        Role,
-        UserRole,
-        Chronicle,
-        Book,
-        Comment
-]});
+    models: [User,Role,UserRole,Chronicle,Book,Comment],
+});
