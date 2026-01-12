@@ -1,4 +1,4 @@
-import { User } from "../models/User";
+import { User } from "../models/User"
 import { Chronicle } from "../models/Chronicle";
 import { Comment } from "../models/Comment";
 

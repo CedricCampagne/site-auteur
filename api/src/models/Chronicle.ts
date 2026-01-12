@@ -1,6 +1,5 @@
 import { Table, Column, Model, DataType, PrimaryKey, AutoIncrement, Unique, HasMany, BelongsToMany, ForeignKey, BelongsTo } from "sequelize-typescript";
 import { Comment } from "./Comment";
-import { Col } from "sequelize/types/utils";
 
 interface ChronicleAttributes {
     id_chronicle:number

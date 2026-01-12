@@ -1,24 +1,31 @@
-import { Table, Column, Model, DataType, PrimaryKey, AutoIncrement, Unique } from "sequelize-typescript";
+import { Table, Column, Model, DataType, PrimaryKey, AutoIncrement, Unique, BeforeUpdate, BeforeValidate } from "sequelize-typescript";
+import { slugify } from "../utils/slugify";
 
 interface BookAttributes {
     id_book: number
     title: string
+    slug: string
     author: string
     summary: string
+    excerpt: string
     published_at: Date
+    publisher: string
+    genre: string
     cover_url: string
-    slug: string
     is_active: boolean
 }
 
 interface BookCreationAttributes {
     title: string
-    slug: string
+    slug?: string
     author: string
     summary: string
+    excerpt: string
     published_at: Date
+    publisher: string
+    genre: string
     cover_url: string
-    is_active?: boolean
+    is_active: boolean
 }
 
 @Table({
@@ -26,6 +33,17 @@ interface BookCreationAttributes {
 })
 
 export class Book extends Model<BookAttributes, BookCreationAttributes> {
+
+    @BeforeValidate
+    @BeforeUpdate
+    static generateSlug(instance: Book) {
+        console.log("HOOK RUNNING, title =", instance.title);
+        console.log("slugify() returns =", slugify(instance.title));
+
+        if(instance.title){
+            instance.slug = slugify(instance.title);
+        }
+    }
 
     @PrimaryKey
     @AutoIncrement
@@ -62,10 +80,28 @@ export class Book extends Model<BookAttributes, BookCreationAttributes> {
     summary!:string
 
     @Column({
+        type: DataType.TEXT,
+        allowNull: false
+    })
+    excerpt!:string
+
+    @Column({
         type: DataType.DATE,
         allowNull: false
     })
     published_at!: Date;
+
+    @Column({
+        type: DataType.TEXT,
+        allowNull: true
+    })
+    publisher!:string
+
+    @Column({
+        type: DataType.TEXT,
+        allowNull: false
+    })
+    genre!:string
 
     @Column({
         type: DataType.STRING,
