@@ -11,10 +11,11 @@ import helmet from 'helmet';
 // utilise middleware pour sanitize le req.body automatiquement si présent
 import { sanitizeBody } from "./middleware/sanitize";
 
-import { testUserRole } from "./scripts/testUserRole";
-import { testChronicle } from "./scripts/testChronicle"
-import { testBook } from "./scripts/testBook";
-import { testComment } from "./scripts/testComment";
+// import { testUserRole } from "./scripts/testUserRole";
+// import { testChronicle } from "./scripts/testChronicle"
+// import { testBook } from "./scripts/testBook";
+// import { testComment } from "./scripts/testComment";
+import { seedBooks } from "./seeds/seedBooks";
 
 const app = express();
 app.use(cors({origin: 'http://localhost:5173', credentials:true}));
@@ -32,16 +33,16 @@ sequelize.authenticate()
 .catch((err=>console.error('Erreur de co a la db', err)));
 
 // test des models User Role et relation via UserRole
-  async function main() {
-     await sequelize.sync({ force: true });
-     console.log("Tables synchronisées");
+//   async function main() {
+//      await sequelize.sync({ force: true });
+//      console.log("Tables synchronisées");
+//     //await testUserRole();
+//     //  await testChronicle();
+//     //  await testBook();
+//     //  await testComment();
+//     // await seedBooks();
+//   }
 
-     //await testUserRole();
-     await testChronicle();
-     await testBook();
-     await testComment();
-  }
-
-  main();
+//   main();
 
 app.listen(process.env.PORT, ()=>console.log('API is running on http://localhost:3000'));
