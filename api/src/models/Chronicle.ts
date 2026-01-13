@@ -1,21 +1,28 @@
-import { Table, Column, Model, DataType, PrimaryKey, AutoIncrement, Unique, HasMany, BelongsToMany, ForeignKey, BelongsTo } from "sequelize-typescript";
+import { Table, Column, Model, DataType, PrimaryKey, AutoIncrement, Unique, BeforeUpdate, BeforeValidate, HasMany } from "sequelize-typescript";
+import { slugify } from "../utils/slugify";
 import { Comment } from "./Comment";
 
 interface ChronicleAttributes {
-    id_chronicle:number
-    title:string
-    content:string
-    published_at: Date
-    slug:string
-    is_active?:boolean
+    id_chronicle:number;
+    title:string;
+    slug:string;
+    quote: string;
+    summary: string;
+    content:string;
+    cover_url: string
+    published_at: string | Date;
+    is_active?:boolean;
 }
 
 interface ChronicleCreationAttributes {
-    title:string
-    content:string
-    published_at: Date
-    slug:string
-    is_active?:boolean
+    title:string;
+    slug:string;
+    quote: string;
+    summary: string;
+    content:string;
+    cover_url: string
+    published_at: string | Date;
+    is_active?:boolean;
 }
 
 @Table ({
@@ -23,6 +30,17 @@ interface ChronicleCreationAttributes {
 })
 
 export class Chronicle extends Model<ChronicleAttributes, ChronicleCreationAttributes>{
+
+    @BeforeValidate
+    @BeforeUpdate
+    static generateSlug(instance: Chronicle) {
+        console.log("HOOK RUNNING, title =", instance.title);
+        console.log("slugify() returns =", slugify(instance.title));
+
+        if(instance.title){
+            instance.slug = slugify(instance.title);
+        }
+    }
 
     @PrimaryKey
     @AutoIncrement
@@ -39,6 +57,25 @@ export class Chronicle extends Model<ChronicleAttributes, ChronicleCreationAttri
     })
     title!:string
 
+    @Unique
+    @Column({
+        type: DataType.STRING,
+        allowNull: false
+    })
+    slug!: string;
+
+    @Column({
+        type: DataType.TEXT,
+        allowNull: false
+    })
+    quote!: string;
+
+    @Column({
+        type: DataType.TEXT,
+        allowNull: false
+    })
+    summary!:string;
+
     @Column({
         type: DataType.TEXT,
         allowNull: false
@@ -46,17 +83,16 @@ export class Chronicle extends Model<ChronicleAttributes, ChronicleCreationAttri
     content!:string;
 
     @Column({
+        type: DataType.STRING,
+        allowNull: false
+    })
+    cover_url!:string
+    
+    @Column({
         type: DataType.DATE,
         allowNull: false
     })
     published_at!: Date;
-
-    @Unique
-    @Column({
-        type: DataType.STRING,
-        allowNull: false
-    })
-    slug!: string;
 
     @Column({
         type: DataType.BOOLEAN,
