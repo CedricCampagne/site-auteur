@@ -9,12 +9,13 @@
 	
 	// const { latestBook } = data;
 	const latestbook = data.latestbook;
+	const allbooks = data.allbooks;
 
 </script>
 
 
 <HeroSection />
 <LastBooks { latestbook } />
-<Bibliography />
+<Bibliography { allbooks }/>
 <LastChroniques/>
 <About/>

@@ -4,7 +4,7 @@
 
 </script>
 
-<article class="min-w-60 h-80 flex flex-col rounded-xl overflow-hidden bg-white shadow-md">
+<article class="min-w-60 h-80 flex flex-col rounded-xl overflow-hidden bg-white shadow-md border border-accent2">
   <div class="h-1/3 w-full">
     <img
       src="/images/kuru.jpg"
