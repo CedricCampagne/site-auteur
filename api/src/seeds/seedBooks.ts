@@ -1,5 +1,5 @@
 import { Book } from "../models/Book";
-import { booksData } from "../data/books";
+import { booksData } from "../data/dataBooks";
 
 export async function seedBooks() {
     console.log("=== Seeding Books ===");

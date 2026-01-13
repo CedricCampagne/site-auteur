@@ -3,6 +3,7 @@ import dotenv from "dotenv"; dotenv.config();
 
 import { sequelize } from "../config/database";
 import { seedBooks } from "./seedBooks";
+import { seedChronicles } from "./seedChronicles";
 
 async function runSeed() {
     console.log("=== Running Seed ===");
@@ -15,6 +16,8 @@ async function runSeed() {
         console.log('Tables synchronisées');
 
         await seedBooks();
+        await seedChronicles();
+
         console.log('Seed Terminé !!');
     } catch (error) {
         console.error('Erreru pendant le seed :', error);
