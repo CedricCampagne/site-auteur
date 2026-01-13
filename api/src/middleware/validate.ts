@@ -9,7 +9,6 @@ export const validate = (schema: any, property: "body" | "params" | "query") => 
       const messages = error.details.map((detail: ValidationErrorItem) => detail.message);
       return res.status(400).json({ error: messages });
     }
-    
     next();
   };
 };
