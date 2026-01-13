@@ -3,7 +3,7 @@
 
 </script>
 
-<section class="bg-accent2 text-white p-6 flex gap-8">
+<section class="bg-accent2 text-white p-6 flex gap-8 mt-12">
     <div>
         <img src="/images/cv_photo.jpeg" alt="auteur" class="w-80 h-auto object-contain">
     </div>
