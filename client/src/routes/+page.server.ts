@@ -9,7 +9,5 @@ export async function load(): Promise< {
         getLatestBook(),
         getAllBooks()
     ]);
-    console.log('latestbook', latestbook);
-    console.log('allbooks', allbooks);
     return { latestbook, allbooks };
 }
