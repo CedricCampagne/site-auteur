@@ -13,8 +13,8 @@ export class BooksController {
     }
 
     static async getLatest(req: Request, res: Response) {
-        const books = await BookService.getLatestBooks();
-        res.json(books);
+        const book = await BookService.getLatestBooks();
+        res.json(book);
     }
 
     static async getSlug (req: Request, res: Response) {

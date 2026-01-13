@@ -14,9 +14,8 @@ export class BookService {
     }
 
     static async getLatestBooks() {
-        return Book.findAll({
+        return Book.findOne({
             order: [["published_at", "DESC"]],
-            limit: 1
         })
     }
 
