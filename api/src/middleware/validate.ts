@@ -12,4 +12,3 @@ export const validate = (schema: any, property: "body" | "params" | "query") => 
     next();
   };
 };
-

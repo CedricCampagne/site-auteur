@@ -1,13 +1,18 @@
 import { getLatestBook, getAllBooks } from "../lib/api/books";
-import type { Book } from '$lib/types';
+import { getLatest3Chronicles } from "$lib/api/chronicles";
+
+import type { Book, Chronicle } from '$lib/types';
 
 export async function load(): Promise< {
     latestbook: Book;
     allbooks:Book[];
+    latest3Chronicles: Chronicle[];
 }> {
-    const [latestbook, allbooks] = await Promise.all([
+    const [latestbook, allbooks, latest3Chronicles] = await Promise.all([
         getLatestBook(),
-        getAllBooks()
+        getAllBooks(),
+        getLatest3Chronicles()
     ]);
-    return { latestbook, allbooks };
+    console.log('dernieres chroniques', latest3Chronicles)
+    return { latestbook, allbooks, latest3Chronicles };
 }
