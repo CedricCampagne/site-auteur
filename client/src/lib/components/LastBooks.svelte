@@ -7,17 +7,17 @@
 </script>
 
 {#if latestbook}
-    <section class="flex flex-col gap-4 mt-12 pb-4 border-b">
+    <section class="items-center mt-12 pb-8 border-b flex flex-col gap-4 text-center sm:text-start sm:items-start">
     <h2 class="text-title text-2xl mb-2">Dernier livre publié</h2>
-    <div class="flex gap-4">
-        <img src={latestbook.cover_url} alt="couverture livre kuru" class="w-40 border">
-        <div>
+    <div class="gap-4 flex flex-col items-center sm:flex sm:flex-row sm:items-start">
+        <img src={latestbook.cover_url} alt="couverture livre kuru" class="w-40 border shadow-lg shadow-accent2">
+        <div class="flex flex-col items-center gap-2 mt-8 sm:items-start">
             <h2 class="text-title text-2xl mb-2">{latestbook.title}</h2>
             <span>{formatDateFR(latestbook.published_at)}</span>
             <p>{latestbook.summary}</p>
-            <div class="mt-8">
-                <Button text="Lire un extrait" className="border-2 border-accent2" />
-                <Button text="Voir la fiche complete" className="border-2 border-accent2" />
+            <div class="flex flex-col items-center gap-2 mt-8 sm:flex sm:flex-row sm:items-start">
+                <Button text="Lire un extrait" className=" text-accent1 border-2 border-accent1 bg-bg-main hover:text-white hover:bg-accent1 transition:all duration-500" />
+                <Button text="Voir la fiche complete" className="text-accent2 border-2 border-accent2 bg-bg-main hover:text-white hover:bg-accent2 transition:all duration-500" />
         </div>
         </div>
     </div>

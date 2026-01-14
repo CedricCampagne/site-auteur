@@ -1,6 +1,7 @@
 export const booksData = [
     {
-        title: "Les Brumes d’Ambre", author: "Élise Montclair",
+        title: "Les Brumes d’Ambre",
+        author: "Élise Montclair",
         summary: "Un voyage initiatique dans un monde où la magie se nourrit des émotions humaines.",
         excerpt: "La brume se leva doucement, révélant les contours d’une cité oubliée...",
         published_at: new Date("2018-03-12"),
