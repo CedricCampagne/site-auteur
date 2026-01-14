@@ -6,9 +6,9 @@
 
 </script>
 
-<section class="bg-bg-main p-6 mt-8 mx-15 flex flex-col gap-6 border-b border-accent2">
+<section class="flex flex-col gap-4 mt-12 pb-4 border-b">
     <h2 class="text-title text-2xl">Bibliographie</h2>
-    <div class="flex gap-3 mt-2">
+    <div class="flex gap-4">
         {#each allbooks as book}
             <BookCard { book }/>
         {/each}

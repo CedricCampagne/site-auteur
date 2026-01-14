@@ -3,6 +3,7 @@
   import Footer from '$lib/components/Footer.svelte';
   import favicon from '$lib/assets/favicon.svg';
   import "./layout.css";
+  import { fade } from 'svelte/transition';
 </script>
 
 <svelte:head>
