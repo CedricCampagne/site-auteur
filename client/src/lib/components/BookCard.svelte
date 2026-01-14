@@ -6,9 +6,9 @@
     export let book: Book;
 </script>
 
-<article class="w-45 flex flex-col gap-4 justify-between items-center">
-    <img src={book.cover_url} alt="couverture livre" class="w-full h-auto object-contain border border-accent1">
-        <p class="text-center"> Titre {book.title}</p>
-        <p>{formatDateFR(book.published_at)}</p>
+<article class="w-45 flex flex-col gap-4 justify-between items-center bg-white pb-4">
+    <img src={book.cover_url} alt="couverture livre" class="w-full h-60 object-cover">
+        <p class="text-center">{book.title}</p>
+        <p class="text-center text-sm">{formatDateFR(book.published_at)}</p>
         <Button text="Voir le livre" className="border-2 border-accent2" />
 </article>

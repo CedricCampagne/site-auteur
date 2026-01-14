@@ -5,7 +5,6 @@
 	import LastBooks from "$lib/components/LastBooks.svelte";
 	import LastChroniques from "$lib/components/LastChroniques.svelte";
 	
-
 	export let data;
 	
 	// const { latestBook } = data;
@@ -15,9 +14,8 @@
 
 </script>
 
-
-<HeroSection />
-<LastBooks { latestbook } />
+<HeroSection/>
+<LastBooks { latestbook }/>
 <Bibliography { allbooks }/>
-<LastChroniques { latest3Chronicles} />
+<LastChroniques { latest3Chronicles}/>
 <About/>

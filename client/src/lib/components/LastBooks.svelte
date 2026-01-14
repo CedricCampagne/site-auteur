@@ -7,10 +7,10 @@
 </script>
 
 {#if latestbook}
-    <section class="bg-bg-main p-6 mt-8 mx-15 flex flex-col gap-6 border-b border-accent2">
+    <section class="flex flex-col gap-4 mt-12 pb-4 border-b">
     <h2 class="text-title text-2xl mb-2">Dernier livre publié</h2>
     <div class="flex gap-4">
-        <img src={latestbook.cover_url} alt="couverture livre kuru" class="w-32 h-auto object-cover border border-accent2">
+        <img src={latestbook.cover_url} alt="couverture livre kuru" class="w-40 border">
         <div>
             <h2 class="text-title text-2xl mb-2">{latestbook.title}</h2>
             <span>{formatDateFR(latestbook.published_at)}</span>
@@ -25,3 +25,4 @@
 {:else}
     <p>Aucun livre trouvé.</p>
 {/if}
+
