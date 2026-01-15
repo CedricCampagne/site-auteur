@@ -8,12 +8,12 @@ export class BookService {
 
     static async getRandom3Books() {
         return Book.findAll({
-            order: sequelize.literal('RANDOM()'),
+            order: sequelize.literal("RANDOM()"),
             limit: 3
         })
     }
 
-    static async getLatestBooks() {
+    static async getLatestBook() {
         return Book.findOne({
             order: [["published_at", "DESC"]],
         })
@@ -23,5 +23,9 @@ export class BookService {
         return Book.findOne({
            where: { slug }
         });
+    }
+
+    static async getBookById(id:number) {
+        return Book.findByPk(id);
     }
 }
