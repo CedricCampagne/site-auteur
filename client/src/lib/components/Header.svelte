@@ -30,8 +30,8 @@
           </ul>
         </nav>
         <button
-            class="bg-accent1 text-white px-4 rounded-3xl cursor-pointer hover:bg-bg-main hover:text-accent1 hover:border-accent1"
-        >Newsletter</button>
+            class="bg-accent1 text-white px-4 rounded-3xl cursor-pointer hover:bg-bg-main hover:text-accent1 hover:border-accent1 transition-all duration-500">Newsletter
+        </button>
     </div>
 
 <!-- Mobile -->
