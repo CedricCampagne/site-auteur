@@ -18,3 +18,11 @@ export async function getAllBooks(): Promise<Book[]> {
     }
     return await res.json();
 }
+
+export async function getByIdBook(id: number, slug:string) : Promise<Book> {
+    const res = await fetch(`${API_URL}/books/${id}/${slug}`);
+    if(!res.ok){
+        throw new Error("Erreur API/books/is/slug");
+    }
+    return await res.json();
+}
