@@ -21,9 +21,9 @@
   <!-- TEXTE -->
   <div class="basis-2/3 flex flex-col justify-between items-center p-4 overflow-hidden">
     <h3 class="font-title text-lg line-clamp-2">{chronicle.title}</h3>
-    <p class="text-accent1 line-clamp-2">{chronicle.quote}</p>
-    <p class="text-sm text-text-soft line-clamp-2">{chronicle.summary}</p>
-    <Button text="Lire la chronique" className="text-sm border-2 bg-accent1 text-white hover:bg-white hover:text-accent1 transition-all duration-500" />
+    <p class="text-accent1 line-clamp-2 text-center">{chronicle.quote}</p>
+    <p class="text-sm text-text-soft line-clamp-2 text-center">{chronicle.summary}</p>
+    <Button text="Lire la chronique" className="text-sm border-2 bg-accent2 text-white hover:bg-white hover:text-accent2 transition-all duration-500" />
   </div>
 </article>
 

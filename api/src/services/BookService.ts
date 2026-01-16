@@ -3,7 +3,9 @@ import { sequelize } from "../config/database";
 
 export class BookService {
     static async getAllBooks() {
-        return Book.findAll();
+        return Book.findAll({
+            order : [["published_at", "DESC"]]
+        });
     }
 
     static async getRandom3Books() {
