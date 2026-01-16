@@ -1,7 +1,4 @@
 <script>
-	import { goto } from "$app/navigation";
-  import { getBookUrl } from "$lib/navigation";
-  
   export let text = "Bouton"
   export let className = ""
 </script>
