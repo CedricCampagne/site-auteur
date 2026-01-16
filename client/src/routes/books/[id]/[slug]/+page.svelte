@@ -8,8 +8,9 @@
     let activTab = "resume"
 </script>
 
+{#if book }
 <section class="flex flex-col gap-4 mt-24 pb-8 border-b">
-    <div class="flex flex-col gap-24 items-center md:flex md:flex-row md:gap-8">
+    <div class="flex flex-col items-center gap-24 md:flex-row md:gap-8">
         <img src={book.cover_url} alt="" class="flex-1 shadow-lg shadow-accent2">
         <div class="flex-2 flex flex-col gap-12">
             <h2 class="text-5xl">{book.title}</h2>
@@ -24,13 +25,12 @@
                 />
                 <BookTag 
                     text={book.publisher}
-                    className= {String(book.published_at) ? "bg-accent2 text-white" : ""}
+                    className= {book.publisher ? "bg-accent2 text-white" : ""}
                 />                
             </div>
 
         </div>
     </div>
-
     <div class="flex justify-center gap-2 mt-24">
         <button
             on:click={() => activTab = "resume"}
@@ -46,17 +46,20 @@
             class={`p-2 text-2xl border-b-2 ${activTab === "extrait"
                 ? "text-accent1 font-black border-accent1"
                 : "text-accent2 border-transparent"
-                }`}
+            }`}
         >
             Extrait
         </button>
     </div>
 
-    <div class="mt-8 px-4 py-4 border-t ">
+    <div class="mt-8 px-4 py-4 border-t text-center">
         {#if activTab === "resume"}
-        <p>{book.summary}</p>
+            <p>{book.summary}</p>
         {:else if activTab === "extrait"}
-        <p>{book.excerpt}</p>
+            <p>{book.excerpt}</p>
         {/if}
     </div>
-</section>
+</section>    
+{:else}
+    <section>Pas de livre trouvé.</section>
+{/if}
