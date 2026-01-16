@@ -9,7 +9,7 @@
 </script>
 
 <section class="flex flex-col gap-4 mt-24 pb-8 border-b">
-    <div class="flex gap-8">
+    <div class="flex flex-col gap-24 items-center md:flex md:flex-row md:gap-8">
         <img src={book.cover_url} alt="" class="flex-1 shadow-lg shadow-accent2">
         <div class="flex-2 flex flex-col gap-12">
             <h2 class="text-5xl">{book.title}</h2>
@@ -31,7 +31,7 @@
         </div>
     </div>
 
-    <div class="border-b flex justify-center gap-2 mt-24">
+    <div class="flex justify-center gap-2 mt-24">
         <button
             on:click={() => activTab = "resume"}
             class={`p-2 text-2xl border-b-2 ${activTab === "resume"
@@ -52,7 +52,7 @@
         </button>
     </div>
 
-    <div class="mt-8 px-4">
+    <div class="mt-8 px-4 py-4 border-t ">
         {#if activTab === "resume"}
         <p>{book.summary}</p>
         {:else if activTab === "extrait"}

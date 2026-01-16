@@ -13,6 +13,5 @@ export async function load(): Promise< {
         getAllBooks(),
         getLatest3Chronicles()
     ]);
-    console.log('dernieres chroniques', latest3Chronicles)
     return { latestbook, allbooks, latest3Chronicles };
 }
