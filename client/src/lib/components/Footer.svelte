@@ -6,7 +6,7 @@
   <nav>
     <ul class="flex">
       <li class=" hidden sm:block sm:p-2 ">
-        <a href="">Accueil</a>
+        <a href="/">Accueil</a>
       </li>
       <li class=" hidden sm:block sm:p-2 ">
         <a href="">Livres</a>

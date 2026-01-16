@@ -31,7 +31,7 @@ app.get("/api/health", (req , res)=> res.json({status : 'ok'}));
 
 // test de co client sequelize
 sequelize.authenticate()
-.then(()=> console.log('Connectin a pg via sequelize-ts ok'))
+.then(()=> console.log('Connection a pg via sequelize-ts ok'))
 .catch((err=>console.error('Erreur de co a la db', err)));
 
 // test des models User Role et relation via UserRole

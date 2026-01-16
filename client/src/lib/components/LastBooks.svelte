@@ -2,8 +2,14 @@
     import type { Book } from "$lib/types";
 	import Button from "./Button.svelte";
     import { formatDateFR} from "../utils/date";
+	import { goto } from "$app/navigation";
+    import { getBookUrl } from "$lib/navigation";
 
     export let latestbook: Book ;
+
+    function goToLatest() {
+        goto(getBookUrl(latestbook));
+    }
 </script>
 
 {#if latestbook}
@@ -16,8 +22,14 @@
             <span>{formatDateFR(latestbook.published_at)}</span>
             <p>{latestbook.summary}</p>
             <div class="flex flex-col items-center gap-2 mt-8 sm:flex sm:flex-row sm:items-start">
-                <Button text="Lire un extrait" className=" text-accent1 border-2 border-accent1 bg-bg-main hover:text-white hover:bg-accent1 transition:all duration-500" />
-                <Button text="Voir la fiche complete" className="text-accent2 border-2 border-accent2 bg-bg-main hover:text-white hover:bg-accent2 transition:all duration-500" />
+                <Button
+                    text="Lire un extrait"
+                    className=" text-accent1 border-2 border-accent1 bg-bg-main hover:text-white hover:bg-accent1 transition:all duration-500"
+                />
+                <Button text="Voir la fiche complete"
+                    className="text-accent2 border-2 border-accent2 bg-bg-main hover:text-white hover:bg-accent2 transition:all duration-500"
+                    on:click={()=> goToLatest()}
+                />
         </div>
         </div>
     </div>
