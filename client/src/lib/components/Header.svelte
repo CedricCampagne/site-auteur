@@ -1,6 +1,8 @@
 <script>
-  let isOpen = false;
-  import Icon from "@iconify/svelte";
+    import Icon from "@iconify/svelte";
+    import { page } from "$app/state";
+
+    let isOpen = false;
 </script>
 
 <header>
@@ -9,21 +11,51 @@
         <div class="p-2">Katia Campagne</div>
         <nav>
           <ul class="flex gap-1">
-              <li class="p-2 hover:text-accent1 hover:underline hover:underline-offset-4 transition-all duration-500">
-                  <a href="/">Accueil</a>
-              </li>
-              <li class="p-2 hover:text-accent1 hover:underline hover:underline-offset-4 transition-all duration-500">
-                  <a href="">Livres</a>
-              </li>
-              <li class="p-2 hover:text-accent1 hover:underline hover:underline-offset-4 transition-all duration-500">
-                  <a href="">Chroniques</a>
-              </li>
-              <li class="p-2 hover:text-accent1 hover:underline hover:underline-offset-4 transition-all duration-500">
-                  <a href="">A propos</a>
-              </li>
-              <li class="p-2 hover:text-accent1 hover:underline hover:underline-offset-4 transition-all duration-500">
-                  <a href="">Contact</a>
-              </li>
+            <li class="p-2 hover:text-accent1 hover:underline hover:underline-offset-4 transition-all duration-500">
+                <a href="/"
+                    class={page.url.pathname === "/"
+                    ? " text-accent1 font-black"
+                    : ""}
+                >
+                    Accueil
+                </a>
+            </li>
+            <li class="p-2 hover:text-accent1 hover:underline hover:underline-offset-4 transition-all duration-500">
+                <a href="/bibliography"
+                    class={page.url.pathname === "/bibliography"
+                    ? " text-accent1 font-black"
+                    : ""}
+                >
+                    Livres
+                </a>
+            </li>
+            <li class="p-2 hover:text-accent1 hover:underline hover:underline-offset-4 transition-all duration-500">
+                <a href="/chronicles"
+                class={page.url.pathname === "/chronicles"
+                ? " text-accent1 font-black"
+                : ""}
+                >
+                    Chroniques                   
+                </a>
+            </li>
+            <li class="p-2 hover:text-accent1 hover:underline hover:underline-offset-4 transition-all duration-500">
+                <a href="/about"
+                    class={page.url.pathname === "/about"
+                    ? " text-accent1 font-black"
+                    : ""}
+                >
+                    A propos
+                </a>
+            </li>
+            <li class="p-2 hover:text-accent1 hover:underline hover:underline-offset-4 transition-all duration-500">
+                <a href="/contact"
+                    class={page.url.pathname === "/contact"
+                    ? " text-accent1 font-black"
+                    : ""}
+                >
+                    Contact
+                </a>
+            </li>
               <li class="p-2 hover:text-accent1 hover:underline hover:underline-offset-4 transition-all duration-500">
                   <Icon icon="ri:moon-fill" class="text-xl" />
               </li>   
@@ -48,11 +80,51 @@
 {#if isOpen}
 <nav class="absolute top-9 right-6 z-1000 md:hidden mt-2" on:mouseleave={() => (isOpen = !isOpen)}>
     <ul class="flex flex-col gap-2 p-2 bg-bg-main border rounded-tl-lg rounded-bl-lg shadow">
-    <li class="p-2 hover:text-accent1"><a href="/">Accueil</a></li>
-    <li class="p-2 hover:text-accent1"><a href="">Livres</a></li>
-    <li class="p-2 hover:text-accent1"><a href="">Chroniques</a></li>
-    <li class="p-2 hover:text-accent1"><a href="">A propos</a></li>
-    <li class="p-2 hover:text-accent1"><a href="">Contact</a></li>
+    <li class="p-2 hover:text-accent1">
+        <a href="/"
+            class={page.url.pathname === "/"
+                ? " text-accent1 font-black"
+                : ""}
+        >
+            Accueil
+        </a>
+    </li>
+    <li class="p-2 hover:text-accent1">
+        <a href="/bibliography"
+            class={page.url.pathname === "/bibliography"
+            ? " text-accent1 font-black"
+            : ""}
+        >
+            Livres
+        </a>
+    </li>
+    <li class="p-2 hover:text-accent1">
+        <a href="/chronicles"
+            class={page.url.pathname === "/chronicles"
+            ? " text-accent1 font-black"
+            : ""}
+        >
+            Chroniques                   
+        </a>
+    </li>
+    <li class="p-2 hover:text-accent1">
+        <a href="/about"
+            class={page.url.pathname === "/about"
+            ? " text-accent1 font-black"
+            : ""}
+        >
+            A propos
+        </a>
+    </li>
+    <li class="p-2 hover:text-accent1">
+        <a href="/contact"
+            class={page.url.pathname === "/contact"
+            ? " text-accent1 font-black"
+            : ""}
+        >
+            Contact
+        </a>
+    </li>
     <li class="p-2 hover:text-accent1">
         <Icon icon="ri:moon-fill" class="text-xl" />
     </li>
