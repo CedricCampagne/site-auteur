@@ -13,6 +13,7 @@ export interface Book {
 }
 
 export interface Chronicle {
+    id_chronicle: number
     title:string;
     slug:string;
     quote: string;

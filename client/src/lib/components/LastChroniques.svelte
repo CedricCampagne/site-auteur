@@ -10,7 +10,7 @@
     <h2 class="text-center md:text-start text-title text-2xl">Dernières chroniques</h2>
      <div class="flex flex-col items-center gap-4 md:flex md:flex-row">
         {#each latest3Chronicles as chronicle }
-        <ChroniqueCard { chronicle}/>            
+        <ChroniqueCard { chronicle }/>            
         {/each}
     </div>
 </section>

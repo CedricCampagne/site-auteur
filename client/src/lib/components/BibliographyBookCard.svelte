@@ -17,7 +17,6 @@
     <div class="flex flex-col justify-between">
         <div>
             <h2 class="text-2xl font-semibold mb-2">{book.title}</h2>
-
             <p class="text-sm text-gray-700 line-clamp-3">
                 {book.excerpt.length > maxLength ? book.excerpt.slice(0,maxLength) + "..." : book.excerpt}
             </p>
