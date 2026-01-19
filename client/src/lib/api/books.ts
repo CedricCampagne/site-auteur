@@ -22,7 +22,7 @@ export async function getAllBooks(): Promise<Book[]> {
 export async function getByIdBook(id: number, slug:string) : Promise<Book> {
     const res = await fetch(`${API_URL}/books/${id}/${slug}`);
     if(!res.ok){
-        throw new Error("Erreur API/books/is/slug");
+        throw new Error("Erreur API/books/id/slug");
     }
     return await res.json();
 }

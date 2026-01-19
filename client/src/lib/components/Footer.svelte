@@ -9,10 +9,10 @@
         <a href="/">Accueil</a>
       </li>
       <li class=" hidden sm:block sm:p-2 ">
-        <a href="">Livres</a>
+        <a href="/bibliography">Livres</a>
       </li>
       <li class=" hidden sm:block sm:p-2 ">
-        <a href="">Chroniques</a>
+        <a href="/chronicles">Chroniques</a>
       </li>
       <li class=" hidden sm:block sm:p-2 ">
         <a href="">A propos</a>
