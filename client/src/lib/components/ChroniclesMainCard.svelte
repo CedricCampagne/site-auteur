@@ -1,0 +1,50 @@
+<script lang="ts">
+    import Button from "./Button.svelte";
+    import { goto } from "$app/navigation";
+    import { getChronicleUrl } from "$lib/navigation";
+	import type { Chronicle } from "$lib/types";
+
+    export let chronicle: Chronicle;
+
+    function goToChronicle(){
+        goto (getChronicleUrl(chronicle));
+  }
+</script>
+
+<article class="bg-white shadow-lg shadow-accent2 rounded p-4 sm:p-6 flex flex-col sm:flex-row gap-4 sm:gap-6">
+    <!-- Image -->
+    <img 
+        src={chronicle.cover_url}
+        alt="Image de la chronique {chronicle.title}"
+        class="w-full sm:w-48 h-48 object-cover rounded"
+    />
+
+    <!-- Texte -->
+    <div class="flex flex-col justify-between flex-1">
+        
+        <div>
+            <!-- Titre -->
+            <h2 class="text-2xl font-semibold mb-2">
+                {chronicle.title} {chronicle.quote}
+            </h2>
+            
+            <!-- Date + tags -->
+            <p class="text-sm text-accent1 font-bold mb-3">
+                {new Date(chronicle.published_at).toLocaleDateString("fr-FR")}
+            </p>
+
+            <!-- Extrait -->
+            <p class="text-sm text-gray-700 line-clamp-3">
+                {chronicle.summary}
+            </p>
+
+        </div>
+
+        <!-- Bouton -->
+        <Button
+            text="Lire la chronique"
+            className="mt-4 border-2 border-accent2 hover:bg-accent2 hover:text-white transition-all duration-300 w-fit"
+            on:click={()=>goToChronicle()}
+        />
+    </div>
+</article>
