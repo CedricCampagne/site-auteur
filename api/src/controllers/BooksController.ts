@@ -58,7 +58,6 @@ export class BooksController {
             if(!book){
                 return res.status(404).json({ error: "Books not found"});
             }
-            console.log("data", book);
             return res.json(book);
         } catch (error) {
             console.error(error);

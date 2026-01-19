@@ -25,4 +25,8 @@ export class ChronicleService {
             where: { slug }
         });
     }
+
+    static async getById(id:number) {
+        return Chronicle.findByPk(id);
+    }
 }
