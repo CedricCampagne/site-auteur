@@ -15,10 +15,13 @@
 
 {#if open}
     <!-- Overlay au click dispatch close pôur ferme le modal et changer showModal dans le parent -->
-    <div 
-        class="fixed inset-0 bg-black/50 flex items-center justify-center z-40"
-        on:click={close}
-    ></div>
+    <div class="fixed inset-0 bg-black/50 flex items-center justify-center z-40">
+        <button
+            class="absolute inset-0 w-full h-full"
+            on:click={close}
+            aria-label="Fermer le modal"
+        ></button>
+    </div>
 
     <div
         class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 
