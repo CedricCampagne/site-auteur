@@ -15,10 +15,10 @@
         <a href="/chronicles">Chroniques</a>
       </li>
       <li class=" hidden sm:block sm:p-2 ">
-        <a href="">A propos</a>
+        <a href="/about">A propos</a>
       </li>
       <li class=" hidden sm:block sm:p-2 ">
-        <a href="">Contact</a>
+        <a href="/contact">Contact</a>
       </li>
       <li class="p-2">
         <a href="">Mentions Légales</a>

@@ -50,7 +50,7 @@
                 l’envie de partager mes lectures, mes analyses et mes coups de cœur. 
                 J’aime comprendre ce qui fait vibrer un texte, ce qui le rend unique.
             </p>
-           <p class="text-lg leading-relaxed text-text-main">
+           <!-- <p class="text-lg leading-relaxed text-text-main">
                 Depuis toujours, j’explore les univers littéraires. Ce site est né de 
                 l’envie de partager mes lectures, mes analyses et mes coups de cœur. 
                 J’aime comprendre ce qui fait vibrer un texte, ce qui le rend unique.
@@ -64,7 +64,7 @@
                 Depuis toujours, j’explore les univers littéraires. Ce site est né de 
                 l’envie de partager mes lectures, mes analyses et mes coups de cœur. 
                 J’aime comprendre ce qui fait vibrer un texte, ce qui le rend unique.
-            </p>
+            </p> -->
             
         </div>
     </div>
