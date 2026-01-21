@@ -11,7 +11,13 @@
 {#if book }
 <section class="flex flex-col gap-4 mt-24 pb-8 border-b">
     <div class="flex flex-col items-center gap-24 md:flex-row md:gap-8">
-        <img src={book.cover_url} alt="" class="flex-1 shadow-lg shadow-accent2">
+       <div class="w-[300px] h-[450px] overflow-hidden rounded-md shadow-lg shadow-accent2">
+            <img 
+                src={book.cover_url} 
+                alt={book.title} 
+                class="w-full h-full object-cover"
+            />
+        </div>
         <div class="flex-2 flex flex-col gap-12">
             <h2 class="text-5xl">{book.title}</h2>
             <p class="text-2xl">par <span class="text-accent1 font-black">{book.author}</span></p>
@@ -52,13 +58,23 @@
         </button>
     </div>
 
-    <div class="mt-8 px-4 py-4 border-t text-center">
+    <!-- <div class="mt-8 px-4 py-4 border-t text-center"> -->
+    <div class="text-content mt-8 px-4 py-4 border-t">
         {#if activTab === "resume"}
-            <p>{book.summary}</p>
+            {#each book.summary.trim().split('\n\n') as paragraph}
+                <p class="text-lg leading-7 mb-4">
+                    {@html paragraph.replace(/\n/g, '<br>')}
+                </p>
+            {/each}
         {:else if activTab === "extrait"}
-            <p>{book.excerpt}</p>
+            {#each book.excerpt.trim().split('\n\n') as paragraph}
+                <p class="text-lg leading-7 mb-4">
+                    {@html paragraph.replace(/\n/g, '<br>')}
+                </p>
+            {/each}
         {/if}
     </div>
+
 </section>    
 {:else}
     <section>Pas de livre trouvé.</section>
