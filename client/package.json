@@ -39,6 +39,8 @@
 		"vite": "^7.2.6"
 	},
 	"dependencies": {
-		"@iconify/svelte": "^5.2.1"
+		"@iconify/svelte": "^5.2.1",
+		"@tailwindcss/typography": "^0.5.19",
+		"marked": "^17.0.1"
 	}
 }

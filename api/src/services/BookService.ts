@@ -4,7 +4,8 @@ import { sequelize } from "../config/database";
 export class BookService {
     static async getAllBooks() {
         return Book.findAll({
-            order : [["published_at", "DESC"]]
+            order : [["published_at", "DESC"]],
+            limit: 5
         });
     }
 
