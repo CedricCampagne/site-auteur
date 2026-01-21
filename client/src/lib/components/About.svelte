@@ -1,4 +1,5 @@
 <script>
+	import { goto } from "$app/navigation";
 	import Button from "./Button.svelte";
 
 </script>
@@ -14,7 +15,11 @@
         <div class="w-2/3 flex flex-col gap-8 items-center md:flex md:flex-row md:w-full">
             <div class="flex-1 flex flex-col items-center justify-start gap-4">
                 <p class="text-center md:text-start">qq lignes sur l'autuer, sa carriere et ses passions pour le thriller. Une biographie captivante pour mieux connaitre l'écrivain</p>
-                <Button text="En savoir plus" className="border hover:text-accent2 hover:bg-white transition-all duration-500" />
+                <Button 
+                    text="En savoir plus"
+                    className="border hover:text-accent2 hover:bg-white transition-all duration-500"
+                    on:click = { ()=> goto('about')}
+                />
             </div>
             <div class="flex-1 flex flex-col items-center justify-start gap-4">
                 <h3 class="text-xl">Recevez les nouvelles publication</h3>

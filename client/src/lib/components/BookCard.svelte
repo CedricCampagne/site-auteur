@@ -13,7 +13,7 @@
 </script>
 
 <article class="w-2/3 flex flex-col gap-4 justify-between items-center bg-white pb-4 shadow-lg shadow-accent2">
-    <img src={book.cover_url} alt="couverture livre" class="w-full sm:h-60 object-cover">
+    <img src={book.cover_url} alt="couverture livre" class="w-full sm:h-full sm:object-contain md:h-60 md:object-cover">
         <h2 class="text-center">{book.title}</h2>
         <p class="text-center text-sm">{formatDateFR(book.published_at)}</p>
         <Button
