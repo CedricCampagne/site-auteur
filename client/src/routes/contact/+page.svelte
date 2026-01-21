@@ -15,7 +15,6 @@
                 class="border border-accent2 rounded-md p-3 focus:outline-none focus:border-accent2 peer"
                 placeholder=""
             >
-            <!-- <Icon icon="maki:cross" class="text-2xl text-accent1 absolute top-10 left-112 peer-placeholder-shown:opacity-100 opacity-0" /> -->
              <div class="absolute top-10 right-4 flex items-center gap-2 transition-opacity duration-500 peer-placeholder-shown:opacity-100 opacity-0" >
                 <span class="text-sm text-accent1">Saisir votre Nom</span>
                 <Icon icon="maki:cross" class="text-2xl text-accent1" />
@@ -29,7 +28,6 @@
                 class="border border-accent2 rounded-md p-3 focus:outline-none focus:border-accent2 peer"
                 placeholder=""
             >
-            <!-- <Icon icon="maki:cross" class="text-2xl text-accent1 absolute top-10 left-112 peer-placeholder-shown:opacity-100 opacity-0" /> -->
             <div class="absolute top-10 right-4 flex items-center gap-2 transition-opacity duration-200 peer-placeholder-shown:opacity-100 opacity-0" >
                 <span class="text-sm text-accent1">Saisir votre Email</span>
                 <Icon icon="maki:cross" class="text-2xl text-accent1" />

@@ -1,4 +1,4 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
 /* Reset perso minimal */
 *, *::before, *::after {
@@ -22,4 +22,21 @@ body, h1, h2, h3, h4, h5, h6 {
 
 h1, h2, h3 {
   font-family: var(--font-title);
+}
+
+.text-content p {
+  margin-bottom: 1rem;
+  line-height: 1.75;
+  font-size: 1.125rem;
+}
+
+.text-content h2 {
+  font-size: 1.75rem;
+  margin: 2rem 0 1rem;
+  font-weight: bold;
+}
+
+.text-content ul {
+  list-style: disc;
+  padding-left: 1.5rem;
 }

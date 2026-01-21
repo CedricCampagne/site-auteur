@@ -5,19 +5,19 @@
 
     export let book;
 
-    const maxLength = 150;
+    const maxLength = 700;
 </script>
 
 <section class="bg-white shadow-lg shadow-accent2 rounded p-6 flex flex-col sm:flex-row gap-6">
-    <img 
-        src={book.cover_url} 
-        alt="Couverture du livre {book.title}" 
-        class="w-full sm:w-40 h-56 object-cover rounded"
-    />
+        <img 
+            src={book.cover_url} 
+            alt="Couverture du livre {book.title}" 
+            class="w-full max-h-100 object-contain sm:w-40 sm:h-56 sm:object-cover rounded"
+        />
     <div class="flex flex-col justify-between">
         <div>
             <h2 class="text-2xl font-semibold mb-2">{book.title}</h2>
-            <p class="text-sm text-gray-700 line-clamp-3">
+            <p class="text-sm text-gray-700 line-clamp-5">
                 {book.excerpt.length > maxLength ? book.excerpt.slice(0,maxLength) + "..." : book.excerpt}
             </p>
         </div>
