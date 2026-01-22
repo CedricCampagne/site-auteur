@@ -18,7 +18,7 @@
     <div class="hidden md:flex md:justify-between md:items-center md:p-2">
         <div class="p-2 flex gap-4">
             <span>Katia Campagne</span>
-           <div class="relative group hidden md:inline-block">
+            <div class="relative group hidden md:inline-block">
                 <a
                     href={instagramUrl}
                     target="_blank"
