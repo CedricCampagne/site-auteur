@@ -1,7 +1,15 @@
 <script>
 	import { goto } from "$app/navigation";
 	import Button from "./Button.svelte";
+    import Icon from "@iconify/svelte";
+    import { onMount } from "svelte";
+    import { getInstagramUrl } from "$lib/navigation";
 
+    onMount(() => {
+       instagramUrl = getInstagramUrl("katiacampagne")
+    });
+    
+    let instagramUrl ="";
 </script>
 
 <section class="flex flex-col items-center bg-accent2 text-white p-6 gap-8 mt-12 md:flex md:flex-row">
@@ -19,11 +27,23 @@
                     l’envie de partager mes lectures, mes analyses et mes coups de cœur. 
                     J’aime comprendre ce qui fait vibrer un texte, ce qui le rend unique.
                 </p>
-                <Button 
-                    text="En savoir plus"
-                    className="border hover:text-accent2 hover:bg-white transition-all duration-500"
-                    on:click = { ()=> goto('about')}
-                />
+                <div class="flex flex-col items-center gap-2 sm:flex-row">
+                    <Button 
+                        text="En savoir plus"
+                        className="border hover:text-accent2 hover:bg-white transition-all duration-500"
+                        on:click = { ()=> goto('about')}
+                    />
+                    <a
+                        href={instagramUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        <Icon
+                            icon="simple-icons:instagram"
+                            class=" cursor-pointer text-2xl text-white hover:scale-115 transition-all duration-500"
+                        />
+                    </a>
+                </div>
             </div>
             <div class="flex-1 flex flex-col items-center justify-start gap-4">
                 <h3 class="text-xl">Recevez les nouvelles publication</h3>
