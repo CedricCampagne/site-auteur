@@ -2,8 +2,8 @@ import { where } from "sequelize";
 import { sequelize } from "../config/database";
 import { User } from "../models/User";
 import { Role } from "../models/Role";
-import { RegisterParams } from "../types/auth";
-import { hashPassword } from "../utils/hash";
+import { AuthResult, LoginParams, RegisterParams } from "../types/auth";
+import { hashPassword, verifyPassword } from "../utils/hash";
 import { generateToken } from "../utils/jwt";
 
 export class AuthServices {
@@ -57,7 +57,42 @@ export class AuthServices {
         };
     }
 
-    static async loginUser() {
+    static async loginUser(params: LoginParams): Promise<AuthResult> {
+        const user = await User.findOne({
+            where : {email: params.email},
+            include : [Role]
+        });
+        if (!user) {
+            throw new Error("Email ou mot de pass invalide");
+        }
 
+        if( user.is_active === false) {
+            throw new Error("Compte bloqué");
+        }
+
+        const valid = await verifyPassword(params.password, user.password);
+        if(!valid) {
+            throw new Error("Email ou mot de pass invalide");
+        }
+
+        const roles = user.roles.map(r =>r.name);
+        
+        //Génération du token
+        const token = generateToken({
+            id: user.id_user,
+            email: user.email,
+            username: user.username,
+            roles
+        });
+
+        return {
+            user: {
+                id: user.id_user,
+                email: user.email,
+                username: user.username,
+                roles
+            },
+            token
+        };
     }
 }
