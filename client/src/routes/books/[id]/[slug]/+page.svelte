@@ -40,7 +40,7 @@
     <div class="flex justify-center gap-2 mt-24">
         <button
             on:click={() => activTab = "resume"}
-            class={`p-2 text-2xl border-b-2 ${activTab === "resume"
+            class={`p-2 text-2xl border-b-2 cursor-pointer ${activTab === "resume"
                 ? "text-accent1 font-black border-accent1"
                 : "text-accent2 border-transparent"
                 }`}
@@ -49,7 +49,7 @@
         </button>
        <button
             on:click={() => activTab = "extrait"}
-            class={`p-2 text-2xl border-b-2 ${activTab === "extrait"
+            class={`p-2 text-2xl border-b-2 cursor-pointer ${activTab === "extrait"
                 ? "text-accent1 font-black border-accent1"
                 : "text-accent2 border-transparent"
             }`}

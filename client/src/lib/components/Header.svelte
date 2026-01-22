@@ -1,14 +1,47 @@
 <script>
     import Icon from "@iconify/svelte";
     import { page } from "$app/state";
+    import { onMount } from "svelte";
+    import { getInstagramUrl } from "$lib/navigation";
 
     let isOpen = false;
+    let instagramUrl = "";
+
+    onMount(() => {
+       instagramUrl = getInstagramUrl("katiacampagne")
+    });
+
 </script>
 
 <header>
     <!-- Desktop -->
     <div class="hidden md:flex md:justify-between md:items-center md:p-2">
-        <div class="p-2">Katia Campagne</div>
+        <div class="p-2 flex gap-4">
+            <span>Katia Campagne</span>
+           <div class="relative group hidden md:inline-block">
+                <a
+                    href={instagramUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <Icon
+                        icon="simple-icons:instagram"
+                        class=" cursor-pointer text-2xl text-accent2 hover:text-accent1 transition-all duration-500"
+                    />
+                </a>
+
+                <!-- Tooltip -->
+                <span
+                    class="absolute left-1/2 -translate-x-1/2 mt-2 
+                    hidden group-hover:block 
+                    whitespace-nowrap
+                    bg-black text-white text-xs px-2 py-1 rounded shadow-lg"
+                >
+                    Peut nécessiter une connexion Instagram
+                </span>
+            </div>
+            
+        </div>
         <nav>
           <ul class="flex gap-1">
             <li class="p-2 hover:text-accent1 hover:underline hover:underline-offset-4 transition-all duration-500">
@@ -56,9 +89,6 @@
                     Contact
                 </a>
             </li>
-              <li class="p-2 hover:text-accent1 hover:underline hover:underline-offset-4 transition-all duration-500">
-                  <Icon icon="ri:moon-fill" class="text-xl" />
-              </li>   
           </ul>
         </nav>
         <button
@@ -67,8 +97,20 @@
     </div>
 
 <!-- Mobile -->
-<div class="flex md:hidden justify-between items-center">
-    <div class="p-2 text-xl font-bold">Katia Campagne</div>
+<div class="flex md:hidden justify-around items-center">
+    <div class="p-2 flex gap-4">
+            <span class="font-black text-xl">Katia Campagne</span>
+            <a
+                href={instagramUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                <Icon
+                    icon="simple-icons:instagram"
+                    class=" cursor-pointer text-2xl text-accent2 hover:text-accent1 transition-all duration-500"
+                />
+            </a>
+        </div>
 
     <!-- Bouton toggle -->
     <button on:click={() => (isOpen = !isOpen)}>
@@ -125,12 +167,11 @@
             Contact
         </a>
     </li>
-    <li class="p-2 hover:text-accent1">
-        <Icon icon="ri:moon-fill" class="text-xl" />
-    </li>
     <li>
-        <button class="bg-accent1 text-white px-4 py-1 rounded-3xl">
-        Newsletter
+        <button
+            class="bg-accent1 text-white px-2 py-1 rounded-3xl hover:text-accent1 hover:bg-bg-main transition-all duration-500"
+        >
+            Newsletter
         </button>
     </li>
     </ul>
