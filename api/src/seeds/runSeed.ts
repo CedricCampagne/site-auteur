@@ -4,6 +4,7 @@ import dotenv from "dotenv"; dotenv.config();
 import { sequelize } from "../config/database";
 import { seedBooks } from "./seedBooks";
 import { seedChronicles } from "./seedChronicles";
+import { seedRoles } from "./seedRoles";
 
 async function runSeed() {
     console.log("=== Running Seed ===");
@@ -17,6 +18,7 @@ async function runSeed() {
 
         await seedBooks();
         await seedChronicles();
+        await seedRoles();
 
         console.log('Seed Terminé !!');
     } catch (error) {
