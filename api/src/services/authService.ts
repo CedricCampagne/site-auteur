@@ -1,0 +1,63 @@
+import { where } from "sequelize";
+import { sequelize } from "../config/database";
+import { User } from "../models/User";
+import { Role } from "../models/Role";
+import { RegisterParams } from "../types/auth";
+import { hashPassword } from "../utils/hash";
+import { generateToken } from "../utils/jwt";
+
+export class AuthServices {
+    static async registerUser(params: RegisterParams) {
+
+        // Vérification du mail
+        const existingEmail = await User.findOne({where: {email: params.email}});
+        if(existingEmail) {
+            throw new Error("Email déjà utilsié");
+        }
+
+        // Vérification du username
+        const existingUsername = await User.findOne({where: {username: params.username}});
+        if(existingUsername) {
+            throw new Error("Nom d'utilisateur déjà utilsié");
+        }
+
+        // Hash du pass
+        const hashed = await hashPassword(params.password);
+
+        // Création du user
+        const user = await User.create({
+            username: params.username,
+            email: params.email,
+            password: hashed,
+            is_active: true
+        });
+
+        const roleUser = await Role.findOne({where: {name: "user"}});
+        if (!roleUser) { 
+            throw new Error("Le rôle 'user' n'existe pas"); 
+        }
+        await user.$add("roles", roleUser.id_role);
+
+        //Génération du token
+        const token = generateToken({
+            id: user.id_user,
+            email: user.email,
+            username: user.username,
+            roles: ["user"]
+        });
+
+        return {
+            user: {
+                id: user.id_user,
+                email: user.email,
+                username: user.username,
+                roles: ["user"]
+            },
+            token
+        };
+    }
+
+    static async loginUser() {
+
+    }
+}
