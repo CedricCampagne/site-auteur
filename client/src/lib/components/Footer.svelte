@@ -21,7 +21,7 @@
         <a href="/contact">Contact</a>
       </li>
       <li class="p-2">
-        <a href="">Mentions Légales</a>
+        <a href="/mentions">Mentions Légales</a>
       </li>
     </ul>
   </nav>
