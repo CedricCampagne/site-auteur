@@ -3,12 +3,20 @@ import { ValidationErrorItem } from "joi";
 
 export const validate = (schema: any, property: "body" | "params" | "query") => {
   return (req: Request, res: Response, next: NextFunction) => {
-    const { error } = schema.validate(req[property], { abortEarly: false });
+    const { error, value } = schema.validate(req[property], {
+      abortEarly: false,
+      stripUknown: true,
+      allowUnknown: true
+    });
 
     if (error) {
       const messages = error.details.map((detail: ValidationErrorItem) => detail.message);
+      console.log("erreur joi", messages)
       return res.status(400).json({ error: messages });
     }
+
+    // ⚠️ Important : on remplace les données par celles nettoyées
+    req[property] = value;
     next();
   };
 };
