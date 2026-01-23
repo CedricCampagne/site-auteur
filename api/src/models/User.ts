@@ -46,13 +46,14 @@ export class User extends Model<UserAttributes, UserCreationAttributes> {
 
     // ne jamais mettre @Unique sur un pass qui va etre hash
     @Column({
-        type: DataType.STRING(50),
+        type: DataType.STRING(200),
         allowNull: false
     })
     password!:string;
 
     @Column({
-        type:DataType.BOOLEAN
+        type:DataType.BOOLEAN,
+        defaultValue: true
     })
     is_active!:boolean
 

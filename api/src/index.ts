@@ -3,7 +3,7 @@ import "reflect-metadata";
 import dotenv from "dotenv";
 dotenv.config();
 
-import apiRouter from "./routes/index.routes";
+import mainRouter from "./routes/index.routes";
 
 import { sequelize } from "./config/database";
 import express from "express";
@@ -47,6 +47,6 @@ sequelize.authenticate()
 
 //   main();
 
-app.use("/api", apiRouter);
+app.use("/api", mainRouter);
 
 app.listen(process.env.PORT, ()=>console.log('API is running on http://localhost:3000'));

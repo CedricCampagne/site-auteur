@@ -13,7 +13,7 @@
 
 </script>
 
-<header>
+<header class="mb-6">
     <!-- Desktop -->
     <div class="hidden md:flex md:justify-between md:items-center md:p-2">
         <div class="p-2 flex gap-4">
@@ -91,9 +91,22 @@
             </li>
           </ul>
         </nav>
-        <button
-            class="bg-accent1 text-white px-4 rounded-3xl cursor-pointer hover:bg-bg-main hover:text-accent1 hover:border-accent1 transition-all duration-500">Newsletter
-        </button>
+        <div class="flex flex-col gap-3">
+            <a
+                href="/auth/login"
+                class="px-4 py-1 rounded-3xl border border-accent1 text-accent1"
+            >
+                Connexion
+            </a>
+
+            <a
+                href="/auth/register"
+                class="px-4 py-1 rounded-3xl border bg-accent1 text-white"
+            >
+                Inscription
+            </a>
+        </div>
+
     </div>
 
 <!-- Mobile -->
@@ -168,11 +181,21 @@
         </a>
     </li>
     <li>
-        <button
-            class="bg-accent1 text-white px-2 py-1 rounded-3xl hover:text-accent1 hover:bg-bg-main transition-all duration-500"
-        >
-            Newsletter
-        </button>
+                <div class="flex flex-col gap-3">
+            <a
+                href="/auth/login"
+                class="px-4 py-1 rounded-3xl border border-accent1 text-accent1"
+            >
+                Connexion
+            </a>
+
+            <a
+                href="/auth/register"
+                class="px-4 py-1 rounded-3xl bg-accent1 text-white"
+            >
+                Inscription
+            </a>
+        </div>
     </li>
     </ul>
     </nav>
