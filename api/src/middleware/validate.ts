@@ -15,7 +15,7 @@ export const validate = (schema: any, property: "body" | "params" | "query") => 
       return res.status(400).json({ error: messages });
     }
 
-    // ⚠️ Important : on remplace les données par celles nettoyées
+    // Important : on remplace les données par celles nettoyées
     req[property] = value;
     next();
   };
