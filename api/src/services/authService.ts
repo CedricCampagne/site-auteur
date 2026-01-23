@@ -70,7 +70,7 @@ export class AuthServices {
             throw new Error("Compte bloqué");
         }
 
-        const valid = await verifyPassword(params.password, user.password);
+        const valid = await verifyPassword( user.password, params.password);
         if(!valid) {
             throw new Error("Email ou mot de pass invalide");
         }

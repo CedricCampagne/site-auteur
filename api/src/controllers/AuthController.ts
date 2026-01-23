@@ -15,10 +15,7 @@ export class AuthController {
                 { stripUnknown: true}   // Pour enlever les champs inconnus par rappoort au schema
                 );
 
-            console.log('req body', req.body);
             const result = await AuthServices.registerUser(data);
-
-            console.log("result", result);
             return res.status(201).json(result);
         } catch (error: any) {
             return res.status(400).json({message : error.message});
@@ -33,10 +30,7 @@ export class AuthController {
                 { stripUnknown: true}
             );
 
-            console.log('req body', req.body);
             const result = await AuthServices.loginUser(data);
-
-            console.log("result", result);
             return res.status(200).json(result);
         } catch (error: any) {
             return res.status(400).json({message : error.message});
