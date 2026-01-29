@@ -12,6 +12,7 @@ import cookieParser from "cookie-parser";
 import helmet from 'helmet';
 // utilise middleware pour sanitize le req.body automatiquement si présent
 import { sanitizeBody } from "./middleware/sanitize";
+import { errorHandler } from "./middleware/errorHandler";
 
 //import { testUserRole } from "./scripts/testUserRole";
 //import { testChronicle } from "./scripts/testChronicle"
@@ -48,5 +49,6 @@ sequelize.authenticate()
 //   main();
 
 app.use("/api", mainRouter);
+app.use(errorHandler);
 
 app.listen(process.env.PORT, ()=>console.log('API is running on http://localhost:3000'));
