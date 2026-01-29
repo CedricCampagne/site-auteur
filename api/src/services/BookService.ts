@@ -1,5 +1,6 @@
 import { Book } from "../models/Book";
 import { sequelize } from "../config/database";
+import { HttpError } from "../errors/HttpError";
 
 export class BookService {
     static async getAllBooks() {
@@ -9,7 +10,7 @@ export class BookService {
         });
 
         if(!books || books.length === 0) {
-            throw { status: 404, message: "Auccun livre trouvé" };
+            throw new HttpError(404, "Aucun livre trouvé");
         }
 
         return books;
@@ -22,7 +23,7 @@ export class BookService {
         })
 
         if(!books || books.length === 0) {
-            throw { status: 404, message: "Auccun livre disponible" };
+            throw new HttpError(404, "Aucun livre disponible");
         }
 
         return books;
@@ -34,7 +35,7 @@ export class BookService {
         })
 
         if (!book) {
-            throw { status: 404, message: "Aucun livre récent trouvé" };
+            throw new HttpError(404, "Aucun livre récent trouvé");
         }
         return book;
     }
@@ -45,7 +46,7 @@ export class BookService {
         });
 
         if (!book) {
-            throw { status: 404, message: "Aucun livre trouvé avec ce slug" };
+            throw new HttpError(404, "Aucun livre trouvé avec ce slug");
         }
         return book;
     }
@@ -54,7 +55,7 @@ export class BookService {
         const book = await Book.findByPk(id);
 
         if (!book) {
-            throw { status: 404, message: "Aucun livre trouvé avec cet ID" };
+            throw new HttpError(404, "Aucun livre trouvé avec cet ID");
         }
         return book;
     }
