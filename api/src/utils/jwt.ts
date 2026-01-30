@@ -10,6 +10,7 @@ export function generateToken(payload:object) {
 
 export function verifyToken(token:string) {
     try {
+        // .verify renvoie le payload ou null si pas ok
         return jwt.verify(token, SECRET);
     } catch (error) {
         return null;
