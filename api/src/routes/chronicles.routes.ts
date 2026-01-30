@@ -2,6 +2,7 @@ import { Router } from "express";
 import { ChroniclesController } from "../controllers/ChroniclesController";
 import { chronicleIdSchema } from "../validators/chronicles/id.schema";
 import { validate } from "../middleware/validate";
+import { authGaurd } from "../middleware/authGuard";
 
 const chroniclesRouter = Router();
 
