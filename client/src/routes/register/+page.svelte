@@ -9,7 +9,7 @@
         if (form?.success) {
             setTimeout(() => {
                 window.location.href = "/login";
-            }, 2000);
+            }, 1500);
         }
     });
 </script>
@@ -39,7 +39,7 @@
                 </p>
             {/if}   
         </div>
-
+        
         <div class="flex flex-col min-w-1/2 relative">
             <label for="username" class="font-title text-title mb-1">Nom :</label>
             <input 
@@ -103,7 +103,7 @@
             type="submit"
             class="text-white bg-accent2 p-2 rounded-md min-w-1/2 hover:bg-accent1 transition-all duration-500"
         >
-            Envoyer
+            S'Inscrire
         </button>
     </form>
 </section>
