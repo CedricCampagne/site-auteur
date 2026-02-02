@@ -7,7 +7,6 @@
 	import LastChroniques from "$lib/components/LastChroniques.svelte";
 
 	export let data;
-	// const { latestBook } = data;
 	const latestbook = data.latestbook;
 	const allbooks = data.allbooks;
 	const latest3Chronicles = data.latest3Chronicles;

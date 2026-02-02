@@ -93,14 +93,14 @@
         </nav>
         <div class="flex flex-col gap-3">
             <a
-                href="/auth/login"
+                href="/login"
                 class="px-4 py-1 rounded-3xl border border-accent1 text-accent1"
             >
                 Connexion
             </a>
 
             <a
-                href="/auth/register"
+                href="/register"
                 class="px-4 py-1 rounded-3xl border bg-accent1 text-white"
             >
                 Inscription

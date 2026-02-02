@@ -1,5 +1,5 @@
 export interface Book {
-   id_book: number;
+    id_book: number;
     title: string;
     slug: string;
     author: string;
@@ -23,3 +23,4 @@ export interface Chronicle {
     published_at: string | Date;
     is_active?:boolean;
 }
+
