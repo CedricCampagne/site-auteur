@@ -4,7 +4,7 @@ import { slugify } from "../utils/slugify";
 interface BookAttributes {
     id_book: number
     title: string
-    slug: string
+    slug?: string
     author: string
     summary: string
     excerpt: string

@@ -19,7 +19,6 @@ export function getDeviceType() {
         if (/Mobile|iPhone|Android/i.test(ua)) {
             return "mobile";
         }
-
         return "desktop";
     }
 

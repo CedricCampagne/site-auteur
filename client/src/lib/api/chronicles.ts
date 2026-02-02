@@ -1,8 +1,7 @@
-import { API_URL } from "$env/static/private";
 import type { Chronicle } from "$lib/types";
 
 export async function getLatest3Chronicles(): Promise<Chronicle[]> {
-    const res = await fetch(`${API_URL}/chronicles/latest3`);
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/chronicles/latest3`);
     if(!res.ok) {
         throw new Error("Error API /latest3");
     }
@@ -10,7 +9,7 @@ export async function getLatest3Chronicles(): Promise<Chronicle[]> {
 }
 
 export async function getAllChronicles () : Promise<Chronicle[]> {
-    const res = await fetch(`${API_URL}/chronicles`);
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/chronicles`);
     if(!res.ok) {
         throw new Error("Errorr API/chronicles");
     }
@@ -18,7 +17,7 @@ export async function getAllChronicles () : Promise<Chronicle[]> {
 }
 
 export async function getByIdChronicle(id: number, slug:string) : Promise<Chronicle>{
-    const res  = await fetch(`${API_URL}/chronicles/${id}/${slug}`);
+    const res  = await fetch(`${import.meta.env.VITE_API_URL}/chronicles/${id}/${slug}`);
     if(!res.ok){
         throw new Error("Error API/chronicles/id/slug");
     }
