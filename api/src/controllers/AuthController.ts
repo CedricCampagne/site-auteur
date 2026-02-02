@@ -1,4 +1,3 @@
-import { error } from "node:console";
 import { AuthServices } from "../services/authService";
 import { Request, Response, NextFunction } from "express";
 import { HttpError } from "../errors/HttpError";
@@ -13,7 +12,7 @@ export class AuthController {
                 .cookie("token", token, {
                     httpOnly: true,
                     secure: false,
-                    sameSite: "strict",
+                    sameSite: "lax",
                     maxAge: 1*60*60*1000 // 1h <=> 3 600 000ms
                 })
                 .status(201)
@@ -31,7 +30,7 @@ export class AuthController {
                 .cookie("token", token, {
                     httpOnly: true,
                     secure: false,
-                    sameSite: "strict",
+                    sameSite: "lax",
                     maxAge: 1*60*60*1000 // 1h <=> 3 600 000ms
                 })
                 .status(201)

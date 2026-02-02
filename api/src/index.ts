@@ -21,8 +21,15 @@ import { errorHandler } from "./middleware/errorHandler";
 //import { seedBooks } from "./seeds/seedBooks";
 
 const app = express();
-app.use(cors({origin: 'http://localhost:5173', credentials:true}));
-app.use(helmet());      // xss-clean n’est plus compatible avec Express 5 / Node 18+ / TypeScript
+app.use(cors({
+    origin: 'http://localhost:5173',
+    credentials:true
+}));
+// app.use(helmet());      // xss-clean n’est plus compatible avec Express 5 / Node 18+ / TypeScript
+app.use(helmet({
+    crossOriginResourcePolicy: false,
+    crossOriginOpenerPolicy: false
+}));
 app.use(express.json());
 app.use(cookieParser());
 app.use(sanitizeBody);
