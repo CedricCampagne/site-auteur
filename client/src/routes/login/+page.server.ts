@@ -1,9 +1,9 @@
-import { fail, redirect } from "@sveltejs/kit";
+import { fail } from "@sveltejs/kit";
 import type { Actions } from "./$types";
 
 export const actions: Actions = {
     default: async ({ request, fetch, cookies })=>{
-        console.log("ACTION LOGIN APPELÉE");
+        // console.log("ACTION LOGIN APPELÉE");
         const data = await request.formData();
 
         const email = data.get("email")?.toString();
