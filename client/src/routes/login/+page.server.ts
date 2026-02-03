@@ -1,4 +1,4 @@
-import { fail } from "@sveltejs/kit";
+import { fail, redirect } from "@sveltejs/kit";
 import type { Actions } from "./$types";
 
 export const actions: Actions = {
@@ -44,15 +44,19 @@ export const actions: Actions = {
 
         // Récupérer le cookie envoyé par ton backend
         const setCookie = res.headers.get("set-cookie");
+        // console.log("setCookie", setCookie);
         if (setCookie) { const token = setCookie.split(";")[0].split("=")[1];
 
-        // Reposer le cookie côté navigateur
-        cookies.set("token", token, {
-            path: "/",
-            httpOnly: true,
-            sameSite: "lax",
-            secure: false, // en dev
-            maxAge: 3600 });
+            // console.log("token apres split", token);
+
+            // Reposer le cookie côté navigateur
+            cookies.set("token", token, {
+                path: "/",
+                httpOnly: true,
+                sameSite: "lax",
+                secure: false, // en dev
+                maxAge: 3600
+            });
         }
         return { success: "Connexion réalisée avec succès ! Redirection en cours..."}
     }
