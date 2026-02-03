@@ -5,13 +5,13 @@
 
     export let form;
 
-    // onMount(() => {
-    //     if (form?.success) {
-    //         setTimeout(() => {
-    //             window.location.href = "/";
-    //         }, 1500);
-    //     }
-    // });
+      onMount(() => {
+          if (form?.success) {
+              setTimeout(() => {
+                  window.location.href = "/";
+              }, 1500);
+          }
+      });
 </script>
 
 <section class="flex flex-col gap-4 mt-24 pb-8 border-b">
