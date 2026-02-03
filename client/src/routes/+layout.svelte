@@ -3,6 +3,8 @@
   import Footer from '$lib/components/Footer.svelte';
   import favicon from '$lib/assets/favicon.svg';
   import "./layout.css";
+
+  export let data;
 </script>
 
 <svelte:head>
@@ -20,7 +22,7 @@
   <!-- Contenu des pages -->
 	<main class="flex-1 bg-bg-main">
 		<div class="max-w-5xl mx-auto px-6">
-			<Header />
+			<Header data={data} />
 			<slot />
 	  	<Footer />
 	</div>

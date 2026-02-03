@@ -16,15 +16,15 @@ export const actions: Actions = {
             });
         }
 
-        console.log("AVANT FETCH", import.meta.env.VITE_API_URL);
+        // console.log("AVANT FETCH", import.meta.env.VITE_API_URL);
         const res = await fetch(`${import.meta.env.VITE_API_URL}/auth/login`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             credentials: "include",         // pour recevoir les cookies
             body: JSON.stringify({email, password })
         });
-        console.log("APRES FETCH", res.status);
-        console.log("COOKIES RECUS PAR SVELTEKIT :", res.headers.get("set-cookie"));
+        // console.log("APRES FETCH", res.status);
+        // console.log("COOKIES RECUS PAR SVELTEKIT :", res.headers.get("set-cookie"));
 
         const json = await res.json();
 
