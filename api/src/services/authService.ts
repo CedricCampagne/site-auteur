@@ -12,7 +12,7 @@ export class AuthServices {
         const existingEmail = await User.findOne({where: {email: params.email}});
         if(existingEmail) {
             // throw new Error("Email déjà utilsié");
-            throw new HttpError(409, "Email déjà utilsié")
+            throw new HttpError(409, "Email déjà utilisé")
         }
 
         // Vérification du username
