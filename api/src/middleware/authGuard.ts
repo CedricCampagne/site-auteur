@@ -2,11 +2,11 @@ import { Request, Response, NextFunction } from "express";
 import { HttpError } from "../errors/HttpError";
 import { verifyToken } from "../utils/jwt";
 
-export function authGaurd(req: Request, res: Response, next: NextFunction){
+export function authGuard(req: Request, res: Response, next: NextFunction){
 
     try {
         const token = req.cookies.token;
-    
+        // console.log('token recu du front', token)
         if(!token){
             throw new HttpError(401, "Non authentifié");
         }

@@ -16,10 +16,12 @@ export async function getAllChronicles () : Promise<Chronicle[]> {
     return await res.json();
 }
 
-export async function getByIdChronicle(id: number, slug:string) : Promise<Chronicle>{
-    const res  = await fetch(`${import.meta.env.VITE_API_URL}/chronicles/${id}/${slug}`);
-    if(!res.ok){
-        throw new Error("Error API/chronicles/id/slug");
-    }
-    return res.json();
-}
+// export async function getByIdChronicle(id: number, slug:string) : Promise<Chronicle>{
+//     const res  = await fetch(`${import.meta.env.VITE_API_URL}/chronicles/${id}/${slug}`, {
+//         credentials: "include"
+//     });
+//     if(!res.ok){
+//         throw new Error("Error API/chronicles/id/slug");
+//     }
+//     return res.json();
+// }
