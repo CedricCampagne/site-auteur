@@ -59,4 +59,14 @@ export class AuthController {
             next(error);
         }
     }
+
+    static async logout(req: Request, res: Response, next: NextFunction){
+        try {
+            // pour l'instant rien a invalider
+            console.log("le logout passe par le back");
+            return res.status(200).json({message: "Logged Out"});
+        } catch (error) {
+            next(error);
+        }
+    }
 }
