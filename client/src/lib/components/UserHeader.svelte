@@ -27,18 +27,16 @@
                 </div>
             {/if}
         </div>
-
     {:else}
-    <div 
-    class="relative"
-    on:pointerenter={() => open = true}
-    on:pointerleave={() => open = false}
->
-    <div class="flex items-center gap-1 cursor-pointer">
-    <Icon icon="mdi:account-circle" class="text-2xl text-accent1" />
-    <span class="text-sm text-accent1">Compte</span>
-</div>
-
+        <div 
+            class="relative"
+            on:pointerenter={() => open = true}
+            on:pointerleave={() => open = false}
+        >
+        <div class="flex items-center gap-1 cursor-pointer">
+            <Icon icon="mdi:account-circle" class="text-2xl text-accent1" />
+            <span class="text-sm text-accent1">Compte</span>
+        </div>
 
     {#if open}
         <div class="absolute right-0 top-full bg-white border rounded shadow p-3 w-30 z-50">
