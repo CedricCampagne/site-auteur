@@ -15,6 +15,8 @@ interface CommentCreationAttributes {
     is_valid?: boolean
     user_id: number
     chronicle_id:number
+    created_at?: Date
+    updated_at?: Date
 }
 
 @Table ({
