@@ -27,7 +27,8 @@ interface ChronicleCreationAttributes {
 
 @Table ({
     tableName: "chronicle",
-    timestamps: true
+    timestamps: true,
+    underscored: true
 })
 
 export class Chronicle extends Model<ChronicleAttributes, ChronicleCreationAttributes>{

@@ -2,6 +2,7 @@
     export let data;
 
     const chronicle = data.chronicle;
+    const comments = data.comments;
 </script>
 
 <section class="flex flex-col gap-4 mt-24 pb-8 border-b">
@@ -28,6 +29,18 @@
 
         <div class="prose prose-lg max-w-none text-gray-800 leading-relaxed">
             {chronicle.content}
+        </div>
+
+        <div>
+            {#each comments as comment }
+                <div>
+                    <div>
+                        <p>par :{comment.user.username}</p>
+                        <p>{comment.content}</p>
+                    </div>
+                </div>
+                
+            {/each}
         </div>
     </article>
 </section>

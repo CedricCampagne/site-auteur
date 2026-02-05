@@ -21,7 +21,8 @@ interface CommentCreationAttributes {
 
 @Table ({
     tableName: "comment",
-    timestamps: true
+    timestamps: true,
+    underscored: true
 })
 
 export class Comment extends Model<CommentAttributes, CommentCreationAttributes> {
