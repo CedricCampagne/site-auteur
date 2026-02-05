@@ -30,8 +30,8 @@ export interface Comment {
     is_valid: boolean;
     user_id: number;
     chronicle_id:number;
-    created_at: Date;
-    updated_at: Date;
+    created_at: string;
+    updated_at: string;
 
     user: {
         id_user: number;

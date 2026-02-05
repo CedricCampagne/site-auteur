@@ -11,7 +11,7 @@ export class CommentService{
                     attributes : ["id_user", "username"]
                 }
             ],
-            order: [["createdAt", "ASC"]]
+            order: [["created_at", "ASC"]]
         })
         return comments;
     };

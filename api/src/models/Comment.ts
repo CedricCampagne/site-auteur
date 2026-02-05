@@ -1,28 +1,35 @@
 import { Table, Column, Model, DataType, PrimaryKey, AutoIncrement, BelongsTo, ForeignKey, AllowNull, Index} from "sequelize-typescript";
 import { User } from "./User";
 import { Chronicle } from "./Chronicle";
+import { get } from "node:http";
 
 interface CommentAttributes {
-    id_comment: number
-    content: string
-    is_valid: boolean
-    user_id: number
-    chronicle_id:number
+    id_comment: number;
+    content: string;
+    is_valid: boolean;
+    user_id: number;
+    chronicle_id: number;
+    created_at: Date;
+    updated_at: Date;
 }
 
+
 interface CommentCreationAttributes {
-    content: string
-    is_valid?: boolean
-    user_id: number
-    chronicle_id:number
-    created_at?: Date
-    updated_at?: Date
+    content: string;
+    is_valid?: boolean;
+    user_id: number;
+    chronicle_id: number;
+    created_at?: Date;
+    updated_at?: Date;
 }
+
 
 @Table ({
     tableName: "comment",
     timestamps: true,
-    underscored: true
+    underscored: true,
+    createdAt: "created_at",
+    updatedAt: "updated_at"
 })
 
 export class Comment extends Model<CommentAttributes, CommentCreationAttributes> {
