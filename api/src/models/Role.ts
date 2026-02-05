@@ -17,7 +17,8 @@ interface RoleCreationAttributes {
 
 // indique que la classe est une table
 @Table({
-    tableName: "role"
+    tableName: "role",
+    underscored: true
 })
 
 //permet d’avoir le typage TypeScript sur les méthodes du modèle.
