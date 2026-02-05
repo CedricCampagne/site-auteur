@@ -25,10 +25,16 @@ export interface Chronicle {
 }
 
 export interface Comment {
+    id_comment: number;
     content: string;
-    is_valid?: boolean;
+    is_valid: boolean;
     user_id: number;
     chronicle_id:number;
-    created_at?: Date;
-    updated_at?: Date;
+    created_at: Date;
+    updated_at: Date;
+
+    user: {
+        id_user: number;
+        username: string
+    }
 }
