@@ -40,7 +40,7 @@
             {/if}
             {#if form?.success}
                 <p
-                    class="text-center text-white bg-green-600 rounded-2xl py-1 px-2"
+                    class="text-center text-white bg-green-700 rounded-2xl py-1 px-2"
                     transition:fade={{ duration: 400 }}
                 >
                     {form.success}

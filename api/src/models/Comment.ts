@@ -1,4 +1,4 @@
-import { Table, Column, Model, DataType, PrimaryKey, AutoIncrement, BelongsTo, ForeignKey} from "sequelize-typescript";
+import { Table, Column, Model, DataType, PrimaryKey, AutoIncrement, BelongsTo, ForeignKey, AllowNull, Index} from "sequelize-typescript";
 import { User } from "./User";
 import { Chronicle } from "./Chronicle";
 
@@ -6,19 +6,20 @@ interface CommentAttributes {
     id_comment: number
     content: string
     is_valid: boolean
-    id_user: number
-    id_chronicle:number
+    user_id: number
+    chronicle_id:number
 }
 
 interface CommentCreationAttributes {
     content: string
     is_valid?: boolean
-    id_user: number
-    id_chronicle:number
+    user_id: number
+    chronicle_id:number
 }
 
 @Table ({
-    tableName: "comment"
+    tableName: "comment",
+    timestamps: true
 })
 
 export class Comment extends Model<CommentAttributes, CommentCreationAttributes> {
@@ -46,15 +47,20 @@ export class Comment extends Model<CommentAttributes, CommentCreationAttributes>
     is_valid!:boolean;
 
     @ForeignKey(()=> Chronicle)
-    @Column(DataType.INTEGER)
-    id_chronicle!:number
+    @Index
+    @Column({
+        type:DataType.INTEGER,
+        allowNull: false
+    })
+    chronicle_id!:number
 
     @BelongsTo(()=> Chronicle)
     chronicle!: Chronicle;
 
     @ForeignKey(() => User)
+    @Index
     @Column(DataType.INTEGER)
-    id_user!: number;
+    user_id!: number;
 
     @BelongsTo(()=> User)
     user!: User;
