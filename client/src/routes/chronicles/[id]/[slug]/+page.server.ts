@@ -10,8 +10,7 @@ import { redirect } from "@sveltejs/kit";
 //     return { chronicle };
 // }
 
-export async function load({params, fetch, cookies}) : Promise<{ chronicle: Chronicle, comments:Comment[]}> {
-    const token = cookies.get("token");
+export async function load({params, fetch}) : Promise<{ chronicle: Chronicle, comments:Comment[]}> {
     // fetch pur récuperer la chronique
     const resChronicle  = await fetch(`${import.meta.env.VITE_API_URL}/chronicles/${params.id}/${params.slug}`);
 
