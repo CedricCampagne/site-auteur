@@ -61,3 +61,13 @@ export const actions: Actions = {
         return { success: "Connexion réalisée avec succès ! Redirection en cours..."}
     }
 }
+
+export function load({ cookies }){
+   const flash = cookies.get("flash");
+
+   if(flash){
+    cookies.delete("flash", { path: "/"});
+   }
+
+   return { flash };
+}

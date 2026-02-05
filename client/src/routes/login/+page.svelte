@@ -2,16 +2,23 @@
     import Icon from "@iconify/svelte";
     import { onMount } from "svelte";
     import { fade } from "svelte/transition";
+    import { flash, setFlash } from "$lib/stores/flash.js";
 
+    export let data;
     export let form;
+    
+    onMount(() => {
+        if (form?.success) {
+            setTimeout(() => {
+                window.location.href = "/";
+            }, 1500);
+        }
+    });
 
-      onMount(() => {
-          if (form?.success) {
-              setTimeout(() => {
-                  window.location.href = "/";
-              }, 1500);
-          }
-      });
+    // Si un message flash vient du serveur → on le met dans le store
+    if (data.flash) {
+        setFlash(data.flash);
+    }
 </script>
 
 <section class="flex flex-col gap-4 mt-24 pb-8 border-b">
@@ -21,11 +28,12 @@
         method="POST"
         class="flex flex-col gap-6 items-center"
     >
+        <!-- affichage message erreur ou succes -->
         <div class="h-8 flex items-center">
             {#if form?.error}
                 <p
                     class="text-center text-white bg-accent1 rounded-2xl py-1 px-2"
-                    transition:fade={{duration:400}}
+                    transition:fade={{ duration: 400 }}
                 >
                     {form.error}
                 </p>
@@ -37,12 +45,21 @@
                 >
                     {form.success}
                 </p>
-            {/if}   
+            {/if}
+            <!-- Message apres redirect si !auth route protegée -->
+            {#if $flash}
+                <p
+                    class="text-center text-white bg-accent1 rounded-2xl py-1 px-2"
+                    transition:fade={{ duration: 400 }}
+                >
+                    {$flash}
+                </p>
+            {/if}
         </div>
 
         <div class="flex flex-col min-w-1/2 relative">
             <label for="email" class="font-title text-title mb-1">Email :</label>
-            <input 
+            <input
                 type="email"
                 id="email"
                 name="email"
@@ -57,7 +74,7 @@
         </div>
         <div class="flex flex-col min-w-1/2 relative">
             <label for="password" class="font-title text-title mb-1">Mot de passe :</label>
-            <input 
+            <input
                 type="password"
                 id="password"
                 name="password"
@@ -69,7 +86,7 @@
                 <Icon icon="maki:cross" class="text-2xl text-accent1" />
             </div>
         </div>
-      
+
         <button
             type="submit"
             class="text-white bg-accent2 p-2 rounded-md min-w-1/2 hover:bg-accent1 transition-all duration-500"
