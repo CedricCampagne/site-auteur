@@ -29,7 +29,8 @@ interface BookCreationAttributes {
 }
 
 @Table({
-    tableName: "book"
+    tableName: "book",
+    underscored: true
 })
 
 export class Book extends Model<BookAttributes, BookCreationAttributes> {

@@ -3,7 +3,8 @@ import { Role } from "./Role";
 import { User } from './User'
 
 @Table({
-    tableName: "user_role"
+    tableName: "user_role",
+    underscored: true
 })
 
 export class UserRole extends Model<UserRole> {

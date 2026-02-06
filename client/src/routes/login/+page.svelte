@@ -40,7 +40,7 @@
             {/if}
             {#if form?.success}
                 <p
-                    class="text-center text-white bg-green-600 rounded-2xl py-1 px-2"
+                    class="text-center text-white bg-green-700 rounded-2xl py-1 px-2"
                     transition:fade={{ duration: 400 }}
                 >
                     {form.success}
@@ -49,7 +49,7 @@
             <!-- Message apres redirect si !auth route protegée -->
             {#if $flash}
                 <p
-                    class="text-center text-white bg-accent1 rounded-2xl py-1 px-2"
+                    class="text-center text-white bg-orange-400 rounded-2xl py-1 px-2"
                     transition:fade={{ duration: 400 }}
                 >
                     {$flash}

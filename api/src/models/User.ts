@@ -21,7 +21,8 @@ interface UserCreationAttributes {
 @Table({
     tableName: "user",
     // Tables de liaison pas besoin des timesstamps
-    timestamps: false
+    timestamps: false,
+    underscored: true
 })
 
 export class User extends Model<UserAttributes, UserCreationAttributes> {

@@ -1,4 +1,4 @@
-import { Table, Column, Model, DataType, PrimaryKey, AutoIncrement, Unique, BeforeUpdate, BeforeValidate, HasMany } from "sequelize-typescript";
+import { Table, Column, Model, DataType, PrimaryKey, AutoIncrement, Unique, BeforeUpdate, BeforeValidate, HasMany, Index } from "sequelize-typescript";
 import { slugify } from "../utils/slugify";
 import { Comment } from "./Comment";
 
@@ -26,7 +26,9 @@ interface ChronicleCreationAttributes {
 }
 
 @Table ({
-    tableName: "chronicle"
+    tableName: "chronicle",
+    timestamps: true,
+    underscored: true
 })
 
 export class Chronicle extends Model<ChronicleAttributes, ChronicleCreationAttributes>{
@@ -58,6 +60,7 @@ export class Chronicle extends Model<ChronicleAttributes, ChronicleCreationAttri
     title!:string
 
     @Unique
+    @Index
     @Column({
         type: DataType.STRING,
         allowNull: false

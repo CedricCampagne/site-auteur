@@ -5,6 +5,8 @@ import { sequelize } from "../config/database";
 import { seedBooks } from "./seedBooks";
 import { seedChronicles } from "./seedChronicles";
 import { seedRoles } from "./seedRoles";
+import { seedUsers } from "./seedUsers";
+import { seedComments } from "./seedComments";
 
 async function runSeed() {
     console.log("=== Running Seed ===");
@@ -19,6 +21,8 @@ async function runSeed() {
         await seedBooks();
         await seedChronicles();
         await seedRoles();
+        await seedUsers();
+        await seedComments();
 
         console.log('Seed Terminé !!');
     } catch (error) {
