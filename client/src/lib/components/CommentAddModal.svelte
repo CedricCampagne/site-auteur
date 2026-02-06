@@ -3,12 +3,44 @@
 
     export let open = false;
 
-    const maxLength = 300;
+    let content= "";
+    let error = "";
+
+    const minLength = 5;
+    const maxLength = 1000;
+
+    async function handleSubmit(event : SubmitEvent){
+        event.preventDefault();
+        error= "";
+
+        const trimmed = content.trim();
+
+        if(trimmed.length === 0){
+            error = "Le commentaire ne peut pas etre vide";
+            return
+        }
+
+        if(trimmed.length < minLength){
+            error = `Le commentaire doit contenir au moins ${minLength} caractères.`
+            return
+        }
+
+        if(trimmed.length > maxLength){
+            error = `Le commentaire ne doit pas dépasser ${maxLength} caractères.`
+            return
+        }
+
+        // Si tout est OK => soumission du formulaire
+        const form = event.target as HTMLFormElement;
+        form.submit();
+    }
+
     const dispatch = createEventDispatcher();
 
     function close(){
         dispatch("close");
     }
+
 </script>
 {#if open}
 <!-- inset-0 => top: 0; right: 0; bottom: 0; left: 0; -->
@@ -28,10 +60,24 @@
     >
     <form
         method="POST"
+        on:submit={handleSubmit}
         class="flex flex-col items-center gap-4"
         >
             <legend class="border-b-2 border-accent1">Ajouter votre commentaire</legend>
-            <textarea name="comment" id="comment" rows="8" cols="30" class="border-2 p-2"></textarea>
+            <textarea
+                name="comment"
+                id="comment"
+                rows="8" cols="30"
+                class="border p-2"
+                bind:value={content}
+                >
+
+            </textarea>
+            <div class="min-h-5">
+                {#if error}
+                    <p class="text-red-500 text-sm">{error}</p>
+                {/if}
+            </div>
             <div>
                 <button class="bg-accent1 text-white p-2 rounded-xs">Valider</button>
                 <button
