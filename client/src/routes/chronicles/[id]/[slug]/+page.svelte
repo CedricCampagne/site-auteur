@@ -34,7 +34,7 @@
         </div>
 
         <section class="max-w-3xl mx-auto px-4 sm:px-0 mt-12 mb-24">
-            <h3 class="text-2xl font-bold mb-6">Commentaires</h3>
+            <h3 class="text-2xl font-bold mb-6">Commentaires ({comments.length})</h3>
 
             {#if comments.length === 0}
                 <p class="text-accent2 italic">Aucun commentaire pour le moment.</p>

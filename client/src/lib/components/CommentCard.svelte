@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { timeAgo } from "$lib/utils/time";
 
     export let comment;
 </script>
@@ -9,11 +10,15 @@
             {comment.user.username[0].toUpperCase()}
         </div>
 
-        <div>
+        <div class="flex items-baseline gap-2">
             <p class="font-semibold">{comment.user.username}</p>
             <p class="text-xs text-accent2">
                 { new Date(comment.created_at).toLocaleDateString("fr-FR") }
             </p>
+            <p class="text-xs text-accent2">
+                {timeAgo(comment.created_at)}
+            </p>
+
         </div>
     </div>
 
