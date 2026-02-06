@@ -1,14 +1,5 @@
 import type { Chronicle, Comment } from "$lib/types";
 import { redirect } from "@sveltejs/kit";
-// import { getByIdChronicle } from "$lib/api/chronicles.js";
-
-
-// export async function load({params}) : Promise<{ chronicle: Chronicle}> {
-//     const { id, slug } = params;
-//     const chronicle = await getByIdChronicle(Number(id), slug);
-//     console.log(chronicle);
-//     return { chronicle };
-// }
 
 export async function load({params, fetch}) : Promise<{ chronicle: Chronicle, comments:Comment[]}> {
     // fetch pur récuperer la chronique
@@ -38,3 +29,4 @@ export async function load({params, fetch}) : Promise<{ chronicle: Chronicle, co
    
     return { chronicle, comments };
 }
+
