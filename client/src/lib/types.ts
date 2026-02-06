@@ -24,3 +24,17 @@ export interface Chronicle {
     is_active?:boolean;
 }
 
+export interface Comment {
+    id_comment: number;
+    content: string;
+    is_valid: boolean;
+    user_id: number;
+    chronicle_id:number;
+    created_at: string;
+    updated_at: string;
+
+    user: {
+        id_user: number;
+        username: string
+    }
+}

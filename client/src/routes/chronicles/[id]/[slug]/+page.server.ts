@@ -1,4 +1,4 @@
-import type { Chronicle } from "$lib/types";
+import type { Chronicle, Comment } from "$lib/types";
 import { redirect } from "@sveltejs/kit";
 // import { getByIdChronicle } from "$lib/api/chronicles.js";
 
@@ -10,23 +10,31 @@ import { redirect } from "@sveltejs/kit";
 //     return { chronicle };
 // }
 
-export async function load({params, fetch, cookies}) : Promise<{ chronicle: Chronicle}> {
-    const token = cookies.get("token");
-
-    const res  = await fetch(`${import.meta.env.VITE_API_URL}/chronicles/${params.id}/${params.slug}`, {
-        headers : {
-            cookie: `token=${token}`
-        }
-    });
+export async function load({params, fetch}) : Promise<{ chronicle: Chronicle, comments:Comment[]}> {
+    // fetch pur récuperer la chronique
+    const resChronicle  = await fetch(`${import.meta.env.VITE_API_URL}/chronicles/${params.id}/${params.slug}`);
 
     // 3. Si backend dit 401
-    if (res.status === 401) {
+    if (resChronicle.status === 401) {
         throw redirect(303, "/login");
     }
-    if (!res.ok) {
+    if (!resChronicle.ok) {
         throw redirect(303, "/login"); }
     
-    const chronicle = await res.json();
+    const chronicle = await resChronicle.json();
    
-    return { chronicle };
+    
+    // fetch pour récuperer les commentaires (avec le user du commentaire) associés a la chronique
+    const resComments = await fetch(`${import.meta.env.VITE_API_URL}/chronicles/${params.id}/${params.slug}/comments`);
+    
+    console.log(`${import.meta.env.VITE_API_URL}/chronicles/${params.id}/${params.slug}/comments`);
+    if (resComments.status === 401) {
+        throw redirect(303, "/login");
+    }
+    if (!resComments.ok) {
+        throw redirect(303, "/login"); }
+    
+    const comments = await resComments.json();
+   
+    return { chronicle, comments };
 }
