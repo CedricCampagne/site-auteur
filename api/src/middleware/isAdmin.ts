@@ -9,7 +9,7 @@ export function isAdmin(req: Request, res: Response, next: NextFunction){
             throw new HttpError(401, "Non authentifié");
         }
 
-        if(!user.roles || !user.roles.include("admin")){
+        if(!user.roles || !user.roles.includes("admin")){
             throw new HttpError(401, "Acces non autorisé : reservé aux administrateurs");
         }
 
