@@ -1,5 +1,7 @@
 import type { Chronicle, Comment } from "$lib/types";
 import { redirect } from "@sveltejs/kit";
+import type { Actions } from "./$types";
+import { fail } from "@sveltejs/kit";
 
 export async function load({params, fetch}) : Promise<{ chronicle: Chronicle, comments:Comment[]}> {
     // fetch pur récuperer la chronique
@@ -30,3 +32,56 @@ export async function load({params, fetch}) : Promise<{ chronicle: Chronicle, co
     return { chronicle, comments };
 }
 
+// Validation formulaire
+
+export const actions: Actions= {
+    default: async ({request, fetch})=> {
+        const data = await request.formData();
+        const comment = data.get("comment")?.toString();
+
+        console.log("form comment", comment);
+
+        // besoin de verifier si comment est vide ? le front le fait via handleSubmit ?
+       if (!comment) {
+            return fail(400, {
+                error: "Le commentaire ne peut pas etre vide",
+                values: { comment }
+            });
+        }
+
+        if (comment.length < 5) {
+            return fail(400, {
+                error: "Le commentaire doit contenir au moins de 5 caractères.",
+                values: { comment }
+            });
+        }
+
+        if (comment.length > 1000) {
+            return fail(400, {
+                error: "Le commentaire ne doit pas dépasser 1000 caractères.",
+                values: { comment }
+            });
+        }
+
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/comments`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            // credentials: "include",         // pour recevoir les cookies
+            body: JSON.stringify({ comment })
+        })
+
+        if (!res.ok) {
+            return fail(res.status, {
+                error: "Impossible de créer le commentaire."
+            });
+        }
+
+        const createdComment = await res.json();
+
+        return {
+            status: 200,
+            success: true,
+            comment: createdComment
+        };
+    }
+}

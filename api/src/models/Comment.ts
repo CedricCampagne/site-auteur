@@ -1,7 +1,6 @@
 import { Table, Column, Model, DataType, PrimaryKey, AutoIncrement, BelongsTo, ForeignKey, AllowNull, Index} from "sequelize-typescript";
 import { User } from "./User";
 import { Chronicle } from "./Chronicle";
-import { get } from "node:http";
 
 interface CommentAttributes {
     id_comment: number;
