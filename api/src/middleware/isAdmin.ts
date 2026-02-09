@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { HttpError } from "../errors/HttpError";
+import { Role } from "../models/Role";
 
 export function isAdmin(req: Request, res: Response, next: NextFunction){
     try {
@@ -9,8 +10,13 @@ export function isAdmin(req: Request, res: Response, next: NextFunction){
             throw new HttpError(401, "Non authentifié");
         }
 
-        if(!user.roles || !user.roles.includes("admin")){
-            throw new HttpError(401, "Acces non autorisé : reservé aux administrateurs");
+        if (!user.roles || user.roles.length === 0) {
+            throw new HttpError(403, "Aucun rôle associé à l'utilisateur");
+        } 
+        
+        const isAdmin = user.roles.some((role: Role) => role.name === "admin");
+        if (!isAdmin) { 
+            throw new HttpError(403, "Accès réservé aux administrateurs");
         }
 
         next();
