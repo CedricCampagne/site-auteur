@@ -6,6 +6,6 @@ import { addCommentSchema } from "../validators/comments/comments";
 
 const commentRouter = Router();
 
-commentRouter.post("/",validate(addCommentSchema,"body"), authGuard, CommentController.addComment);
+commentRouter.post("/",validate(addCommentSchema,"body"), authGuard,CommentController.addComment);
 
 export default commentRouter;
