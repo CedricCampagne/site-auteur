@@ -18,12 +18,20 @@
                 <span>{user.username}</span>
             </div>
             {#if open}
-                <div class="absolute right-0 top-full bg-white border rounded shadow p-3 w-40 z-50">
-                <form method="POST" action="/logout">
-                    <button class="w-full hover:underline underline-offset-4 cursor-pointer text-center ">
-                        Se déconnecter
-                    </button>
-                </form>
+                <div class="absolute right-0 top-full bg-white border rounded shadow p-3 w-40 z-50 flex flex-col">
+                    {#if user.roles && user.roles.includes("admin")}
+                        <a 
+                            href="/admin"
+                            class="hover:underline underline-offset-4 cursor-pointer text-center"
+                        >
+                            Administration
+                        </a>
+                    {/if}
+                    <form method="POST" action="/logout">
+                        <button class="w-full hover:underline underline-offset-4 cursor-pointer">
+                            Se déconnecter
+                        </button>
+                    </form>
                 </div>
             {/if}
         </div>
