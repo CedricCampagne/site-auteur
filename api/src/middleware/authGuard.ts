@@ -6,7 +6,6 @@ export function authGuard(req: Request, res: Response, next: NextFunction){
 
     try {
         const token = req.cookies.token;
-        // console.log('token recu du front', token)
         if(!token){
             throw new HttpError(401, "Non authentifié");
         }
@@ -24,8 +23,7 @@ export function authGuard(req: Request, res: Response, next: NextFunction){
             roles: payload.roles
         };
 
-
-        next();
+        next(); 
     } catch (error) {
         next(error);
     }

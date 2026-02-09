@@ -6,6 +6,7 @@ import { seedBooks } from "./seedBooks";
 import { seedChronicles } from "./seedChronicles";
 import { seedRoles } from "./seedRoles";
 import { seedUsers } from "./seedUsers";
+import { seedUserRole } from "./seedUserRole";
 import { seedComments } from "./seedComments";
 
 async function runSeed() {
@@ -22,6 +23,7 @@ async function runSeed() {
         await seedChronicles();
         await seedRoles();
         await seedUsers();
+        await seedUserRole();
         await seedComments();
 
         console.log('Seed Terminé !!');
