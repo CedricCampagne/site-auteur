@@ -50,7 +50,7 @@ export class ChroniclesController {
     static async getById (req: Request, res: Response, next: NextFunction) {
         try {
             const id = Number(req.params.id);
-            const chronicle = await ChronicleService.getById(id);
+            const chronicle = await ChronicleService.getChroniclesById(id);
 
             return res.json(chronicle);
         } catch (error) {
