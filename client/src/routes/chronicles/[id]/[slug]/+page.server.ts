@@ -20,7 +20,6 @@ export async function load({params, fetch}) : Promise<{ chronicle: Chronicle, co
     // fetch pour récuperer les commentaires (avec le user du commentaire) associés a la chronique
     const resComments = await fetch(`${import.meta.env.VITE_API_URL}/chronicles/${params.id}/${params.slug}/comments`);
     
-    console.log(`${import.meta.env.VITE_API_URL}/chronicles/${params.id}/${params.slug}/comments`);
     if (resComments.status === 401) {
         throw redirect(303, "/login");
     }
@@ -35,12 +34,12 @@ export async function load({params, fetch}) : Promise<{ chronicle: Chronicle, co
 // Validation formulaire
 
 export const actions: Actions= {
-    default: async ({request, fetch})=> {
+    default: async ({request, fetch, params})=> {
         const data = await request.formData();
         const comment = data.get("comment")?.toString();
 
-        console.log("form comment", comment);
-
+        const chronicle_id = Number(params.id);
+      
         // besoin de verifier si comment est vide ? le front le fait via handleSubmit ?
        if (!comment) {
             return fail(400, {
@@ -62,12 +61,15 @@ export const actions: Actions= {
                 values: { comment }
             });
         }
-
+    
         const res = await fetch(`${import.meta.env.VITE_API_URL}/comments`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            // credentials: "include",         // pour recevoir les cookies
-            body: JSON.stringify({ comment })
+            credentials: "include",         // pour recevoir les cookies
+            body: JSON.stringify({
+                content: comment,
+                chronicle_id: chronicle_id
+            })
         })
 
         if (!res.ok) {

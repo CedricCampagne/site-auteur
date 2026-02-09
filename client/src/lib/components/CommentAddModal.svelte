@@ -84,8 +84,7 @@
                 rows="8" cols="30"
                 class="border p-2"
                 bind:value={content}
-                >
-
+            >
             </textarea>
             <div class="min-h-5">
                 {#if error}

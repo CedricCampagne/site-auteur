@@ -2,7 +2,6 @@
 	import Button from '$lib/components/Button.svelte';
 	import CommentAddModal from '$lib/components/CommentAddModal.svelte';
     import CommentCard from '$lib/components/CommentCard.svelte';
-    import { enhance as kitEnhance } from "$app/forms";
 
     export let data;
 
@@ -12,7 +11,8 @@
     let showModal = false;
 
     function handleCreated(event: any) {
-        comments = [...comments, event.detail.comment];
+        const newComment = event.detail.comment;
+        comments = [ newComment, ...comments];
     }
 </script>
 
