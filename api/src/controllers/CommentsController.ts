@@ -12,4 +12,25 @@ export class CommentController {
             next(error);
         }
     }
+
+    static async addComment(req: Request, res: Response, next: NextFunction){
+        try {
+            const { content, chronicle_id} = req.body;
+            const user_id = req.user.id_user;  
+
+            const createdComment = await CommentService.addComment({
+                user_id,
+                chronicle_id,
+                content
+            })
+
+            return res.status(201).json({
+                success: true,
+                comment: createdComment
+            });
+
+        } catch (error) {
+            next(error);
+        }
+    }
 }
