@@ -22,6 +22,8 @@ export function authGuard(req: Request, res: Response, next: NextFunction){
             username: payload.username,
             roles: payload.roles
         };
+        
+        console.log("USER FROM TOKEN (authGuard):", req.user);
 
         next(); 
     } catch (error) {

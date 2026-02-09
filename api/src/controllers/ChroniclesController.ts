@@ -1,10 +1,17 @@
 import { Request, Response, NextFunction } from "express";
 import { ChronicleService } from "../services/ChronicleService";
+import { Role } from "../models/Role";
 
 export class ChroniclesController {
     static async getAll(req: Request, res:Response, next: NextFunction) {
         try {
-            const chronicles = await ChronicleService.getAllChronicles();
+            const user = req.user;
+
+            // Vérifie si l'utilisateur est admin
+            const isAdmin = user?.roles?.some((role: Role) => role.name === "admin") ?? false;
+
+            // Passe l'info au service
+            const chronicles = await ChronicleService.getAllChronicles(isAdmin);
 
             return res.json(chronicles);
         } catch (error) {
@@ -50,7 +57,11 @@ export class ChroniclesController {
     static async getById (req: Request, res: Response, next: NextFunction) {
         try {
             const id = Number(req.params.id);
-            const chronicle = await ChronicleService.getChroniclesById(id);
+            const user = req.user; // Détermine si l'utilisateur est admin
+            const isAdmin = user?.roles?.some((role: Role) => role.name === "admin") ?? false; 
+          
+            // Passe l'info au service
+            const chronicle = await ChronicleService.getChroniclesById(id, isAdmin);
 
             return res.json(chronicle);
         } catch (error) {
