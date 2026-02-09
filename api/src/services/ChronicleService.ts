@@ -3,8 +3,8 @@ import { Chronicle } from "../models/Chronicle";
 import { HttpError } from "../errors/HttpError";
 
 export class ChronicleService {
-    static async getAllChronicles({ isAdmin = false} = {}) {
-        const where = isAdmin ? {} : { isAdmin:true };
+    static async getAllChronicles(isAdmin: boolean ) {
+        const where = isAdmin ? {} : { is_active:true };
         const chronicles= await Chronicle.findAll({
             where,
             order: [["published_at", "DESC"]]
@@ -48,9 +48,8 @@ export class ChronicleService {
         return chronicle;
     }
 
-    static async getChroniclesById(id:number, { isAdmin =false} = {}) {
-        // where : Partial<Chronicle>
-        // objet where peut contenir n’importe quel champ de Chronicle, mais de manière optionnelle
+    static async getChroniclesById(id:number, isAdmin: boolean =false) {
+        
         const where : Partial<Chronicle>= isAdmin
             ? { id_chronicle : id}
             : { id_chronicle: id, is_active: true};
