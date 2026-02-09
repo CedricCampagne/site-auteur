@@ -2,14 +2,18 @@
 	import Button from '$lib/components/Button.svelte';
 	import CommentAddModal from '$lib/components/CommentAddModal.svelte';
     import CommentCard from '$lib/components/CommentCard.svelte';
-    
+    import { enhance as kitEnhance } from "$app/forms";
+
     export let data;
 
     const chronicle = data.chronicle;
-    const comments = data.comments;
+    let comments = data.comments;
 
     let showModal = false;
 
+    function handleCreated(event: any) {
+        comments = [...comments, event.detail.comment];
+    }
 </script>
 
 <section class="flex flex-col gap-4 mt-24 pb-8 border-b">
@@ -60,8 +64,10 @@
         </section>
     </article>
 
-    <CommentAddModal
+<CommentAddModal
         open={showModal}
-        on:close={()=> showModal= false}
-    />
+        on:close={() => showModal = false}
+        on:created={handleCreated}
+/>
+
 </section>

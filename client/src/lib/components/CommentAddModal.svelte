@@ -1,5 +1,6 @@
 <script lang="ts">
-      import { createEventDispatcher } from "svelte";
+    import { createEventDispatcher } from "svelte";
+    import { enhance } from "$app/forms";
 
     export let open = false;
 
@@ -38,6 +39,8 @@
     const dispatch = createEventDispatcher();
 
     function close(){
+        content="";
+        error="";
         dispatch("close");
     }
 
@@ -61,6 +64,17 @@
     <form
         method="POST"
         on:submit={handleSubmit}
+        use:enhance={async ({ result }: any) => {
+            if (result.type === "success") {
+                // on prévient la page qu’un commentaire a été créé
+                dispatch("created", { comment: result.data.comment });
+                close();
+            }
+
+            if (result.type === "failure") {
+                error = result.data.error ?? "Erreur lors de la création du commentaire.";
+            }
+        }}
         class="flex flex-col items-center gap-4"
         >
             <legend class="border-b-2 border-accent1">Ajouter votre commentaire</legend>
