@@ -17,7 +17,13 @@ export function authGuard(req: Request, res: Response, next: NextFunction){
             throw new HttpError(401, "Token invalide ou expiré");
         }
 
-        req.user = payload;
+        req.user = {
+            id_user: payload.id,
+            email: payload.email,
+            username: payload.username,
+            roles: payload.roles
+        };
+
 
         next();
     } catch (error) {

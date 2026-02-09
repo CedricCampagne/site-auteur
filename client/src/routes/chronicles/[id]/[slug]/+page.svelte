@@ -1,10 +1,19 @@
 <script lang="ts">
+	import Button from '$lib/components/Button.svelte';
+	import CommentAddModal from '$lib/components/CommentAddModal.svelte';
     import CommentCard from '$lib/components/CommentCard.svelte';
-    
+
     export let data;
 
     const chronicle = data.chronicle;
-    const comments = data.comments;
+    let comments = data.comments;
+
+    let showModal = false;
+
+    function handleCreated(event: any) {
+        const newComment = event.detail.comment;
+        comments = [ newComment, ...comments];
+    }
 </script>
 
 <section class="flex flex-col gap-4 mt-24 pb-8 border-b">
@@ -34,7 +43,14 @@
         </div>
 
         <section class="max-w-3xl mx-auto px-4 sm:px-0 mt-12 mb-24">
-            <h3 class="text-2xl font-bold mb-6">Commentaires ({comments.length})</h3>
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold">Commentaires ({comments.length})</h3>
+                <Button 
+                    text="Ajouter un commentaire"
+                    className ="bg-accent2 text-white"
+                    on:click={()=> showModal= true}
+                />
+            </div>
 
             {#if comments.length === 0}
                 <p class="text-accent2 italic">Aucun commentaire pour le moment.</p>
@@ -47,4 +63,11 @@
             {/if}
         </section>
     </article>
+
+<CommentAddModal
+        open={showModal}
+        on:close={() => showModal = false}
+        on:created={handleCreated}
+/>
+
 </section>
