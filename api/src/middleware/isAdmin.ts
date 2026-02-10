@@ -14,7 +14,8 @@ export function isAdmin(req: Request, res: Response, next: NextFunction){
             throw new HttpError(403, "Aucun rôle associé à l'utilisateur");
         } 
         
-        const isAdmin = user.roles.some((role: Role) => role.name === "admin");
+        const isAdmin = user.roles.includes("admin");
+
         if (!isAdmin) { 
             throw new HttpError(403, "Accès réservé aux administrateurs");
         }

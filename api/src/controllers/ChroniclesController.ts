@@ -8,7 +8,7 @@ export class ChroniclesController {
             const user = req.user;
 
             // Vérifie si l'utilisateur est admin
-            const isAdmin = user?.roles?.some((role: Role) => role.name === "admin") ?? false;
+            const isAdmin = user?.roles?.includes("admin") ?? false;
 
             // Passe l'info au service
             const chronicles = await ChronicleService.getAllChronicles(isAdmin);
