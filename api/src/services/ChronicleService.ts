@@ -61,4 +61,8 @@ export class ChronicleService {
         }
         return chronicle;
     }
+
+    static async deleteChronicle(id:number){
+        return Chronicle.destroy({ where: {id_chronicle: id}});
+    }
 }
