@@ -68,4 +68,15 @@ export class ChroniclesController {
             next(error);
         }
     }
+
+    static async delete(req: Request, res: Response, next: NextFunction){
+        try {
+            const id = Number(req.params.id);
+            await ChronicleService.deleteChronicle(id);
+            console.log('delete (ChronicleController)');
+            return res.status(204).send();
+        } catch (error) {
+            next(error);
+        }
+    }
 }

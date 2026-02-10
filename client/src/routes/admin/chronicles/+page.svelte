@@ -1,15 +1,22 @@
-<script>
+<script lang="ts">
 	import Button from '$lib/components/Button.svelte';
     import ChronicleAdminCard from '$lib/components/ChronicleAdminCard.svelte';
+    import type { Chronicle } from '$lib/types.js';
 
     export let data;
     let chronicles = data.chronicles;
 
-    async function toggleStatus() {
-        
-        console.log("toggle");
+    async function toggleStatus(chronicle: Chronicle) {
+  
+    location.reload();
+}
 
-        location.reload();
+    async function deleteChronicle(id:number){
+        await fetch(`${import.meta.env.VITE_API_URL}/admin/chronicles/${id}`, {
+            method: "DELETE",
+            credentials: "include"
+        })
+        chronicles = chronicles.filter((c: Chronicle)=> c.id_chronicle !== id);
     }
 </script>
 
@@ -21,7 +28,7 @@
 
         <Button
         text="Ajouter une chronique"
-        className="bg-accent1 text-white hover:bg-white hover:text-accent1 transition-all duration-500 self-center"
+        className="bg-accent1 text-white hover:bg-white hover:text-accent1 transition-all duration-500 self-center border border-accent1"
         
         />
     </div>
@@ -30,11 +37,11 @@
         {#each chronicles as chronicle}
             <ChronicleAdminCard
                 {chronicle}
-                onToggle={toggleStatus}
+                on:toggle={(e) => toggleStatus(e.detail)}
+                on:delete={(e) => deleteChronicle(e.detail)}
             />
         {/each}
     </ul>
-
 </section>
 
 
