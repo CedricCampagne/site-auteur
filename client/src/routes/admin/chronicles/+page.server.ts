@@ -1,5 +1,7 @@
 export const load = async ({ fetch }) => {
-    const res = await fetch(`${import.meta.env.VITE_API_URL}/chronicles`);
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/admin/chronicles`, {
+        credentials: "include"
+    });
 
     if (!res.ok) {
         throw new Error("Impossible de récupérer les chroniques");
@@ -9,3 +11,4 @@ export const load = async ({ fetch }) => {
 
     return { chronicles };
 };
+
