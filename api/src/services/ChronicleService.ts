@@ -1,5 +1,5 @@
 import { sequelize } from "../config/database";
-import { Chronicle } from "../models/Chronicle";
+import { Chronicle, ChronicleCreationAttributes } from "../models/Chronicle";
 import { HttpError } from "../errors/HttpError";
 
 export class ChronicleService {
@@ -93,5 +93,24 @@ export class ChronicleService {
         await chronicle.save();
 
         return chronicle;
+    }
+
+    static async createChronicle(data:ChronicleCreationAttributes){
+        try {
+            const chronicle = await Chronicle.create({
+                title: data.title,
+                quote: data.quote,
+                summary: data.summary,
+                content: data.content,
+                cover_url: data.cover_url,
+                published_at: data.published_at,
+                is_active: data.is_active ?? true
+            });       
+
+            return chronicle;
+
+        } catch (err:any) {
+            throw new HttpError(400, "Impossible de creer la chronique");
+        }
     }
 }

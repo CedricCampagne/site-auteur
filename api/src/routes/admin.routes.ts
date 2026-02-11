@@ -10,5 +10,6 @@ adminRouteur.get("/chronicles/:id",authGuard, isAdmin, ChroniclesController.getB
 adminRouteur.delete("/chronicles/:id",authGuard, isAdmin, ChroniclesController.delete);
 adminRouteur.put("/chronicles/:id", authGuard, isAdmin, ChroniclesController.update);
 adminRouteur.patch("/chronicles/:id/toggle", authGuard, isAdmin, ChroniclesController.toggle);
+adminRouteur.post("/chronicles", authGuard, isAdmin, ChroniclesController.create);
 
 export default adminRouteur
