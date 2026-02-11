@@ -58,7 +58,8 @@ export class ChroniclesController {
         try {
             const id = Number(req.params.id);
             const user = req.user; // Détermine si l'utilisateur est admin
-            const isAdmin = user?.roles?.some((role: Role) => role.name === "admin") ?? false; 
+            const isAdmin = user?.roles?.includes("admin") ?? false;
+
           
             // Passe l'info au service
             const chronicle = await ChronicleService.getChroniclesById(id, isAdmin);
@@ -89,5 +90,15 @@ export class ChroniclesController {
             // res.status(err.status || 500).json({ error: err.message });
             next(error);
         } 
+    }
+
+    static async toggle(req: Request, res: Response, next: NextFunction){
+        try {
+            const id = Number(req.params.id);
+            const chronicle = await ChronicleService.toggleChronicle(id);
+            res.json(chronicle);
+        } catch(error) {
+            next(error);
+        }
     }
 }

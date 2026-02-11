@@ -77,5 +77,21 @@ export class ChronicleService {
 
         await chronicle.update(data);
         
-        return chronicle; }
+        return chronicle;
+    }
+
+    static async toggleChronicle(id:number){
+        const chronicle = await Chronicle.findOne({
+            where: { id_chronicle: id}
+        });
+
+        if (!chronicle) {
+            throw new HttpError(404, "Aucune chronique trouvée");
+        }
+
+        chronicle.is_active = !chronicle.is_active;
+        await chronicle.save();
+
+        return chronicle;
+    }
 }

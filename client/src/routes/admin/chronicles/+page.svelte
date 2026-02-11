@@ -11,8 +11,25 @@
     function updateChronicle(id: number){
         goto(`/admin/chronicles/${id}/edit`);
     }
-    async function toggleStatus(chronicle: Chronicle) {
-        console.log("TOGGLE FIRED");
+    
+    async function toggleStatus(id: number) {
+        try {
+            const res = await fetch(
+                `${import.meta.env.VITE_API_URL}/admin/chronicles/${id}/toggle`,
+                {
+                    method: "PATCH",
+                    credentials: "include"
+                }
+            );
+
+            if (res.ok) {
+                location.reload();
+            } else {
+                console.error("Erreur toggle");
+            }
+        } catch (error) {
+            console.error("Erreur toggle");
+        }
     }
 
     async function deleteChronicle(id:number){
