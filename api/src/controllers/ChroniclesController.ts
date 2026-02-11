@@ -79,4 +79,15 @@ export class ChroniclesController {
             next(error);
         }
     }
+
+    static async update(req: Request, res: Response, next: NextFunction) {
+        try {
+            const id = Number(req.params.id);
+            const updated = await ChronicleService.updateChronicle(id, req.body);
+            res.json(updated);
+        } catch (error){
+            // res.status(err.status || 500).json({ error: err.message });
+            next(error);
+        } 
+    }
 }

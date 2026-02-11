@@ -6,6 +6,8 @@ import { isAdmin } from "../middleware/isAdmin";
 const adminRouteur = Router();
 
 adminRouteur.get("/chronicles",authGuard, isAdmin, ChroniclesController.getAll);
+adminRouteur.get("/chronicles/:id",authGuard, isAdmin, ChroniclesController.getById);
 adminRouteur.delete("/chronicles/:id",authGuard, isAdmin, ChroniclesController.delete);
+adminRouteur.put("/chronicles/:id", authGuard, isAdmin, ChroniclesController.update);
 
-export default adminRouteur;
+export default adminRouteur
