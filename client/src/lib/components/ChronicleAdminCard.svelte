@@ -42,7 +42,7 @@
 
             <button on:click={handleToggle}>
                 <Icon
-                    icon="dashicons:update"
+                    icon={chronicle.is_active ? "mdi:toggle-switch" : "mdi:toggle-switch-off"}
                     class="text-4xl p-1 border border-accent1 bg-white text-accent1 hover:bg-accent1 hover:text-white transition-all duration-500"
                 />
             </button>
