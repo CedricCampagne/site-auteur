@@ -2,14 +2,18 @@
 	import Button from '$lib/components/Button.svelte';
     import ChronicleAdminCard from '$lib/components/ChronicleAdminCard.svelte';
     import type { Chronicle } from '$lib/types.js';
+    import { goto } from '$app/navigation';
 
     export let data;
+
     let chronicles = data.chronicles;
 
+    function updateChronicle(id: number){
+        goto(`/admin/chronicles/${id}/edit`);
+    }
     async function toggleStatus(chronicle: Chronicle) {
-  
-    location.reload();
-}
+        console.log("TOGGLE FIRED");
+    }
 
     async function deleteChronicle(id:number){
         await fetch(`${import.meta.env.VITE_API_URL}/admin/chronicles/${id}`, {
@@ -39,6 +43,7 @@
                 {chronicle}
                 on:toggle={(e) => toggleStatus(e.detail)}
                 on:delete={(e) => deleteChronicle(e.detail)}
+                on:update={(e)=> updateChronicle(e.detail)}
             />
         {/each}
     </ul>

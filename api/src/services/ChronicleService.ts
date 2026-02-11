@@ -65,4 +65,17 @@ export class ChronicleService {
     static async deleteChronicle(id:number){
         return Chronicle.destroy({ where: {id_chronicle: id}});
     }
+
+    static async updateChronicle(id: number, data: any) {
+        const chronicle = await Chronicle.findOne({ 
+            where: { id_chronicle: id }
+        });
+        
+        if (!chronicle) {
+            throw new HttpError(404, "Aucune chronique trouvée");
+        }
+
+        await chronicle.update(data);
+        
+        return chronicle; }
 }
