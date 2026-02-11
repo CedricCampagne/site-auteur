@@ -9,5 +9,6 @@ adminRouteur.get("/chronicles",authGuard, isAdmin, ChroniclesController.getAll);
 adminRouteur.get("/chronicles/:id",authGuard, isAdmin, ChroniclesController.getById);
 adminRouteur.delete("/chronicles/:id",authGuard, isAdmin, ChroniclesController.delete);
 adminRouteur.put("/chronicles/:id", authGuard, isAdmin, ChroniclesController.update);
+adminRouteur.patch("/chronicles/:id/toggle", authGuard, isAdmin, ChroniclesController.toggle);
 
 export default adminRouteur

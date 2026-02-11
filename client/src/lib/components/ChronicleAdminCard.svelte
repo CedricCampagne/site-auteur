@@ -8,7 +8,7 @@
     const dispatch = createEventDispatcher();
 
     function handleToggle() {
-        dispatch("toggle", chronicle);
+        dispatch("toggle", chronicle.id_chronicle);
     }
 
     function handleUpdate() {
