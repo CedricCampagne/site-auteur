@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { ChronicleService } from "../services/ChronicleService";
 import { Role } from "../models/Role";
+import { ChronicleCreationAttributes } from "../models/Chronicle";
 
 export class ChroniclesController {
     static async getAll(req: Request, res:Response, next: NextFunction) {
@@ -98,6 +99,17 @@ export class ChroniclesController {
             const chronicle = await ChronicleService.toggleChronicle(id);
             res.json(chronicle);
         } catch(error) {
+            next(error);
+        }
+    }
+
+    static async create(req: Request, res: Response, next: NextFunction){
+        try {
+            const data = req.body as ChronicleCreationAttributes;
+            const chronicle = await ChronicleService.createChronicle(data);
+
+            res.status(200).json(chronicle);
+        } catch (error) {
             next(error);
         }
     }

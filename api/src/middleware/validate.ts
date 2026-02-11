@@ -5,7 +5,7 @@ export const validate = (schema: any, property: "body" | "params" | "query") => 
   return (req: Request, res: Response, next: NextFunction) => {
     const { error, value } = schema.validate(req[property], {
       abortEarly: false,
-      stripUknown: true,
+      stripUnknown: true,
       allowUnknown: true
     });
 
