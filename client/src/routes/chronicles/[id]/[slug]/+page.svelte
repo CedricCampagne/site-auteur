@@ -2,6 +2,12 @@
 	import Button from '$lib/components/Button.svelte';
 	import CommentAddModal from '$lib/components/CommentAddModal.svelte';
     import CommentCard from '$lib/components/CommentCard.svelte';
+    import { marked } from "marked";
+
+   marked.setOptions({
+        breaks: true,
+        gfm: true
+    });
 
     export let data;
 
@@ -25,7 +31,7 @@
         >
     </div>
 
-    <article class="max-w-3xl mx-auto px-4 sm:px-0 mt-12 mb-24">
+    <article class="w-full max-w-3xl mx-auto px-4 sm:px-0 mt-12 mb-24">
         <h2 class="text-4xl sm:text-6xl font-black mb-6 leading-tight">
             { chronicle.title}
         </h2>
@@ -37,9 +43,11 @@
         <p class="text-sm text-accent2 mb-12">
             Publié le {new Date(chronicle.published_at).toLocaleDateString("fr-FR")}
         </p>
-
-        <div class="prose prose-lg max-w-none text-gray-800 leading-relaxed">
+        <!-- <div class="prose prose-lg max-w-none text-gray-800 leading-relaxed">
             {chronicle.content}
+        </div> -->
+        <div class="markdown text-gray-800 leading-relaxed space-y-4">
+            {@html marked(chronicle.content)}
         </div>
 
         <section class="max-w-3xl mx-auto px-4 sm:px-0 mt-12 mb-24">
