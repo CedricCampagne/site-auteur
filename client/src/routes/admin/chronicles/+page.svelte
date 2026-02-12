@@ -78,7 +78,8 @@
         </h2>       
         <Button
         text="Ajouter une chronique"
-        className="bg-accent1 text-white hover:bg-white hover:text-accent1 transition-all duration-500 self-center border border-accent1"  
+        className="bg-accent1 text-white hover:bg-white hover:text-accent1 transition-all duration-500 self-center border border-accent1"
+        on:click={()=> goto("/admin/chronicles/create")}
         />
     </div>
     
