@@ -2,7 +2,7 @@ import { Table, Column, Model, DataType, PrimaryKey, AutoIncrement, Unique, Befo
 import { slugify } from "../utils/slugify";
 import { Comment } from "./Comment";
 
-interface ChronicleAttributes {
+export interface ChronicleAttributes {
     id_chronicle:number;
     title:string;
     slug:string;
@@ -14,9 +14,8 @@ interface ChronicleAttributes {
     is_active?:boolean;
 }
 
-interface ChronicleCreationAttributes {
+export interface ChronicleCreationAttributes {
     title:string;
-    slug:string;
     quote: string;
     summary: string;
     content:string;

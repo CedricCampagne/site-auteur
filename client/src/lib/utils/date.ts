@@ -5,3 +5,8 @@ export function formatDateFR(date:string | Date) {
         day: "numeric"
     });
 }
+
+export function toInputDate(date: string | Date): string {
+    const d = new Date(date);
+    return d.toISOString().split("T")[0];
+}
