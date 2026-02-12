@@ -37,6 +37,6 @@ export const chroniclesData = [
     quote: "« Les rêves éclairent ce que la réalité n’ose pas révéler. »",
     cover_url: "https://picsum.photos/600/400?random=14",
     published_at: new Date("2024-09-22"),
-    is_active: true
+    is_active: false
   }
 ];
