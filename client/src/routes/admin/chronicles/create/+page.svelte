@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { goto } from "$app/navigation";
-
+    import MarkdownEditor from "$lib/components/MarkdownEditor.svelte";
 
     let title = "";
     let quote = "";
@@ -124,7 +124,10 @@
 
         <label>
             Contenu (Markdown)
-            <textarea bind:value={content}  rows="10" class="border p-2 w-full"></textarea>
+            <MarkdownEditor
+                value={content}
+                onChange={(v) => content = v}
+            />
             <div class="h-10 py-2">
                 {#if contentError}<p class="text-accent1">{contentError}</p>{/if}
             </div>
