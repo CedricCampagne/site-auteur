@@ -3,6 +3,8 @@ import { authGuard } from "../middleware/authGuard";
 import { isAdmin } from "../middleware/isAdmin";
 import { ChroniclesController } from "../controllers/ChroniclesController";
 import { UsersController } from "../controllers/UsersController";
+import { updateUserSchema } from "../validators/auth/update.schema";
+import { validate } from "../middleware/validate";
 
 const adminRouteur = Router();
 
@@ -16,7 +18,7 @@ adminRouteur.post("/chronicles", authGuard, isAdmin, ChroniclesController.create
 adminRouteur.get("/users", authGuard, isAdmin, UsersController.getAll);
 adminRouteur.get("/users/:id", authGuard, isAdmin, UsersController.getById);
 adminRouteur.delete("/users/:id", authGuard, isAdmin, UsersController.delete);
-adminRouteur.put("/users/:id", authGuard, isAdmin, UsersController.update);
+adminRouteur.put("/users/:id", authGuard, isAdmin, validate(updateUserSchema, "body"), UsersController.update);
 adminRouteur.patch("/users/:id/toggle", authGuard, isAdmin, UsersController.toggle);
 adminRouteur.post("/users", authGuard, isAdmin, UsersController.create);
 

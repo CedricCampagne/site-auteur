@@ -17,7 +17,6 @@ export class UsersController {
         try {
             const id = Number(req.params.id);
             const user = await UserServices.getUserById(id);
-
             return res.json(user);
         } catch (error) {
             next(error);

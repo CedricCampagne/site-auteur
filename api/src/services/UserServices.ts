@@ -12,7 +12,9 @@ export class UserServices {
     }
 
     static async getUserById(id: number){
-        const user = await User.findByPk(id);
+        const user = await User.findByPk(id, {
+            attributes: { exclude :["password"] }
+        });
 
         if(!user) {
             throw new HttpError(404, "Aucun utilisateur trouvé avec cet ID");
