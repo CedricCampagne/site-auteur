@@ -26,9 +26,11 @@
         <div class="flex gap-2">
             <p class="font-bold">{chronicle.title}</p>
             <p>publiée le : {new Date(chronicle.published_at).toLocaleDateString("fr-FR")}</p>
-            {#if !chronicle.is_active}
-                <span class="text-red-600 font-bold">(inactive)</span>
-            {/if}
+            <div>
+                {#if !chronicle.is_active}
+                    <span class="text-red-600 font-bold border p-1 ">Inactive</span>
+                {/if}
+            </div>
         </div>
 
         <div class="flex gap-4">

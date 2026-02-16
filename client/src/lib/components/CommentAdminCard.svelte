@@ -39,7 +39,7 @@
     <div class="flex gap-4 justify-between">
         <div>
              {#if !comment.is_visible}
-                <span class="text-red-600 font-bold">(masqué)</span>
+                <span class="text-red-600 font-bold border p-1">Masqué</span>
             {/if}
         </div>
         <div>
