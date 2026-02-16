@@ -27,7 +27,7 @@ export interface Chronicle {
 export interface Comment {
     id_comment: number;
     content: string;
-    is_valid: boolean;
+    is_visible: boolean;
     user_id: number;
     chronicle_id:number;
     created_at: string;
@@ -36,6 +36,11 @@ export interface Comment {
     user: {
         id_user: number;
         username: string
+    };
+
+    chronicle: {
+        id_chronicle: number;
+        title: string;
     }
 }
 
@@ -45,6 +50,7 @@ export interface User {
     email:string;
     password:string;
     is_active:boolean;
+    created_at: Date | string;
 }
 
 export interface UserForm {
