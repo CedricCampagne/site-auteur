@@ -22,8 +22,9 @@ export type UserUpdateAttributes = Partial<Omit<UserAttributes, "id_user">>;
 
 @Table({
     tableName: "user",
-    // Tables de liaison pas besoin des timesstamps
-    timestamps: false,
+    timestamps: true,
+    createdAt: "created_at",
+    updatedAt: "updated_at",
     underscored: true
 })
 

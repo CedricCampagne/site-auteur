@@ -74,7 +74,7 @@
     {/if}
     <div class="flex justify-between border-b-2 border-accent2">
         <h2 class="text-5xl font-black text-center mb-4">
-            Toutes les chroniques
+            Toutes les chroniques ({chronicles.length})
         </h2>       
         <Button
         text="Ajouter une chronique"
