@@ -54,3 +54,10 @@ export interface UserForm {
     password?:string;
     is_active:boolean;
 }
+
+export interface UserFormCreate {
+    username:string;
+    email:string;
+    password:string;
+    is_active:boolean;
+}

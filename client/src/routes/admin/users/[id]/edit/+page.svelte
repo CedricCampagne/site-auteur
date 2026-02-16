@@ -79,7 +79,7 @@
 </script>
 
 <section class="flex flex-col gap-4 mt-24 pb-8 border-b">
-    <h2 class="text-5xl font-black text-center mb-4">Création d'une chronique</h2>
+    <h2 class="text-5xl font-black text-center mb-4">Mise a jour de l'utilisateur</h2>
 
     <form on:submit|preventDefault={handleSubmit} class="flex flex-col gap-4" >
         
