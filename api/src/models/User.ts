@@ -3,7 +3,7 @@ import { Role } from "./Role";
 import { UserRole } from "./UserRole";
 import { Comment } from "./Comment";
 
-interface UserAttributes {
+export interface UserAttributes {
     id_user:number
     username:string
     email:string;
@@ -11,12 +11,14 @@ interface UserAttributes {
     is_active:boolean
 } 
 
-interface UserCreationAttributes {
+export interface UserCreationAttributes {
     username:string
     email:string;
     password:string;
     is_active:boolean
 }
+
+export type UserUpdateAttributes = Partial<Omit<UserAttributes, "id_user">>;
 
 @Table({
     tableName: "user",
