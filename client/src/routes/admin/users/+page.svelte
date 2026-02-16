@@ -62,7 +62,7 @@
     {/if}
     <div class="flex justify-between border-b-2 border-accent2">
         <h2 class="text-5xl font-black text-center mb-4">
-            Tous les utilisateurs
+            Tous les utilisateurs ({users.length})
         </h2>       
         <Button
         text="Ajouter un utilisateur"
