@@ -2,6 +2,7 @@ import { Comment } from "../models/Comment";
 import { User } from "../models/User";
 import { AddBody } from "../types/comment";
 import { HttpError } from "../errors/HttpError";
+import { Chronicle } from "../models/Chronicle";
 
 export class CommentService{
     static async getCommentsByChronicleId(chronicle_id: number){
@@ -46,4 +47,80 @@ export class CommentService{
         
         return comment;
     }
+
+    static async getAllComments(){
+        const comments = await Comment.findAll({
+            include: [
+                {
+                    model: User,
+                    attributes: ["id_user", "username"]
+                },
+                {
+                    model: Chronicle,
+                    attributes: ["id_chronicle","title"]
+                }
+            ],
+            order:[["created_at", "DESC"]]
+        });
+
+        return comments;
+    }
+
+    static async getCommentById(id: number) {
+        const comment = await Comment.findOne({
+            where: { id_comment: id },
+            include: [
+                { model: User, attributes: ["id_user", "username"] },
+                { model: Chronicle, attributes: ["id_chronicle", "title"] }
+            ]
+        });
+
+        if (!comment) {
+            throw new HttpError(404, "Commentaire introuvable");
+        }
+
+        return comment;
+    }
+
+    static async deleteComment(id: number) {
+        const deleted = await Comment.destroy({
+            where: { id_comment: id }
+        });
+
+        if (deleted === 0) {
+            throw new HttpError(404, "Commentaire introuvable");
+        }
+
+        return deleted;
+    }
+
+    static async toggleComment(id:number){
+        const comment = await Comment.findOne({
+            where: { id_comment: id}
+        });
+
+        if (!comment) {
+            throw new HttpError(404, "Aucune commentaire trouvé");
+        }
+
+        comment.is_visible = !comment.is_visible;
+        await comment.save();
+
+        return comment;
+    }
+
+    static async updateComment(id: number, data: any) {
+        const comment = await Comment.findOne({ 
+            where: { id_comment: id }
+        });
+        
+        if (!comment) {
+            throw new HttpError(404, "Aucun commentaire trouvée");
+        }
+
+        await comment.update(data);
+        
+        return comment;
+    }
+
 }
