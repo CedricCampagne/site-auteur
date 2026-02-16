@@ -50,6 +50,7 @@ export interface User {
     email:string;
     password:string;
     is_active:boolean;
+    created_at: Date | string;
 }
 
 export interface UserForm {
