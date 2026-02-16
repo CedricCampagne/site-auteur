@@ -84,7 +84,7 @@ export class CommentService{
 
     static async deleteComment(id: number) {
         const deleted = await Comment.destroy({
-            where: { id_comment: id }
+            where: { id_comment: id },
         });
 
         if (deleted === 0) {
@@ -96,7 +96,17 @@ export class CommentService{
 
     static async toggleComment(id:number){
         const comment = await Comment.findOne({
-            where: { id_comment: id}
+            where: { id_comment: id},
+            include: [
+                {
+                    model: User,
+                    attributes: ["id_user", "username"]
+                },
+                {
+                    model: Chronicle,
+                    attributes: ["id_chronicle","title"]
+                }
+            ]
         });
 
         if (!comment) {
@@ -111,7 +121,17 @@ export class CommentService{
 
     static async updateComment(id: number, data: any) {
         const comment = await Comment.findOne({ 
-            where: { id_comment: id }
+            where: { id_comment: id },
+            include: [
+                {
+                    model: User,
+                    attributes: ["id_user", "username"]
+                },
+                {
+                    model: Chronicle,
+                    attributes: ["id_chronicle","title"]
+                }
+            ]
         });
         
         if (!comment) {
@@ -122,5 +142,4 @@ export class CommentService{
         
         return comment;
     }
-
 }
