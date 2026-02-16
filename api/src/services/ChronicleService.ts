@@ -63,7 +63,14 @@ export class ChronicleService {
     }
 
     static async deleteChronicle(id:number){
-        return Chronicle.destroy({ where: {id_chronicle: id}});
+        const deleted = await Chronicle.destroy({
+            where: { id_chronicle: id }
+        });
+       
+        if (deleted === 0) {
+            throw new HttpError(404, "Chronique introuvable");
+        }
+        return deleted;
     }
 
     static async updateChronicle(id: number, data: any) {

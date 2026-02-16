@@ -5,6 +5,7 @@ import { ChroniclesController } from "../controllers/ChroniclesController";
 import { UsersController } from "../controllers/UsersController";
 import { updateUserSchema } from "../validators/auth/update.schema";
 import { validate } from "../middleware/validate";
+import { CommentController } from "../controllers/CommentsController";
 
 const adminRouteur = Router();
 
@@ -21,5 +22,11 @@ adminRouteur.delete("/users/:id", authGuard, isAdmin, UsersController.delete);
 adminRouteur.put("/users/:id", authGuard, isAdmin, validate(updateUserSchema, "body"), UsersController.update);
 adminRouteur.patch("/users/:id/toggle", authGuard, isAdmin, UsersController.toggle);
 adminRouteur.post("/users", authGuard, isAdmin, UsersController.create);
+
+adminRouteur.get("/comments", authGuard, isAdmin, CommentController.getAll);
+adminRouteur.get("/comments/:id", authGuard, isAdmin, CommentController.getOne);
+adminRouteur.delete("/comments/:id", authGuard, isAdmin, CommentController.delete);
+adminRouteur.put("/comments/:id", authGuard, isAdmin, CommentController.update);
+adminRouteur.patch("/comments/:id/toggle", authGuard, isAdmin, CommentController.toggle);
 
 export default adminRouteur;

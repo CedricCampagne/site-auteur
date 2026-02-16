@@ -5,17 +5,16 @@ import { Chronicle } from "./Chronicle";
 interface CommentAttributes {
     id_comment: number;
     content: string;
-    is_valid: boolean;
+    is_visible: boolean;
     user_id: number;
     chronicle_id: number;
     created_at: Date;
     updated_at: Date;
 }
 
-
 interface CommentCreationAttributes {
     content: string;
-    is_valid?: boolean;
+    is_visible?: boolean;
     user_id: number;
     chronicle_id: number;
     created_at?: Date;
@@ -53,7 +52,7 @@ export class Comment extends Model<CommentAttributes, CommentCreationAttributes>
         allowNull: false,
         defaultValue: true
     })
-    is_valid!:boolean;
+    is_visible!:boolean;
 
     @ForeignKey(()=> Chronicle)
     @Index
