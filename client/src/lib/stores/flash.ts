@@ -4,7 +4,7 @@ export const flash = writable<string | null>(null);
 
 export function setFlash(message: string){
     flash.set(message);
-    setTimeout(()=> flash.set(null), 2000);
+    setTimeout(()=> flash.set(null), 1500);
 }
 
 export function showFlash(message: string, duration = 2500) {

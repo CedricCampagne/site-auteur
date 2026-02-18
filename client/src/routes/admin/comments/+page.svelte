@@ -2,12 +2,28 @@
     import Button from '$lib/components/Button.svelte';
     import { goto } from '$app/navigation';
     import { flash, setFlash} from "$lib/stores/flash";
-	import type { Comment } from '$lib/types.js';
+	import type { Chronicle, Comment, User } from '$lib/types.js';
 	import CommentAdminCard from '$lib/components/CommentAdminCard.svelte';
 
     export let data;
 
     let comments: Comment[] = data.comments;
+    let users: User[] = data.users;
+    let chronicles: Chronicle[] = data.chronicles;
+
+    let selectedUser = "";
+    let selectedChronicle = "";
+
+    $: filteredComments = comments
+    // si selectedUser a une valeur on applique le filtre sinon retoure true
+    .filter(c => selectedUser ? c.user_id === Number(selectedUser) : true)
+    // idem pour selectedChronicle
+    .filter(c => selectedChronicle ? c.chronicle_id === Number(selectedChronicle) : true);
+
+    function clearFilter(){
+        selectedUser = "";
+        selectedChronicle = "";
+    }
 
     async function toggleStatus(id: number){
         try {
@@ -62,19 +78,53 @@
             {$flash}
         </div>
     {/if}
-    <div class="flex justify-between border-b-2 border-accent2">
-        <h2 class="text-5xl font-black text-center mb-4">
-            Tous les commentaires ({comments.length})
-        </h2>       
-        <Button
-        text="Ajouter un utilisateur"
-        className="bg-accent1 text-white hover:bg-white hover:text-accent1 transition-all duration-500 self-center border border-accent1"
-        on:click={()=> goto("/admin/users/create")}
-        />
+    <h2 class="text-5xl font-black text-center mb-4">
+        Tous les commentaires ({filteredComments.length})
+    </h2>
+    <div>
+        <div class="flex justify-around border-b-2 border-accent2 pb-2">
+            <div class="flex items-center gap-2 border p-2">
+                <p>Filter par utilisateurs : </p>
+                <select
+                    bind:value={selectedUser}
+                    name="users"
+                    id="users"
+                    class="text-accent1 p-2 rounded border-0 outline-none focus:outline-none focus:ring-0"
+                >
+                    <option value="">Tous</option>
+                    {#each users as user }
+                        <option value={user.id_user}>
+                            {user.username}
+                        </option>
+                    {/each}
+                </select>
+            </div>
+            <div class="flex items-center gap-2 border p-2">
+                <p>Filter par chroniques : </p>
+                <select 
+                    bind:value={selectedChronicle}
+                    name="chronicles"
+                    id="chronicles"
+                    class="text-accent1 p-2 rounded border-0 outline-none focus:outline-none focus:ring-0"
+                    >
+                    <option value="" class="text-center">Tous</option>
+                    {#each chronicles as chronicle }
+                        <option class="text-center" value={chronicle.id_chronicle}>
+                            {chronicle.title}
+                        </option>
+                    {/each}
+                </select>
+            </div>
+            <Button
+            text="Réinitialiser"
+            className="bg-accent1 text-white hover:bg-white hover:text-accent1 transition-all duration-500 self-center border border-accent1"
+            on:click={clearFilter}
+            />
+        </div>
     </div>
     
     <ul class="space-y-2">
-        {#each comments as comment}
+        {#each filteredComments as comment}
             <CommentAdminCard
                 {comment}
                 on:toggle={(e) => toggleStatus(e.detail)}
