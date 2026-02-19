@@ -4,7 +4,7 @@
 	import BookExcerptModal from "$lib/components/BookExcerptModal.svelte";
 	import HeroSection from "$lib/components/HeroSection.svelte";
 	import LastBooks from "$lib/components/LastBooks.svelte";
-	import LastChroniques from "$lib/components/LastChroniques.svelte";
+	import LastChroniques from "$lib/components/LastChronicles.svelte";
 
 	export let data;
 	const latestbook = data.latestbook;

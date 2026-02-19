@@ -4,6 +4,7 @@
     import Icon from "@iconify/svelte";
     import { onMount } from "svelte";
     import { getInstagramUrl } from "$lib/navigation";
+	import NewsletterForm from "./NewsletterForm.svelte";
 
     onMount(() => {
        instagramUrl = getInstagramUrl("katiacampagne")
@@ -46,12 +47,13 @@
                 </div>
             </div>
             <div class="flex-1 flex flex-col items-center justify-start gap-4">
-                <h3 class="text-xl">Recevez les nouvelles publication</h3>
+                <h3 class="text-xl">Recevez les nouvelles publications</h3>
                     <p>Pas de spam, juste du suspense.</p>
-                    <form action="" class="flex flex-col gap-1">
+                    <NewsletterForm />
+                    <!-- <form action="" class="flex flex-col gap-1">
                         <input type="text" placeholder="E-mail" class="bg-white text-black p-1">
                         <button type="submit" class="bg-accent1 p-1 hover:bg-white hover:text-accent1 transition-all duration-500"> S'inscrire</button>
-                    </form>
+                    </form> -->
             </div>
         </div>
     </div>
