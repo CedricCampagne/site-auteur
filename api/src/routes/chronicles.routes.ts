@@ -1,8 +1,14 @@
 import { Router } from "express";
-import { ChroniclesController } from "../controllers/ChroniclesController";
-import { chronicleIdSchema } from "../validators/chronicles/id.schema";
+
+// Middlewares
 import { validate } from "../middleware/validate";
 import { authGuard } from "../middleware/authGuard";
+
+// Validators
+import { chronicleIdSchema } from "../validators/chronicles/id.schema";
+
+// Controllers
+import { ChroniclesController } from "../controllers/ChroniclesController";
 import { CommentController } from "../controllers/CommentsController";
 
 const chroniclesRouter = Router();
