@@ -6,29 +6,29 @@ import { generateToken } from "../utils/jwt";
 import { HttpError } from "../errors/HttpError";
 
 export class AuthServices {
-    static async registerUser(params: RegisterParams) {
+    static async registerUser(data: RegisterParams) {
 
         // Vérification du mail
-        const existingEmail = await User.findOne({where: {email: params.email}});
+        const existingEmail = await User.findOne({where: {email: data.email}});
         if(existingEmail) {
             // throw new Error("Email déjà utilsié");
             throw new HttpError(409, "Email déjà utilisé")
         }
 
         // Vérification du username
-        const existingUsername = await User.findOne({where: {username: params.username}});
+        const existingUsername = await User.findOne({where: {username: data.username}});
         if(existingUsername) {
             // throw new Error("Nom d'utilisateur déjà utilsié");
             throw new HttpError(409, "Nom d'utilisateur déjà utilisé");
         }
 
         // Hash du pass
-        const hashed = await hashPassword(params.password);
+        const hashed = await hashPassword(data.password);
 
         // Création du user
         const user = await User.create({
-            username: params.username,
-            email: params.email,
+            username: data.username,
+            email: data.email,
             password: hashed,
             is_active: true
         });
