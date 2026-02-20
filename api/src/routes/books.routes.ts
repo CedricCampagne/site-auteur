@@ -1,7 +1,13 @@
 import { Router } from "express";
-import { BooksController } from "../controllers/BooksController";
+
+// Middlewares
 import { validate } from "../middleware/validate";
+
+// Validators
 import { bookIdSchema } from "../validators/books/bookId.schema";
+
+// Controllers
+import { BooksController } from "../controllers/BooksController";
 
 const booksRouter = Router();
 

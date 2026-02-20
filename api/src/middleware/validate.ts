@@ -1,7 +1,8 @@
 import { Request, Response, NextFunction } from "express";
 import { ValidationErrorItem } from "joi";
+import { ObjectSchema } from "joi";
 
-export const validate = (schema: any, property: "body" | "params" | "query") => {
+export const validate = (schema: ObjectSchema, property: "body" | "params" | "query") => {
   return (req: Request, res: Response, next: NextFunction) => {
     const { error, value } = schema.validate(req[property], {
       abortEarly: false,

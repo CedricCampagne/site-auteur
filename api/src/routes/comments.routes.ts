@@ -1,11 +1,17 @@
 import { Router } from "express";
+
+// Middlecares
 import { authGuard } from "../middleware/authGuard";
-import { CommentController } from "../controllers/CommentsController";
 import { validate } from "../middleware/validate";
-import { addCommentSchema } from "../validators/comments/comments";
+
+// Validators
+import { addCommentSchema } from "../validators/comments/addComment.schema";
+
+// Controllers
+import { CommentController } from "../controllers/CommentsController";
 
 const commentRouter = Router();
 
-commentRouter.post("/",validate(addCommentSchema,"body"), authGuard,CommentController.addComment);
+commentRouter.post("/", authGuard, validate(addCommentSchema,"body"),CommentController.addComment);
 
 export default commentRouter;
