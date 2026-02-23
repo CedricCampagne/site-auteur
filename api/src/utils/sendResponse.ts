@@ -1,16 +1,18 @@
 import type { Response } from "express";
+import { ApiResponse } from "../types/ApiResponse";
 
 export function sendResponse<T>(
-  res: Response,
-  status: number,
-  type: "success" | "fail",
-  message: string,
-  data?: T
+    res: Response,
+    status: number,
+    type: "success" | "fail",
+    message: string,
+    data?: T
 ) {
-  return res.status(status).json({
-    type,
-    message,
-    // si 1ere partie est true renvoie la seconde data : data
-    ...(data !== undefined && { data })
-  });
+    const payload: ApiResponse<T> = {
+        type,
+        message,
+        ...(data !== undefined && { data })
+    };
+
+    return res.status(status).json(payload);
 }
