@@ -1,11 +1,14 @@
 import { Request, Response, NextFunction } from "express";
 import { HttpError } from "../errors/HttpError";
+import { sendResponse } from "../utils/sendResponse";
 
 
 export function errorHandler(err: any, req: Request, res: Response, next: NextFunction) {
     console.error("Global Error Handler:", err);
 
-    const status:number = (err instanceof HttpError) ? err.statusCode : 500;
+    if(err instanceof HttpError) {
+        return sendResponse(res, err.statusCode, "fail", err.message);
+    }
 
-    res.status(status).json({message: err.message || "Internal server error"});
+    return sendResponse(res, 500, "fail", "Erreur interne server");
 }

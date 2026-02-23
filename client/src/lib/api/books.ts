@@ -6,7 +6,9 @@ export async function getLatestBook(): Promise<Book> {
     if (!res.ok) {
         throw new Error("Erreur API /latest");
     }
-    return await res.json();
+    
+    const json = await res.json();
+    return json.data;
 }
 
 export async function getAllBooks(): Promise<Book[]> {
@@ -14,7 +16,8 @@ export async function getAllBooks(): Promise<Book[]> {
     if(!res.ok){
         throw new Error("Erreur API /books");
     }
-    return await res.json();
+    const json = await res.json();
+    return json.data;
 }
 
 export async function getByIdBook(id: number, slug:string) : Promise<Book> {
@@ -22,5 +25,6 @@ export async function getByIdBook(id: number, slug:string) : Promise<Book> {
     if(!res.ok){
         throw new Error("Erreur API/books/id/slug");
     }
-    return await res.json();
+    const json = await res.json();
+    return json.data;
 }
