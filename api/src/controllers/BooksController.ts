@@ -7,7 +7,7 @@ export class BooksController {
         try {
             const books = await BookService.getAllBooks();
             
-            return sendResponse(res, 200, "success", "Listes des livres récupétée", books);
+            return sendResponse(res, 200, "success", "Listes des livres récupérée", books);
         } catch (error) {
             next(error);
         }
