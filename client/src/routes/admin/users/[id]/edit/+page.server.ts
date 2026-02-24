@@ -10,10 +10,11 @@ export const load : PageServerLoad = async ({ fetch, params}) => {
     });
 
     if(!res.ok){
-                throw redirect(302, '/admin/chronicles');   
+        throw redirect(302, '/admin/chronicles');   
     }
 
-    const user = await res.json();
+    const json = await res.json();
+    const user = json.data!;
 
     return { user };
 }

@@ -1,13 +1,13 @@
 import { UserCreationAttributes, UserUpdateAttributes } from "../models/User";
 import { UserServices } from "../services/UserServices";
 import { Request, Response, NextFunction } from "express";
+import { sendResponse } from "../utils/sendResponse";
 
 export class UsersController {
     static async getAll(req: Request, res: Response, next: NextFunction){
         try {
             const users = await UserServices.getAllUsers();
-
-            return res.json(users);
+            return sendResponse(res, 200, "success", "Tous les utilisateurs récupérés", users);
         } catch (error) {
             next(error);
         }
@@ -17,7 +17,7 @@ export class UsersController {
         try {
             const id = Number(req.params.id);
             const user = await UserServices.getUserById(id);
-            return res.json(user);
+            return sendResponse(res, 200, "success", "Utilisateur récupéré", user);
         } catch (error) {
             next(error);
         }
@@ -26,9 +26,8 @@ export class UsersController {
     static async delete(req: Request, res: Response, next: NextFunction){
             try {
                 const id = Number(req.params.id);
-                await UserServices.deleteUser(id);
-                console.log('delete (UserController)');
-                return res.status(204).send();
+                const deleted = await UserServices.deleteUser(id);
+                return sendResponse(res, 200, "success", "Utilisateur supprimé", deleted);
             } catch (error) {
                 next(error);
             }
@@ -39,7 +38,7 @@ export class UsersController {
             const data = req.body as UserCreationAttributes;
             const user =await UserServices.createUser(data);
 
-            res.status(201).json(user);
+            return sendResponse(res, 201, "success", "Utilisateur crée", user);
 
         } catch (error) {
             next(error);
@@ -53,7 +52,7 @@ export class UsersController {
 
             const updated = await UserServices.updateUser(id, data);
 
-            res.json(updated);
+            return sendResponse(res, 200, "success", "Utilisateur mis à jour", updated);
 
         } catch (error) {
             next(error);
@@ -63,8 +62,8 @@ export class UsersController {
     static async toggle(req: Request, res: Response, next: NextFunction){
             try {
                 const id = Number(req.params.id);
-                const user = await UserServices.toggleUser(id);
-                res.json(user);
+                const updated = await UserServices.toggleUser(id);
+                return sendResponse(res, 200, "success", "Status de l'utilisateur mis à jour", updated);
             } catch(error) {
                 next(error);
             }

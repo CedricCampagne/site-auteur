@@ -27,9 +27,6 @@
 
     async function toggleStatus(id: number) {
         try {
-            console.log("data.chronicles", chronicles);
-            console.log("id reçu dans toggleStatus:", id);
-
             const res = await fetch(
                 `${import.meta.env.VITE_API_URL}/admin/chronicles/${id}/toggle`,
                 {
@@ -60,6 +57,7 @@
                 credentials: "include"
             })
             const json = await res.json();
+            // pour use le retour de .destroy de sequelize du back return nombre de ligne supprimée
             if (json.data === 1) {
                 chronicles = chronicles.filter((c: Chronicle) => c.id_chronicle !== id);
                 setFlash("Supression de la chronique effectuée !!");

@@ -35,7 +35,7 @@ export class CommentController {
     static async getAll(req: Request, res: Response, next: NextFunction){
         try {
             const comments = await CommentService.getAllComments();
-            return res.json(comments);
+            return sendResponse(res, 200, "success", "Tous les commentaires récupérés", comments);
         } catch (error) {
             next(error);
         }
@@ -45,7 +45,7 @@ export class CommentController {
         try {
             const id = Number(req.params.id);
             const comment = await CommentService.getCommentById(id);
-            res.json(comment);
+            return sendResponse(res, 200, "success", "Commentaire récupéré", comment);
         } catch (error) {
             next(error);
         }
@@ -54,8 +54,8 @@ export class CommentController {
     static async delete(req: Request, res: Response, next: NextFunction){
         try {
             const id = Number(req.params.id);
-            await CommentService.deleteComment(id);
-            return res.status(204).send();
+            const deleted = await CommentService.deleteComment(id);
+            return sendResponse(res, 200, "success", "Commentaire supprimé", deleted);
         } catch (error) {
             next(error);
         }
@@ -64,8 +64,8 @@ export class CommentController {
     static async toggle(req: Request, res: Response, next: NextFunction){
         try {
             const id = Number(req.params.id);
-            const comment = await CommentService.toggleComment(id);
-            res.json(comment);
+            const updated = await CommentService.toggleComment(id);
+            return sendResponse(res, 200, "success", "Statut du commentaire mis à jour", updated);
         } catch(error) {
             next(error);
         }
@@ -75,7 +75,7 @@ export class CommentController {
         try {
             const id = Number(req.params.id);
             const updated = await CommentService.updateComment(id, req.body);
-            res.json(updated);
+            return sendResponse(res, 200, "success", "Commentaire mis à jour", updated);
         } catch (error){
             next(error);
         } 

@@ -36,8 +36,9 @@
             );
             
             if(res.ok){
-                const updated = await res.json();
-                comments = comments.map((c: Comment) => c.id_comment === id ? updated : c );
+                const json = await res.json();
+                const updated = json.data!;
+                comments = comments.map((c: Comment) => c.id_comment === id ? { ...c, ...updated } : c );
 
                 setFlash('Mise a jour du status reussié !');
             } else {
@@ -57,9 +58,11 @@
                     credentials: "include"
                 }
             );
-            if(res.ok){
+            const json = await res.json();
+            // pour use le retour de .destroy de sequelize du back return nombre de ligne supprimée
+            if(json.data === 1){
                 comments = comments.filter((c: Comment)=> c.id_comment !== id);
-                setFlash("Supression du commentaire effectué !!");
+                setFlash("Supression du commentaire effectué !");
             }
         } catch (error) {
              console.error("Erreur lors de la suppresion du commentaire");
@@ -131,10 +134,6 @@
                 on:delete={(e) => deleteComment(e.detail)}
                 on:update={(e)=> updateComment(e.detail)}
             />
-            <!-- <UserAdminCard
-                {comment}
-                on:update={(e)=> updateUser(e.detail)}
-            /> -->
         {/each}
     </ul>   
 </section>
