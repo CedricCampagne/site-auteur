@@ -14,8 +14,8 @@
                 method: "DELETE",
                 credentials: "include"
             })
-            
-            if(res.ok){
+            const json = await res.json();
+            if(json.data! === 1){
                 users = users.filter((u: User)=> u.id_user !== id);
                 setFlash("Supression de l'utilisateur effectuée !!");
             }
@@ -25,7 +25,7 @@
     }
 
     async function toggleStatus(id: number) {
-            try {
+        try {
             const res = await fetch(
                 `${import.meta.env.VITE_API_URL}/admin/users/${id}/toggle`,
                 {
@@ -33,11 +33,11 @@
                     credentials: "include"
                 }
             );
-
+            const json = await res.json();
             if (res.ok) {
-                const updated = await res.json(); 
+                const updated = json.data!; 
                 // Mise à jour locale comme delete 
-                users = users.map((u: User) => u.id_user === id ? updated : u );
+                users = users.map((u: User) => u.id_user === id ? { ...u, ...updated } : u );
                 setFlash('Mise a jour du status reussié !');
             } else {
                 console.error("Erreur toggle");

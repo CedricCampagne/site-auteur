@@ -7,6 +7,8 @@ export async function load({ fetch }){
         throw new Error("Impossible de récupérer les utilisateurs");
     }
     
-    const users = await res.json();
+    const json = await res.json();
+    const users = json.data!;
+    
     return { users };
 }
