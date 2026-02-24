@@ -1,4 +1,15 @@
-import { Table, Column, Model, DataType, PrimaryKey, AutoIncrement, Unique, BeforeUpdate, BeforeValidate, HasMany, Index } from "sequelize-typescript";
+import { Table,
+    Column,
+    Model,
+    DataType,
+    PrimaryKey,
+    AutoIncrement,
+    Unique,
+    BeforeUpdate,
+    BeforeValidate,
+    HasMany,
+    Index
+} from "sequelize-typescript";
 import { slugify } from "../utils/slugify";
 import { Comment } from "./Comment";
 

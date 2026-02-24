@@ -10,6 +10,8 @@ export const load : PageServerLoad = async ({fetch, params}) => {
         throw new Error("Impossible de récupérer le commentaire");
     }
 
-    const comment = await res.json();
+    const json = await res.json();
+    const comment = json.data!;
+    
     return { comment };
 }
