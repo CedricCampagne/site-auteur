@@ -36,9 +36,11 @@
             );
 
             if (res.ok) {
-                const updated = await res.json(); 
+                const json = await res.json(); 
+                const updated = json.data!;
                 // Mise à jour locale comme delete 
-                chronicles = chronicles.map((c: Chronicle) => c.id_chronicle === id ? updated : c );
+                // { ...c, ...updated } fussionne ancien et nouvel objet
+                chronicles = chronicles.map((c: Chronicle) => c.id_chronicle === id ? { ...c, ...updated } : c );
                 setFlash('Mise a jour du status reussié !');
             } else {
                 console.error("Erreur toggle");
@@ -54,9 +56,10 @@
                 method: "DELETE",
                 credentials: "include"
             })
-            
-            if(res.ok){
-                chronicles = chronicles.filter((c: Chronicle)=> c.id_chronicle !== id);
+            const json = await res.json();
+            // pour use le retour de .destroy de sequelize du back return nombre de ligne supprimée
+            if (json.data === 1) {
+                chronicles = chronicles.filter((c: Chronicle) => c.id_chronicle !== id);
                 setFlash("Supression de la chronique effectuée !!");
             }
         } catch (error) {

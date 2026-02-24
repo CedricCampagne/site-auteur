@@ -19,7 +19,8 @@ export const load: PageServerLoad = async ({ params, fetch }) => {
         throw redirect(302, '/admin/chronicles');
     }
 
-    const chronicle = await res.json();
+    const json = await res.json();
+    const chronicle = json.data!;
 
     return { chronicle };
 };

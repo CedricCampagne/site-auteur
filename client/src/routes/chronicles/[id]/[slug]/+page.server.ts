@@ -14,9 +14,9 @@ export async function load({params, fetch}) : Promise<{ chronicle: Chronicle, co
     if (!resChronicle.ok) {
         throw redirect(303, "/login"); }
     
-    const chronicle = await resChronicle.json();
-   
-    
+    // const chronicle = await resChronicle.json();
+    const jsonChronicle = await resChronicle.json();
+    const chronicle = jsonChronicle.data!;
     // fetch pour récuperer les commentaires (avec le user du commentaire) associés a la chronique
     const resComments = await fetch(`${import.meta.env.VITE_API_URL}/chronicles/${params.id}/${params.slug}/comments`);
     
@@ -26,8 +26,10 @@ export async function load({params, fetch}) : Promise<{ chronicle: Chronicle, co
     if (!resComments.ok) {
         throw redirect(303, "/login"); }
     
-    const comments = await resComments.json();
-   
+    // const comments = await resComments.json();
+    const jsonComments = await resComments.json();
+    const comments = jsonComments.data!;
+    
     return { chronicle, comments };
 }
 

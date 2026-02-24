@@ -1,12 +1,13 @@
 import { BookService } from "../services/BookService";
 import { Request, Response, NextFunction } from "express";
+import { sendResponse } from "../utils/sendResponse";
 
 export class BooksController {
     static async getAll(req: Request, res:Response, next: NextFunction) {
         try {
             const books = await BookService.getAllBooks();
             
-            return res.json(books);
+            return sendResponse(res, 200, "success", "Listes des livres récupérée", books);
         } catch (error) {
             next(error);
         }
@@ -15,7 +16,7 @@ export class BooksController {
     static async getRandom(req: Request, res: Response, next: NextFunction) {
         try {
             const books = await BookService.getRandom3Books();            
-            return res.json(books);
+            return sendResponse(res, 200, "success", "Livres aléatoires récupérés", books);
         } catch (error) {
             next(error);
         }
@@ -24,7 +25,7 @@ export class BooksController {
     static async getLatest(req: Request, res: Response, next: NextFunction) {
         try {
             const book = await BookService.getLatestBook();
-            return res.json(book);
+            return sendResponse(res, 200, "success", "Dernier livre récupéré", book);
         } catch (error) {
             next(error);
         }
@@ -35,7 +36,7 @@ export class BooksController {
             // const slug = req.params.slug;
             const { slug } = req.params;
             const book = await BookService.getBySlug(slug);
-            return res.json(book);
+            return sendResponse(res, 200, "success", "Livre trouvé", book);
         } catch (error) {
             next(error);
         }
@@ -46,7 +47,7 @@ export class BooksController {
             const id = Number(req.params.id);
             const book = await BookService.getBookById(id);
 
-            return res.json(book);
+            return sendResponse(res, 200, "success", "Livre trouvé", book);
         } catch (error) {
             next(error);
         }       

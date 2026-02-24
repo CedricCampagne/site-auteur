@@ -8,7 +8,8 @@ export const load : PageServerLoad = async ({fetch}) => {
     if (!res.ok) {
         throw new Error("Impossible de récupérer les commentaires");
     }
-    const comments = await res.json();
+    const jsonComments = await res.json();
+    const comments = jsonComments.data!;
 
     const res2 = await fetch(`${import.meta.env.VITE_API_URL}/admin/users`,{
         credentials: "include"
@@ -17,13 +18,15 @@ export const load : PageServerLoad = async ({fetch}) => {
     if (!res2.ok) {
         throw new Error("Impossible de récupérer les utilisateurs");
     }
-    const users = await res2.json();
+    const jsonUsers = await res2.json();
+    const users = jsonUsers.data!;
 
     const res3 = await fetch(`${import.meta.env.VITE_API_URL}/admin/chronicles`,
         { credentials: "include"
         });
 
-    const chronicles = await res3.json();
+    const jsonChronicles = await res3.json();
+    const chronicles = jsonChronicles.data!;
     
     return { comments, users, chronicles };
 }

@@ -67,3 +67,9 @@ export interface UserFormCreate {
     password:string;
     is_active:boolean;
 }
+
+export interface ApiResponse<T> {
+    type: "success" | "fail";
+    message: string;
+    data?: T;
+}

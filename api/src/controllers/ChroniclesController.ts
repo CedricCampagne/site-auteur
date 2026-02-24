@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import { ChronicleService } from "../services/ChronicleService";
 import { Role } from "../models/Role";
 import { ChronicleCreationAttributes } from "../models/Chronicle";
+import { sendResponse } from "../utils/sendResponse";
 
 export class ChroniclesController {
     static async getAll(req: Request, res:Response, next: NextFunction) {
@@ -14,7 +15,7 @@ export class ChroniclesController {
             // Passe l'info au service
             const chronicles = await ChronicleService.getAllChronicles(isAdmin);
 
-            return res.json(chronicles);
+            return sendResponse(res, 200, "success", "Liste des chroniques récupérée", chronicles);
         } catch (error) {
             next(error);
         }
@@ -25,7 +26,7 @@ export class ChroniclesController {
         try {
             const chronicles = await ChronicleService.getRandom3Chronicles();
 
-            return res.json(chronicles);
+            return sendResponse(res, 200, "success", "3 chroniques aléatoires trouvées", chronicles);
         } catch (error) {
             next(error);       
         }
@@ -36,7 +37,7 @@ export class ChroniclesController {
         try {
             const chronicles = await ChronicleService.getLatest3Chronicles();
 
-            return res.json(chronicles); 
+            return sendResponse(res, 200, "success", "3 dernières chroniques trouvées", chronicles);
         } catch (error) {
             next(error);
         }
@@ -48,7 +49,7 @@ export class ChroniclesController {
             const { slug } = req.params;
             const chronicle = await ChronicleService.getBySlug(slug);
 
-            return res.json(chronicle);
+            return sendResponse(res, 200, "success", "Chronique trouvé", chronicle);
         } catch (error) {
             next(error);
         }
@@ -65,7 +66,7 @@ export class ChroniclesController {
             // Passe l'info au service
             const chronicle = await ChronicleService.getChroniclesById(id, isAdmin);
 
-            return res.json(chronicle);
+            return sendResponse(res, 200, "success", "Chronique trouvé", chronicle);
         } catch (error) {
             next(error);
         }
@@ -74,8 +75,8 @@ export class ChroniclesController {
     static async delete(req: Request, res: Response, next: NextFunction){
         try {
             const id = Number(req.params.id);
-            await ChronicleService.deleteChronicle(id);
-            return res.status(204).send();
+            const deleted = await ChronicleService.deleteChronicle(id);
+            return sendResponse(res, 200, "success", "Chronique supprimée", deleted);
         } catch (error) {
             next(error);
         }
@@ -85,9 +86,8 @@ export class ChroniclesController {
         try {
             const id = Number(req.params.id);
             const updated = await ChronicleService.updateChronicle(id, req.body);
-            res.json(updated);
+            return sendResponse(res, 200, "success", "Chronique mise a jour", updated);
         } catch (error){
-            // res.status(err.status || 500).json({ error: err.message });
             next(error);
         } 
     }
@@ -96,7 +96,7 @@ export class ChroniclesController {
         try {
             const id = Number(req.params.id);
             const chronicle = await ChronicleService.toggleChronicle(id);
-            res.json(chronicle);
+            return sendResponse(res, 200, "success", "Statut de la chronique mis a jour", chronicle);
         } catch(error) {
             next(error);
         }
@@ -107,7 +107,7 @@ export class ChroniclesController {
             const data = req.body as ChronicleCreationAttributes;
             const chronicle = await ChronicleService.createChronicle(data);
 
-            res.status(200).json(chronicle);
+            return sendResponse(res, 201, "success", "Statut de la chronique mis a jour", chronicle);
         } catch (error) {
             next(error);
         }
