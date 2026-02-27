@@ -5,14 +5,14 @@
 
 <section class="flex flex-col gap-6 mt-24 pb-8 border-b">
     <div class="border-b-2 border-accent2">
-        <h2 class="text-5xl font-black text-center mb-4">
+        <h2 class="text-4xl sm:text-5xl font-black text-center mb-4">
             Administration du site
         </h2>
     </div>
 
-    <!-- Menu horizontal -->
+    <!-- Menu nav -->
     <nav class="bg-gray-100 border-b">
-        <ul class="flex justify-center gap-16 py-4 text-lg font-medium">
+        <ul class="flex flex-col gap-4 items-center sm:flex-row sm:justify-center sm:gap-16 py-4 text-lg font-medium">
             <li>
                 <a 
                     href="/admin/chronicles" 

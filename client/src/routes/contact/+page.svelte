@@ -43,7 +43,7 @@
         </div>
         <button
             type="submit"
-            class="text-white bg-accent2 p-2 rounded-md min-w-1/2 hover:bg-accent1 transition-all duration-500"
+            class=" text-white bg-accent2 p-2 rounded-md min-w-1/4 hover:bg-accent1 transition-all duration-500"
         >
             Envoyer
         </button>

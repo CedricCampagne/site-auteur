@@ -24,9 +24,9 @@
         </p>
     </div>
 
-    <div class="flex flex-col md:flex-row gap-8 md:items-start mb-20">
-        <div class="w-full md:w-1/3 md:self-auto">
-           <div class="w-full aspect-square rounded-lg overflow-hidden shadow">
+    <div class="flex flex-col md:flex-row gap-8 md:items-stretch mb-20">
+        <div class="w-full md:w-1/3">
+           <div class="w-full aspect-square rounded-lg overflow-hidden shadow md:aspect-auto md:h-full">
                 <img 
                     src="/images/cv_photo.jpeg" 
                     alt="Portrait" 
@@ -35,7 +35,7 @@
             </div>
         </div>
         <div class="w-full md:w-2/3 space-y-2">
-            <h2 class="text-3xl font-title text-title mb-4">Mon histoire</h2>
+            <h2 class="text-center md:text-left text-3xl font-title text-title mb-4">Mon histoire</h2>
             <p class="text-lg leading-relaxed text-text-main">
                 Depuis toujours, j’explore les univers littéraires. Ce site est né de 
                 l’envie de partager mes lectures, mes analyses et mes coups de cœur. 
@@ -49,28 +49,12 @@
                 Depuis toujours, j’explore les univers littéraires. Ce site est né de 
                 l’envie de partager mes lectures, mes analyses et mes coups de cœur. 
                 J’aime comprendre ce qui fait vibrer un texte, ce qui le rend unique.
-            </p>
-           <!-- <p class="text-lg leading-relaxed text-text-main">
-                Depuis toujours, j’explore les univers littéraires. Ce site est né de 
-                l’envie de partager mes lectures, mes analyses et mes coups de cœur. 
-                J’aime comprendre ce qui fait vibrer un texte, ce qui le rend unique.
-            </p>
-            <p class="text-lg leading-relaxed text-text-main">
-                Depuis toujours, j’explore les univers littéraires. Ce site est né de 
-                l’envie de partager mes lectures, mes analyses et mes coups de cœur. 
-                J’aime comprendre ce qui fait vibrer un texte, ce qui le rend unique.
-            </p>
-            <p class="text-lg leading-relaxed text-text-main">
-                Depuis toujours, j’explore les univers littéraires. Ce site est né de 
-                l’envie de partager mes lectures, mes analyses et mes coups de cœur. 
-                J’aime comprendre ce qui fait vibrer un texte, ce qui le rend unique.
-            </p> -->
-            
+            </p>        
         </div>
     </div>
 
     <div class="flex flex-col gap-8 mb-20">
-        <h2 class="text-3xl font-title text-title mb-4">Ma vision</h2>
+        <h2 class="text-center md:text-left text-3xl font-title text-title mb-4">Ma vision</h2>
        <p class="text-lg leading-relaxed text-text-main">
             La littérature est un espace de liberté. Elle permet de voyager, de réfléchir, 
             de ressentir. À travers mes chroniques, je cherche à mettre en lumière ce qui 
@@ -78,7 +62,7 @@
         </p>
     </div>
 
-    <div class="flex flex-col items-center sm:flex-row sm:justify-center gap-8">
+    <div class="flex flex-col items-center gap-4 sm:flex-row sm:justify-center sm:gap-8">
             <a 
                 href="/bibliography" 
                 class="p-2 border bg-accent1 text-white hover:bg-bg-main hover:text-accent1 transition-all duration-500"

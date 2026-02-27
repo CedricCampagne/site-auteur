@@ -1,5 +1,5 @@
 <script lang="ts">
-    import Button from '$lib/components/Button.svelte';
+    import Icon from '@iconify/svelte';
     import { goto } from '$app/navigation';
     import { flash, setFlash} from "$lib/stores/flash";
 	import type { Chronicle, Comment, User } from '$lib/types.js';
@@ -81,52 +81,78 @@
             {$flash}
         </div>
     {/if}
-    <h2 class="text-5xl font-black text-center mb-4">
+
+    <h2 class="text-4xl font-black text-center mb-4">
         Tous les commentaires ({filteredComments.length})
     </h2>
-    <div>
-        <div class="flex justify-around border-b-2 border-accent2 pb-2">
-            <div class="flex items-center gap-2 border p-2">
-                <p>Filter par utilisateurs : </p>
-                <select
-                    bind:value={selectedUser}
-                    name="users"
-                    id="users"
-                    class="text-accent1 p-2 rounded border-0 outline-none focus:outline-none focus:ring-0"
-                >
-                    <option value="">Tous</option>
-                    {#each users as user }
-                        <option value={user.id_user}>
-                            {user.username}
-                        </option>
-                    {/each}
-                </select>
-            </div>
-            <div class="flex items-center gap-2 border p-2">
-                <p>Filter par chroniques : </p>
-                <select 
-                    bind:value={selectedChronicle}
-                    name="chronicles"
-                    id="chronicles"
-                    class="text-accent1 p-2 rounded border-0 outline-none focus:outline-none focus:ring-0"
-                    >
-                    <option value="" class="text-center">Tous</option>
-                    {#each chronicles as chronicle }
-                        <option class="text-center" value={chronicle.id_chronicle}>
-                            {chronicle.title}
-                        </option>
-                    {/each}
-                </select>
-            </div>
-            <Button
-            text="Réinitialiser"
-            className="bg-accent1 text-white hover:bg-white hover:text-accent1 transition-all duration-500 self-center border border-accent1"
-            on:click={clearFilter}
-            />
+
+    <div class="border-b-2 border-accent2 pb-2 flex flex-col items-center gap-2 md:flex-row md:justify-between md:items-center ">
+        <div class="flex flex-col gap-2 border border-accent2 py-3 px-4 rounded-md bg-white shadow-sm w-fit">
+            <p class="text-sm font-semibold text-accent2">
+                Filtrer par utilisateur :
+            </p>
+
+            <select
+                bind:value={selectedUser}
+                name="users"
+                id="users"
+                class="appearance-none bg-white border border-accent2 
+                    text-accent2 px-4 py-2 pr-10 rounded-md 
+                    shadow-sm cursor-pointer
+                    focus:outline-none focus:ring-2 focus:ring-accent1 focus:border-accent1
+                    transition-all duration-200"
+            >
+                <option value="">Tous</option>
+                {#each users as user}
+                    <option value={user.id_user}>
+                        {user.username}
+                    </option>
+                {/each}
+            </select>
         </div>
+
+        <div class="flex flex-col gap-2 border border-accent2 py-3 px-4 rounded-md bg-white shadow-sm w-fit">
+            <p class="text-sm font-semibold text-accent2">
+                Filtrer par chroniques :
+            </p>
+
+            <select
+                bind:value={selectedChronicle}
+                name="users"
+                id="users"
+                class="appearance-none bg-white border border-accent2 
+                    text-accent2 px-4 py-2 pr-10 rounded-md 
+                    shadow-sm cursor-pointer
+                    focus:outline-none focus:ring-2 focus:ring-accent1 focus:border-accent1
+                    transition-all duration-200"
+            >
+                <option value="">Tous</option>
+                {#each chronicles as chronicle}
+                    <option value={chronicle.id_chronicle}>
+                        {chronicle.title}
+                    </option>
+                {/each}
+            </select>
+        </div>
+
+        <button
+            on:click={clearFilter}
+            class="flex items-center justify-center 
+                w-12 h-12 rounded-full 
+                border border-accent2 
+                text-accent2 bg-white
+                hover:bg-accent1 hover:text-white hover:border-accent1
+                transition-all duration-300 shadow-sm"
+            title="Réinitialiser les filtres"
+        >
+            <Icon icon="material-symbols:restart-alt-rounded" class="text-2xl" />
+    </button>
     </div>
-    
+   
     <ul class="space-y-2">
+        {#if filteredComments.length === 0}
+            <p class="border p-4 rounded bg-white shadow text-center"> Pas de commentaires pour ces filtres</p>
+        {/if}
         {#each filteredComments as comment}
             <CommentAdminCard
                 {comment}
