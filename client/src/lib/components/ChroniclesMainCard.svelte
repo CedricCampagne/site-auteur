@@ -16,11 +16,11 @@
     <img 
         src={chronicle.cover_url}
         alt="Image de la chronique {chronicle.title}"
-        class="w-full sm:w-48 h-48 object-cover rounded"
+        class="w-full sm:w-48 h-auto object-cover rounded"
     />
 
     <!-- Texte -->
-    <div class="flex flex-col justify-between flex-1">
+    <div class="flex flex-col justify-between ">
         
         <div>
             <!-- Titre -->
@@ -43,7 +43,7 @@
         <!-- Bouton -->
         <Button
             text="Lire la chronique"
-            className="mt-4 border-2 border-accent2 hover:bg-accent2 hover:text-white transition-all duration-300 w-fit"
+            className="mt-4 border-2 border-accent2 hover:bg-accent2 hover:text-white transition-all duration-300 w-fit self-center sm:self-auto"
             on:click={()=>goToChronicle()}
         />
     </div>

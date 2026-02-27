@@ -15,14 +15,12 @@
 
 <section class="flex flex-col items-center bg-accent2 text-white p-6 gap-8 mt-12 md:flex md:flex-row">
     <div class="shrink-0">
-        <img src="/images/cv_photo.jpeg" alt="auteur" class="w-50 md:w-70">
+        <img src="/images/cv_photo.jpeg" alt="auteur" class="w-50 lg:w-70">
     </div>
     <div class="flex flex-col items-center gap-4 md:flex md:flex-col md:justify-around md:items-start">
-        <div>
-        </div>
         <div class="w-2/3 flex flex-col gap-8 items-center md:flex md:flex-row md:items-start md:w-full">
             <div class="flex-1 flex flex-col items-center justify-start gap-4">
-                <div class="flex flex-col items-center gap-4">
+                <div class="flex flex-col items-center gap-4 p-2 border-b border-t md:border-r md:border-t-0 md:border-b-0 ">
                     <h2 class="text-white text-3xl">A propos</h2>
                     <p class="text-center md:text-start">
                         Depuis toujours, j’explore les univers littéraires. Ce site est né de 
@@ -42,7 +40,7 @@
                         >
                             <Icon
                                 icon="simple-icons:instagram"
-                                class=" cursor-pointer text-2xl text-white hover:scale-115 transition-all duration-500"
+                                class=" cursor-pointer text-2xl text-white hover:scale-115 hover:text-accent1 transition-all duration-500"
                             />
                         </a>
                     </div>
