@@ -51,7 +51,7 @@
         </div>
 
         <section class="max-w-3xl mx-auto px-4 sm:px-0 mt-12 mb-24">
-            <div class="flex justify-between items-center mb-6">
+            <div class="flex flex-col items-center gap-2 mb-6 sm:flex sm:flex-row sm:justify-between sm:items-center">
                 <h3 class="text-2xl font-bold">Commentaires ({comments.length})</h3>
                 <Button 
                     text="Ajouter un commentaire"

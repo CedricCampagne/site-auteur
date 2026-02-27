@@ -58,7 +58,7 @@
 </script>
 
 <section class="flex flex-col gap-4 mt-24 pb-8 border-b">
-    <h2 class="text-5xl font-black text-center mb-4">Création d'une chronique</h2>
+    <h2 class="text-4xl font-black text-center mb-4">Création d'une chronique</h2>
 
     <form on:submit|preventDefault={handleSubmit} class="flex flex-col gap-4" >
         
@@ -124,7 +124,7 @@
                 class="max-w-50 bg-accent2 text-white px-4 py-2 rounded hover:bg-accent1 transition-all duration-500"
                 disabled={!isFormValid}
             >
-                Créer la chronique
+                Mise a jour de la chronique
             </button>
 
             {#if successMessage}

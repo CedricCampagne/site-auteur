@@ -47,7 +47,7 @@
 </script>
 
 <section class="flex flex-col gap-4 mt-24 pb-8 border-b">
-    <h2 class="text-5xl font-black text-center mb-4">
+    <h2 class="text-4xl font-black text-center mb-4">
         Édition du commentaire
     </h2>
 
