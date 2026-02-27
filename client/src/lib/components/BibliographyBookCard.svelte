@@ -12,9 +12,9 @@
         <img 
             src={book.cover_url} 
             alt="Couverture du livre {book.title}" 
-            class="w-full max-h-100 object-contain sm:w-40 sm:h-56 sm:object-cover rounded"
+            class="w-full sm:max-h-100 object-contain sm:w-40 sm:h-56 sm:object-cover rounded"
         />
-    <div class="flex flex-col justify-between">
+    <div class="flex flex-col justify-between items-center text-center sm:text-left sm:items-start ">
         <div>
             <h2 class="text-2xl font-semibold mb-2">{book.title}</h2>
             <p class="text-sm text-gray-700 line-clamp-5">

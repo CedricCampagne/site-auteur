@@ -10,7 +10,7 @@
 
 {#if book }
 <section class="flex flex-col gap-4 mt-24 pb-8 border-b">
-    <div class="flex flex-col items-center gap-24 md:flex-row md:gap-8">
+    <div class="flex flex-col items-center gap-24 md:flex-row md:gap-8 md:self-center">
        <div class="w-[300px] h-[450px] overflow-hidden rounded-md shadow-lg shadow-accent2">
             <img 
                 src={book.cover_url} 
