@@ -16,7 +16,7 @@ export async function load({params, fetch}) : Promise<{ chronicle: Chronicle, co
     
     // const chronicle = await resChronicle.json();
     const jsonChronicle = await resChronicle.json();
-    const chronicle = jsonChronicle.data!;
+    const chronicle: Chronicle = jsonChronicle.data!;
     // fetch pour récuperer les commentaires (avec le user du commentaire) associés a la chronique
     const resComments = await fetch(`${import.meta.env.VITE_API_URL}/chronicles/${params.id}/${params.slug}/comments`);
     
@@ -28,8 +28,8 @@ export async function load({params, fetch}) : Promise<{ chronicle: Chronicle, co
     
     // const comments = await resComments.json();
     const jsonComments = await resComments.json();
-    const comments = jsonComments.data!;
-    
+    const comments: Comment[] = jsonComments.data!;
+  
     return { chronicle, comments };
 }
 

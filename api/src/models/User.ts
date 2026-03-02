@@ -68,5 +68,11 @@ export class User extends Model<UserAttributes, UserCreationAttributes> {
 
     // Relation avec Comment
     @HasMany(()=> Comment)
-    comments!: Comment;
+    comments!: Comment[];
+
+    @Column(DataType.DATE)
+    created_at!: Date;
+
+    @Column(DataType.DATE)
+    updated_at!: Date;
 }
