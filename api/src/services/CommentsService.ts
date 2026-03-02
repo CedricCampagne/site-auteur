@@ -1,6 +1,6 @@
 import { Comment } from "../models/Comment";
 import { User } from "../models/User";
-import { AddBody } from "../types/comment";
+import { AddBody } from "../dto/comment/AddComment.dto";
 import { HttpError } from "../errors/HttpError";
 import { Chronicle } from "../models/Chronicle";
 
