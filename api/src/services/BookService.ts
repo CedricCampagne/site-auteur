@@ -1,9 +1,10 @@
 import { Book } from "../models/Book";
 import { sequelize } from "../config/database";
 import { HttpError } from "../errors/HttpError";
+import { BookDto } from "../dto/book/Book.dto";
 
 export class BookService {
-    static async getAllBooks() {
+    static async getAllBooks(): Promise<BookDto[]> {
         const books = await Book.findAll({
             order : [["published_at", "DESC"]],
             limit: 5
@@ -12,11 +13,22 @@ export class BookService {
         if(!books || books.length === 0) {
             throw new HttpError(404, "Aucun livre trouvé");
         }
-
-        return books;
+        // on renvoie pas les instances sequelize on les transforme en dto
+        return books.map(book => ({
+            id_book: book.id_book,
+            title: book.title,
+            slug: book.slug,
+            author: book.author,
+            summary: book.summary,
+            excerpt: book.excerpt,
+            published_at: book.published_at.toISOString(),
+            publisher: book.publisher,
+            genre: book.genre,
+            cover_url: book.cover_url,
+        }));
     }
    
-    static async getRandom3Books() {
+    static async getRandom3Books(): Promise<BookDto[]> {
         const books = await Book.findAll({
             order: sequelize.literal("RANDOM()"),
             limit: 3
@@ -26,10 +38,22 @@ export class BookService {
             throw new HttpError(404, "Aucun livre disponible");
         }
 
-        return books;
+       // on renvoie pas les instances sequelize on les transforme en dto
+        return books.map(book => ({
+            id_book: book.id_book,
+            title: book.title,
+            slug: book.slug,
+            author: book.author,
+            summary: book.summary,
+            excerpt: book.excerpt,
+            published_at: book.published_at.toISOString(),
+            publisher: book.publisher,
+            genre: book.genre,
+            cover_url: book.cover_url,
+        }));
     }
 
-    static async getLatestBook() {
+    static async getLatestBook(): Promise<BookDto>{
         const book = await Book.findOne({
             order: [["published_at", "DESC"]],
         })
@@ -37,10 +61,22 @@ export class BookService {
         if (!book) {
             throw new HttpError(404, "Aucun livre récent trouvé");
         }
-        return book;
+
+        return {
+            id_book: book.id_book,
+            title: book.title,
+            slug: book.slug,
+            author: book.author,
+            summary: book.summary,
+            excerpt: book.excerpt,
+            published_at: book.published_at.toISOString(),
+            publisher: book.publisher,
+            genre: book.genre,
+            cover_url: book.cover_url,
+        };
     }
 
-    static async getBySlug(slug: string) {
+    static async getBySlug(slug: string): Promise<BookDto> {
         const book = await Book.findOne({
            where: { slug }
         });
@@ -48,15 +84,38 @@ export class BookService {
         if (!book) {
             throw new HttpError(404, "Aucun livre trouvé avec ce slug");
         }
-        return book;
+        return {
+            id_book: book.id_book,
+            title: book.title,
+            slug: book.slug,
+            author: book.author,
+            summary: book.summary,
+            excerpt: book.excerpt,
+            published_at: book.published_at.toISOString(),
+            publisher: book.publisher,
+            genre: book.genre,
+            cover_url: book.cover_url,
+        };
     }
 
-    static async getBookById(id:number) {
+    static async getBookById(id:number): Promise<BookDto> {
         const book = await Book.findByPk(id);
 
         if (!book) {
             throw new HttpError(404, "Aucun livre trouvé avec cet ID");
         }
-        return book;
+        
+        return {
+            id_book: book.id_book,
+            title: book.title,
+            slug: book.slug,
+            author: book.author,
+            summary: book.summary,
+            excerpt: book.excerpt,
+            published_at: book.published_at.toISOString(),
+            publisher: book.publisher,
+            genre: book.genre,
+            cover_url: book.cover_url,
+        };
     }
 }

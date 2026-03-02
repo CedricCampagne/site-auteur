@@ -13,15 +13,15 @@ export interface Book {
 }
 
 export interface Chronicle {
-    id_chronicle: number
-    title:string;
-    slug:string;
+    id_chronicle: number;
+    title: string;
+    slug: string;
     quote: string;
     summary: string;
-    content:string;
-    cover_url: string
-    published_at: string | Date;
-    is_active?:boolean;
+    content: string;
+    cover_url: string;
+    published_at: string; // backend renvoie ISO string, pas Date
+    is_active?: boolean;
 }
 
 export interface Comment {
@@ -29,19 +29,11 @@ export interface Comment {
     content: string;
     is_visible: boolean;
     user_id: number;
-    chronicle_id:number;
-    created_at: string;
+    chronicle_id: number;
+    created_at: string; // string ISO
     updated_at: string;
-
-    user: {
-        id_user: number;
-        username: string
-    };
-
-    chronicle: {
-        id_chronicle: number;
-        title: string;
-    }
+    user: { id_user: number; username: string };
+    chronicle: { id_chronicle: number; title: string };
 }
 
 export interface User {
