@@ -125,7 +125,7 @@ export class ChronicleService {
         return deleted;
     }
 
-    static async updateChronicle(id: number, data: any): Promise<ChronicleDto> {
+    static async updateChronicle(id: number, data: ChronicleCreationAttributes): Promise<ChronicleDto> {
         const chronicle = await Chronicle.findOne({ 
             where: { id_chronicle: id }
         });

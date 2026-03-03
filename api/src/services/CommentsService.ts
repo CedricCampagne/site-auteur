@@ -65,8 +65,36 @@ export class CommentService{
         const comment = await Comment.create({
             user_id, chronicle_id, content, created_at: new Date()
         });
+
+        const fullComment = await Comment.findOne({
+            where: { id_comment: comment.id_comment },
+            include: [
+                { model: User, attributes : ["id_user", "username"]},
+                { model: Chronicle, attributes: ["id_chronicle", "title"]}
+            ]
+        });
+
+        if (!fullComment) {
+            throw new HttpError(500, "Erreur lors de la récupération du commentaire créé");
+        }
         
-        return comment;
+        return {
+            id_comment: fullComment.id_comment,
+            content: fullComment.content,
+            is_visible: fullComment.is_visible,
+            user_id: fullComment.user_id,
+            chronicle_id: fullComment.chronicle_id,
+            created_at: fullComment.created_at.toISOString(),
+            updated_at: fullComment.updated_at.toISOString(),
+            user: {
+                id_user: fullComment.user.id_user,
+                username: fullComment.user.username
+            },
+            chronicle: {
+                id_chronicle: fullComment.chronicle.id_chronicle,
+                title: fullComment.chronicle.title
+            }
+        };
     }
 
     static async getAllComments(): Promise<CommentDto[]>{
@@ -100,7 +128,7 @@ export class CommentService{
                 id_chronicle: comment.chronicle.id_chronicle,
                 title: comment.chronicle.title
             }
-        }));;
+        }));
     }
 
     static async getCommentById(id: number): Promise<CommentDto> {

@@ -2,8 +2,20 @@ import { Request, Response, NextFunction } from "express";
 import { ValidationErrorItem } from "joi";
 import { ObjectSchema } from "joi";
 
-export const validate = (schema: ObjectSchema, property: "body" | "params" | "query") => {
-  return (req: Request, res: Response, next: NextFunction) => {
+export const validate = <
+  TParams = any,
+  TresBody = any,
+  TReqBody = any,
+  TQuery = any
+> (
+  schema: ObjectSchema,
+  property: "body" | "params" | "query"
+) => {
+  return (
+    req: Request<TParams, TresBody, TReqBody, TQuery>,
+    res: Response,
+    next: NextFunction
+  ) => {
     const { error, value } = schema.validate(req[property], {
       abortEarly: false,
       stripUnknown: true,

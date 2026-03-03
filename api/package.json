@@ -5,7 +5,8 @@
   "scripts": {
     "test": "jest",
     "dev": "ts-node-dev --respawn src/index.ts",
-    "seed": "ts-node src/seeds/runSeed.ts"
+    "seed": "ts-node src/seeds/runSeed.ts",
+    "build": "tsc"
   },
   "keywords": [],
   "author": "",

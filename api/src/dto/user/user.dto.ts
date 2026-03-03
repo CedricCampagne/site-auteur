@@ -5,7 +5,7 @@ export interface UserDto {
     username: string;
     email: string;
     is_active: boolean;
-    roles?: RoleDto[];
+    roles: RoleDto[];
     created_at: string;
     updated_at: string;
 }
