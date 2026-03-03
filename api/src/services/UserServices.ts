@@ -1,12 +1,14 @@
 import { User, UserCreationAttributes, UserUpdateAttributes } from "../models/User";
 import { HttpError } from "../errors/HttpError";
 import argon2 from "argon2";
+import { Role } from "../models/Role";
 import { UserDto } from "../dto/user/user.dto";
 
 export class UserServices {
     static async getAllUsers(): Promise<UserDto[]>{
         const users = await User.findAll({
-            order: ["username"]
+            order: ["username"],
+            include: [{ model: Role, attributes: ["id_role", "name"] }]
         });
 
         return users.map(user => ({
@@ -22,7 +24,8 @@ export class UserServices {
 
     static async getUserById(id: number): Promise<UserDto>{
         const user = await User.findByPk(id, {
-            attributes: { exclude :["password"] }
+            attributes: { exclude :["password"] },
+            include: [{ model: Role, attributes: ["id_role", "name"] }]
         });
 
         if(!user) {
@@ -44,13 +47,14 @@ export class UserServices {
         const deleted = await User.destroy({ where: {id_user: id}});
 
         if (deleted === 0) {
-            throw new HttpError(404, "Chronique introuvable");
+            throw new HttpError(404, "Utilisateur introuvable");
         }
         return deleted;
     }
 
     static async createUser(data: UserCreationAttributes): Promise<UserDto>{
         const hash = await argon2.hash(data.password);
+
         const user = await User.create({
             username: data.username,
             email: data.email,
@@ -62,14 +66,27 @@ export class UserServices {
             throw new HttpError(400, "Impossible de créer l'utilisateur");
         }
 
+        const fullUser = await User.findByPk((user.id_user), {
+            include: [
+                {
+                    model: Role,
+                    attributes: ["id_role", "name"]
+                }
+            ]
+        });
+
+        if(!fullUser){
+            throw new HttpError(500, "Erreur lors de la récupération de l'utilisateur créé");
+        }
+
         return {
-            id_user: user.id_user,
-            username: user.username,
-            email: user.email,
-            is_active: user.is_active,
-            created_at: user.created_at.toISOString(),
-            updated_at: user.updated_at.toISOString(),
-            roles: user.roles?.map(role => ({ id_role: role.id_role, name: role.name }))
+            id_user: fullUser.id_user,
+            username: fullUser.username,
+            email: fullUser.email,
+            is_active: fullUser.is_active,
+            created_at: fullUser.created_at.toISOString(),
+            updated_at: fullUser.updated_at.toISOString(),
+            roles: fullUser.roles?.map(role => ({ id_role: role.id_role, name: role.name }))
         };
     }
 

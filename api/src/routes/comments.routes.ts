@@ -9,9 +9,10 @@ import { addCommentSchema } from "../validators/comments/addComment.schema";
 
 // Controllers
 import { CommentController } from "../controllers/CommentsController";
+import { CreateCommentDto } from "../dto/comment/CreateComment.dto";
 
 const commentRouter = Router();
 
-commentRouter.post("/", authGuard, validate(addCommentSchema,"body"),CommentController.addComment);
+commentRouter.post<{}, {}, CreateCommentDto>("/", authGuard, validate(addCommentSchema,"body"),CommentController.addComment);
 
 export default commentRouter;

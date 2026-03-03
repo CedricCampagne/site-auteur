@@ -3,10 +3,15 @@ import { Request, Response, NextFunction } from "express";
 import { HttpError } from "../errors/HttpError";
 import { verifyToken } from "../utils/jwt";
 import { sendResponse } from "../utils/sendResponse";
-import { send } from "node:process";
+import { RegisterParams } from "../dto/auth/RegisterParams.dto";
+import { LoginParams } from "../dto/auth/LoginParams.dto";
 
 export class AuthController {
-    static async register(req: Request, res: Response, next: NextFunction) {
+    static async register(
+        req: Request<{}, {}, RegisterParams>,
+        res: Response,
+        next: NextFunction)
+    {
         try {
             const  result = await AuthServices.registerUser(req.body);
 
@@ -18,14 +23,18 @@ export class AuthController {
                     maxAge: 1*60*60*1000
                 });
             
-            sendResponse(res, 201, "success","Utilisateur créé avec succès" , result.user);
+            return sendResponse(res, 201, "success","Utilisateur créé avec succès" , result.user);
 
         } catch (error: any) {
             next(error);
         }
     }
 
-    static async login(req: Request, res: Response, next: NextFunction) {
+    static async login(
+        req: Request<{}, {}, LoginParams>,
+        res: Response,
+        next: NextFunction
+    ) {
         try {
             const result = await AuthServices.loginUser(req.body);
 
@@ -43,7 +52,11 @@ export class AuthController {
         }
     }
 
-    static async me(req: Request, res: Response, next: NextFunction){
+    static async me(
+        req: Request,
+        res: Response,
+        next: NextFunction
+    ){
         try {
             const token = req.cookies.token;
     
@@ -57,14 +70,18 @@ export class AuthController {
                 throw new HttpError(401, "Token invalide ou expiré");
             }
             
-            sendResponse(res, 200, "success", "Utilisateur authentifié", payload);
+            return sendResponse(res, 200, "success", "Utilisateur authentifié", payload);
             
         } catch (error) {
             next(error);
         }
     }
 
-    static async logout(req: Request, res: Response, next: NextFunction){
+    static async logout(
+        req: Request,
+        res: Response,
+        next: NextFunction
+    ){
         try {
             // pour l'instant rien a invalider
             console.log("le logout passe par le back(AuthController)");

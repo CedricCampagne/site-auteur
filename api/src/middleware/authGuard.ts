@@ -2,7 +2,16 @@ import { Request, Response, NextFunction } from "express";
 import { HttpError } from "../errors/HttpError";
 import { verifyToken } from "../utils/jwt";
 
-export function authGuard(req: Request, res: Response, next: NextFunction){
+export function authGuard<
+    TParams = any,
+    TResBody = any,
+    TReqBody = any,
+    TQuery = any
+>(
+    req: Request<TParams, TResBody, TReqBody, TQuery>,
+    res: Response,
+    next: NextFunction
+){
 
     try {
         const token = req.cookies.token;
