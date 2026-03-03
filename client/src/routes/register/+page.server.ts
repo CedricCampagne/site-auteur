@@ -1,4 +1,4 @@
-import { fail} from "@sveltejs/kit";
+import { fail } from "@sveltejs/kit";
 import type { Actions } from "./$types";
 
 export const actions: Actions = {
@@ -32,16 +32,10 @@ export const actions: Actions = {
 
         const json = await res.json();
 
-        if (!res.ok) {
-            const msg =
-                Array.isArray(json?.error)
-                    ? json.error.join(" / ")
-                    : json?.error ||
-                      json?.message ||
-                      "Erreur lors de l'inscription";
-
+        if (json.type === "fail") {
+    
             return fail(res.status, {
-                error: msg,
+                error: json.message,
                 values: { username, email }
             });
         }

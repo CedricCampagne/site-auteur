@@ -72,4 +72,10 @@ export class Comment extends Model<CommentAttributes, CommentCreationAttributes>
 
     @BelongsTo(()=> User)
     user!: User;
+
+    @Column(DataType.DATE)
+    created_at!: Date;
+
+    @Column(DataType.DATE)
+    updated_at!: Date;
 }

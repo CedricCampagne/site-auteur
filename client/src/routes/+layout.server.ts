@@ -10,12 +10,13 @@ export const load = async ({ fetch, cookies }) => {
     });
     // console.log('post fetch', res);
 
+    
     if(!res.ok) {
         return { user: null };
     }
 
-    const data = await res.json();
+    const json = await res.json();
     // console.log('data si res ok ', data);
 
-    return { user: data.user };
+    return { user: json.data! };
 }

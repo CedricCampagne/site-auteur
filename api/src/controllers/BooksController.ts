@@ -1,13 +1,15 @@
 import { BookService } from "../services/BookService";
 import { Request, Response, NextFunction } from "express";
 import { sendResponse } from "../utils/sendResponse";
+import { GetBookBySlugParams } from "../dto/book/GetBookBySlugParams.dto";
+import { GetBookByIdParams } from "../dto/book/GetBookByIdParams.dto";
 
 export class BooksController {
     static async getAll(req: Request, res:Response, next: NextFunction) {
         try {
             const books = await BookService.getAllBooks();
             
-            return sendResponse(res, 200, "success", "Listes des livres récupérée", books);
+            return sendResponse(res, 200, "success", "Liste des livres récupérée", books);
         } catch (error) {
             next(error);
         }
@@ -31,7 +33,11 @@ export class BooksController {
         }
     }
 
-    static async getSlug (req: Request, res: Response, next: NextFunction) {
+    static async getSlug (
+        req: Request<GetBookBySlugParams>,
+        res: Response,
+        next: NextFunction
+    ) {
         try {
             // const slug = req.params.slug;
             const { slug } = req.params;
@@ -42,7 +48,10 @@ export class BooksController {
         }
     }
 
-    static async getById (req: Request, res: Response, next: NextFunction) {
+    static async getById (
+        req: Request<GetBookByIdParams>,
+        res: Response,
+        next: NextFunction) {
         try {
             const id = Number(req.params.id);
             const book = await BookService.getBookById(id);

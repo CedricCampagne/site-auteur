@@ -28,16 +28,10 @@ export const actions: Actions = {
 
         const json = await res.json();
 
-        if (!res.ok) {
-            const msg =
-                Array.isArray(json?.error)
-                    ? json.error.join(" / ")
-                    : json?.error ||
-                      json?.message ||
-                      "Erreur lors de la connexion";
-
+        if (json.type === "fail") {
+   
             return fail(res.status, {
-                error: msg,
+                error: json.message,
                 values: { email }
             });
         }

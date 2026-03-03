@@ -1,5 +1,5 @@
 import type { Response } from "express";
-import { ApiResponse } from "../types/ApiResponse";
+import { ApiResponse } from "../dto/common/apiResponse.dto";
 
 export function sendResponse<T>(
     res: Response,

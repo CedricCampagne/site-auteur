@@ -1,8 +1,16 @@
 import { Request, Response, NextFunction } from "express";
 import { HttpError } from "../errors/HttpError";
-import { Role } from "../models/Role";
 
-export function isAdmin(req: Request, res: Response, next: NextFunction){
+export function isAdmin<
+    TParams = any,
+    TResBody = any,
+    TReqBody = any,
+    TQuery = any
+>(
+    req: Request<TParams, TResBody, TReqBody, TQuery>,
+    res: Response,
+    next: NextFunction)
+{
     try {
         const user = req.user;
 
