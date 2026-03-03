@@ -4,11 +4,12 @@ import { UserRole } from "./UserRole";
 import { Comment } from "./Comment";
 
 export interface UserAttributes {
-    id_user:number
-    username:string
+    id_user:number;
+    username:string;
     email:string;
     password:string;
-    is_active:boolean
+    is_active:boolean;
+    roles?: Role[];
 } 
 
 export interface UserCreationAttributes {
@@ -67,5 +68,11 @@ export class User extends Model<UserAttributes, UserCreationAttributes> {
 
     // Relation avec Comment
     @HasMany(()=> Comment)
-    comments!: Comment;
+    comments!: Comment[];
+
+    @Column(DataType.DATE)
+    created_at!: Date;
+
+    @Column(DataType.DATE)
+    updated_at!: Date;
 }

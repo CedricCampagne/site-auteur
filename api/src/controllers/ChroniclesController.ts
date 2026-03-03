@@ -1,8 +1,10 @@
 import { Request, Response, NextFunction } from "express";
 import { ChronicleService } from "../services/ChronicleService";
-import { Role } from "../models/Role";
-import { ChronicleCreationAttributes } from "../models/Chronicle";
 import { sendResponse } from "../utils/sendResponse";
+import { GetChronicleBySlugParams } from "../dto/chronicles/GetChronicleBySlug.dto";
+import { GetChronicleByIdParams } from "../dto/chronicles/GetChronicleByIdParams.dto";
+import { CreateChronicleDto } from "../dto/chronicles/CreateChronicle.dto";
+import { UpdateChronicleDto } from "../dto/chronicles/UpdateChronicle.dto";
 
 export class ChroniclesController {
     static async getAll(req: Request, res:Response, next: NextFunction) {
@@ -43,20 +45,28 @@ export class ChroniclesController {
         }
     }
 
-    static async getSlug (req: Request, res: Response, next: NextFunction) {
+    static async getSlug (
+        req: Request<GetChronicleBySlugParams>,
+        res: Response,
+        next: NextFunction)
+    {
         try {
             // const slug = req.params.slug;
             const { slug } = req.params;
             const chronicle = await ChronicleService.getBySlug(slug);
 
-            return sendResponse(res, 200, "success", "Chronique trouvé", chronicle);
+            return sendResponse(res, 200, "success", "Chronique trouvée", chronicle);
         } catch (error) {
             next(error);
         }
         
     }
 
-    static async getById (req: Request, res: Response, next: NextFunction) {
+    static async getById (
+        req: Request<GetChronicleByIdParams>,
+        res: Response,
+        next: NextFunction)
+    {
         try {
             const id = Number(req.params.id);
             const user = req.user; // Détermine si l'utilisateur est admin
@@ -72,7 +82,11 @@ export class ChroniclesController {
         }
     }
 
-    static async delete(req: Request, res: Response, next: NextFunction){
+    static async delete(
+        req: Request<GetChronicleByIdParams>,
+        res: Response,
+        next: NextFunction)
+    {
         try {
             const id = Number(req.params.id);
             const deleted = await ChronicleService.deleteChronicle(id);
@@ -82,7 +96,11 @@ export class ChroniclesController {
         }
     }
 
-    static async update(req: Request, res: Response, next: NextFunction) {
+    static async update(
+        req: Request<GetChronicleByIdParams, {}, UpdateChronicleDto>,
+        res: Response,
+        next: NextFunction)
+    {
         try {
             const id = Number(req.params.id);
             const updated = await ChronicleService.updateChronicle(id, req.body);
@@ -92,7 +110,11 @@ export class ChroniclesController {
         } 
     }
 
-    static async toggle(req: Request, res: Response, next: NextFunction){
+    static async toggle(
+        req: Request<GetChronicleByIdParams>,
+        res: Response,
+        next: NextFunction)
+    {
         try {
             const id = Number(req.params.id);
             const chronicle = await ChronicleService.toggleChronicle(id);
@@ -102,12 +124,16 @@ export class ChroniclesController {
         }
     }
 
-    static async create(req: Request, res: Response, next: NextFunction){
+    static async create(
+        req: Request<{},{}, CreateChronicleDto>,
+        res: Response,
+        next: NextFunction)
+    {
         try {
-            const data = req.body as ChronicleCreationAttributes;
+            const data = req.body;
             const chronicle = await ChronicleService.createChronicle(data);
 
-            return sendResponse(res, 201, "success", "Statut de la chronique mis a jour", chronicle);
+            return sendResponse(res, 201, "success", "Chronique créée", chronicle);
         } catch (error) {
             next(error);
         }

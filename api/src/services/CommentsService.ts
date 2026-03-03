@@ -1,22 +1,43 @@
 import { Comment } from "../models/Comment";
 import { User } from "../models/User";
-import { AddBody } from "../types/comment";
+import { AddBody } from "../dto/comment/AddComment.dto";
 import { HttpError } from "../errors/HttpError";
 import { Chronicle } from "../models/Chronicle";
+import { CommentDto } from "../dto/comment/comment.dto";
 
 export class CommentService{
-    static async getCommentsByChronicleId(chronicle_id: number){
+    static async getCommentsByChronicleId(chronicle_id: number): Promise<CommentDto[]>{
         const comments = await Comment.findAll({
             where: {chronicle_id},
             include: [
                 {
                     model: User,
                     attributes : ["id_user", "username"]
+                },
+                {
+                    model: Chronicle,
+                    attributes: ["id_chronicle", "title"]
                 }
             ],
             order: [["created_at", "DESC"]]
         })
-        return comments;
+        return comments.map(comment => ({
+            id_comment: comment.id_comment,
+            content: comment.content,
+            is_visible: comment.is_visible,
+            user_id: comment.user_id,
+            chronicle_id: comment.chronicle_id,
+            created_at: comment.created_at.toISOString(),
+            updated_at: comment.updated_at.toISOString(),
+            user: {
+                id_user: comment.user.id_user,
+                username: comment.user.username
+            },
+            chronicle: {
+                id_chronicle: comment.chronicle.id_chronicle,
+                title: comment.chronicle.title
+            }
+        }));
     };
 
     static async addComment({user_id, chronicle_id, content}: AddBody){
@@ -44,11 +65,39 @@ export class CommentService{
         const comment = await Comment.create({
             user_id, chronicle_id, content, created_at: new Date()
         });
+
+        const fullComment = await Comment.findOne({
+            where: { id_comment: comment.id_comment },
+            include: [
+                { model: User, attributes : ["id_user", "username"]},
+                { model: Chronicle, attributes: ["id_chronicle", "title"]}
+            ]
+        });
+
+        if (!fullComment) {
+            throw new HttpError(500, "Erreur lors de la récupération du commentaire créé");
+        }
         
-        return comment;
+        return {
+            id_comment: fullComment.id_comment,
+            content: fullComment.content,
+            is_visible: fullComment.is_visible,
+            user_id: fullComment.user_id,
+            chronicle_id: fullComment.chronicle_id,
+            created_at: fullComment.created_at.toISOString(),
+            updated_at: fullComment.updated_at.toISOString(),
+            user: {
+                id_user: fullComment.user.id_user,
+                username: fullComment.user.username
+            },
+            chronicle: {
+                id_chronicle: fullComment.chronicle.id_chronicle,
+                title: fullComment.chronicle.title
+            }
+        };
     }
 
-    static async getAllComments(){
+    static async getAllComments(): Promise<CommentDto[]>{
         const comments = await Comment.findAll({
             include: [
                 {
@@ -63,10 +112,26 @@ export class CommentService{
             order:[["created_at", "DESC"]]
         });
 
-        return comments;
+        return comments.map(comment => ({
+            id_comment: comment.id_comment,
+            content: comment.content,
+            is_visible: comment.is_visible,
+            user_id: comment.user_id,
+            chronicle_id: comment.chronicle_id,
+            created_at: comment.created_at.toISOString(),
+            updated_at: comment.updated_at.toISOString(),
+            user: {
+                id_user: comment.user.id_user,
+                username: comment.user.username
+            },
+            chronicle: {
+                id_chronicle: comment.chronicle.id_chronicle,
+                title: comment.chronicle.title
+            }
+        }));
     }
 
-    static async getCommentById(id: number) {
+    static async getCommentById(id: number): Promise<CommentDto> {
         const comment = await Comment.findOne({
             where: { id_comment: id },
             include: [
@@ -79,10 +144,26 @@ export class CommentService{
             throw new HttpError(404, "Commentaire introuvable");
         }
 
-        return comment;
+        return {
+            id_comment: comment.id_comment,
+            content: comment.content,
+            is_visible: comment.is_visible,
+            user_id: comment.user_id,
+            chronicle_id: comment.chronicle_id,
+            created_at: comment.created_at.toISOString(),
+            updated_at: comment.updated_at.toISOString(),
+            user: {
+                id_user: comment.user.id_user,
+                username: comment.user.username
+            },
+            chronicle: {
+                id_chronicle: comment.chronicle.id_chronicle,
+                title: comment.chronicle.title
+            }
+        };
     }
 
-    static async deleteComment(id: number) {
+    static async deleteComment(id: number) : Promise<number> {
         const deleted = await Comment.destroy({
             where: { id_comment: id },
         });
@@ -94,7 +175,7 @@ export class CommentService{
         return deleted;
     }
 
-    static async toggleComment(id:number){
+    static async toggleComment(id:number): Promise<CommentDto>{
         const comment = await Comment.findOne({
             where: { id_comment: id},
             include: [
@@ -116,10 +197,26 @@ export class CommentService{
         comment.is_visible = !comment.is_visible;
         await comment.save();
 
-        return comment;
+        return {
+            id_comment: comment.id_comment,
+            content: comment.content,
+            is_visible: comment.is_visible,
+            user_id: comment.user_id,
+            chronicle_id: comment.chronicle_id,
+            created_at: comment.created_at.toISOString(),
+            updated_at: comment.updated_at.toISOString(),
+            user: {
+                id_user: comment.user.id_user,
+                username: comment.user.username
+            },
+            chronicle: {
+                id_chronicle: comment.chronicle.id_chronicle,
+                title: comment.chronicle.title
+            }
+        };
     }
 
-    static async updateComment(id: number, data: any) {
+    static async updateComment(id: number, data: any): Promise<CommentDto> {
         const comment = await Comment.findOne({ 
             where: { id_comment: id },
             include: [
@@ -140,6 +237,22 @@ export class CommentService{
 
         await comment.update(data);
         
-        return comment;
+        return {
+            id_comment: comment.id_comment,
+            content: comment.content,
+            is_visible: comment.is_visible,
+            user_id: comment.user_id,
+            chronicle_id: comment.chronicle_id,
+            created_at: comment.created_at.toISOString(),
+            updated_at: comment.updated_at.toISOString(),
+            user: {
+                id_user: comment.user.id_user,
+                username: comment.user.username
+            },
+            chronicle: {
+                id_chronicle: comment.chronicle.id_chronicle,
+                title: comment.chronicle.title
+            }
+        };
     }
 }

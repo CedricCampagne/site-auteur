@@ -47,7 +47,7 @@
             {chronicle.content}
         </div> -->
         <div class="markdown text-gray-800 leading-relaxed space-y-4">
-            {@html marked(chronicle.content)}
+            {@html marked(chronicle.content)}     
         </div>
 
         <section class="max-w-3xl mx-auto px-4 sm:px-0 mt-12 mb-24">
