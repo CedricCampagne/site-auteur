@@ -23,10 +23,10 @@
 </script>
 
 <section class="flex flex-col gap-4 mt-24 pb-8 border-b">
-    <div class="w-full h-64 sm:h-96 overflow-hidden rounded-b-lg ">
+    <div class="w-full aspect-video overflow-hidden rounded-b-lg">
         <img
-            src={ chronicle.cover_url }
-            alt="Image de { chronicle.title }"
+            src={chronicle.cover_url}
+            alt={chronicle.title}
             class="w-full h-full object-cover"
         >
     </div>

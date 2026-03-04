@@ -13,19 +13,19 @@
 
 <article class="bg-white shadow-lg shadow-accent2 rounded p-4 sm:p-6 flex flex-col sm:flex-row gap-4 sm:gap-6">
     <!-- Image -->
-    <img 
-        src={chronicle.cover_url}
-        alt="Image de la chronique {chronicle.title}"
-        class="w-full sm:w-48 h-auto object-cover rounded"
-    />
+    <div class="w-full sm:w-48 aspect-4/5 overflow-hidden rounded flex-none">
+        <img
+            src={chronicle.cover_url}
+            class="w-full h-full object-cover"
+        />
+    </div>
 
     <!-- Texte -->
     <div class="flex flex-col justify-between ">
-        
         <div>
             <!-- Titre -->
             <h2 class="text-2xl font-semibold mb-2">
-                {chronicle.title} {chronicle.quote}
+                {chronicle.title} «{chronicle.quote}»
             </h2>
             
             <!-- Date + tags -->
@@ -39,7 +39,6 @@
             </p>
 
         </div>
-
         <!-- Bouton -->
         <Button
             text="Lire la chronique"
