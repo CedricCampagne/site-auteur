@@ -65,3 +65,11 @@ export interface ApiResponse<T> {
     message: string;
     data?: T;
 }
+
+export interface JwtPayload {
+    id: number;
+    email: string;
+    roles: string[];
+    exp?: number;
+    iat?: number;
+}
