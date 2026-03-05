@@ -1,8 +1,12 @@
+//Models
 import { Comment } from "../models/Comment";
 import { User } from "../models/User";
-import { AddBody } from "../dto/comment/AddComment.dto";
-import { HttpError } from "../errors/HttpError";
 import { Chronicle } from "../models/Chronicle";
+
+import { HttpError } from "../errors/HttpError";
+
+//Dto
+import { AddBody } from "../dto/comment/AddComment.dto";
 import { CommentDto } from "../dto/comment/comment.dto";
 
 export class CommentService{

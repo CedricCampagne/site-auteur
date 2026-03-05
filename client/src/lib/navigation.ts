@@ -10,17 +10,17 @@ export function getChronicleUrl(chronicle:Chronicle) {
 }
 
 export function getDeviceType() {
-        const ua = navigator.userAgent;
+    const ua = navigator.userAgent;
 
-        if (/iPad|Tablet|PlayBook|Silk/i.test(ua)) {
-            return "tablet";
-        }
-
-        if (/Mobile|iPhone|Android/i.test(ua)) {
-            return "mobile";
-        }
-        return "desktop";
+    if (/iPad|Tablet|PlayBook|Silk/i.test(ua)) {
+        return "tablet";
     }
+
+    if (/Mobile|iPhone|Android/i.test(ua)) {
+        return "mobile";
+    }
+    return "desktop";
+}
 
 export function getInstagramUrl(username: string) {
     const device = getDeviceType();

@@ -9,7 +9,6 @@
             Administration du site
         </h2>
     </div>
-
     <!-- Menu nav -->
     <nav class="bg-gray-100 border-b">
         <ul class="flex flex-col gap-4 items-center sm:flex-row sm:justify-center sm:gap-16 py-4 text-lg font-medium">
@@ -25,7 +24,6 @@
                     Chroniques
                 </a>
             </li>
-
             <li>
                 <a 
                     href="/admin/comments" 
@@ -38,7 +36,6 @@
                     Commentaires
                 </a>
             </li>
-
             <li>
                 <a 
                     href="/admin/users" 

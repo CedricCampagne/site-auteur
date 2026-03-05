@@ -31,7 +31,7 @@
                         <Button 
                             text="En savoir plus"
                             className="border hover:text-accent2 hover:bg-white transition-all duration-500"
-                            on:click = { ()=> goto('about')}
+                            on:click = { ()=> goto('/about')}
                         />
                         <a
                             href={instagramUrl}
@@ -54,47 +54,3 @@
         </div>
     </div>
 </section>
-
-<!-- <section class="flex flex-col items-center bg-accent2 text-white p-12 gap-16 mt-12 md:flex-row md:items-start md:justify-center">
-    
-   
-    <div class="flex-shrink-0">
-        <img src="/images/cv_photo.jpeg" alt="auteur" class="w-35 md:w-70 rounded">
-    </div>
-
-   
-    <div class="flex flex-col gap-16 w-full max-w-3xl md:flex-row md:items-start">
-
-        
-        <div class="flex-1 flex flex-col gap-6 md:items-start text-center md:text-left">
-            <h2 class="text-white text-3xl">À propos</h2>
-            <p class="leading-relaxed">
-                Depuis toujours, j’explore les univers littéraires. Ce site est né de 
-                l’envie de partager mes lectures, mes analyses et mes coups de cœur. 
-                J’aime comprendre ce qui fait vibrer un texte, ce qui le rend unique.
-            </p>
-
-            <div class="flex flex-col items-center gap-4 sm:flex-row md:items-start">
-                <Button 
-                    text="En savoir plus"
-                    className="border hover:text-accent2 hover:bg-white transition-all duration-500"
-                    on:click={() => goto('about')}
-                />
-                <a href={instagramUrl} target="_blank" rel="noopener noreferrer">
-                    <Icon
-                        icon="simple-icons:instagram"
-                        class="cursor-pointer text-2xl text-white hover:scale-115 transition-all duration-500"
-                    />
-                </a>
-            </div>
-        </div>
-
-       
-        <div class="flex-1 flex flex-col gap-6 md:items-start text-center md:text-left">
-            <h3 class="text-xl">Recevez les nouvelles publications</h3>
-            <p class="leading-relaxed">Pas de spam, juste du suspense.</p>
-            <NewsletterForm />
-        </div>
-
-    </div>
-</section> -->

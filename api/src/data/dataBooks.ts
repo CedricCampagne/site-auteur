@@ -7,7 +7,7 @@ export const booksData = [
         excerpt: "La brume se leva doucement, révélant les contours d’une cité oubliée...",
         published_at: new Date("2018-03-12"),
         publisher: "Éditions du Lys", genre: "Fantasy",
-        cover_url: "https://picsum.photos/300/450?random=1", is_active: true
+        cover_url: "https://images.pexels.com/photos/268533/pexels-photo-268533.jpeg?w=1000&h=1500&fit=crop", is_active: true
     },
     {
         title: "L’Ombre des Étoiles",
@@ -16,7 +16,7 @@ export const booksData = [
         excerpt: "Dans le silence absolu de l’espace, il réalisa qu’il n’était pas seul...",
         published_at: new Date("2020-11-05"),
         publisher: "Nova Press", genre: "Science-Fiction",
-        cover_url: "https://picsum.photos/300/450?random=2", is_active: true
+        cover_url: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=1000&h=1500&fit=crop", is_active: true
     },
     {
         title: "Le Dernier Jardin",
@@ -26,7 +26,7 @@ export const booksData = [
         published_at: new Date("2022-06-21"),
         publisher: "Terra Verde",
         genre: "Roman écologique",
-        cover_url: "https://picsum.photos/300/450?random=3",
+        cover_url: "https://images.pexels.com/photos/210243/pexels-photo-210243.jpeg?w=1000&h=1500&fit=crop",
         is_active: true
     },
     { 
@@ -37,7 +37,7 @@ export const booksData = [
         published_at: new Date("2019-09-14"),
         publisher: "Nocturne",
         genre: "Thriller",
-        cover_url: "https://picsum.photos/300/450?random=4", is_active: true
+        cover_url: "https://images.pexels.com/photos/164025/pexels-photo-164025.jpeg?w=1000&h=1500&fit=crop", is_active: true
     },
     {
         title: "Kuru",

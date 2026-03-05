@@ -4,7 +4,6 @@
     export let value = "";
     export let onChange: (value: string) => void = () => {};
 
-
     let textarea:  HTMLTextAreaElement;
     let editor: any;
 

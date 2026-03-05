@@ -10,6 +10,8 @@ import { chronicleIdSchema } from "../validators/chronicles/id.schema";
 // Controllers
 import { ChroniclesController } from "../controllers/ChroniclesController";
 import { CommentController } from "../controllers/CommentsController";
+
+//Dto
 import { GetChronicleByIdParams } from "../dto/chronicles/GetChronicleByIdParams.dto";
 
 const chroniclesRouter = Router();

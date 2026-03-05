@@ -1,4 +1,14 @@
-import { Table, Column, Model, DataType, PrimaryKey, AutoIncrement, BelongsTo, ForeignKey, AllowNull, Index} from "sequelize-typescript";
+import {
+    Table,
+    Column,
+    Model,
+    DataType,
+    PrimaryKey,
+    AutoIncrement,
+    BelongsTo,
+    ForeignKey,
+    Index
+} from "sequelize-typescript";
 import { User } from "./User";
 import { Chronicle } from "./Chronicle";
 
@@ -21,7 +31,6 @@ interface CommentCreationAttributes {
     updated_at?: Date;
 }
 
-
 @Table ({
     tableName: "comment",
     timestamps: true,
@@ -31,7 +40,6 @@ interface CommentCreationAttributes {
 })
 
 export class Comment extends Model<CommentAttributes, CommentCreationAttributes> {
-
 
     @PrimaryKey
     @AutoIncrement

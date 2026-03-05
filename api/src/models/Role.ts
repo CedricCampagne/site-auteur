@@ -1,5 +1,15 @@
 // import des decorateurs et classes pour definir le modèle
-import { Table, Column, Model, DataType, PrimaryKey, AutoIncrement, Unique, HasMany, AllowNull, BelongsToMany } from "sequelize-typescript";
+import {
+    Table,
+    Column,
+    Model,
+    DataType,
+    PrimaryKey,
+    AutoIncrement,
+    Unique,
+    HasMany,
+    BelongsToMany
+} from "sequelize-typescript";
 import { UserRole } from "./UserRole";
 import { User } from "./User";
 

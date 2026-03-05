@@ -15,7 +15,9 @@
 </script>
 
 <section class="flex flex-col gap-4 mt-24 pb-8 border-b">
-    <h2 class="text-5xl font-black text-center mb-4">Créer votre compte</h2>
+    <h2 class="text-5xl font-black text-center mb-4">
+        Créer votre compte
+    </h2>
 
     <form
         method="POST"

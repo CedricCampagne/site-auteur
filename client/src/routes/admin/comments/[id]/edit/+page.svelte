@@ -52,7 +52,6 @@
     </h2>
 
     <form on:submit|preventDefault={handleSubmit} class="flex flex-col gap-4">
-
         <!-- Auteur -->
         <label>
             Auteur
@@ -63,7 +62,6 @@
                 class="border p-2 w-full bg-gray-100"
             />
         </label>
-
         <!-- Chronique -->
         <label>
             Chronique
@@ -74,7 +72,6 @@
                 class="border p-2 w-full bg-gray-100"
             />
         </label>
-
         <!-- Contenu -->
         <label>
             Commentaire
@@ -83,20 +80,19 @@
                 rows="4"
                 class="border p-2 w-full"
             ></textarea>
-
             <div class="h-10 py-2">
                 {#if contentError}
-                    <p class="text-accent1">{contentError}</p>
+                    <p class="text-accent1">
+                        {contentError}
+                    </p>
                 {/if}
             </div>
         </label>
-
         <!-- Visibilité -->
         <label class="flex items-center gap-2">
             <input bind:checked={comment.is_visible} type="checkbox" />
             Commentaire visible
         </label>
-
         <!-- Bouton + messages -->
         <div class="flex items-center gap-6">
             <button
@@ -106,13 +102,11 @@
             >
                 Mettre à jour
             </button>
-
             {#if successMessage}
                 <p class="bg-green-600 text-white font-semibold p-2 rounded-xs">
                     {successMessage}
                 </p>
             {/if}
-
             {#if errorMessage}
                 <p class="bg-red-700 text-white font-semibold p-2 rounded-xs">
                     {errorMessage}

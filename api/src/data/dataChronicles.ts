@@ -33,7 +33,13 @@ export const chroniclesData = [
     title: "Sous la Lumière des Rêves",
     slug: "sous-la-lumiere-des-reves",
     summary: "Une exploration sensible de l’imaginaire et de la manière dont il nourrit notre rapport au monde.",
-    content: "Les rêves sont des fragments de lumière que l’on tente de saisir au réveil. Ils glissent, mais laissent une trace...",
+    content: `
+    Les rêves sont des fragments de lumière que l’on tente de saisir au réveil. Ils glissent, mais laissent une trace...
+    test de retour a la ligne
+
+    Nouveau paragraphe
+    retour ligne
+    `,
     quote: "« Les rêves éclairent ce que la réalité n’ose pas révéler. »",
     cover_url: "https://images.pexels.com/photos/164025/pexels-photo-164025.jpeg",
     published_at: new Date("2024-09-22"),

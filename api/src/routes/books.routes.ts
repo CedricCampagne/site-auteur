@@ -9,7 +9,7 @@ import { bookIdSchema } from "../validators/books/bookId.schema";
 // Controllers
 import { BooksController } from "../controllers/BooksController";
 
-//Type
+//Dto
 import { GetBookByIdParams } from "../dto/book/GetBookByIdParams.dto";
 
 const booksRouter = Router();

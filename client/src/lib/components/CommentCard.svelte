@@ -10,9 +10,10 @@
             <div class="w-10 h-10 rounded-full bg-accent1 text-white flex items-center justify-center font-bold">
                 {comment.user.username[0].toUpperCase()}
             </div>
-            <p class="font-semibold">{comment.user.username}</p>
+            <p class="font-semibold">
+                {comment.user.username}
+            </p>
         </div>
-
         <div class="flex flex-col gap-2 ">
             <p class="text-xs text-accent2">
                 { new Date(comment.created_at).toLocaleDateString("fr-FR") }
@@ -20,10 +21,8 @@
             <p class="text-xs text-accent2">
                 {timeAgo(comment.created_at)}
             </p>
-
         </div>
     </div>
-
     <p class="text-gray-800 leading-relaxed">
         {comment.content}
     </p>

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { User, UserFormCreate } from '$lib/types.js';
+	import type { UserFormCreate } from '$lib/types.js';
     import { goto } from '$app/navigation';
 
     const user: UserFormCreate = {
@@ -61,8 +61,6 @@
            
             const error = await res.json();
 
-        console.log("error 0", error.error?.[0]);
-
         if (Array.isArray(error.error)) {
             errorMessage = error.error.join(" / ");
         } else if (typeof error.error === "string") {
@@ -72,45 +70,53 @@
         }
         successMessage = "";
         }
-
     }
     
 </script>
 
 <section class="flex flex-col gap-4 mt-24 pb-8 border-b">
-    <h2 class="text-4xl font-black text-center mb-4">Création d'un utilisateur</h2>
+    <h2 class="text-4xl font-black text-center mb-4">
+        Création d'un utilisateur
+    </h2>
 
-    <form on:submit|preventDefault={handleSubmit} class="flex flex-col gap-4" >
-        
+    <form on:submit|preventDefault={handleSubmit} class="flex flex-col gap-4" >       
         <label>
             Username
             <input bind:value={user.username} type="text" class="border p-2 w-full" />
             <div class="h-10 py-2">
-                {#if usernameError}<p class="text-accent1">{usernameError}</p>{/if}
+                {#if usernameError}
+                    <p class="text-accent1">
+                        {usernameError}
+                    </p>
+                {/if}
             </div>
         </label>
-
         <label>
             Email
             <input bind:value={user.email} type="text" class="border p-2 w-full" />
             <div class="h-10 py-2">
-                {#if emailError}<p class="text-accent1">{emailError}</p>{/if}
+                {#if emailError}
+                    <p class="text-accent1">
+                        {emailError}
+                    </p>
+                {/if}
             </div>
         </label>
-
         <label>
             Password
             <input bind:value={user.password} type="password" class="border p-2 w-full" />
             <div class="h-10 py-2">
-                {#if passwordError}<p class="text-accent1">{passwordError}</p>{/if}
+                {#if passwordError}
+                    <p class="text-accent1">
+                        {passwordError}
+                    </p>
+                {/if}
             </div>
         </label>
-
         <label class="flex items-center gap-2">
             <input bind:checked={user.is_active} type="checkbox"/>
             Activer l'utilisateur
         </label>
-
         <div class="flex items-center gap-6">
             <button
                 type="submit"
@@ -119,13 +125,16 @@
             >
                 Mettre a jour
             </button>
-
             {#if successMessage}
-                <p class="bg-green-600 text-white font-semibold p-2 rounded-xs">{successMessage}</p>
+                <p class="bg-green-600 text-white font-semibold p-2 rounded-xs">
+                    {successMessage}
+                </p>
             {/if}
 
             {#if errorMessage}
-                <p class="bg-red-700 text-white font-semibold p-2 rounded-xs">{errorMessage}</p>
+                <p class="bg-red-700 text-white font-semibold p-2 rounded-xs">
+                    {errorMessage}
+                </p>
             {/if}
         </div>
     </form>

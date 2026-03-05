@@ -3,7 +3,6 @@ import type { Actions } from "./$types";
 
 export const actions: Actions = {
     default: async ({ request, fetch, cookies })=>{
-        // console.log("ACTION LOGIN APPELÉE");
         const data = await request.formData();
 
         const email = data.get("email")?.toString();
@@ -16,15 +15,12 @@ export const actions: Actions = {
             });
         }
 
-        // console.log("AVANT FETCH", import.meta.env.VITE_API_URL);
         const res = await fetch(`${import.meta.env.VITE_API_URL}/auth/login`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             credentials: "include",         // pour recevoir les cookies
             body: JSON.stringify({email, password })
         });
-        // console.log("APRES FETCH", res.status);
-        // console.log("COOKIES RECUS PAR SVELTEKIT :", res.headers.get("set-cookie"));
 
         const json = await res.json();
 
@@ -38,11 +34,7 @@ export const actions: Actions = {
 
         // Récupérer le cookie envoyé par ton backend
         const setCookie = res.headers.get("set-cookie");
-        // console.log("setCookie", setCookie);
         if (setCookie) { const token = setCookie.split(";")[0].split("=")[1];
-
-            // console.log("token apres split", token);
-
             // Reposer le cookie côté navigateur
             cookies.set("token", token, {
                 path: "/",

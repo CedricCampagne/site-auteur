@@ -1,11 +1,17 @@
+//Models
 import { User } from "../models/User";
 import { Role } from "../models/Role";
+
+//Utils
+import { hashPassword, verifyPassword } from "../utils/hash";
+import { generateToken } from "../utils/jwt";
+
+import { HttpError } from "../errors/HttpError";
+
+//Dto
 import { AuthResult } from "../dto/auth/AuthResult.dto";
 import { LoginParams } from "../dto/auth/LoginParams.dto";
 import { RegisterParams } from "../dto/auth/RegisterParams.dto";
-import { hashPassword, verifyPassword } from "../utils/hash";
-import { generateToken } from "../utils/jwt";
-import { HttpError } from "../errors/HttpError";
 
 export class AuthServices {
     static async registerUser(data: RegisterParams): Promise<AuthResult> {

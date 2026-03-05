@@ -4,7 +4,7 @@
     import CommentCard from '$lib/components/CommentCard.svelte';
     import { marked } from "marked";
 
-   marked.setOptions({
+    marked.setOptions({
         breaks: true,
         gfm: true
     });
@@ -43,16 +43,20 @@
         <p class="text-sm text-accent2 mb-12">
             Publié le {new Date(chronicle.published_at).toLocaleDateString("fr-FR")}
         </p>
-        <!-- <div class="prose prose-lg max-w-none text-gray-800 leading-relaxed">
-            {chronicle.content}
-        </div> -->
-        <div class="markdown text-gray-800 leading-relaxed space-y-4">
-            {@html marked(chronicle.content)}     
+        <div class="text-content mt-8 px-4 py-4 border-t max-w-3xl mx-auto">
+            {#each chronicle.content.trim().split('\n\n') as paragraph, i (i)}
+                <p class="text-lg leading-7 mb-4">
+                    <!-- Le contenu vient uniquement du seed ou de l'admin (EasyMDE), donc pas de risque XSS. -->
+                    {@html paragraph.replace(/\n/g, '<br>')}
+                </p>
+            {/each}
         </div>
 
         <section class="max-w-3xl mx-auto px-4 sm:px-0 mt-12 mb-24">
             <div class="flex flex-col items-center gap-2 mb-6 sm:flex sm:flex-row sm:justify-between sm:items-center">
-                <h3 class="text-2xl font-bold">Commentaires ({comments.length})</h3>
+                <h3 class="text-2xl font-bold">
+                    Commentaires ({comments.length})
+                </h3>
                 <Button 
                     text="Ajouter un commentaire"
                     className ="bg-accent2 text-white"
@@ -61,11 +65,15 @@
             </div>
 
             {#if comments.length === 0}
-                <p class="text-accent2 italic">Aucun commentaire pour le moment.</p>
+                <p class="text-accent2 italic">
+                    Aucun commentaire pour le moment.
+                </p>
             {:else}
                 <div class="flex flex-col gap-6">
-                    {#each comments as comment}
-                        <CommentCard {comment} />
+                    {#each comments as comment, i (i)}
+                        <CommentCard 
+                            {comment} 
+                        />
                     {/each}
                 </div>
             {/if}
@@ -73,9 +81,8 @@
     </article>
 
 <CommentAddModal
-        open={showModal}
-        on:close={() => showModal = false}
-        on:created={handleCreated}
+    open={showModal}
+    on:close={() => showModal = false}
+    on:created={handleCreated}
 />
-
 </section>

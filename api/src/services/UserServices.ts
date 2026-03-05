@@ -1,7 +1,11 @@
+//Models
 import { User, UserCreationAttributes, UserUpdateAttributes } from "../models/User";
+import { Role } from "../models/Role";
+
 import { HttpError } from "../errors/HttpError";
 import argon2 from "argon2";
-import { Role } from "../models/Role";
+
+//Dto
 import { UserDto } from "../dto/user/user.dto";
 
 export class UserServices {

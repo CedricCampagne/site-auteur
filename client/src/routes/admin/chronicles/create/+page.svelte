@@ -94,34 +94,44 @@
 </script>
 
 <section class="flex flex-col gap-4 mt-24 pb-8 border-b">
-    <h2 class="text-4xl font-black text-center mb-4">Création d'une chronique</h2>
+    <h2 class="text-4xl font-black text-center mb-4">
+        Création d'une chronique
+    </h2>
 
     <form on:submit|preventDefault={handleSubmit} class="flex flex-col gap-4" >
-        
         <label>
             Titre
             <input bind:value={title} type="text" class="border p-2 w-full" />
             <div class="h-10 py-2">
-                {#if titleError}<p class="text-accent1">{titleError}</p>{/if}
+                {#if titleError}
+                    <p class="text-accent1">
+                        {titleError}
+                    </p>
+                {/if}
             </div>
         </label>
-
         <label>
             Citation
             <textarea bind:value={quote} rows="2" class="border p-2 w-full"></textarea>
             <div class="h-10 py-2">
-                {#if quoteError}<p class="text-accent1">{quoteError}</p>{/if}
+                {#if quoteError}
+                    <p class="text-accent1">
+                        {quoteError}
+                    </p>
+                {/if}
             </div>
         </label>
-
         <label>
             Résumé
-            <textarea bind:value={summary}  rows="3" class="border p-2 w-full"></textarea>
+            <textarea bind:value={summary} rows="3" class="border p-2 w-full"></textarea>
             <div class="h-10 py-2">
-                {#if summaryError}<p class="text-accent1">{summaryError}</p>{/if}
+                {#if summaryError}
+                    <p class="text-accent1">
+                        {summaryError}
+                    </p>
+                {/if}
             </div>
         </label>
-
         <label>
             Contenu (Markdown)
             <MarkdownEditor
@@ -129,26 +139,35 @@
                 onChange={(v) => content = v}
             />
             <div class="h-10 py-2">
-                {#if contentError}<p class="text-accent1">{contentError}</p>{/if}
+                {#if contentError}
+                    <p class="text-accent1">
+                        {contentError}
+                    </p>
+                {/if}
             </div>
         </label>
-
         <label>
             URL de l’image
             <input bind:value={cover_url} type="text" class="border p-2 w-full" />
             <div class="h-10 py-2">
-                {#if urlError}<p class="text-accent1">{urlError}</p>{/if}
+                {#if urlError}
+                    <p class="text-accent1">
+                        {urlError}
+                    </p>
+                {/if}
             </div>
         </label>
-
         <label>
             Date de publication :
             <input bind:value={published_at} type="date" class="border p-2 w-full" />
             <div class="h-10 py-2 ">
-                {#if dateError}<p class="text-accent1">{dateError}</p>{/if}
+                {#if dateError}
+                    <p class="text-accent1">
+                        {dateError}
+                    </p>
+                {/if}
             </div>
         </label>
-
         <label class="flex items-center gap-2">
             <input bind:checked={is_active} type="checkbox"/>
             Activer la chronique
@@ -164,11 +183,14 @@
             </button>
 
             {#if successMessage}
-                <p class="bg-green-600 text-white font-semibold p-2 rounded-xs">{successMessage}</p>
+                <p class="bg-green-600 text-white font-semibold p-2 rounded-xs">
+                    {successMessage}
+                </p>
             {/if}
-
             {#if errorMessage}
-                <p class="bg-red-700 text-white font-semibold p-2 rounded-xs">{errorMessage}</p>
+                <p class="bg-red-700 text-white font-semibold p-2 rounded-xs">
+                    {errorMessage}
+                </p>
             {/if}
         </div>
     </form>
