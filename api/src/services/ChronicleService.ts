@@ -1,6 +1,10 @@
 import { sequelize } from "../config/database";
+//Models
 import { Chronicle, ChronicleCreationAttributes } from "../models/Chronicle";
+
 import { HttpError } from "../errors/HttpError";
+
+//Dto
 import { ChronicleDto } from "../dto/chronicles/chronicles.dto";
 
 export class ChronicleService {

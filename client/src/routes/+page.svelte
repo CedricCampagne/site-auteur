@@ -24,8 +24,8 @@
 <About/>
 
 <BookExcerptModal
-open={showModal}
-text={latestbook.excerpt}
-title={latestbook.title}
-on:close={()=> showModal = false }
+	open={showModal}
+	text={latestbook.excerpt}
+	title={latestbook.title}
+	on:close={()=> showModal = false }
 />

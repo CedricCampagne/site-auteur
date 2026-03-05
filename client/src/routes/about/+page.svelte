@@ -18,7 +18,7 @@
             je partage mes chroniques, mes réflexions et mes découvertes littéraires. 
             Mon objectif est simple : transmettre, inspirer et inviter à la lecture.
 
-                 Je suis un passionné de récits, d’histoires et de mots. À travers ce site, 
+            Je suis un passionné de récits, d’histoires et de mots. À travers ce site, 
             je partage mes chroniques, mes réflexions et mes découvertes littéraires. 
             Mon objectif est simple : transmettre, inspirer et inviter à la lecture
         </p>
@@ -35,7 +35,9 @@
             </div>
         </div>
         <div class="w-full md:w-2/3 space-y-2">
-            <h2 class="text-center md:text-left text-3xl font-title text-title mb-4">Mon histoire</h2>
+            <h2 class="text-center md:text-left text-3xl font-title text-title mb-4">
+                Mon histoire
+            </h2>
             <p class="text-lg leading-relaxed text-text-main">
                 Depuis toujours, j’explore les univers littéraires. Ce site est né de 
                 l’envie de partager mes lectures, mes analyses et mes coups de cœur. 
@@ -54,7 +56,9 @@
     </div>
 
     <div class="flex flex-col gap-8 mb-20">
-        <h2 class="text-center md:text-left text-3xl font-title text-title mb-4">Ma vision</h2>
+        <h2 class="text-center md:text-left text-3xl font-title text-title mb-4">
+            Ma vision
+        </h2>
        <p class="text-lg leading-relaxed text-text-main">
             La littérature est un espace de liberté. Elle permet de voyager, de réfléchir, 
             de ressentir. À travers mes chroniques, je cherche à mettre en lumière ce qui 
@@ -69,7 +73,6 @@
             >
                 Découvrir mes Livres
             </a>
-      
             <a 
                 href="/chronicles" 
                 class="p-2 border bg-accent2 text-white hover:bg-bg-main hover:text-accent2 transition-all duration-500"

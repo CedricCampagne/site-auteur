@@ -9,6 +9,8 @@ import { addCommentSchema } from "../validators/comments/addComment.schema";
 
 // Controllers
 import { CommentController } from "../controllers/CommentsController";
+
+//Dto
 import { CreateCommentDto } from "../dto/comment/CreateComment.dto";
 
 const commentRouter = Router();

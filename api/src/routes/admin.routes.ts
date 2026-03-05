@@ -7,12 +7,15 @@ import { validate } from "../middleware/validate";
 
 // Validators
 import { idSchema } from "../validators/id.schema";
+
 // Validators Chronicles
 import { updateChronicleSchema } from "../validators/chronicles/updateChronicle.schema";
 import { createChronicleSchema } from "../validators/chronicles/createChronicle.schema";
+
 // Validators Users
 import { updateUserSchema } from "../validators/auth/updateUser.schema";
 import { createUserSchema } from "../validators/auth/createUser.schema";
+
 // Validators Comments
 import { updateCommentSchema } from "../validators/comments/updateComment.schema"
 
@@ -20,6 +23,8 @@ import { updateCommentSchema } from "../validators/comments/updateComment.schema
 import { ChroniclesController } from "../controllers/ChroniclesController";
 import { UsersController } from "../controllers/UsersController";
 import { CommentController } from "../controllers/CommentsController";
+
+//Dto
 import { GetChronicleByIdParams } from "../dto/chronicles/GetChronicleByIdParams.dto";
 import { CreateChronicleDto } from "../dto/chronicles/CreateChronicle.dto";
 import { GetCommentByIdParams } from "../dto/comment/GetCommentByIdParams.dto";

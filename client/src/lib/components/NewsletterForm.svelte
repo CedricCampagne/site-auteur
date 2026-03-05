@@ -43,7 +43,6 @@
         required
         class="bg-white text-black p-2 rounded border border-gray-300 focus:border-accent1 focus:ring-0 outline-none"
     />
-
     <button
         type="submit"
         class="bg-accent1 text-white p-2 rounded hover:bg-white hover:text-accent1 border border-accent1 transition-all duration-500"
@@ -52,13 +51,16 @@
     </button>
 </form>
 
-<div class="min-h-[30px] mt-2">
+<div class="min-h-7.5 mt-2">
     {#if success}
-        <p class="text-green-600">Merci ! Vérifiez votre boîte mail pour confirmer votre inscription.</p>
+        <p class="text-green-600">
+            Merci ! Vérifiez votre boîte mail pour confirmer votre inscription.
+        </p>
     {/if}
-
     {#if error}
-        <p class="text-red-600">Une erreur est survenue. Veuillez réessayer.</p>
+        <p class="text-red-600">
+            Une erreur est survenue. Veuillez réessayer.
+        </p>
     {/if}
 </div>
 

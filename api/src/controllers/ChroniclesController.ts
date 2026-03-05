@@ -69,7 +69,8 @@ export class ChroniclesController {
     {
         try {
             const id = Number(req.params.id);
-            const user = req.user; // Détermine si l'utilisateur est admin
+            const user = req.user;
+            // Détermine si l'utilisateur est admin
             const isAdmin = user?.roles?.includes("admin") ?? false;
 
           

@@ -3,8 +3,12 @@
 </script>
 
 <section class="flex flex-col gap-4 mt-24 pb-8 border-b">
-    <h2 class="text-5xl font-black text-center mb-4">Me Contacter</h2>
-    <h3 class="text-center mb-16">Une question, une remarque ou une demande ? Écrivez-moi.</h3>
+    <h2 class="text-5xl font-black text-center mb-4">
+        Me Contacter
+    </h2>
+    <h3 class="text-center mb-16">
+        Une question, une remarque ou une demande ? Écrivez-moi.
+    </h3>
 
     <form action="" class="flex flex-col gap-6 items-center">
         <div class="flex flex-col min-w-1/2 relative">
@@ -16,7 +20,9 @@
                 placeholder=""
             >
              <div class="absolute top-10 right-4 flex items-center gap-2 transition-opacity duration-500 peer-placeholder-shown:opacity-100 opacity-0" >
-                <span class="text-sm text-accent1">Saisir votre Nom</span>
+                <span class="text-sm text-accent1">
+                    Saisir votre Nom
+                </span>
                 <Icon icon="maki:cross" class="text-2xl text-accent1" />
             </div>
         </div>
@@ -29,7 +35,9 @@
                 placeholder=""
             >
             <div class="absolute top-10 right-4 flex items-center gap-2 transition-opacity duration-200 peer-placeholder-shown:opacity-100 opacity-0" >
-                <span class="text-sm text-accent1">Saisir votre Email</span>
+                <span class="text-sm text-accent1">
+                    Saisir votre Email
+                </span>
                 <Icon icon="maki:cross" class="text-2xl text-accent1" />
             </div>
         </div>

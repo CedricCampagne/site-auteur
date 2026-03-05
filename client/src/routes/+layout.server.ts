@@ -8,7 +8,6 @@ export const load = async ({ fetch, cookies }) => {
     const res = await fetch(`${import.meta.env.VITE_API_URL}/auth/me`, {
         credentials: "include"
     });
-    // console.log('post fetch', res);
 
     
     if(!res.ok) {
@@ -16,7 +15,6 @@ export const load = async ({ fetch, cookies }) => {
     }
 
     const json = await res.json();
-    // console.log('data si res ok ', data);
 
     return { user: json.data! };
 }

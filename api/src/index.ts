@@ -14,12 +14,6 @@ import helmet from 'helmet';
 import { sanitizeBody } from "./middleware/sanitize";
 import { errorHandler } from "./middleware/errorHandler";
 
-//import { testUserRole } from "./scripts/testUserRole";
-//import { testChronicle } from "./scripts/testChronicle"
-//import { testBook } from "./scripts/testBook";
-//import { testComment } from "./scripts/testComment";
-//import { seedBooks } from "./seeds/seedBooks";
-
 const app = express();
 app.use(cors({
     origin: 'http://localhost:5173',
@@ -34,26 +28,11 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(sanitizeBody);
 
-// Route pour tester le fonctionnement du server
-app.get("/api/health", (req , res)=> res.json({status : 'ok'}));
 
 // test de co client sequelize
 sequelize.authenticate()
 .then(()=> console.log('Connection a pg via sequelize-ts ok'))
 .catch((err=>console.error('Erreur de co a la db', err)));
-
-// test des models User Role et relation via UserRole
-//   async function main() {
-//      await sequelize.sync({ force: true });
-//      console.log("Tables synchronisées");
-//     //await testUserRole();
-//     //await testChronicle();
-//     //await testBook();
-//     //await testComment();
-//     //await seedBooks();
-//   }
-
-//   main();
 
 app.use("/api", mainRouter);
 app.use(errorHandler);

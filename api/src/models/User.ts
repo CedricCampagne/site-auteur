@@ -1,4 +1,13 @@
-import { Table, Column, Model, DataType, PrimaryKey, AutoIncrement, Unique, HasMany, BelongsToMany } from "sequelize-typescript";
+import { Table,
+    Column,
+    Model,
+    DataType,
+    PrimaryKey,
+    AutoIncrement,
+    Unique,
+    HasMany,
+    BelongsToMany
+} from "sequelize-typescript";
 import { Role } from "./Role";
 import { UserRole } from "./UserRole";
 import { Comment } from "./Comment";
@@ -30,6 +39,7 @@ export type UserUpdateAttributes = Partial<Omit<UserAttributes, "id_user">>;
 })
 
 export class User extends Model<UserAttributes, UserCreationAttributes> {
+    
     @PrimaryKey
     @AutoIncrement
     @Column(DataType.INTEGER)

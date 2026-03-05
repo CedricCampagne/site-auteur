@@ -16,10 +16,10 @@
     <div class="w-full sm:w-48 aspect-4/5 overflow-hidden rounded flex-none">
         <img
             src={chronicle.cover_url}
+            alt={`Couverture de ${chronicle.title}`}
             class="w-full h-full object-cover"
         />
     </div>
-
     <!-- Texte -->
     <div class="flex flex-col justify-between ">
         <div>
@@ -27,12 +27,10 @@
             <h2 class="text-2xl font-semibold mb-2">
                 {chronicle.title} «{chronicle.quote}»
             </h2>
-            
             <!-- Date + tags -->
             <p class="text-sm text-accent1 font-bold mb-3">
                 {new Date(chronicle.published_at).toLocaleDateString("fr-FR")}
             </p>
-
             <!-- Extrait -->
             <p class="text-sm text-gray-700 line-clamp-3">
                 {chronicle.summary}

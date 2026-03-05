@@ -45,7 +45,7 @@
                 console.error("Erreur toggle status");
             }
         } catch (error) {
-            console.error("Erreur toggle");
+            console.error("Erreur toggle", error);
         }
     }
 
@@ -65,7 +65,7 @@
                 setFlash("Supression du commentaire effectué !");
             }
         } catch (error) {
-             console.error("Erreur lors de la suppresion du commentaire");
+             console.error("Erreur lors de la suppresion du commentaire", error);
         }
     }
 
@@ -86,32 +86,8 @@
         Tous les commentaires ({filteredComments.length})
     </h2>
 
-    <div class="border-b-2 border-accent2 pb-2 flex flex-col items-center gap-2 md:flex-row md:justify-between md:items-center ">
-        <div class="flex flex-col gap-2 border border-accent2 py-3 px-4 rounded-md bg-white shadow-sm w-fit">
-            <p class="text-sm font-semibold text-accent2">
-                Filtrer par utilisateur :
-            </p>
-
-            <select
-                bind:value={selectedUser}
-                name="users"
-                id="users"
-                class="appearance-none bg-white border border-accent2 
-                    text-accent2 px-4 py-2 pr-10 rounded-md 
-                    shadow-sm cursor-pointer
-                    focus:outline-none focus:ring-2 focus:ring-accent1 focus:border-accent1
-                    transition-all duration-200"
-            >
-                <option value="">Tous</option>
-                {#each users as user}
-                    <option value={user.id_user}>
-                        {user.username}
-                    </option>
-                {/each}
-            </select>
-        </div>
-
-        <div class="flex flex-col gap-2 border border-accent2 py-3 px-4 rounded-md bg-white shadow-sm w-fit">
+    <div class="border-b-2 border-accent2 pb-2 flex flex-col items-center gap-2 md:flex-row md:justify-around md:items-center ">
+        <div class="flex flex-col items-center gap-2 border border-accent2 py-3 px-4 rounded-md bg-white shadow-sm w-fit md:items-baseline">
             <p class="text-sm font-semibold text-accent2">
                 Filtrer par chroniques :
             </p>
@@ -127,14 +103,36 @@
                     transition-all duration-200"
             >
                 <option value="">Tous</option>
-                {#each chronicles as chronicle}
+                {#each chronicles as chronicle, i (i)}
                     <option value={chronicle.id_chronicle}>
                         {chronicle.title}
                     </option>
                 {/each}
             </select>
         </div>
-
+        
+        <div class="flex flex-col items-center gap-2 border border-accent2 py-3 px-4 rounded-md bg-white shadow-sm w-fit">
+            <p class="text-sm font-semibold text-accent2">
+                Filtrer par utilisateur :
+            </p>
+            <select
+                bind:value={selectedUser}
+                name="users"
+                id="users"
+                class="appearance-none bg-white border border-accent2 
+                    text-accent2 px-4 py-2 pr-10 rounded-md 
+                    shadow-sm cursor-pointer
+                    focus:outline-none focus:ring-2 focus:ring-accent1 focus:border-accent1
+                    transition-all duration-200"
+            >
+                <option value="">Tous</option>
+                {#each users as user, i (i)}
+                    <option value={user.id_user}>
+                        {user.username}
+                    </option>
+                {/each}
+            </select>
+        </div>
         <button
             on:click={clearFilter}
             class="flex items-center justify-center 
@@ -146,14 +144,16 @@
             title="Réinitialiser les filtres"
         >
             <Icon icon="material-symbols:restart-alt-rounded" class="text-2xl" />
-    </button>
+        </button>
     </div>
    
     <ul class="space-y-2">
         {#if filteredComments.length === 0}
-            <p class="border p-4 rounded bg-white shadow text-center"> Pas de commentaires pour ces filtres</p>
+            <p class="border p-4 rounded bg-white shadow text-center">
+                Pas de commentaires pour ces filtres
+            </p>
         {/if}
-        {#each filteredComments as comment}
+        {#each filteredComments as comment, i(i)}
             <CommentAdminCard
                 {comment}
                 on:toggle={(e) => toggleStatus(e.detail)}

@@ -1,6 +1,11 @@
-import { Book } from "../models/Book";
 import { sequelize } from "../config/database";
+
+//Models
+import { Book } from "../models/Book";
+
 import { HttpError } from "../errors/HttpError";
+
+//Dto
 import { BookDto } from "../dto/book/Book.dto";
 
 export class BookService {

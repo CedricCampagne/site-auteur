@@ -3,42 +3,56 @@
 </script>
 
 <section class="flex flex-col gap-4 mt-24 pb-8 border-b">
-    <h2 class="text-5xl font-black text-center mb-16">Mentions légales</h2>
+    <h2 class="text-5xl font-black text-center mb-16">
+        Mentions légales
+    </h2>
 
-    <h3 class="my-4 border-b border-accent2 text-accent1">Éditeur du site</h3>
+    <h3 class="my-4 border-b border-accent2 text-accent1">
+        Éditeur du site
+    </h3>
     <p>
-        Ce site est édité par : <strong class="">Campagne Katia</strong><br>
+        Ce site est édité par : <strong>Campagne Katia</strong><br>
         Statut : Auteur / Créatrice de contenu<br>
         Adresse : 28130<br>
-        Email : <a href="mailto:[email]"><strong class="">kaldrixx23@gmail.com</strong></a>
+        Email : <a href="mailto:[email]"><strong>kaldrixx23@gmail.com</strong></a>
     </p>
 
-    <h3 class="my-4 border-b border-accent2 text-accent1">Responsable de la publication</h3>
+    <h3 class="my-4 border-b border-accent2 text-accent1">
+        Responsable de la publication
+    </h3>
     <p>
-        <strong class="">Campagne Katia</strong>
+        <strong>Campagne Katia</strong>
     </p>
 
-    <h3 class="my-4 border-b border-accent2 text-accent1">Hébergement du site</h3>
+    <h3 class="my-4 border-b border-accent2 text-accent1">
+        Hébergement du site
+    </h3>
     <p>
         Le site est hébergé par : <strong>[Nom de l’hébergeur]</strong><br>
         Adresse : [Adresse de l’hébergeur]<br>
         Site web : <a href="[URL hébergeur]" target="_blank" rel="noopener noreferrer">[URL hébergeur]</a>
     </p>
 
-    <h3 class="my-4 border-b border-accent2 text-accent1">Propriété intellectuelle</h3>
+    <h3 class="my-4 border-b border-accent2 text-accent1">
+        Propriété intellectuelle
+    </h3>
     <p>
         L’ensemble des contenus présents sur ce site (textes, extraits, images, couvertures, chroniques, etc.)
         est protégé par le droit d’auteur. Toute reproduction, distribution ou utilisation, même partielle,
         est interdite sans autorisation préalable.
     </p>
 
-    <h3 class="my-4 border-b border-accent2 text-accent1">Données personnelles</h3>
+    <h3 class="my-4 border-b border-accent2 text-accent1">
+        Données personnelles
+    </h3>
     <p>
         Ce site peut collecter certaines données personnelles dans les cas suivants :
     </p>
     <ul>
         <li class="md:list-disc md:ml-8">
-            <h4 class="my-4">Formulaire de contact / commentaires (prévu)</h4>
+            <h4 class="my-4">
+                Formulaire de contact / commentaires (prévu)
+            </h4>
             <p>
                 Les informations suivantes pourront être collectées : nom ou pseudonyme, adresse email, contenu du message
                 ou du commentaire. Ces données seront utilisées uniquement pour répondre aux messages, permettre la
@@ -46,40 +60,50 @@
             </p>
         </li>
         <li class="md:list-disc md:ml-8">
-            <h4 class="my-4">Newsletter (prévue)</h4>
+            <h4 class="my-4">
+                Newsletter (prévue)
+            </h4>
             <p>
                 L’adresse email fournie sera utilisée exclusivement pour l’envoi de la newsletter. Aucune donnée n’est
                 vendue ou transmise à des tiers.
             </p>
         </li>
     </ul>
-
-
-    <h3 class="my-4 border-b border-accent2 text-accent1">Durée de conservation</h3>
+    <h3 class="my-4 border-b border-accent2 text-accent1">
+        Durée de conservation
+    </h3>
     <p>
         Les données sont conservées uniquement le temps nécessaire à leur traitement ou tant que l’utilisateur
         reste inscrit à la newsletter.
     </p>
 
-    <h3 class="my-4 border-b border-accent2 text-accent1">Droits des utilisateurs (RGPD)</h3>
+    <h3 class="my-4 border-b border-accent2 text-accent1">
+        Droits des utilisateurs (RGPD)
+    </h3>
     <p>
         Conformément au RGPD, vous disposez d’un droit d’accès, de rectification, de suppression et d’opposition.
         Pour exercer ces droits, contactez : <a href="mailto:[email]"><strong class="underline underline-offset-2">kaldrixx23@gmail.com</strong></a>
     </p>
 
-    <h3 class="my-4 border-b border-accent2 text-accent1">Cookies</h3>
+    <h3 class="my-4 border-b border-accent2 text-accent1">
+        Cookies
+    </h3>
     <p>
         Ce site n’utilise actuellement aucun cookie nécessitant un consentement. Si des outils de mesure d’audience
         ou de connexion sont ajoutés ultérieurement, une bannière de consentement sera mise en place.
     </p>
 
-    <h3 class="my-4 border-b border-accent2 text-accent1">Liens externes</h3>
+    <h3 class="my-4 border-b border-accent2 text-accent1">
+        Liens externes
+    </h3>
     <p>
         Le site peut contenir des liens vers des sites tiers. L’éditeur ne peut être tenu responsable du contenu
         de ces sites externes.
     </p>
 
-    <h3 class="my-4 border-b border-accent2 text-accent1">Conception et développement du site</h3>
+    <h3 class="my-4 border-b border-accent2 text-accent1">
+        Conception et développement du site
+    </h3>
     
     <div class="flex flex-col gap-2">
         <span>Site conçu et développé par : <strong class="text-lg">Campagne Cédric</strong></span>

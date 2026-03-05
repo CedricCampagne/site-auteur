@@ -46,7 +46,7 @@
                 console.error("Erreur toggle");
             }
         } catch (error) {
-            console.error("Erreur toggle");
+            console.error("Erreur toggle", error);
         }
     }
 
@@ -63,13 +63,12 @@
                 setFlash("Supression de la chronique effectuée !!");
             }
         } catch (error) {
-             console.error("Erreur lors de la suppresion");
+             console.error("Erreur lors de la suppresion", error);
         }
     }
 </script>
 
 <section class="flex flex-col gap-6 mt-24 pb-8 border-b">
-
     {#if $flash}
         <div class="fixed top-90 left-1/2 -translate-x-1/2 bg-green-600 text-white px-4 py-2 rounded shadow-lg z-50">
             {$flash}
@@ -80,14 +79,14 @@
             Toutes les chroniques ({chronicles.length})
         </h2>       
         <Button
-        text="Ajouter une chronique"
-        className="bg-accent1 text-white hover:bg-white hover:text-accent1 transition-all duration-500 self-center border border-accent1"
-        on:click={()=> goto("/admin/chronicles/create")}
+            text="Ajouter une chronique"
+            className="bg-accent1 text-white hover:bg-white hover:text-accent1 transition-all duration-500 self-center border border-accent1"
+            on:click={()=> goto("/admin/chronicles/create")}
         />
     </div>
     
     <ul class="space-y-2">
-        {#each chronicles as chronicle}
+        {#each chronicles as chronicle, i (i)}
             <ChronicleAdminCard
                 {chronicle}
                 on:toggle={(e) => toggleStatus(e.detail)}

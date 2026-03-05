@@ -22,7 +22,9 @@
 </script>
 
 <section class="flex flex-col gap-4 mt-24 pb-8 border-b">
-    <h2 class="text-5xl font-black text-center mb-4">Connectez-Vous</h2>
+    <h2 class="text-5xl font-black text-center mb-4">
+        Connectez-Vous
+    </h2>
 
     <form
         method="POST"
@@ -68,7 +70,9 @@
                 class="border border-accent2 rounded-md p-3 focus:outline-none focus:border-accent2 peer"
             >
             <div class="absolute top-10 right-4 flex items-center gap-2 transition-opacity duration-200 peer-placeholder-shown:opacity-100 opacity-0" >
-                <span class="text-sm text-accent1">Saisir votre Email</span>
+                <span class="text-sm text-accent1"
+                    >Saisir votre Email
+                </span>
                 <Icon icon="maki:cross" class="text-2xl text-accent1" />
             </div>
         </div>
@@ -82,7 +86,9 @@
                 class="border border-accent2 rounded-md p-3 focus:outline-none focus:border-accent2 peer"
             >
             <div class="absolute top-10 right-4 flex items-center gap-2 transition-opacity duration-200 peer-placeholder-shown:opacity-100 opacity-0" >
-                <span class="text-sm text-accent1">Saisir un mot de passe</span>
+                <span class="text-sm text-accent1"
+                    >Saisir un mot de passe
+                </span>
                 <Icon icon="maki:cross" class="text-2xl text-accent1" />
             </div>
         </div>

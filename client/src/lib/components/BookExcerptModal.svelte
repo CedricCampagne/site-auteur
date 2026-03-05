@@ -33,7 +33,9 @@
         >
             X
         </button>
-        <h2 class="border-b border-accent1 text-center pb-2"> Extrait du livre : { title }</h2>
+        <h2 class="border-b border-accent1 text-center pb-2">
+            Extrait du livre : { title }
+        </h2>
         <p>
             {text.length > maxLength ? text.slice(0,maxLength) + "..." : text}
         </p>
