@@ -1,45 +1,6 @@
 
 export const booksData = [
     {
-        title: "Les Brumes d’Ambre",
-        author: "Élise Montclair",
-        summary: "Un voyage initiatique dans un monde où la magie se nourrit des émotions humaines.",
-        excerpt: "La brume se leva doucement, révélant les contours d’une cité oubliée...",
-        published_at: new Date("2018-03-12"),
-        publisher: "Éditions du Lys", genre: "Fantasy",
-        cover_url: "https://images.pexels.com/photos/268533/pexels-photo-268533.jpeg?w=1000&h=1500&fit=crop", is_active: true
-    },
-    {
-        title: "L’Ombre des Étoiles",
-        author: "Julien Armand",
-        summary: "Un astronaute découvre un secret qui pourrait bouleverser l’humanité.",
-        excerpt: "Dans le silence absolu de l’espace, il réalisa qu’il n’était pas seul...",
-        published_at: new Date("2020-11-05"),
-        publisher: "Nova Press", genre: "Science-Fiction",
-        cover_url: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=1000&h=1500&fit=crop", is_active: true
-    },
-    {
-        title: "Le Dernier Jardin",
-        author: "Camille Dorian",
-        summary: "Une botaniste lutte pour sauver la dernière forêt vivante de la planète.",
-        excerpt: "Ses doigts effleurèrent la feuille, fragile mais encore pleine de vie...",
-        published_at: new Date("2022-06-21"),
-        publisher: "Terra Verde",
-        genre: "Roman écologique",
-        cover_url: "https://images.pexels.com/photos/210243/pexels-photo-210243.jpeg?w=1000&h=1500&fit=crop",
-        is_active: true
-    },
-    { 
-        title: "Fragments de Verre",
-        author: "Nora Belcourt",
-        summary: "Un thriller psychologique où chaque vérité est un mensonge en devenir.",
-        excerpt: "Elle observa le miroir brisé, chaque éclat reflétant une version différente d’elle-même...",
-        published_at: new Date("2019-09-14"),
-        publisher: "Nocturne",
-        genre: "Thriller",
-        cover_url: "https://images.pexels.com/photos/164025/pexels-photo-164025.jpeg?w=1000&h=1500&fit=crop", is_active: true
-    },
-    {
         title: "Kuru",
         author: "Katia Campagne",
         summary: `
@@ -73,6 +34,28 @@ export const booksData = [
         published_at: new Date("2017-01-01"),
         publisher: "Auto Édition",
         genre: "Thriller",
-        cover_url: "/images/kuru.png", is_active: true
+        cover_url: "/images/kuru.png",
+        is_active: true
+    },
+    { 
+        title: "American Witches",
+        author: " Katia Campagne",
+        summary: `
+        Le corps d'une femme rousse est retrouvé sur un chemin de randonnée, à quelques kilomètres d'une bourgade américaine isolée. Démembrée, un parchemin enfoncé dans la gorge, la victime semble avoir fait l'objet d'une cérémonie macabre. 
+        
+        Mise en scène ou rituel consacré ? 
+
+        La question se pose au coeur de Hinsdale, qui garde encore les traces des anciennes chasses aux sorcières. Chargé de l'enquête, Karl Rosenberg sait qu'il n'y coupera pas : pour sa dernière enquête, il va devoir affronter des légendes qu'il aurait préféré ne pas réveiller, et l'aide de son remplaçant ne sera pas de trop pour démêler les croyances de la réalité.
+        
+        Car dans cette petite ville où tout se sait mais où personne ne parle, les mythes ont toujours un fond de vérité.
+        `,
+        excerpt: `
+        Le corps d'une femme rousse est retrouvé sur un chemin de randonnée, à quelques kilomètres d'une bourgade américaine isolée. Démembrée, un parchemin enfoncé dans la gorge, la victime semble avoir fait l'objet d'une cérémonie macabre. 
+        `,
+        published_at: new Date("2021-01-14"),
+        publisher: "Hugo Roman",
+        genre: "Thriller",
+        cover_url: "/images/american-witches.jpg",
+        is_active: true
     }
 ];

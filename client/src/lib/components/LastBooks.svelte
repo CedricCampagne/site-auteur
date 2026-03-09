@@ -18,20 +18,22 @@
         <h2 class="text-title text-2xl mb-2">
             Dernier livre publié
         </h2>
-        <div class="gap-4 flex flex-col items-center sm:flex sm:flex-row sm:items-start">
+        <div class="gap-4 flex flex-col items-center sm:flex sm:flex-row sm:items-center">
             <img
                 src={latestbook.cover_url}
                 alt="couverture livre kuru"
-                class="w-40 border shadow-lg shadow-accent2"
+                class="w-50 border shadow-lg shadow-accent2"
             >
             <div class="flex flex-col items-center gap-2 mt-8 sm:items-start">
+            <div class="flex flex-col gap-4 sm:flex sm:flex-row sm:items-center">
                 <h2 class="text-title text-2xl mb-2">
                     {latestbook.title}
                 </h2>
                 <span>
                     {formatDateFR(latestbook.published_at)}
                 </span>
-                <p>
+            </div>
+                <p class="">
                     {latestbook.summary}
                 </p>
                 <div class="flex flex-col items-center gap-2 mt-8 sm:flex sm:flex-row sm:items-start">
