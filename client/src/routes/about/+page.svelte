@@ -14,18 +14,14 @@
 
     <div class="mb-16">
         <p class="text-lg leading-relaxed text-text-main">
-            Je suis un passionné de récits, d’histoires et de mots. À travers ce site, 
-            je partage mes chroniques, mes réflexions et mes découvertes littéraires. 
-            Mon objectif est simple : transmettre, inspirer et inviter à la lecture.
-
-            Je suis un passionné de récits, d’histoires et de mots. À travers ce site, 
-            je partage mes chroniques, mes réflexions et mes découvertes littéraires. 
-            Mon objectif est simple : transmettre, inspirer et inviter à la lecture
+        <strong class="text-accent1">Katia Campagne</strong> est une auteure de thrillers fascinée par les zones d’ombre de l’âme humaine.
+        Ses romans explorent les secrets de famille, les traumatismes enfouis et les esprits tourmentés, 
+        là où <strong class="text-accent1">la violence psychologique se transmet de génération en génération.</strong>
         </p>
     </div>
 
     <div class="flex flex-col md:flex-row gap-8 md:items-stretch mb-20">
-        <div class="w-full md:w-1/3">
+        <div class="w-full mb-20 md:w-1/3">
            <div class="w-full aspect-square rounded-lg overflow-hidden shadow md:aspect-auto md:h-full">
                 <img 
                     src="/images/cv_photo.jpeg" 
@@ -36,33 +32,41 @@
         </div>
         <div class="w-full md:w-2/3 space-y-2">
             <h2 class="text-center md:text-left text-3xl font-title text-title mb-4">
-                Mon histoire
+                Mon parcours littéraire
             </h2>
             <p class="text-lg leading-relaxed text-text-main">
-                Depuis toujours, j’explore les univers littéraires. Ce site est né de 
-                l’envie de partager mes lectures, mes analyses et mes coups de cœur. 
-                J’aime comprendre ce qui fait vibrer un texte, ce qui le rend unique.
+                Finaliste d’un concours d’édition en 2019, elle <strong class="text-accent1">remporte en 2020 le concours Sorcières chez Fyctia avec American Witches</strong>.
             </p>
             <p class="text-lg leading-relaxed text-text-main">
-                Au fil des années, j’ai développé une approche personnelle de la critique 
-                littéraire : sensible, structurée et tournée vers l’émotion.
+                Après plusieurs nouvelles publiées en recueils et une trilogie fantastique autoéditée en 2015,
+                elle publie chez <strong class="text-accent1">Evidence Edition</strong>, son premier roman <strong class="text-accent1">Kuru en 2017</strong>.
             </p>
-           <p class="text-lg leading-relaxed text-text-main">
-                Depuis toujours, j’explore les univers littéraires. Ce site est né de 
-                l’envie de partager mes lectures, mes analyses et mes coups de cœur. 
+
+            <p class="text-lg leading-relaxed text-text-main">
+                Au fil des années, j’ai développé une approche personnelle de la critique 
+                littéraire : <strong class="text-accent1"> sensible, structurée et tournée vers l’émotion.</strong>
+            </p>
+            <p class="text-lg leading-relaxed text-text-main">
+                Depuis toujours, j’explore les univers littéraires.
+            </p>
+            <p class="text-lg leading-relaxed text-text-main">
+                Ce site est né de l’envie de partager mes lectures, mes analyses et mes coups de cœur.
+            </p>
+            <p class="text-lg leading-relaxed text-text-main">
                 J’aime comprendre ce qui fait vibrer un texte, ce qui le rend unique.
-            </p>        
+            </p>
         </div>
     </div>
 
-    <div class="flex flex-col gap-8 mb-20">
+    <div class="flex flex-col mb-20">
         <h2 class="text-center md:text-left text-3xl font-title text-title mb-4">
-            Ma vision
+           Ma démarche d’auteure
         </h2>
        <p class="text-lg leading-relaxed text-text-main">
-            La littérature est un espace de liberté. Elle permet de voyager, de réfléchir, 
-            de ressentir. À travers mes chroniques, je cherche à mettre en lumière ce qui 
-            rend chaque œuvre singulière.
+            Maman de trois enfants, elle écrit aujourd’hui des histoires où les liens du sang peuvent devenir des prisons. 
+        </p>
+        <p class="text-lg leading-relaxed text-text-main">
+            Elle travaille actuellement sur <strong class="text-accent1">un nouveau thriller.</strong>
         </p>
     </div>
 
