@@ -5,7 +5,10 @@
     export let data;
 
     const book = data.book;
+
     let activTab = "resume"
+    let contentSection: HTMLElement;
+
 </script>
 
 {#if book }
@@ -42,7 +45,10 @@
         </div>
         <div class="flex justify-center gap-2 mt-24">
             <button
-                on:click={() => activTab = "resume"}
+                on:click={() => {
+                    activTab = "resume";
+                    contentSection.scrollIntoView({ behavior: "smooth"});
+                }}
                 class={`p-2 text-2xl border-b-2 cursor-pointer ${activTab === "resume"
                     ? "text-accent1 font-black border-accent1"
                     : "text-accent2 border-transparent"
@@ -51,7 +57,10 @@
                 Résumé
             </button>
         <button
-                on:click={() => activTab = "extrait"}
+                on:click={() => {
+                    activTab = "extrait";
+                    contentSection.scrollIntoView({behavior: "smooth"});
+                }}
                 class={`p-2 text-2xl border-b-2 cursor-pointer ${activTab === "extrait"
                     ? "text-accent1 font-black border-accent1"
                     : "text-accent2 border-transparent"
@@ -60,7 +69,10 @@
                 Extrait
             </button>
         </div>
-        <div class="text-content mt-8 px-4 py-4 border-t">
+        <div 
+            class="text-content mt-8 px-4 py-4 border-t"
+            bind:this={contentSection}
+        >
             {#if activTab === "resume"}
                 {#each book.summary.trim().split('\n\n') as paragraph, i (i)}
                     <p class="text-lg leading-7 mb-4">

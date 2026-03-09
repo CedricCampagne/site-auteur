@@ -40,7 +40,7 @@
                     <Button
                         text="Lire un extrait"
                         className=" text-accent1 border-2 border-accent1 bg-bg-main hover:text-white hover:bg-accent1 transition:all duration-500"
-                        on:click={()=> dispatch("openExcerpt") }
+                        on:click={()=> dispatch("openExcerpt")}
                     />
                     <Button text="Voir la fiche complete"
                         className="text-accent2 border-2 border-accent2 bg-bg-main hover:text-white hover:bg-accent2 transition:all duration-500"

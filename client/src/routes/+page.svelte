@@ -24,6 +24,9 @@
 		excerpt = randomBook.excerpt;
 		excerptTitle = randomBook.title;
 
+		console.log("extrait", excerpt);
+		console.log("titre extrait", excerptTitle);
+		
 		showModal = true;
 	}
 
@@ -34,7 +37,11 @@
 />
 <LastBooks
 	{ latestbook }
-	on:openExcerpt={()=>showModal = true }
+	on:openExcerpt= {()=>{
+		excerpt = latestbook.excerpt;
+		excerptTitle = latestbook.title
+		showModal = true;
+	}}
 />
 <Bibliography { allbooks }/>
 <LastChroniques { latest3Chronicles}/>
