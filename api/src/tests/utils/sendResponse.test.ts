@@ -1,4 +1,3 @@
-import { json } from "sequelize";
 import { sendResponse } from "../../utils/sendResponse";
 import type { Response } from "express";
 

@@ -12,9 +12,26 @@
 	const latest3Chronicles = data.latest3Chronicles;
 	
 	let showModal = false;
+	let excerpt = "";
+	let excerptTitle = "";
+
+	function pickRandomExcerpt(){
+		if(!allbooks || allbooks.length === 0) {
+			return;
+		}
+
+		const randomBook = allbooks[Math.floor(Math.random() * allbooks.length)];
+		excerpt = randomBook.excerpt;
+		excerptTitle = randomBook.title;
+
+		showModal = true;
+	}
+
 </script>
 
-<HeroSection/>
+<HeroSection
+	on:randomExerpt= { pickRandomExcerpt }
+/>
 <LastBooks
 	{ latestbook }
 	on:openExcerpt={()=>showModal = true }
@@ -25,7 +42,7 @@
 
 <BookExcerptModal
 	open={showModal}
-	text={latestbook.excerpt}
-	title={latestbook.title}
+	text={excerpt}
+	title={excerptTitle}
 	on:close={()=> showModal = false }
 />
