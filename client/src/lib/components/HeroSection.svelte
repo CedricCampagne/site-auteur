@@ -1,6 +1,13 @@
 <script>
 	import { goto } from "$app/navigation";
     import Button from "./Button.svelte";
+    import { createEventDispatcher } from "svelte";
+
+    const dispatch = createEventDispatcher();
+
+    function HandleRandom() {
+        dispatch("randomExerpt");
+    }
 </script>
 
 <section class="h-100 bg-cover bg-center relative" style="background-image: url('/images/hero.jpg')">
@@ -16,6 +23,7 @@
             <Button
                 text="Lire un extrait"
                 className="border-2 border-white bg-accent1 hover:text-accent1 hover:bg-white transition:all duration-500"
+                on:click= { HandleRandom }
             />
             <Button
                 text="Découvrir les livres"
