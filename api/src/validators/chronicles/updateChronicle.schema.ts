@@ -40,13 +40,20 @@ export const updateChronicleSchema = Joi.object({
         }),
 
     cover_url: Joi.string()
-        .uri()
+        //helpers est un objet fourni par Joi sert à renvoyer des erreurs personnalisées
+        .custom((value, helpers) => {
+            if (!value.startsWith("http") && !value.startsWith("/")) {
+                return helpers.error("any.invalid");
+            }
+            return value;
+        })
         .required()
         .messages({
-            "string.base": "L'URL de couverture doit être une chaîne de caractères",
-            "string.uri": "L'URL de couverture doit être une URL valide",
-            "any.required": "L'URL de couverture est obligatoire"
-        }),
+            "any.invalid": "L’URL doit commencer par http ou /",
+            "any.required": "L'URL de couverture est obligatoire",
+            "string.base": "L'URL de couverture doit être une chaîne de caractères"
+    }),
+
 
     published_at: Joi.date()
         .required()
