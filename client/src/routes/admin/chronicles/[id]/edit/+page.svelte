@@ -16,7 +16,11 @@
     $: quoteError = chronicle.quote.trim().length < 10 ? "La citation doit faire au moins 10 caractères." : "";
     $: summaryError = chronicle.summary.trim().length < 20 ? "Le résumé doit faire au moins 20 caractères." : "";
     $: contentError = chronicle.content.trim().length < 50 ? "Le contenu doit faire au moins 50 caractères." : "";
-    $: urlError = !chronicle.cover_url.startsWith("http") ? "L’URL doit commencer par http." : "";
+    $: urlError =
+    (!chronicle.cover_url.startsWith("http") && !chronicle.cover_url.startsWith("/"))
+        ? "L’URL doit commencer par http ou /"
+        : "";
+
     $: dateError = !chronicle.published_at ? "La date est obligatoire." : "";
 
     // Form valid si aucune erreur
@@ -32,29 +36,58 @@
     let errorMessage = "";
 
     async function handleSubmit() {
-        successMessage = "";
-        errorMessage = "";
+    successMessage = "";
+    errorMessage = "";
 
-        try {
-            const res = await fetch(
-                `${import.meta.env.VITE_API_URL}/admin/chronicles/${chronicle.id_chronicle}`,
-                {
-                    method: "PUT",
-                    headers: { "Content-Type": "application/json" },
-                    credentials: "include",
-                    body: JSON.stringify(chronicle)
-                }
-            );
-
-            if (res.ok) {
-                goto('/admin/chronicles?updated=1');
-            } else {
-                errorMessage = "Erreur lors de la mise à jour";
-            }
-        } catch (err) {
-            errorMessage = "Impossible de contacter le serveur";
-        }
+    if (!chronicle.title.trim()) {
+        errorMessage = "Le titre est obligatoire";
+        return;
     }
+
+    if (chronicle.summary.trim().length < 20) {
+        errorMessage = "Le résumé doit faire au moins 20 caractères";
+        return;
+    }
+
+    if (chronicle.content.trim().length < 50) {
+        errorMessage = "Le contenu est trop court";
+        return;
+    }
+
+    if (
+        !chronicle.cover_url.startsWith("http") &&
+        !chronicle.cover_url.startsWith("/")
+    ) {
+        errorMessage = "L’URL de l’image doit commencer par http ou /";
+        return;
+    }
+
+    if (!chronicle.published_at) {
+        errorMessage = "La date est obligatoire";
+        return;
+    }
+
+    try {
+        const res = await fetch(
+            `${import.meta.env.VITE_API_URL}/admin/chronicles/${chronicle.id_chronicle}`,
+            {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                credentials: "include",
+                body: JSON.stringify(chronicle)
+            }
+        );
+
+        if (res.ok) {
+            goto('/admin/chronicles?updated=1');
+        } else {
+            errorMessage = "Erreur lors de la mise à jour";
+        }
+    } catch (err) {
+        errorMessage = "Impossible de contacter le serveur";
+    }
+}
+
 </script>
 
 <section class="flex flex-col gap-4 mt-24 pb-8 border-b">

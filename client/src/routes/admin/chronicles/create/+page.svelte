@@ -15,7 +15,10 @@
     $: quoteError = quote.trim().length < 10 ? "La citation doit faire au moins 10 caractères." : "";
     $: summaryError = summary.trim().length < 20 ? "Le résumé doit faire au moins 20 caractères." : "";
     $: contentError = content.trim().length < 50 ? "Le contenu doit faire au moins 50 caractères." : "";
-    $: urlError = !cover_url.startsWith("http") ? "L’URL doit commencer par http." : "";
+    $: urlError =
+    (!cover_url.startsWith("http") && !cover_url.startsWith("/"))
+        ? "L’URL doit commencer par http ou par /"
+        : "";
     $: dateError = !published_at ? "La date est obligatoire." : "";
 
     // Form valid si aucune erreur
@@ -48,10 +51,11 @@
                 return;
             }
 
-            if (!cover_url.startsWith("http")) {
-                errorMessage = "L’URL de l’image est invalide";
-                return;
+            if (!cover_url.startsWith("http") && !cover_url.startsWith("/")) {
+            errorMessage = "L’URL de l’image doit commencer par http ou /";
+            return;
             }
+
 
             const res = await fetch(`${import.meta.env.VITE_API_URL}/admin/chronicles`,{
                 method: "POST",
