@@ -9,4 +9,5 @@ export interface BookDto {
     publisher: string | null;
     genre: string;
     cover_url: string;
+    is_active: boolean;
 }
