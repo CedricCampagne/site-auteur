@@ -27,7 +27,7 @@
                     </h2>
                     <p class="text-2xl">
                         par <span class="text-accent1 font-black">{book.author}</span>
-                    </p>
+                    </p> 
                     <div class="flex flex-col items-start lg:flex lg:flex-row gap-4">
                         <BookTag 
                             text={book.genre}
@@ -36,10 +36,12 @@
                         <BookTag
                             text={formatDateFR(book.published_at)}
                         />
+                        {#if book.publisher !== "" }
                         <BookTag 
                             text={book.publisher}
                             className= {book.publisher ? "bg-accent2 text-white" : ""}
                         />                
+                        {/if}
                     </div>
                 </div>
         </div>

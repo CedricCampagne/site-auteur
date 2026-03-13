@@ -57,5 +57,38 @@ export const booksData = [
         genre: "Thriller",
         cover_url: "/images/american-witches.jpg",
         is_active: true
+    },
+    { 
+        title: " La légitimité du crime",
+        author: " Katia Campagne",
+        summary: `
+        Le cœur arraché.
+
+        La capitaine Mikaella Duval est chargée de l’enquête.
+
+        Flic brillante, hypersensible aux odeurs, Mikaella avance dans un monde saturé d’indices que les autres ne perçoivent pas. Son équipe est soudée, presque familiale. Son équilibre fragile, mais maîtrisé.
+
+        Jusqu’à ce qu’un deuxième meurtre survienne.
+
+        Et qu’une confession inattendue vienne troubler l’affaire.
+
+        Tandis qu’un nouveau membre intègre son équipe et que les tensions montent, Mikaella se retrouve confrontée à ses propres failles : un passé familial lourd, un psychologue troublant, et un jeune garçon qu’elle protège depuis des années, marqué par l’abandon et la violence.
+
+        Dans cette enquête où chaque vérité en cache une autre, une question s’impose :
+
+        Un crime peut-il être légitime ?
+
+        La légitimité du crime est un thriller psychologique intense sur les traumatismes, la loyauté, la manipulation et la frontière fragile entre justice et vengeance.
+        `,
+        excerpt: `
+        Pas d'extrait disponible.
+        
+        En cours de correction...
+        `,
+        published_at: new Date("2026-03-13"),
+        publisher: "",
+        genre: "Thriller",
+        cover_url: "/images/legitimite-du-crime.png",
+        is_active: true
     }
 ];
