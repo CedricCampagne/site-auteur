@@ -1,10 +1,11 @@
 <script lang="ts">
 	import BookTag from '$lib/components/BookTag.svelte';
+	import type { Book } from '$lib/types.js';
     import { formatDateFR } from '$lib/utils/date.js';
 
     export let data;
 
-    const book = data.book;
+    const book: Book = data.book;
 
     let activTab = "resume"
     let contentSection: HTMLElement;
@@ -15,12 +16,19 @@
     <section class="flex flex-col gap-4 mt-24 pb-8 border-b">
         <div class="flex flex-col items-center gap-24 md:flex-row md:gap-8 md:self-center">
             <div class="w-75 h-112.5 overflow-hidden rounded-md shadow-lg shadow-accent2">
-                <img 
-                    src={book.cover_url} 
-                    alt={book.title} 
-                    class="w-full h-full object-cover"
-                />
+                <div class="relative">
+                    <img 
+                        src={book.cover_url} 
+                        alt={book.title} 
+                        class="w-full h-full object-cover {book.is_active === false ? 'opacity-30' : 'opacity-100'}"
+                    />
+                    {#if book.is_active === false}
+                        <div class="absolute inset-0 bg flex items-center justify-center">
+                            <p class="text-accent2 text-center text-lg font-semibold p-2">image non contractuelle en cours d'édition</p>
+                        </div>
+                    {/if}
                 </div>
+            </div>
                 <div class="flex-2 flex flex-col gap-12">
                     <h2 class="text-5xl">
                         {book.title}

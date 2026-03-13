@@ -89,6 +89,6 @@ export const booksData = [
         publisher: "",
         genre: "Thriller",
         cover_url: "/images/legitimite-du-crime.png",
-        is_active: true
+        is_active: false
     }
 ];
