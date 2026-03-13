@@ -30,6 +30,7 @@ export class BookService {
             publisher: book.publisher,
             genre: book.genre,
             cover_url: book.cover_url,
+            is_active : book.is_active
         }));
     }
    
@@ -55,6 +56,7 @@ export class BookService {
             publisher: book.publisher,
             genre: book.genre,
             cover_url: book.cover_url,
+            is_active : book.is_active
         }));
     }
 
@@ -78,6 +80,7 @@ export class BookService {
             publisher: book.publisher,
             genre: book.genre,
             cover_url: book.cover_url,
+            is_active : book.is_active
         };
     }
 
@@ -100,6 +103,7 @@ export class BookService {
             publisher: book.publisher,
             genre: book.genre,
             cover_url: book.cover_url,
+            is_active : book.is_active
         };
     }
 
@@ -121,6 +125,7 @@ export class BookService {
             publisher: book.publisher,
             genre: book.genre,
             cover_url: book.cover_url,
+            is_active : book.is_active
         };
     }
 }
