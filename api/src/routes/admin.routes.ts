@@ -1,9 +1,5 @@
 import { Router } from "express";
 
-// Middlewares
-import { authGuard } from "../middleware/authGuard";
-import { isAdmin } from "../middleware/isAdmin";
-import { validate } from "../middleware/validate";
 
 // Validators
 import { idSchema } from "../validators/id.schema";
@@ -23,6 +19,11 @@ import { updateCommentSchema } from "../validators/comments/updateComment.schema
 import { ChroniclesController } from "../controllers/ChroniclesController";
 import { UsersController } from "../controllers/UsersController";
 import { CommentController } from "../controllers/CommentsController";
+
+// Middlewares
+import { authGuard } from "../middleware/authGuard";
+import { isAdmin } from "../middleware/isAdmin";
+import { validate } from "../middleware/validate";
 
 //Dto
 import { GetChronicleByIdParams } from "../dto/chronicles/GetChronicleByIdParams.dto";

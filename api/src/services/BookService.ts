@@ -11,7 +11,7 @@ import { BookDto } from "../dto/book/Book.dto";
 export class BookService {
     static async getAllBooks(): Promise<BookDto[]> {
         const books = await Book.findAll({
-            order : [["published_at", "ASC"]],
+            order : [["published_at", "DESC"]],
             limit: 5
         });
 

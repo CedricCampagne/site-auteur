@@ -18,7 +18,7 @@
         {#each books as book, i (i)}
             <div class="relative">
                 <!-- Point sur la ligne -->
-                <div class="absolute -left-11.5 top-1 w-6 h-6 bg-accent2 rounded-full border-4 border-accent2"></div>
+                <div class="absolute -left-11.5 top-1 w-6 h-6 bg-accent1 rounded-full border-2 border-accent2"></div>
                 <!-- Année -->
                 <p class="text-accent1 font-bold text-lg mb-2">
                     {new Date(book.published_at).getFullYear()}
