@@ -2,18 +2,26 @@
     import Button from "$lib/components/Button.svelte";
     import { goto } from "$app/navigation";
     import { getBookUrl } from "$lib/navigation";
+	import type { Book } from "$lib/types";
 
-    export let book;
+    export let book: Book;
 
     const maxLength = 700;
 </script>
 
 <section class="bg-white shadow-lg shadow-accent2 rounded p-6 flex flex-col sm:flex-row gap-6">
+<div class="relative">
     <img 
         src={book.cover_url} 
         alt="Couverture du livre {book.title}" 
-        class="w-full sm:max-h-100 object-contain sm:w-40 sm:h-56 sm:object-cover rounded"
+        class="w-full sm:max-h-100 object-contain sm:w-40 sm:h-56 sm:object-cover rounded {book.is_active === false ? 'opacity-30' : 'opacity-100'}"
     />
+    {#if book.is_active === false}
+        <div class="absolute inset-0 bg flex items-center justify-center">
+            <p class="text-accent2 text-center text-lg font-semibold p-2">image non contractuelle en cours d'édition</p>
+        </div>
+    {/if}
+</div>
     <div class="flex flex-col justify-between items-center text-center sm:text-left sm:items-start ">
         <div>
             <h2 class="text-2xl font-semibold mb-2">{book.title}</h2>

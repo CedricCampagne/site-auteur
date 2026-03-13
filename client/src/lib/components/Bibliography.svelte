@@ -10,7 +10,9 @@
     <h2 class="text-center md:text-start text-title text-2xl">Bibliographie</h2>
     <div class="flex flex-col items-center gap-4 md:flex md:flex-row md:gap-4">
         {#each allbooks as book, i (i)}
+            {#if i !== 0}
             <BookCard { book }/>
+            {/if}
         {/each}
     </div>
 </section>
