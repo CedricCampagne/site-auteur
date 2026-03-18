@@ -331,9 +331,9 @@ Voici la configuration actuellement utilisée dans le projet :
 ```bash
 PORT=3000
 DB_HOST=localhost
-DB_NAME=site-katia
-DB_USER=postgres
-DB_PASSWORD=Katia1410
+DB_NAME=db_name
+DB_USER=db_user
+DB_PASSWORD=db_password
 DB_DIALECT=postgres
 JWT_SECRET=ton_JWT_secret
 COOKIE_SECRET=ton_cookie_secret (optionnel)
