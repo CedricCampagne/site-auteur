@@ -13,8 +13,13 @@ export class CommentController {
         next: NextFunction
     ){
         try {
+            const user = req.user;
+
+            // Vérifie si l'utilisateur est admin
+            const isAdmin = user?.roles?.includes("admin") ?? false;
+
             const chronicle_id = Number(req.params.id);
-            const comments = await CommentService.getCommentsByChronicleId(chronicle_id);
+            const comments = await CommentService.getCommentsByChronicleId(chronicle_id, isAdmin);
 
             return sendResponse(res, 200, "success", "Commentaires de la chronique récupérés", comments);
 
@@ -46,7 +51,12 @@ export class CommentController {
 
     static async getAll(req: Request, res: Response, next: NextFunction){
         try {
-            const comments = await CommentService.getAllComments();
+            const user = req.user;
+
+            // Vérifie si l'utilisateur est admin
+            const isAdmin = user?.roles?.includes("admin") ?? false;
+
+            const comments = await CommentService.getAllComments(isAdmin);
             return sendResponse(res, 200, "success", "Tous les commentaires récupérés", comments);
         } catch (error) {
             next(error);
