@@ -54,6 +54,7 @@ export class ChronicleService {
 
     static async getLatest3Chronicles(): Promise<ChronicleDto[]> {
         const chronicles= await Chronicle.findAll({
+            where : { is_active : true},
             order: [["published_at", "DESC"]],
             limit: 3
         })
