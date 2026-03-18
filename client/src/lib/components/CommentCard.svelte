@@ -1,7 +1,7 @@
 <script lang="ts">
     import { timeAgo } from "$lib/utils/time";
-
-    export let comment;
+    import type { Comment } from "$lib/types";
+    export let comment : Comment;
 </script>
 
 <div class="border border-gray-200 rounded-lg p-4 shadow-sm bg-white">
@@ -13,6 +13,11 @@
             <p class="font-semibold">
                 {comment.user.username}
             </p>
+            {#if comment.is_visible === false}
+                <span class="text-red-600 font-bold border ml-2 p-1">
+                    Masqué
+                </span>
+            {/if}
         </div>
         <div class="flex flex-col gap-2 ">
             <p class="text-xs text-accent2">
