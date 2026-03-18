@@ -13,7 +13,6 @@
 
     const chronicle = data.chronicle;
     let comments = data.comments;
-
     let showModal = false;
 
     function handleCreated(event: any) {
@@ -71,18 +70,18 @@
             {:else}
                 <div class="flex flex-col gap-6">
                     {#each comments as comment, i (i)}
-                        <CommentCard 
-                            {comment} 
-                        />
+                            <CommentCard 
+                                {comment} 
+                            />  
                     {/each}
                 </div>
             {/if}
         </section>
     </article>
 
-<CommentAddModal
-    open={showModal}
-    on:close={() => showModal = false}
-    on:created={handleCreated}
-/>
+    <CommentAddModal
+        open={showModal}
+        on:close={() => showModal = false}
+        on:created={handleCreated}
+    />
 </section>

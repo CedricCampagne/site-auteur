@@ -10,9 +10,13 @@ import { AddBody } from "../dto/comment/AddComment.dto";
 import { CommentDto } from "../dto/comment/comment.dto";
 
 export class CommentService{
-    static async getCommentsByChronicleId(chronicle_id: number): Promise<CommentDto[]>{
+    static async getCommentsByChronicleId(chronicle_id: number, isAdmin: boolean): Promise<CommentDto[]>{
+        const where = isAdmin 
+            ? { chronicle_id }
+            : { chronicle_id, is_visible: true };
+        
         const comments = await Comment.findAll({
-            where: {chronicle_id},
+            where,
             include: [
                 {
                     model: User,
@@ -101,7 +105,9 @@ export class CommentService{
         };
     }
 
-    static async getAllComments(): Promise<CommentDto[]>{
+    static async getAllComments(isAdmin: boolean): Promise<CommentDto[]>{
+        const where = isAdmin ? {} : { is_visible: true }
+
         const comments = await Comment.findAll({
             include: [
                 {
