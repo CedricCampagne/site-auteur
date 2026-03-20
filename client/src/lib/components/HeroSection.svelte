@@ -12,7 +12,7 @@
 
 <section class="h-100 bg-cover bg-center relative" style="background-image: url('/images/hero.jpg')">
     <div class="absolute inset-0 bg-steel/30"></div>
-    <div class="relative z-10 flex flex-col justify-center sm:items-start sm:justify-center h-full text-white px-6 text-center gap-4">
+    <div class="relative z-10 flex flex-col justify-center items-center md:items-start sm:justify-center h-full text-white px-6 text-center gap-4">
         <h1 class="font-title mb-4 text-3xl sm:text-5xl ">
             « Là où l’esprit se fissure, l’histoire commence »
         </h1>

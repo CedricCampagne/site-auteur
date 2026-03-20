@@ -1,18 +1,32 @@
 import { Sequelize } from "sequelize-typescript";
-// Tu importes la fonction join du module Node.js  path.
-// Elle sert à construire des chemins de fichiers compatibles Windows / Mac / Linux.
 import { User } from "../models/User";
 import { Role } from "../models/Role";
 import { UserRole } from "../models/UserRole";
-import { Chronicle} from "../models/Chronicle";
+import { Chronicle } from "../models/Chronicle";
 import { Book } from "../models/Book";
 import { Comment } from "../models/Comment";
-export const sequelize = new Sequelize({
-    dialect: process.env.DB_DIALECT as 'postgres',
-    host: process.env.DB_HOST, database: process.env.DB_NAME,
-    username: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    logging: false,
-    // models: [join(__dirname, '..', 'models')]
-    models: [User,Role,UserRole,Chronicle,Book,Comment],
-});
+
+const isProd = process.env.NODE_ENV === "production";
+
+export const sequelize = isProd
+  ? new Sequelize(process.env.DATABASE_URL!, {
+      dialect: "postgres",
+      protocol: "postgres",
+      logging: false,
+      models: [User, Role, UserRole, Chronicle, Book, Comment],
+      dialectOptions: {
+        ssl: {
+          require: true,
+          rejectUnauthorized: false, // Supabase SSL
+        },
+      },
+    })
+  : new Sequelize({
+      dialect: process.env.DB_DIALECT as "postgres",
+      host: process.env.DB_HOST,
+      database: process.env.DB_NAME,
+      username: process.env.DB_USER,
+      password: process.env.DB_PASSWORD,
+      logging: false,
+      models: [User, Role, UserRole, Chronicle, Book, Comment],
+    });

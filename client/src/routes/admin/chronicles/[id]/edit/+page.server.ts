@@ -1,7 +1,7 @@
 import type { PageServerLoad } from './$types';
 import { redirect } from '@sveltejs/kit';
 
-// PageServerLoad tyoe auto de svelteKit pour type load
+// PageServerLoad type auto de svelteKit pour type load
 export const load: PageServerLoad = async ({ params, fetch }) => {
     const id = params.id;
 

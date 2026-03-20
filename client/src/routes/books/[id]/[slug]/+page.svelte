@@ -15,7 +15,7 @@
 {#if book }
     <section class="flex flex-col gap-4 mt-24 pb-8 border-b">
         <div class="flex flex-col items-center gap-24 md:flex-row md:gap-8 md:self-center">
-            <div class="w-75 h-112.5 overflow-hidden rounded-md shadow-lg shadow-accent2">
+            <div class="sm:w-75 sm:h-112.5 overflow-hidden rounded-md shadow-lg shadow-accent2">
                 <div class="relative">
                     <img 
                         src={book.cover_url} 
@@ -29,14 +29,14 @@
                     {/if}
                 </div>
             </div>
-                <div class="flex-2 flex flex-col gap-12">
-                    <h2 class="text-5xl">
+                <div class="flex-2 flex flex-col items-center md:items-start gap-12">
+                    <h2 class="text-center text-3xl md:text-start md:text-5xl">
                         {book.title}
                     </h2>
                     <p class="text-2xl">
                         par <span class="text-accent1 font-black">{book.author}</span>
                     </p> 
-                    <div class="flex flex-col items-start lg:flex lg:flex-row gap-4">
+                    <div class="flex flex-col items-center md:items-start lg:flex lg:flex-row gap-4">
                         <BookTag 
                             text={book.genre}
                             className= {book.genre ? "bg-accent1 text-white" : ""}
@@ -59,7 +59,7 @@
                     activTab = "resume";
                     contentSection.scrollIntoView({ behavior: "smooth"});
                 }}
-                class={`p-2 text-2xl border-b-2 cursor-pointer ${activTab === "resume"
+                class={`p-2 text-xl sm:text-2xl border-b-2 cursor-pointer ${activTab === "resume"
                     ? "text-accent1 font-black border-accent1"
                     : "text-accent2 border-transparent"
                     }`}
@@ -71,7 +71,7 @@
                     activTab = "extrait";
                     contentSection.scrollIntoView({behavior: "smooth"});
                 }}
-                class={`p-2 text-2xl border-b-2 cursor-pointer ${activTab === "extrait"
+                class={`p-2 text-xl sm:text-2xl border-b-2 cursor-pointer ${activTab === "extrait"
                     ? "text-accent1 font-black border-accent1"
                     : "text-accent2 border-transparent"
                 }`}

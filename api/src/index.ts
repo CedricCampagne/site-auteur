@@ -1,7 +1,9 @@
 import "reflect-metadata";
 // attention a charger dotenv avant database.ts sinon env pas reconnu
 import dotenv from "dotenv";
-dotenv.config();
+dotenv.config({
+    path: `.env.${process.env.NODE_ENV || "development"}`
+});
 
 import mainRouter from "./routes/index.routes";
 

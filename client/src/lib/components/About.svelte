@@ -15,7 +15,7 @@
 
 <section class="flex flex-col items-center bg-accent2 text-white p-6 gap-8 mt-12 md:flex md:flex-row">
     <div class="shrink-0">
-        <img src="/images/cv_photo.jpeg" alt="auteur" class="w-50 lg:w-70">
+        <img src="/images/katia2.jpg" alt="auteur" class="w-50 lg:w-70">
     </div>
     <div class="flex flex-col items-center gap-4 md:flex md:flex-col md:justify-around md:items-start">
         <div class="w-2/3 flex flex-col gap-8 items-center md:flex md:flex-row md:items-start md:w-full">
