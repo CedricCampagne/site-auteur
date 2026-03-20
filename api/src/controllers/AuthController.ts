@@ -63,7 +63,6 @@ export class AuthController {
             if (!token){
                 throw new HttpError(401, "Non authetifié");
             }
-            // renvoie payload si ok sinon null
             const payload = verifyToken(token);
             
             if(!payload){

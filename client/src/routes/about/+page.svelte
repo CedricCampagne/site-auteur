@@ -21,17 +21,17 @@
     </div>
 
     <div class="flex flex-col md:flex-row gap-8 md:items-stretch mb-20">
-        <div class="w-full mb-20 md:w-1/3">
-           <div class="w-full aspect-square rounded-lg overflow-hidden shadow md:aspect-auto md:h-full">
+        <div class="w-full mb-20 sm:w-1/3 self-center">
+           <div class="w-full sm:w-auto aspect-square rounded-lg overflow-hidden shadow md:aspect-auto md:h-full">
                 <img 
-                    src="/images/cv_photo.jpeg" 
+                    src="/images/katia2.jpg" 
                     alt="Portrait" 
                     class="w-full h-full object-cover"
                 >
             </div>
         </div>
         <div class="w-full md:w-2/3 space-y-2">
-            <h2 class="text-center md:text-left text-3xl font-title text-title mb-4">
+            <h2 class="text-center md:text-left text-3xl font-title text-title mb-12">
                 Mon parcours littéraire
             </h2>
             <p class="text-lg leading-relaxed text-text-main">
@@ -59,7 +59,7 @@
     </div>
 
     <div class="flex flex-col mb-20">
-        <h2 class="text-center md:text-left text-3xl font-title text-title mb-4">
+        <h2 class="text-center md:text-left text-3xl font-title text-title mb-12">
            Ma démarche d’auteure
         </h2>
        <p class="text-lg leading-relaxed text-text-main">

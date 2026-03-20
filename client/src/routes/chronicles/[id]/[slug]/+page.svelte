@@ -69,7 +69,7 @@
                 </p>
             {:else}
                 <div class="flex flex-col gap-6">
-                    {#each comments as comment, i (i)}
+                    {#each comments as comment (comment.id_comment)}
                             <CommentCard 
                                 {comment} 
                             />  
