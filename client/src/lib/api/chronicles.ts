@@ -1,7 +1,13 @@
 import type { ApiResponse, Chronicle } from "$lib/types";
 
-export async function getLatest3Chronicles(): Promise<Chronicle[]> {
-    const res = await fetch(`${import.meta.env.VITE_API_URL}/chronicles/latest3`);
+export async function getLatest3Chronicles(fetchFn: typeof fetch): Promise<Chronicle[]> {
+   const apiUrl = import.meta.env.VITE_API_URL;
+    if (!apiUrl) throw new Error("VITE_API_URL non définie");
+
+    const res = await fetchFn(`${apiUrl}/chronicles/latest3`, {
+        credentials: "include"
+    });
+
     if(!res.ok) {
         throw new Error("Error API /latest3");
     }
@@ -9,8 +15,11 @@ export async function getLatest3Chronicles(): Promise<Chronicle[]> {
     return json.data!;
 }
 
-export async function getAllChronicles () : Promise<Chronicle[]> {
-    const res = await fetch(`${import.meta.env.VITE_API_URL}/chronicles`);
+export async function getAllChronicles (fetchFn: typeof fetch) : Promise<Chronicle[]> {
+   const apiUrl = import.meta.env.VITE_API_URL;
+    if (!apiUrl) throw new Error("VITE_API_URL non définie");
+
+    const res = await fetchFn(`${apiUrl}/chronicles`);
     if(!res.ok) {
         throw new Error("Errorr API/chronicles");
     }

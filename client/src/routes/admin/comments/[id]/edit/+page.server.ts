@@ -1,8 +1,10 @@
 import type { PageServerLoad } from './$types';
+// @ts-expect-error can't find module
+import { API_URL } from '$env/static/private';
 
 export const load : PageServerLoad = async ({fetch, params}) => {
     const id = params.id;
-    const res = await fetch(`${import.meta.env.VITE_API_URL}/admin/comments/${id}`,{
+    const res = await fetch(`${API_URL}/admin/comments/${id}`,{
         credentials: "include"
     });
 

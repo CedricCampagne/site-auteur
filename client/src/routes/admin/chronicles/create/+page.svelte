@@ -55,8 +55,7 @@
             errorMessage = "L’URL de l’image doit commencer par http ou /";
             return;
             }
-
-
+            
             const res = await fetch(`${import.meta.env.VITE_API_URL}/admin/chronicles`,{
                 method: "POST",
                 headers: {"Content-Type": "application/json" },
