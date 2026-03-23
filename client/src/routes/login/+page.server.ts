@@ -1,8 +1,14 @@
 import { fail } from "@sveltejs/kit";
 import type { Actions } from "./$types";
+import type { PageServerLoad } from './$types';
+// @ts-expect-error can't find module
+import { API_URL } from '$env/static/private';
 
 export const actions: Actions = {
-    default: async ({ request, fetch, cookies })=>{
+    default: async ( event )=>{
+        const { request, fetch, cookies } = event;
+        if (!API_URL) throw new Error("API_URL non définie");
+
         const data = await request.formData();
 
         const email = data.get("email")?.toString();
@@ -15,7 +21,7 @@ export const actions: Actions = {
             });
         }
 
-        const res = await fetch(`${import.meta.env.VITE_API_URL}/auth/login`, {
+        const res = await fetch(`${API_URL}/auth/login`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             credentials: "include",         // pour recevoir les cookies
@@ -48,7 +54,7 @@ export const actions: Actions = {
     }
 }
 
-export function load({ cookies }){
+export const load: PageServerLoad = ({ cookies }) =>{
    const flash = cookies.get("flash");
 
    if(flash){

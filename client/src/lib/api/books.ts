@@ -2,8 +2,8 @@ import type { ApiResponse, Book } from '$lib/types';
 
 //fonction renvoie une promesse qui, une fois résolue, contiendra un tableau de Book.”
 export async function getLatestBook(fetchFn: typeof fetch): Promise<Book> {
-    const apiUrl = process.env.API_URL;
-    if (!apiUrl) throw new Error("API_URL non définie");
+    const apiUrl = import.meta.env.VITE_API_URL;
+    if (!apiUrl) throw new Error("VITE_API_URL non définie");
 
     const res = await fetchFn(`${apiUrl}/books/latest`,{
         credentials: "include"
@@ -18,8 +18,8 @@ export async function getLatestBook(fetchFn: typeof fetch): Promise<Book> {
 }
 
 export async function getAllBooks(fetchFn: typeof fetch): Promise<Book[]> {
-    const apiUrl = process.env.API_URL;
-    if (!apiUrl) throw new Error("API_URL non définie");
+    const apiUrl = import.meta.env.VITE_API_URL;
+    if (!apiUrl) throw new Error("VITE_API_URL non définie");
 
     const res = await fetchFn(`${apiUrl}/books`, {
         credentials: "include"
@@ -33,8 +33,8 @@ export async function getAllBooks(fetchFn: typeof fetch): Promise<Book[]> {
 }
 
 export async function getByIdBook(fetchFn: typeof fetch, id: number, slug:string) : Promise<Book> {
-    const apiUrl = process.env.API_URL;
-    if (!apiUrl) throw new Error("API_URL non définie");
+    const apiUrl = import.meta.env.VITE_API_URL;
+    if (!apiUrl) throw new Error("VITE_API_URL non définie");
 
     const res = await fetchFn(`${apiUrl}/books/${id}/${slug}`);
     if(!res.ok){

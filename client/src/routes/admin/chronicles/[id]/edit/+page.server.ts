@@ -1,12 +1,17 @@
 import type { PageServerLoad } from './$types';
 import { redirect } from '@sveltejs/kit';
+// @ts-expect-error can't find module
+import { API_URL } from '$env/static/private';
 
 // PageServerLoad type auto de svelteKit pour type load
 export const load: PageServerLoad = async ({ params, fetch }) => {
+
+    if (!API_URL) throw new Error("API_URL non définie");
+
     const id = params.id;
 
     const res = await fetch(
-        `${import.meta.env.VITE_API_URL}/admin/chronicles/${id}`,
+        `${API_URL}/admin/chronicles/${id}`,
         {
             credentials: "include",
             headers: {

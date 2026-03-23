@@ -2,7 +2,7 @@
     import Header from '$lib/components/Header.svelte';
     import Footer from '$lib/components/Footer.svelte';
     import favicon from '$lib/assets/favicon.svg';
-    import "./layout.css";
+    import "$lib/styles/layout.css";
 
     export let data;
 </script>
