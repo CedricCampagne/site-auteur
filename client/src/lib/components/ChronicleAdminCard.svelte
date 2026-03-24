@@ -12,7 +12,6 @@
     }
 
     function handleUpdate() {
-        console.log("DISPATCH UPDATE", chronicle.id_chronicle);
         dispatch("update", chronicle.id_chronicle);
     }
 
@@ -21,7 +20,6 @@
     }
 </script>
 
-<!-- <section> -->
 <section class="border p-4 rounded bg-white shadow">
     <div class="flex flex-col items-center gap-4 md:flex md:flex-row md:justify-between md:items-center">
         <div class="flex flex-col items-center gap-2 sm:flex sm:flex-row ">

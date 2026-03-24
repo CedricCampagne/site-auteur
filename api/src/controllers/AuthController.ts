@@ -82,8 +82,6 @@ export class AuthController {
         next: NextFunction
     ){
         try {
-            // pour l'instant rien a invalider
-            console.log("le logout passe par le back(AuthController)");
             res.clearCookie("token");
             return sendResponse(res, 200, "success", "Déconnexion réussie");
         } catch (error) {

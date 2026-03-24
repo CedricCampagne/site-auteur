@@ -21,7 +21,7 @@ app.use(cors({
     origin: 'http://localhost:5173',
     credentials:true
 }));
-// app.use(helmet());      // xss-clean n’est plus compatible avec Express 5 / Node 18+ / TypeScript
+
 app.use(helmet({
     crossOriginResourcePolicy: false,
     crossOriginOpenerPolicy: false

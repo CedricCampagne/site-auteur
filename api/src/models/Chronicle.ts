@@ -46,9 +46,7 @@ export class Chronicle extends Model<ChronicleAttributes, ChronicleCreationAttri
     @BeforeValidate
     @BeforeUpdate
     static generateSlug(instance: Chronicle) {
-        console.log("HOOK RUNNING, title =", instance.title);
-        console.log("slugify() returns =", slugify(instance.title));
-
+        
         if(instance.title){
             instance.slug = slugify(instance.title);
         }

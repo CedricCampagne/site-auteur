@@ -20,7 +20,8 @@
                 setFlash("Supression de l'utilisateur effectuée !!");
             }
         } catch (error) {
-             console.error("Erreur lors de la suppresion");
+            console.log(error);
+            console.error("Erreur lors de la suppression");
         }
     }
 

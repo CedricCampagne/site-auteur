@@ -34,8 +34,9 @@
                 <div class="absolute right-0 top-full bg-white border rounded shadow p-3 w-40 z-50 flex flex-col">
                     {#if user.roles && user.roles.includes("admin")}
                         <a 
-                            href="/admin"
+                            href="/admin/chronicles"
                             class="hover:underline underline-offset-4 cursor-pointer text-center"
+                            on:click={close}
                         >
                             Administration
                         </a>
@@ -51,8 +52,7 @@
     {:else}
         <div 
             class="relative"
-            on:pointerenter={() => open = true}
-            on:pointerleave={() => open = false}
+            on:click={toggleOpen}
         >
             <div class="flex items-center gap-1 cursor-pointer">
                 <Icon

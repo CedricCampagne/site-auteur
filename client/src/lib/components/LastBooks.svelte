@@ -22,13 +22,12 @@
     </h2>
     <div class="gap-4 flex flex-col items-center md:flex md:flex-row md:items-center"> 
     <!-- Image avec texte par-dessus, image visible -->
-
         <div class="relative inline-block">
-                <img
-                    src={latestbook.cover_url}
-                    alt="couverture livre kuru"
-                    class="block sm:w-48 sm:min-w-48 h-auto sm:flex-shrink-0 {latestbook.is_active === false ? 'opacity-30' : 'opacity-100'}"
-                >
+            <img
+                src={latestbook.cover_url}
+                alt="couverture livre kuru"
+                class="block sm:w-48 sm:min-w-48 h-auto sm:shrink-0 {latestbook.is_active === false ? 'opacity-30' : 'opacity-100'}"
+            >
             {#if !latestbook.is_active}
                 <span class="absolute inset-0 flex items-center justify-center text-accent2 text-center text-lg font-semibold p-2">
                     image non contractuelle en cours d'édition

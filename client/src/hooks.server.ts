@@ -25,7 +25,7 @@ function decodeJwt(token: string | undefined): JwtPayload | null {
 export async function handle({ event, resolve }) {
     const token = event.cookies.get("token");
 
-    // 1) Protection des pages nécessitant d'être connecté
+    // Protection des pages nécessitant d'être connecté
     if (event.url.pathname.match(/^\/chronicles\/\d+\/[^/]+$/)) {
         if (!token) {
             event.cookies.set("flash", "Connectez-vous pour accéder à cette page.", {
@@ -36,7 +36,7 @@ export async function handle({ event, resolve }) {
         }
     }
 
-    // 2) Protection de toutes les routes admin
+    // Protection de toutes les routes admin
     if (event.url.pathname.startsWith("/admin")) {
 
         if (!token) {

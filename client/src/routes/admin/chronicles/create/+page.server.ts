@@ -9,7 +9,6 @@ export const actions: Actions = {
 
         const data = await request.formData();
 
-        
         const title = data.get("title")?.toString();
         const quote = data.get("quote")?.toString();
         const summary = data.get("summary")?.toString();
