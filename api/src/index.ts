@@ -1,4 +1,11 @@
 import "reflect-metadata";
+import dotenv from "dotenv";
+
+if (process.env.NODE_ENV !== "production") {
+  dotenv.config({
+    path: `.env.${process.env.NODE_ENV || "development"}`
+  });
+}
 
 import express from "express";
 import cors from "cors";
@@ -10,35 +17,25 @@ import { sequelize } from "./config/database";
 import { sanitizeBody } from "./middleware/sanitize";
 import { errorHandler } from "./middleware/errorHandler";
 
-import dotenv from "dotenv";
-
-if (process.env.NODE_ENV !== "production") {
-  dotenv.config({
-    path: `.env.${process.env.NODE_ENV || "development"}`
-  });
-}
-
-
 const app = express();
 
-// Middleware classiques
 app.use(cors({
   origin: 'http://localhost:5173',
   credentials: true
 }));
+
 app.use(helmet({
   crossOriginResourcePolicy: false,
   crossOriginOpenerPolicy: false
 }));
+
 app.use(express.json());
 app.use(cookieParser());
 app.use(sanitizeBody);
 
-// Routes
 app.use("/api", mainRouter);
 app.use(errorHandler);
 
-// Test de connexion DB
 (async () => {
   try {
     await sequelize.authenticate();
@@ -48,6 +45,5 @@ app.use(errorHandler);
   }
 })();
 
-// Démarrage serveur
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`API running on port ${PORT}`));
