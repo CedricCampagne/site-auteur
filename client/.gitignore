@@ -1,6 +1,7 @@
-node_modules
+# Node modules
+node_modules/
 
-# Output
+# Build / output
 .output
 .vercel
 .netlify
@@ -8,11 +9,11 @@ node_modules
 /.svelte-kit
 /build
 
-# OS
+# OS files
 .DS_Store
 Thumbs.db
 
-# Env
+# Environment variables
 .env
 .env.*
 !.env.example
