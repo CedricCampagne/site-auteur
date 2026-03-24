@@ -19,7 +19,6 @@ export const sequelize = isProd
           require: true,
           rejectUnauthorized: false, // Supabase SSL
         },
-        family: 4,
       },
     })
   : new Sequelize({
