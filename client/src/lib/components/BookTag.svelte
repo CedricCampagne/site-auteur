@@ -5,6 +5,6 @@
 </script>
 
 <span
-    class={` border rounded-3xl px-4 py-1 ${className}`}>
+    class={` border rounded-xl px-4 py-1 ${className}`}>
     {text}
 </span>
