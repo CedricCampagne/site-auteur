@@ -1,2 +1,4 @@
 # Ignore all environment files in this folder
 .env*
+!.env.example
+!.env.test
