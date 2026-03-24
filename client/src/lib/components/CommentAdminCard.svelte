@@ -12,7 +12,6 @@
     }
 
     function handleUpdate() {
-        console.log("DISPATCH UPDATE", comment.id_comment);
         dispatch("update", comment.id_comment);
     }
 

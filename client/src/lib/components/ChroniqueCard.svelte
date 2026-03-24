@@ -12,8 +12,6 @@
 </script>
 
 <article class="flex flex-col overflow-hidden bg-white shadow-lg shadow-accent2 h-112 w-3/4">
-    <!-- IMAGE verrouillée -->
-    <!-- basis-1/3 prend exactement 33% de la hauteur du <article> -->
     <div class="relative basis-1/3 shrink-0">
         <!-- absolute inset-0 le div interne couvre 100% du parent en relative -->
         <div class="absolute inset-0">
@@ -24,7 +22,7 @@
             />
         </div>
     </div>
-    <!-- TEXTE -->
+    
     <div class="basis-2/3 flex flex-col justify-between items-center p-4 overflow-hidden">
         <h3 class="font-title text-lg line-clamp-2">
             {chronicle.title}

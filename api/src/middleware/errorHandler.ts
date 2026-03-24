@@ -4,8 +4,6 @@ import { sendResponse } from "../utils/sendResponse";
 
 
 export function errorHandler(err: any, req: Request, res: Response, next: NextFunction) {
-    //console.error("Global Error Handler:", err);
-
     if(err instanceof HttpError) {
         return sendResponse(res, err.statusCode, "fail", err.message);
     }

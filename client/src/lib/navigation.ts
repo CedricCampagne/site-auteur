@@ -5,7 +5,6 @@ export function getBookUrl(book:Book) {
 }
 
 export function getChronicleUrl(chronicle:Chronicle) {
-    console.log(`/chronicles/${chronicle.id_chronicle}/${chronicle.slug}`);
     return `/chronicles/${chronicle.id_chronicle}/${chronicle.slug}`;
 }
 

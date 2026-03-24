@@ -5,7 +5,6 @@ export interface RegisterPayload {
 }
 
 export async function registerUser(data: RegisterPayload) {
-    console.log(import.meta.env.VITE_API_URL);
     const res = await fetch(`${import.meta.env.VITE_API_URL}/auth/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },

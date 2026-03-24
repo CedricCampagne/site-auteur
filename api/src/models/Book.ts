@@ -48,9 +48,7 @@ BookCreationAttributes> {
     @BeforeValidate
     @BeforeUpdate
     static generateSlug(instance: Book) {
-        console.log("HOOK RUNNING, title =", instance.title);
-        console.log("slugify() returns =", slugify(instance.title));
-
+        
         if(instance.title){
             instance.slug = slugify(instance.title);
         }
