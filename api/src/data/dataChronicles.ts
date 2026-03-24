@@ -32,7 +32,7 @@ export const chroniclesData = [
     #avislittéraire #lesecretdessecrets #jclattès #danbrown #chutmamanecrit
     `,
     quote: "Ce livre ne donne pas de réponses définitives. Mais il ouvre des portes.",
-    cover_url: "https://images.pexels.com/photos/268533/pexels-photo-268533.jpeg",
+    cover_url: "/images/chronicles/secret-des-secrets.jpg",
     published_at: new Date("2026-02-17"),
     is_active: true
   },
@@ -57,7 +57,7 @@ export const chroniclesData = [
     #lecture #lectureaddict #bookstagramfrance #instalivre #thriller
     `,
     quote: "je t’embarque dans un roman où quelques secondes peuvent tout faire basculer : mourir… ou tomber amoureux.",
-    cover_url: "https://images.pexels.com/photos/417074/pexels-photo-417074.jpeg",
+    cover_url: "/images/chronicles/8.2.jpg",
     published_at: new Date("2023-01-21"),
     is_active: true
   },
@@ -80,7 +80,7 @@ export const chroniclesData = [
     #thriller #Octobre #cachecache #sorensveistrup #albinmichel
     `,
     quote: "Et si les comptines n’étaient plus faites pour jouer… mais pour tuer ?",
-    cover_url: "https://images.pexels.com/photos/210243/pexels-photo-210243.jpeg",
+    cover_url: "/images/chronicles/cache-cache.jpg",
     published_at: new Date("2026-01-18"),
     is_active: true
   },
@@ -109,7 +109,7 @@ export const chroniclesData = [
     #thriller
     `,
     quote: "On navigue  entre passé et présent, dans la vie de cette tueuse à la personnalité si complexe qu'elle en devient attachante.",
-    cover_url: "https://images.pexels.com/photos/164025/pexels-photo-164025.jpeg",
+    cover_url: "/images/chronicles/le-crepuscule-de-la-veuve-noire.jpg",
     published_at: new Date("2025-12-04"),
     is_active: true
   }

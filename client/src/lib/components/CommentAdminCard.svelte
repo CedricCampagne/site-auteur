@@ -12,7 +12,6 @@
     }
 
     function handleUpdate() {
-        console.log("DISPATCH UPDATE", comment.id_comment);
         dispatch("update", comment.id_comment);
     }
 
@@ -24,13 +23,13 @@
 <section class="border p-4 rounded bg-white shadow flex flex-col gap-3">
     <!-- Infos -->
     <div class="flex flex-col gap-2">
-        <div class="flex flex-col gap-2 md:flex-row">
+        <div class="flex flex-col gap-2 sm:flex-row">
             <strong>Auteur :</strong>
             <p>
                 {comment.user.username}
             </p>
         </div>
-        <div class="flex flex-col gap-2 md:flex-row">
+        <div class="flex flex-col gap-2 sm:flex-row">
             <strong>Chronique :</strong>
             <p>
                 {comment.chronicle.title}

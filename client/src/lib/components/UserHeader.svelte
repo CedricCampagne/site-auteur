@@ -1,19 +1,27 @@
 <script lang="ts">
+	import { clickOutside } from "$lib/utils/clickOutside";
     import Icon from "@iconify/svelte";
 
     export let user;
 
     let open = false;
+
+    function toggleOpen(){
+        open =!open
+    }
+
+    function close(){
+        open = false;
+    }
 </script>
 
-<section>
+<section use:clickOutside={close}>
     {#if user}
-        <div 
-            class="relative"
-            on:pointerenter={() => open = true}
-            on:pointerleave={() => open = false}
-        >
-            <div class="flex items-center gap-2 cursor-pointer">
+        <div class="relative">
+            <button 
+                class="flex items-center gap-2 cursor-pointer"
+                on:click={toggleOpen}
+            >
                 <Icon
                     icon="mdi:account-circle"
                     class="text-2xl text-accent1"
@@ -21,13 +29,14 @@
                 <span>
                     {user.username}
                 </span>
-            </div>
+            </button>
             {#if open}
                 <div class="absolute right-0 top-full bg-white border rounded shadow p-3 w-40 z-50 flex flex-col">
                     {#if user.roles && user.roles.includes("admin")}
                         <a 
-                            href="/admin"
+                            href="/admin/chronicles"
                             class="hover:underline underline-offset-4 cursor-pointer text-center"
+                            on:click={close}
                         >
                             Administration
                         </a>
@@ -43,8 +52,7 @@
     {:else}
         <div 
             class="relative"
-            on:pointerenter={() => open = true}
-            on:pointerleave={() => open = false}
+            on:click={toggleOpen}
         >
             <div class="flex items-center gap-1 cursor-pointer">
                 <Icon

@@ -5,7 +5,7 @@
 
 <section class="flex flex-col gap-6 mt-24 pb-8 border-b">
     <div class="border-b-2 border-accent2">
-        <h2 class="text-4xl sm:text-5xl font-black text-center mb-4">
+        <h2 class="text-3xl sm:text-4xl sm:text-5xl font-black text-center mb-4">
             Administration du site
         </h2>
     </div>

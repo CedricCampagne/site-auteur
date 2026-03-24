@@ -1,4 +1,13 @@
-import { Table, Column, Model, DataType, PrimaryKey, AutoIncrement, Unique, BeforeUpdate, BeforeValidate } from "sequelize-typescript";
+import { Table,
+    Column,
+    Model,
+    DataType,
+    PrimaryKey,
+    AutoIncrement,
+    Unique,
+    BeforeUpdate,
+    BeforeValidate
+} from "sequelize-typescript";
 import { slugify } from "../utils/slugify";
 
 interface BookAttributes {
@@ -33,14 +42,13 @@ interface BookCreationAttributes {
     underscored: true
 })
 
-export class Book extends Model<BookAttributes, BookCreationAttributes> {
+export class Book extends Model<BookAttributes,
+BookCreationAttributes> {
 
     @BeforeValidate
     @BeforeUpdate
     static generateSlug(instance: Book) {
-        console.log("HOOK RUNNING, title =", instance.title);
-        console.log("slugify() returns =", slugify(instance.title));
-
+        
         if(instance.title){
             instance.slug = slugify(instance.title);
         }

@@ -20,7 +20,8 @@
                 setFlash("Supression de l'utilisateur effectuée !!");
             }
         } catch (error) {
-             console.error("Erreur lors de la suppresion");
+            console.log(error);
+            console.error("Erreur lors de la suppression");
         }
     }
 
@@ -61,7 +62,7 @@
         </div>
     {/if}
     <div class="flex flex-col border-b-2 border-accent2 py-2 md:flex-row md:justify-between">
-        <h2 class="text-4xl font-black text-center mb-4">
+        <h2 class="text-2xl sm:text-4xl font-black text-center mb-4">
             Tous les utilisateurs ({users.length})
         </h2>       
         <Button

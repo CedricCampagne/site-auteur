@@ -24,8 +24,7 @@ async function runSeed() {
         await seedRoles();
         await seedUsers();
         await seedUserRole();
-        await seedComments();
-
+        
         console.log('Seed Terminé !!');
     } catch (error) {
         console.error('Erreru pendant le seed :', error);

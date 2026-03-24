@@ -1,4 +1,3 @@
-import { UserCreationAttributes, UserUpdateAttributes } from "../models/User";
 import { UserServices } from "../services/UserServices";
 import { Request, Response, NextFunction } from "express";
 import { sendResponse } from "../utils/sendResponse";

@@ -82,7 +82,7 @@
         </div>
     {/if}
 
-    <h2 class="text-4xl font-black text-center mb-4">
+    <h2 class="text-2xl smtext-4xl font-black text-center mb-4">
         Tous les commentaires ({filteredComments.length})
     </h2>
 

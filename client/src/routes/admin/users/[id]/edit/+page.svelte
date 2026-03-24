@@ -1,5 +1,8 @@
 <script lang="ts">
 	import type { UserForm } from '$lib/types.js';
+    import { goto } from '$app/navigation';
+    import { page } from '$app/stores';
+    import { browser } from "$app/environment";
 
     export let data;
 
@@ -22,8 +25,12 @@
 
     // Password : seulement si l'utilisateur en saisit un 
     $: passwordError =
-    user.password && user.password.trim().length > 0 && user.password.trim().length < 6
-        ? "Le mot de passe doit faire au moins 6 caractères." 
+        user.password && user.password.trim().length > 0 &&
+        (
+            user.password.trim().length < 10 ||
+            !/[A-Z]/.test(user.password)
+        )
+        ? "Le mot de passe doit contenir au moins 10 caractères et une majuscule."
         : "";
    
 
@@ -33,49 +40,9 @@
         !emailError &&
         !passwordError
     
-
-    let successMessage = "";
-    let errorMessage = "";
-
-    async function handleSubmit() {
-        const payload = structuredClone(user);
-
-        if (!payload.password || payload.password.trim() === "") {
-            delete payload.password;
-        }
-
-        const res = await fetch(`${import.meta.env.VITE_API_URL}/admin/users/${user.id_user}`, {
-            method: "PUT",
-            credentials: "include",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(payload)
-        });
-
-        if (res.ok) {
-            successMessage = "Utilisateur mis à jour avec succès.";
-            errorMessage = "";
-        } else {
-           
-            const error = await res.json();
-
-        console.log("error 0", error.error?.[0]);
-
-        if (Array.isArray(error.error)) {
-            errorMessage = error.error.join(" / ");
-        } else if (typeof error.error === "string") {
-            errorMessage = error.error;
-        } else {
-            errorMessage = "Erreur lors de la mise à jour.";
-        }
-
-        successMessage = "";
-        }
-
+    $: if (browser && $page.form?.success) {
+        setTimeout(() => goto('/admin/users'), 1500);
     }
-    
-
 </script>
 
 <section class="flex flex-col gap-4 mt-24 pb-8 border-b">
@@ -83,10 +50,22 @@
         Mise a jour de l'utilisateur
     </h2>
 
-    <form on:submit|preventDefault={handleSubmit} class="flex flex-col gap-4" >
+    <form method="POST" class="flex flex-col gap-4" >
+        <div class="w-full sm:w-2/4 text-center mx-auto">
+            {#if $page.form?.error}
+                <p class="bg-red-700 text-white font-semibold p-2 rounded-xs">
+                    {$page.form.error}
+                </p>
+            {/if}
+            {#if $page.form?.success}   
+                <p class="bg-green-600 text-white font-semibold p-2 rounded-xs">
+                    Utilisateur mis a jour avec succès !
+                </p>
+            {/if}
+        </div>
         <label>
             Username
-            <input bind:value={user.username} type="text" class="border p-2 w-full" />
+            <input bind:value={user.username} name="username" type="text" class="border p-2 w-full" />
             <div class="h-10 py-2">
                 {#if usernameError}
                     <p class="text-accent1">
@@ -97,7 +76,7 @@
         </label>
         <label>
             Email
-            <input bind:value={user.email} type="text" class="border p-2 w-full" />
+            <input bind:value={user.email} name="email" type="text" class="border p-2 w-full" />
             <div class="h-10 py-2">
                 {#if emailError}
                     <p class="text-accent1">
@@ -108,8 +87,11 @@
         </label>
         <label>
             Password
-            <input bind:value={user.password} type="password" class="border p-2 w-full" />
-            <div class="h-10 py-2">
+            <input bind:value={user.password} name="password" type="password" class="border p-2 w-full" />
+            <p class="text-sm text-gray-500">
+                Laisser vide pour ne pas modifier le mot de passe
+            </p>
+            <div class="min-h-24 py-2">
                 {#if passwordError}
                     <p class="text-accent1">
                         {passwordError}
@@ -118,7 +100,7 @@
             </div>
         </label>
         <label class="flex items-center gap-2">
-            <input bind:checked={user.is_active} type="checkbox"/>
+            <input bind:checked={user.is_active} name="is_active" type="checkbox"/>
             Activer l'utilisateur
         </label>
         <div class="flex items-center gap-6">
@@ -129,16 +111,6 @@
             >
                 Mettre a jour
             </button>
-            {#if successMessage}
-                <p class="bg-green-600 text-white font-semibold p-2 rounded-xs">
-                    {successMessage}
-                </p>
-            {/if}
-            {#if errorMessage}
-                <p class="bg-red-700 text-white font-semibold p-2 rounded-xs">
-                    {errorMessage}
-                </p>
-            {/if}
         </div>
     </form>
 </section>

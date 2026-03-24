@@ -4,6 +4,6 @@ export interface CreateChronicleDto {
     summary: string;
     content: string;
     cover_url: string;
-    published_at: string; // le front envoie une string
+    published_at: string;
     is_active?: boolean;
 }

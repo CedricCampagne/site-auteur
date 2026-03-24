@@ -58,18 +58,18 @@
                 </h3>
                 <Button 
                     text="Ajouter un commentaire"
-                    className ="bg-accent2 text-white"
+                    className ="border bg-accent2 text-white hover:bg-white hover:text-accent2 transition-all duration-300"
                     on:click={()=> showModal= true}
                 />
             </div>
 
             {#if comments.length === 0}
-                <p class="text-accent2 italic">
+                <p class="text-center sm:text-left text-accent2 italic">
                     Aucun commentaire pour le moment.
                 </p>
             {:else}
                 <div class="flex flex-col gap-6">
-                    {#each comments as comment, i (i)}
+                    {#each comments as comment (comment.id_comment)}
                             <CommentCard 
                                 {comment} 
                             />  

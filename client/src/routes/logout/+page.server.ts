@@ -1,11 +1,16 @@
 import { redirect } from "@sveltejs/kit";
 import type { Actions } from "./$types";
+// @ts-expect-error can't find module
+import { API_URL } from '$env/static/private';
 
 export const actions: Actions = {
-    default: async ({ fetch, cookies }) => {
+    default: async (event) => {
+        const { fetch, cookies } = event;
+       
+        if (!API_URL) throw new Error("API_URL non définie");
 
         // 1. Appeler ton backend
-        await fetch(`${import.meta.env.VITE_API_URL}/auth/logout`, {
+        await fetch(`${API_URL}/auth/logout`, {
             method: "POST",
             credentials: "include"
         });

@@ -34,7 +34,7 @@ export const booksData = [
         published_at: new Date("2017-01-01"),
         publisher: "Auto Édition",
         genre: "Thriller",
-        cover_url: "/images/kuru.png",
+        cover_url: "/images/books/kuru.png",
         is_active: true
     },
     { 
@@ -55,7 +55,7 @@ export const booksData = [
         published_at: new Date("2021-01-14"),
         publisher: "Hugo Roman",
         genre: "Thriller",
-        cover_url: "/images/american-witches.jpg",
+        cover_url: "/images/books/test3.jpg",
         is_active: true
     },
     { 
@@ -88,7 +88,7 @@ export const booksData = [
         published_at: new Date("2026-03-13"),
         publisher: "",
         genre: "Thriller",
-        cover_url: "/images/legitimite-du-crime.png",
+        cover_url: "/images/books/legitimite-du-crime.png",
         is_active: false
     },
     {
@@ -132,7 +132,7 @@ export const booksData = [
         published_at: new Date("2015-07-01"),
         publisher: "autoédition",
         genre: "Thriller",
-        cover_url: "/images/dans-mes-veines.png",
+        cover_url: "/images/books/dans-mes-veines.png",
         is_active: true
     }
 ];

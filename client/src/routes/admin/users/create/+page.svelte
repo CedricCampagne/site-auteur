@@ -1,7 +1,9 @@
 <script lang="ts">
-	import type { UserFormCreate } from '$lib/types.js';
+    import { page } from '$app/stores';
     import { goto } from '$app/navigation';
-
+    import { browser } from '$app/environment'; 
+	import type { UserFormCreate } from '$lib/types.js';
+   
     const user: UserFormCreate = {
     username: "",
     email: "",
@@ -35,43 +37,12 @@
         !usernameError &&
         !emailError &&
         !passwordError
-    
 
-    let successMessage = "";
-    let errorMessage = "";
 
-    async function handleSubmit() {
-        
-        // manque la recuperation de user avec les value des champs
-
-        const res = await fetch(`${import.meta.env.VITE_API_URL}/admin/users/`, {
-            method: "POST",
-            credentials: "include",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(user)
-        });
-
-        if (res.ok) {
-            successMessage = "Utilisateur créé avec succès.";
-            errorMessage = "";
-            setTimeout(()=>goto("/admin/users"),3000)
-        } else {
-           
-            const error = await res.json();
-
-        if (Array.isArray(error.error)) {
-            errorMessage = error.error.join(" / ");
-        } else if (typeof error.error === "string") {
-            errorMessage = error.error;
-        } else {
-            errorMessage = "Erreur lors de la création.";
-        }
-        successMessage = "";
-        }
+    // Redirection après succès
+    $: if (browser && $page.form?.success) {
+        setTimeout(() => goto('/admin/users'), 2000); 
     }
-    
 </script>
 
 <section class="flex flex-col gap-4 mt-24 pb-8 border-b">
@@ -79,10 +50,10 @@
         Création d'un utilisateur
     </h2>
 
-    <form on:submit|preventDefault={handleSubmit} class="flex flex-col gap-4" >       
+    <form method="POST" class="flex flex-col gap-4" >       
         <label>
             Username
-            <input bind:value={user.username} type="text" class="border p-2 w-full" />
+            <input bind:value={user.username} name="username" type="text" class="border p-2 w-full" />
             <div class="h-10 py-2">
                 {#if usernameError}
                     <p class="text-accent1">
@@ -93,7 +64,7 @@
         </label>
         <label>
             Email
-            <input bind:value={user.email} type="text" class="border p-2 w-full" />
+            <input bind:value={user.email} name="email" type="text" class="border p-2 w-full" />
             <div class="h-10 py-2">
                 {#if emailError}
                     <p class="text-accent1">
@@ -104,7 +75,7 @@
         </label>
         <label>
             Password
-            <input bind:value={user.password} type="password" class="border p-2 w-full" />
+            <input bind:value={user.password} name="password" type="password" class="border p-2 w-full" />
             <div class="h-10 py-2">
                 {#if passwordError}
                     <p class="text-accent1">
@@ -125,15 +96,16 @@
             >
                 Mettre a jour
             </button>
-            {#if successMessage}
-                <p class="bg-green-600 text-white font-semibold p-2 rounded-xs">
-                    {successMessage}
-                </p>
+
+            {#if $page.form?.error}
+            <p class="bg-red-700 text-white font-semibold p-2 rounded-xs">
+                {$page.form.error}
+            </p>
             {/if}
 
-            {#if errorMessage}
-                <p class="bg-red-700 text-white font-semibold p-2 rounded-xs">
-                    {errorMessage}
+            {#if $page.form?.success}
+                <p class="bg-green-600 text-white font-semibold p-2 rounded-xs">
+                    Utilisateur créé avec succès !
                 </p>
             {/if}
         </div>
