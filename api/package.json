@@ -5,8 +5,12 @@
   "scripts": {
     "test": "jest",
     "dev": "ts-node-dev --respawn src/index.ts",
-    "seed": "ts-node src/seeds/runSeed.ts",
-    "build": "tsc"
+    "build": "tsc",
+
+    "migrate": "sequelize-cli db:migrate",
+    "seed:prod": "sequelize-cli db:seed:all",
+
+    "seed": "ts-node src/seeds/runSeed.ts"
   },
   "keywords": [],
   "author": "",
