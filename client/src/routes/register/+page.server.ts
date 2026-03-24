@@ -1,8 +1,14 @@
 import { fail } from "@sveltejs/kit";
 import type { Actions } from "./$types";
+// @ts-expect-error can't find module
+import { API_URL } from '$env/static/private';
 
 export const actions: Actions = {
-    default: async ({ request, fetch }) => {
+    default: async (event) => {
+        const { request, fetch }= event;
+
+        if (!API_URL) throw new Error("API_URL non définie")
+
         const data = await request.formData();
 
         const username = data.get("username")?.toString();
@@ -24,7 +30,7 @@ export const actions: Actions = {
             });
         }
 
-        const res = await fetch(`${import.meta.env.VITE_API_URL}/auth/register`, {
+        const res = await fetch(`${API_URL}/auth/register`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({

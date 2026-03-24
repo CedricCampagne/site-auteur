@@ -10,6 +10,7 @@
 
         const formData = new FormData();
         formData.append("EMAIL", email);
+        // honeypot anti-bot les bots le remplissent pas les humains
         formData.append("email_address_check", "");
         formData.append("locale", "fr");
         formData.append("html_type", "simple");

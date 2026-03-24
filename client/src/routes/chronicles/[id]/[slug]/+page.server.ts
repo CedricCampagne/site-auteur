@@ -1,11 +1,16 @@
 import type { Chronicle, Comment } from "$lib/types";
 import { redirect } from "@sveltejs/kit";
-import type { Actions } from "./$types";
+import type { Actions, PageServerLoad } from "./$types";
 import { fail } from "@sveltejs/kit";
+// @ts-expect-error can't find module
+import { API_URL } from '$env/static/private';
 
-export async function load({params, fetch}) : Promise<{ chronicle: Chronicle, comments:Comment[]}> {
+export const load: PageServerLoad = async({params, fetch}) : Promise<{ chronicle: Chronicle, comments:Comment[]}> => {
+   
+    if (!API_URL) throw new Error("API_URL non définie")
+
     // fetch pur récuperer la chronique
-    const resChronicle  = await fetch(`${import.meta.env.VITE_API_URL}/chronicles/${params.id}/${params.slug}`);
+    const resChronicle  = await fetch(`${API_URL}/chronicles/${params.id}/${params.slug}`);
 
     // 3. Si backend dit 401
     if (resChronicle.status === 401) {
@@ -14,11 +19,10 @@ export async function load({params, fetch}) : Promise<{ chronicle: Chronicle, co
     if (!resChronicle.ok) {
         throw redirect(303, "/login"); }
     
-    // const chronicle = await resChronicle.json();
     const jsonChronicle = await resChronicle.json();
     const chronicle: Chronicle = jsonChronicle.data!;
     // fetch pour récuperer les commentaires (avec le user du commentaire) associés a la chronique
-    const resComments = await fetch(`${import.meta.env.VITE_API_URL}/chronicles/${params.id}/${params.slug}/comments`);
+    const resComments = await fetch(`${API_URL}/chronicles/${params.id}/${params.slug}/comments`);
     
     if (resComments.status === 401) {
         throw redirect(303, "/login");
@@ -36,7 +40,11 @@ export async function load({params, fetch}) : Promise<{ chronicle: Chronicle, co
 // Validation formulaire
 
 export const actions: Actions= {
-    default: async ({request, fetch, params})=> {
+    default: async (event)=> {
+        const {request, fetch, params} = event;
+
+        if (!API_URL) throw new Error("API_URL non définie");
+
         const data = await request.formData();
         const comment = data.get("comment")?.toString();
 
@@ -64,7 +72,7 @@ export const actions: Actions= {
             });
         }
     
-        const res = await fetch(`${import.meta.env.VITE_API_URL}/comments`, {
+        const res = await fetch(`${API_URL}/comments`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             credentials: "include",         // pour recevoir les cookies

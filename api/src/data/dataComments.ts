@@ -1,7 +1,5 @@
 export const commentsData = [
-  // -----------------------------
   // 1) Dans l’Ombre des Mots
-  // -----------------------------
   {
     chronicle_id: 1,
     user_id: 2,
@@ -27,10 +25,7 @@ export const commentsData = [
     user_id: 2,
     content: "Je reviendrai relire cette chronique, elle résonne longtemps.",
   },
-
-  // -----------------------------
   // 2) Le Silence des Pages
-  // -----------------------------
   {
     chronicle_id: 2,
     user_id: 3,
@@ -56,10 +51,7 @@ export const commentsData = [
     user_id: 3,
     content: "Tu arrives à mettre des mots sur des sensations que je n’arrivais pas à décrire.",
   },
-
-  // -----------------------------
   // 3) Les Échos du Passé
-  // -----------------------------
   {
     chronicle_id: 3,
     user_id: 4,
@@ -85,10 +77,7 @@ export const commentsData = [
     user_id: 4,
     content: "Cette chronique m’a donné envie d’écrire mes propres souvenirs.",
   },
-
-  // -----------------------------
   // 4) Sous la Lumière des Rêves
-  // -----------------------------
   {
     chronicle_id: 4,
     user_id: 2,

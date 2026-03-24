@@ -1,14 +1,12 @@
 <script lang="ts">
-    import { goto } from '$app/navigation';
+   import { goto } from '$app/navigation';
+    import { page } from '$app/stores';
+    import { browser } from "$app/environment";
     import type { Comment } from '$lib/types.js';
     export let data;
 
     // Clone pour éviter de modifier data directement
     const comment: Comment = structuredClone(data.comment);
-
-    // Messages
-    let successMessage = "";
-    let errorMessage = "";
 
     // Validation simple
     $: contentError = comment.content.trim().length < 5
@@ -17,32 +15,8 @@
 
     $: isFormValid = !contentError;
 
-    async function handleSubmit() {
-        successMessage = "";
-        errorMessage = "";
-
-        try {
-            const res = await fetch(
-                `${import.meta.env.VITE_API_URL}/admin/comments/${comment.id_comment}`,
-                {
-                    method: "PUT",
-                    headers: { "Content-Type": "application/json" },
-                    credentials: "include",
-                    body: JSON.stringify({
-                        content: comment.content,
-                        is_visible: comment.is_visible
-                    })
-                }
-            );
-
-            if (res.ok) {
-                goto('/admin/comments?updated=1');
-            } else {
-                errorMessage = "Erreur lors de la mise à jour";
-            }
-        } catch (err) {
-            errorMessage = "Impossible de contacter le serveur";
-        }
+    $: if (browser && $page.form?.success) {
+        setTimeout(() => goto('/admin/comments'), 1500);
     }
 </script>
 
@@ -51,13 +25,26 @@
         Édition du commentaire
     </h2>
 
-    <form on:submit|preventDefault={handleSubmit} class="flex flex-col gap-4">
+    <form method="POST" class="flex flex-col gap-4">
+        <div class="w-full sm:w-2/4 text-center mx-auto">
+            {#if $page.form?.error}
+                <p class="bg-red-700 text-white font-semibold p-2 rounded-xs">
+                    {$page.form.error}
+                </p>
+            {/if}
+            {#if $page.form?.success}   
+                <p class="bg-green-600 text-white font-semibold p-2 rounded-xs">
+                    Utilisateur mis a jour avec succès !
+                </p>
+            {/if}
+        </div>
         <!-- Auteur -->
         <label>
             Auteur
             <input
                 type="text"
                 value={comment.user.username}
+                name="username"
                 disabled
                 class="border p-2 w-full bg-gray-100"
             />
@@ -68,6 +55,7 @@
             <input
                 type="text"
                 value={comment.chronicle.title}
+                name="chronicle.title"
                 disabled
                 class="border p-2 w-full bg-gray-100"
             />
@@ -77,6 +65,7 @@
             Commentaire
             <textarea
                 bind:value={comment.content}
+                name="content"
                 rows="4"
                 class="border p-2 w-full"
             ></textarea>
@@ -90,7 +79,7 @@
         </label>
         <!-- Visibilité -->
         <label class="flex items-center gap-2">
-            <input bind:checked={comment.is_visible} type="checkbox" />
+            <input bind:checked={comment.is_visible} name="is_visible" type="checkbox" />
             Commentaire visible
         </label>
         <!-- Bouton + messages -->
@@ -102,16 +91,6 @@
             >
                 Mettre à jour
             </button>
-            {#if successMessage}
-                <p class="bg-green-600 text-white font-semibold p-2 rounded-xs">
-                    {successMessage}
-                </p>
-            {/if}
-            {#if errorMessage}
-                <p class="bg-red-700 text-white font-semibold p-2 rounded-xs">
-                    {errorMessage}
-                </p>
-            {/if}
         </div>
     </form>
 </section>

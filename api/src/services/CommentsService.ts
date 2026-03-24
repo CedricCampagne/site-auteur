@@ -20,14 +20,16 @@ export class CommentService{
             include: [
                 {
                     model: User,
-                    attributes : ["id_user", "username"]
+                    attributes : ["id_user", "username"],
+                    where: { is_active: true }
                 },
                 {
                     model: Chronicle,
                     attributes: ["id_chronicle", "title"]
                 }
             ],
-            order: [["created_at", "DESC"]]
+            order: [["created_at", "DESC"]],
+            subQuery: false
         })
         return comments.map(comment => ({
             id_comment: comment.id_comment,

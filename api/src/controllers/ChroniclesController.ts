@@ -16,7 +16,7 @@ export class ChroniclesController {
 
             // Passe l'info au service
             const chronicles = await ChronicleService.getAllChronicles(isAdmin);
-
+            
             return sendResponse(res, 200, "success", "Liste des chroniques récupérée", chronicles);
         } catch (error) {
             next(error);

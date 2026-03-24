@@ -6,7 +6,7 @@ export class HttpError extends Error {
         this.statusCode = statusCode;
 
         // L’objet this (l’instance de HttpError) doit avoir HttpError.prototype comme prototype.”
-        // sur que err instanceof HttpError tjr → true
+        // pour etre sur que err instanceof HttpError tjr → true
         Object.setPrototypeOf(this, HttpError.prototype);
     }
 }

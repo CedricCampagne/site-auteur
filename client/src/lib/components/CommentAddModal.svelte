@@ -66,7 +66,6 @@
             on:submit={handleSubmit}
             use:enhance={async ({ result }: any) => {
                 if (result.type === "success") {
-                    // on prévient la page qu’un commentaire a été créé
                     dispatch("created", { comment: result.data.comment });
                     close();
                 }

@@ -1,38 +1,11 @@
 import { fail } from "@sveltejs/kit";
 import type { Actions } from "./$types";
-import type { PageServerLoad } from './$types';
-import { redirect } from '@sveltejs/kit';
 // @ts-expect-error can't find module
 import { API_URL } from '$env/static/private';
 
-// PageServerLoad type auto de svelteKit pour type load
-export const load: PageServerLoad = async ({ params, fetch }) => {
-
-    if (!API_URL) throw new Error("API_URL non définie");
-
-    const id = params.id;
-
-    const res = await fetch(
-        `${API_URL}/admin/chronicles/${id}`,
-        {
-            credentials: "include",
-        }
-    );
-
-    if (!res.ok) {
-        throw redirect(302, '/admin/chronicles');
-    }
-
-    const json = await res.json();
-    const chronicle = json.data!;
-
-    return { chronicle };
-};
-
 export const actions: Actions = {
-    default: async( event ) =>{
-        const { request, fetch, params } = event;
-        const id = params.id;
+    default: async( event )=> {
+        const { request, fetch } = event;
 
         const data = await request.formData();
 
@@ -43,7 +16,7 @@ export const actions: Actions = {
         const cover_url = data.get("cover_url")?.toString();
         const published_at = data.get("published_at")?.toString();
         const is_active_raw = data.get("is_active");
-        
+
         if ( !title || !quote || !summary || !content || !cover_url || !published_at ) {
             return fail(400, {
                 error: "Tous les champs sont obligatoires",
@@ -54,7 +27,7 @@ export const actions: Actions = {
          // Val(idation stricte côté server (comme Joi)
         if( !title || title.length <2 || title.length >255) {
             return fail(400, {
-                error: "Le nom doit contenir entre 2 et 255 caractères",
+                error: "Le nom doit contenir entre 2 et 50 caractères",
                 values: { title, quote, summary, content, cover_url,published_at}
             });
         }
@@ -106,23 +79,21 @@ export const actions: Actions = {
         const is_active = is_active_raw === "on" ? true : false;
 
         try {
-            const res = await fetch(`${API_URL}/admin/chronicles/${id}`,{
-                method: "PUT",
+            const res = await fetch(`${API_URL}/admin/chronicles`, {
+                method: "POST",
                 headers: {"Content-Type": "application/json"},
-                credentials: "include",
-                body: JSON.stringify({ title, quote, summary, content, cover_url,published_at, is_active })
-            });
+                credentials:"include",
+                body: JSON.stringify({title, quote, summary, content, cover_url, published_at, is_active})
+            })
 
             if(!res.ok) {
-                    return fail(res.status, {error: "Impossible de mettre a jour la chronique"});
-                }
+                return fail(res.status, {error: "Impossible de creer la chronique"});
+            }
 
-            return { success : true};    
+            return { success : true};
         } catch (error) {
             console.log(error);
             return fail(500, { error: "Erreur serveur, veuillez réessayer plus tard" });
         }
-        
     }
 };
- 

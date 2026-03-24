@@ -39,7 +39,6 @@ export class BooksController {
         next: NextFunction
     ) {
         try {
-            // const slug = req.params.slug;
             const { slug } = req.params;
             const book = await BookService.getBySlug(slug);
             return sendResponse(res, 200, "success", "Livre trouvé", book);
