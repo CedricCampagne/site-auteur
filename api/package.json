@@ -6,15 +6,8 @@
     "test": "jest",
     "dev": "ts-node-dev --respawn src/index.ts",
     "build": "tsc",
-<<<<<<< HEAD
-
     "migrate": "sequelize-cli db:migrate",
     "seed:prod": "sequelize-cli db:seed:all",
-
-=======
-    "migrate": "sequelize-cli db:migrate",
-    "seed:prod": "sequelize-cli db:seed:all",
->>>>>>> prep/db-prod
     "seed": "ts-node src/seeds/runSeed.ts"
   },
   "keywords": [],
