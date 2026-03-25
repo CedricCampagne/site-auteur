@@ -17,6 +17,10 @@ import { sequelize } from "./config/database";
 import { sanitizeBody } from "./middleware/sanitize";
 import { errorHandler } from "./middleware/errorHandler";
 
+
+import { User } from "./models/User";
+import { Book } from "./models/Book";
+import { Chronicle } from "./models/Chronicle";
 const app = express();
 
 app.use(cors({
@@ -44,6 +48,19 @@ app.use(errorHandler);
     console.error("DB connection error:", err);
   }
 })();
+
+// test staging 
+app.get("/debug", async (req, res) => {
+  try {
+    const users = await User.findAll();
+    const books = await Book.findAll();
+    const chronicles = await Chronicle.findAll();
+    res.json({ users, books, chronicles });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Erreur serveur" });
+  }
+});
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`API running on port ${PORT}`));
