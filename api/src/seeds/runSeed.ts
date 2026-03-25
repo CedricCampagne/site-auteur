@@ -16,8 +16,9 @@ async function runSeed() {
         await sequelize.authenticate();
         console.log('Connection DB ok');
 
-        await sequelize.sync({ force: true});
-        console.log('Tables synchronisées');
+        // En prod on ne fais jamais sync
+        // await sequelize.sync({ force: true});
+        // console.log('Tables synchronisées');
 
         await seedBooks();
         await seedChronicles();
