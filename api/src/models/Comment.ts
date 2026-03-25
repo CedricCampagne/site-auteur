@@ -75,7 +75,10 @@ export class Comment extends Model<CommentAttributes, CommentCreationAttributes>
 
     @ForeignKey(() => User)
     @Index
-    @Column(DataType.INTEGER)
+    @Column({
+        type:DataType.INTEGER,
+        allowNull: false
+    })
     user_id!: number;
 
     @BelongsTo(()=> User)

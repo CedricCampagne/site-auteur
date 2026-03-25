@@ -1,5 +1,9 @@
 import "reflect-metadata";
-import dotenv from "dotenv"; dotenv.config();
+
+import dotenv from "dotenv";
+dotenv.config({
+  path: `.env.${process.env.NODE_ENV || "development"}`
+});
 
 import { sequelize } from "../config/database";
 import { seedBooks } from "./seedBooks";
@@ -7,7 +11,6 @@ import { seedChronicles } from "./seedChronicles";
 import { seedRoles } from "./seedRoles";
 import { seedUsers } from "./seedUsers";
 import { seedUserRole } from "./seedUserRole";
-import { seedComments } from "./seedComments";
 
 async function runSeed() {
     console.log("=== Running Seed ===");

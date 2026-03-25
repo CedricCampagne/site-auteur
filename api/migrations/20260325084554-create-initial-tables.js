@@ -18,8 +18,8 @@ module.exports = {
         await queryInterface.createTable('role', {
             id_role: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true, allowNull: false },
             name: { type: Sequelize.STRING(50), allowNull: false, unique: true },
-            createdAt: { type: Sequelize.DATE, allowNull: false },
-            updatedAt: { type: Sequelize.DATE, allowNull: false },
+            created_at: { type: Sequelize.DATE, allowNull: false },
+            updated_at: { type: Sequelize.DATE, allowNull: false },
         });
 
         // UserRoles
@@ -36,8 +36,8 @@ module.exports = {
                 references: { model: 'role', key: 'id_role' },
                 onDelete: 'CASCADE',
             },
-            createdAt: { type: Sequelize.DATE, allowNull: false },
-            updatedAt: { type: Sequelize.DATE, allowNull: false },
+            created_at: { type: Sequelize.DATE, allowNull: false },
+            updated_at: { type: Sequelize.DATE, allowNull: false },
         });
 
         // Books
@@ -53,8 +53,8 @@ module.exports = {
             genre: { type: Sequelize.TEXT, allowNull: false },
             cover_url: { type: Sequelize.STRING, allowNull: false },
             is_active: { type: Sequelize.BOOLEAN, allowNull: false, defaultValue: true },
-            createdAt: { type: Sequelize.DATE, allowNull: false },
-            updatedAt: { type: Sequelize.DATE, allowNull: false },
+            created_at: { type: Sequelize.DATE, allowNull: false },
+            updated_at: { type: Sequelize.DATE, allowNull: false },
         });
 
         // Chronicles
@@ -68,9 +68,8 @@ module.exports = {
             cover_url: { type: Sequelize.STRING, allowNull: false },
             published_at: { type: Sequelize.DATE, allowNull: false },
             is_active: { type: Sequelize.BOOLEAN, allowNull: false, defaultValue: true },
-            bookId: { type: Sequelize.INTEGER, allowNull: false, references: { model: 'book', key: 'id_book' }, onDelete: 'CASCADE' },
-            createdAt: { type: Sequelize.DATE, allowNull: false },
-            updatedAt: { type: Sequelize.DATE, allowNull: false },
+            created_at: { type: Sequelize.DATE, allowNull: false },
+            updated_at: { type: Sequelize.DATE, allowNull: false },
         });
 
         // Comments
