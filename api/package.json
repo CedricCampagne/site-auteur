@@ -6,10 +6,15 @@
     "test": "jest",
     "dev": "ts-node-dev --respawn src/index.ts",
     "build": "tsc",
+<<<<<<< HEAD
 
     "migrate": "sequelize-cli db:migrate",
     "seed:prod": "sequelize-cli db:seed:all",
 
+=======
+    "migrate": "sequelize-cli db:migrate",
+    "seed:prod": "sequelize-cli db:seed:all",
+>>>>>>> prep/db-prod
     "seed": "ts-node src/seeds/runSeed.ts"
   },
   "keywords": [],
@@ -44,6 +49,7 @@
     "reflect-metadata": "^0.2.2",
     "sanitize-html": "^2.17.0",
     "sequelize": "^6.37.7",
+    "sequelize-cli": "^6.6.5",
     "sequelize-typescript": "^2.1.6"
   }
 }
