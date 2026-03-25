@@ -18,7 +18,6 @@ export const sequelize = isProd
           require: true,
           rejectUnauthorized: false,
         },
-        family: 4
       },
     })
   : new Sequelize({
