@@ -5,12 +5,23 @@ import { fail } from "@sveltejs/kit";
 // @ts-expect-error can't find module
 import { API_URL } from '$env/static/private';
 
-export const load: PageServerLoad = async({params, fetch}) : Promise<{ chronicle: Chronicle, comments:Comment[]}> => {
+export const load: PageServerLoad = async({params, fetch, cookies}) : Promise<{ chronicle: Chronicle, comments:Comment[]}> => {
    
     if (!API_URL) throw new Error("API_URL non définie")
+    
+    const token = cookies.get("token");
+    if (!token) {
+        throw redirect(303, "/login");
+    }
+
+    const headers = {
+        "Authorization": `Bearer ${token}`
+    };
 
     // fetch pur récuperer la chronique
-    const resChronicle  = await fetch(`${API_URL}/chronicles/${params.id}/${params.slug}`);
+    const resChronicle  = await fetch(`${API_URL}/chronicles/${params.id}/${params.slug}`, {
+        headers
+    });
 
     // 3. Si backend dit 401
     if (resChronicle.status === 401) {
@@ -21,8 +32,12 @@ export const load: PageServerLoad = async({params, fetch}) : Promise<{ chronicle
     
     const jsonChronicle = await resChronicle.json();
     const chronicle: Chronicle = jsonChronicle.data!;
+
+
     // fetch pour récuperer les commentaires (avec le user du commentaire) associés a la chronique
-    const resComments = await fetch(`${API_URL}/chronicles/${params.id}/${params.slug}/comments`);
+    const resComments = await fetch(`${API_URL}/chronicles/${params.id}/${params.slug}/comments`, {
+        headers
+    });
     
     if (resComments.status === 401) {
         throw redirect(303, "/login");
@@ -41,7 +56,7 @@ export const load: PageServerLoad = async({params, fetch}) : Promise<{ chronicle
 
 export const actions: Actions= {
     default: async (event)=> {
-        const {request, fetch, params} = event;
+        const {request, fetch, params, cookies} = event;
 
         if (!API_URL) throw new Error("API_URL non définie");
 
@@ -72,10 +87,15 @@ export const actions: Actions= {
             });
         }
     
+        const token = cookies.get("token");
+        if (!token) throw redirect(303, "/login");
+
         const res = await fetch(`${API_URL}/comments`, {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
-            credentials: "include",         // pour recevoir les cookies
+            headers: { 
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            },
             body: JSON.stringify({
                 content: comment,
                 chronicle_id: chronicle_id
