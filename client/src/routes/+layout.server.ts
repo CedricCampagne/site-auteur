@@ -12,7 +12,14 @@ export const load: PageServerLoad = async (event: LoadEvent) => {
     const token = cookies.get("token");
     if (!token) return { user: null };
 
-    const res = await fetch(`${API_URL}/auth/me`,{ credentials: "include" });
+    // 🔹 Changement : ajout du token dans le header Authorization
+    const res = await fetch(`${API_URL}/auth/me`, {
+        method: "GET",
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    });
+    
     if (!res.ok) return { user: null };
 
     const json = await res.json();
