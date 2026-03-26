@@ -34,6 +34,16 @@ export async function handle({ event, resolve }) {
             });
             throw redirect(303, "/login");
         }
+
+        const payload = decodeJwt(token);
+
+    if (!payload) {
+        event.cookies.set("flash", "Connectez-vous pour accéder à cette page.", {
+            path: "/",
+            maxAge: 5
+        });
+        throw redirect(303, "/login");
+    }
     }
 
     // Protection de toutes les routes admin
@@ -46,6 +56,10 @@ export async function handle({ event, resolve }) {
         const payload = decodeJwt(token);
 
         if (!payload || !payload.roles?.includes("admin")) {
+            event.cookies.set("flash", "Vous n’avez pas les droits pour accéder à cette page.", {
+                path: "/",
+                maxAge: 5
+            });
             throw redirect(303, "/");
         }
     }
