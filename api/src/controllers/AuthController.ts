@@ -22,7 +22,8 @@ export class AuthController {
                     httpOnly: true,
                     secure: isProd,
                     sameSite: isProd ? "none" : "lax",
-                    maxAge: 1*60*60*1000
+                    maxAge: 1*60*60*1000,
+                    path: "/"
                 });
             
             return sendResponse(res, 201, "success","Utilisateur créé avec succès" , result.user);
@@ -41,12 +42,14 @@ export class AuthController {
             const result = await AuthServices.loginUser(req.body);
 
             const isProd = process.env.NODE_ENV === "production";
+            
             res
                 .cookie("token", result.token, {
                     httpOnly: true,
                     secure: isProd,
                     sameSite: isProd ? "none" : "lax",
-                    maxAge: 1*60*60*1000 // 1h <=> 3 600 000ms
+                    maxAge: 1*60*60*1000,
+                    path: "/"
                 })
             
             sendResponse(res, 200,"success", "Connexion réussie", result.user);
