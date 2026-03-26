@@ -28,6 +28,9 @@ const app = express();
 
 const isProd = process.env.NODE_ENV === "production";
 
+console.log("NODE_ENV:", process.env.NODE_ENV);
+console.log("isProd:", process.env.NODE_ENV === "production");
+
 app.use(cors({
   origin: isProd
     ? ['https://site-auteur-ashen.vercel.app']
