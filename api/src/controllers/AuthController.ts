@@ -15,11 +15,13 @@ export class AuthController {
         try {
             const  result = await AuthServices.registerUser(req.body);
 
+            const isProd = process.env.NODE_ENV === "production";
+
             res
                 .cookie("token", result.token, {
                     httpOnly: true,
-                    secure: false,
-                    sameSite: "lax",
+                    secure: isProd,
+                    sameSite: isProd ? "none" : "lax",
                     maxAge: 1*60*60*1000
                 });
             
@@ -38,11 +40,12 @@ export class AuthController {
         try {
             const result = await AuthServices.loginUser(req.body);
 
+            const isProd = process.env.NODE_ENV === "production";
             res
                 .cookie("token", result.token, {
                     httpOnly: true,
-                    secure: false,
-                    sameSite: "lax",
+                    secure: isProd,
+                    sameSite: isProd ? "none" : "lax",
                     maxAge: 1*60*60*1000 // 1h <=> 3 600 000ms
                 })
             
