@@ -43,15 +43,15 @@ export class AuthController {
         try {
             const result = await AuthServices.loginUser(req.body);
 
-            //const isProd = process.env.NODE_ENV === "production";
+            const isProd = process.env.NODE_ENV === "production";
             
             res
                 .cookie("token", result.token, {
                     httpOnly: true,
-                    secure: true,
-                    sameSite: "none",
-                    // secure: isProd,
-                    // sameSite: isProd ? "none" : "lax",
+                    // secure: true,
+                    // sameSite: "none",
+                    secure: isProd,
+                    sameSite: isProd ? "none" : "lax",
                     maxAge: 1*60*60*1000,
                     path: "/"
                 })
@@ -92,8 +92,17 @@ export class AuthController {
         next: NextFunction
     ){
         try {
-            res.clearCookie("token");
+            const isProd = process.env.NODE_ENV === "production";
+
+            res.clearCookie("token", {
+                httpOnly: true,
+                secure: isProd,
+                sameSite: isProd ? "none" : "lax",
+                path: "/"
+            });
+            
             return sendResponse(res, 200, "success", "Déconnexion réussie");
+
         } catch (error) {
             next(error);
         }

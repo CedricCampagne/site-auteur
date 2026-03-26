@@ -39,14 +39,16 @@ export const actions: Actions = {
         }
 
         // Récupérer le cookie envoyé par ton backend
+        const isProd = process.env.NODE_ENV === "production";
+
         const setCookie = res.headers.get("set-cookie");
         if (setCookie) { const token = setCookie.split(";")[0].split("=")[1];
             // Reposer le cookie côté navigateur
             cookies.set("token", token, {
                 path: "/",
                 httpOnly: true,
-                sameSite: "lax",
-                secure: false, // en dev
+                sameSite: isProd ? "none" : "lax",
+                secure: isProd,
                 maxAge: 3600
             });
         }
