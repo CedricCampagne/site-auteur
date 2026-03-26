@@ -20,7 +20,8 @@ export const load: PageServerLoad = async({params, fetch, cookies}) : Promise<{ 
 
     // fetch pur récuperer la chronique
     const resChronicle  = await fetch(`${API_URL}/chronicles/${params.id}/${params.slug}`, {
-        headers
+        headers,
+        credentials: "include"
     });
 
     // 3. Si backend dit 401
@@ -36,7 +37,8 @@ export const load: PageServerLoad = async({params, fetch, cookies}) : Promise<{ 
 
     // fetch pour récuperer les commentaires (avec le user du commentaire) associés a la chronique
     const resComments = await fetch(`${API_URL}/chronicles/${params.id}/${params.slug}/comments`, {
-        headers
+        headers,
+        credentials: "include"
     });
     
     if (resComments.status === 401) {
@@ -96,6 +98,7 @@ export const actions: Actions= {
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ${token}`
             },
+            credentials: "include",
             body: JSON.stringify({
                 content: comment,
                 chronicle_id: chronicle_id
