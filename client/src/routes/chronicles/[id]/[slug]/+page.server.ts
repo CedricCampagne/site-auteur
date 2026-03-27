@@ -5,14 +5,19 @@ import { fail } from "@sveltejs/kit";
 // @ts-expect-error can't find module
 import { API_URL } from '$env/static/private';
 
-export const load: PageServerLoad = async({params, fetch, cookies}) : Promise<{ chronicle: Chronicle, comments:Comment[]}> => {
+export const load: PageServerLoad = async({params, fetch, locals, cookies}) : Promise<{ chronicle: Chronicle, comments:Comment[]}> => {
    
     if (!API_URL) throw new Error("API_URL non définie")
     
-    const token = cookies.get("token");
-    if (!token) {
+    if (!locals.user) {
+        cookies.set("flash", "Vous devez être connecté pour accéder à cette page", {
+            path: "/",
+            maxAge: 15
+        });
         throw redirect(303, "/login");
     }
+
+    const token = locals.user.token;
 
     const headers = {
         "Authorization": `Bearer ${token}`
@@ -58,7 +63,7 @@ export const load: PageServerLoad = async({params, fetch, cookies}) : Promise<{ 
 
 export const actions: Actions= {
     default: async (event)=> {
-        const {request, fetch, params, cookies} = event;
+        const {request, fetch, params, locals, cookies} = event;
 
         if (!API_URL) throw new Error("API_URL non définie");
 
@@ -88,9 +93,16 @@ export const actions: Actions= {
                 values: { comment }
             });
         }
-    
-        const token = cookies.get("token");
-        if (!token) throw redirect(303, "/login");
+        
+        if (!locals.user) {
+            cookies.set("flash", "Vous devez être connecté pour accéder à cette page", {
+                path: "/",
+                maxAge: 15
+            });
+            throw redirect(303, "/login");
+        }
+
+        const token = locals.user.token;
 
         const res = await fetch(`${API_URL}/comments`, {
             method: "POST",
