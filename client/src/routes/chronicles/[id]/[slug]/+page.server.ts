@@ -1,134 +1,124 @@
-import type { Chronicle, Comment } from "$lib/types";
-import { redirect } from "@sveltejs/kit";
+// +page.server.ts
+import type { Chronicle, Comment, User } from "$lib/types";
+import { redirect, fail } from "@sveltejs/kit";
 import type { Actions, PageServerLoad } from "./$types";
-import { fail } from "@sveltejs/kit";
 // @ts-expect-error can't find module
 import { API_URL } from '$env/static/private';
 
-export const load: PageServerLoad = async({params, fetch, locals, cookies}) : Promise<{ chronicle: Chronicle, comments:Comment[]}> => {
-   
-    if (!API_URL) throw new Error("API_URL non définie")
-    
-    if (!locals.user) {
-        cookies.set("flash", "Vous devez être connecté pour accéder à cette page", {
-            path: "/",
-            maxAge: 15
-        });
+export const load: PageServerLoad = async ({ params, fetch, cookies, locals }) => {
+    if (!API_URL) throw new Error("API_URL non définie");
+
+    // 🔹 Récupérer le token soit depuis locals (hook SSR), soit fallback cookie
+    let token: string | undefined = locals.user?.token || cookies.get("token");
+
+    // 🔹 Vérification token / récupération user côté serveur
+    if (!locals.user && token) {
+        try {
+            const resUser = await fetch(`${API_URL}/auth/me`, {
+                headers: { Authorization: `Bearer ${token}` }
+            });
+
+            if (!resUser.ok) {
+                cookies.set("flash", "Token invalide ou expiré", { path: "/", maxAge: 15 });
+                throw redirect(303, "/login");
+            }
+
+            locals.user = (await resUser.json()).data as User & { token?: string };
+            locals.user.token = token; // 🔹 on garde le token dans locals.user pour fetch suivants
+        } catch (err) {
+            console.error("Erreur fetch /auth/me:", err);
+            cookies.set("flash", "Erreur lors de l'authentification", { path: "/", maxAge: 15 });
+            throw redirect(303, "/login");
+        }
+    }
+
+    // 🔹 Si pas de token ou utilisateur non authentifié
+    if (!locals.user || !token) {
+        cookies.set("flash", "Vous devez être connecté pour accéder à cette page", { path: "/", maxAge: 15 });
         throw redirect(303, "/login");
     }
 
-    const token = locals.user.token;
+    token = locals.user.token;
 
     const headers = {
-        "Authorization": `Bearer ${token}`
+        Authorization: `Bearer ${token}`
     };
 
-    // fetch pur récuperer la chronique
-    const resChronicle  = await fetch(`${API_URL}/chronicles/${params.id}/${params.slug}`, {
+    // 🔹 Fetch chronique
+    const resChronicle = await fetch(`${API_URL}/chronicles/${params.id}/${params.slug}`, {
         headers,
         credentials: "include"
     });
 
-    // 3. Si backend dit 401
     if (resChronicle.status === 401) {
+        cookies.set("flash", "Vous devez être connecté pour accéder à cette page", { path: "/", maxAge: 15 });
         throw redirect(303, "/login");
     }
-    if (!resChronicle.ok) {
-        throw redirect(303, "/login"); }
-    
+    if (!resChronicle.ok) throw redirect(303, "/login");
+
     const jsonChronicle = await resChronicle.json();
     const chronicle: Chronicle = jsonChronicle.data!;
 
-
-    // fetch pour récuperer les commentaires (avec le user du commentaire) associés a la chronique
+    // 🔹 Fetch commentaires
     const resComments = await fetch(`${API_URL}/chronicles/${params.id}/${params.slug}/comments`, {
         headers,
         credentials: "include"
     });
-    
-    if (resComments.status === 401) {
-        throw redirect(303, "/login");
-    }
-    if (!resComments.ok) {
-        throw redirect(303, "/login"); }
-    
-    // const comments = await resComments.json();
+
+    if (resComments.status === 401) throw redirect(303, "/login");
+    if (!resComments.ok) throw redirect(303, "/login");
+
     const jsonComments = await resComments.json();
     const comments: Comment[] = jsonComments.data!;
-  
-    return { chronicle, comments };
-}
 
-// Validation formulaire
+    return { chronicle, comments, user: locals.user };
+};
 
-export const actions: Actions= {
-    default: async (event)=> {
-        const {request, fetch, params, locals, cookies} = event;
-
+// 🔹 Actions pour poster un commentaire
+export const actions: Actions = {
+    default: async ({ request, fetch, params, locals, cookies }) => {
         if (!API_URL) throw new Error("API_URL non définie");
 
-        const data = await request.formData();
-        const comment = data.get("comment")?.toString();
-
+        const comment = (await request.formData()).get("comment")?.toString();
         const chronicle_id = Number(params.id);
-      
-        // besoin de verifier si comment est vide ? le front le fait via handleSubmit ?
-       if (!comment) {
-            return fail(400, {
-                error: "Le commentaire ne peut pas etre vide",
-                values: { comment }
-            });
-        }
 
-        if (comment.length < 5) {
-            return fail(400, {
-                error: "Le commentaire doit contenir au moins de 5 caractères.",
-                values: { comment }
-            });
-        }
-
-        if (comment.length > 1000) {
-            return fail(400, {
-                error: "Le commentaire ne doit pas dépasser 1000 caractères.",
-                values: { comment }
-            });
-        }
-        
         if (!locals.user) {
-            cookies.set("flash", "Vous devez être connecté pour accéder à cette page", {
-                path: "/",
-                maxAge: 15
-            });
+            cookies.set("flash", "Vous devez être connecté pour poster un commentaire", { path: "/", maxAge: 15 });
             throw redirect(303, "/login");
         }
 
-        const token = locals.user.token;
+        if (!comment || comment.length < 5 || comment.length > 1000) {
+            let errorMessage = "";
 
+            if (!comment) {
+                errorMessage = "Le commentaire ne peut pas être vide.";
+            } else if (comment.length < 5) {
+                errorMessage = "Le commentaire doit contenir au moins 5 caractères.";
+            } else if (comment.length > 1000) {
+                errorMessage = "Le commentaire ne doit pas dépasser 1000 caractères.";
+            }
+
+            return fail(400, {
+                error: errorMessage,
+                values: { comment }
+            });
+        }
+
+        const token = locals.user.token;
         const res = await fetch(`${API_URL}/comments`, {
             method: "POST",
             headers: { 
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}`
+                Authorization: `Bearer ${token}`
             },
             credentials: "include",
-            body: JSON.stringify({
-                content: comment,
-                chronicle_id: chronicle_id
-            })
-        })
+            body: JSON.stringify({ content: comment, chronicle_id })
+        });
 
-        if (!res.ok) {
-            return fail(res.status, {
-                error: "Impossible de créer le commentaire."
-            });
-        }
+        if (!res.ok) return fail(res.status, { error: "Impossible de créer le commentaire." });
 
         const createdComment = await res.json();
 
-        return {
-            status: 200,
-            success: true,
-            comment: createdComment
-        };
+        return { status: 200, success: true, comment: createdComment };
     }
-}
+};
