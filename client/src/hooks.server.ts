@@ -19,6 +19,7 @@ export const handle: Handle = async({ event, resolve })=>{
                 const json = await res.json();
                 // 🔹 On stocke l'utilisateur dans locals pour toutes les pages
                 event.locals.user = json.data;
+                event.locals.token = token;
             }
         } catch (err) {
             console.error("Erreur dans hook auth:", err);
