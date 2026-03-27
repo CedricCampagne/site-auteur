@@ -40,8 +40,9 @@ export const actions: Actions = {
         }
 
         // Récupérer le cookie envoyé par ton backend
-        const isProd = process.env.NODE_ENV === "production";
-
+        // const isProd = process.env.NODE_ENV === "production";
+        const isProd = true;
+        
         const token = json.data.token;
 
         cookies.set("token", token, {

@@ -1,15 +1,15 @@
 import type { Handle } from '@sveltejs/kit';
 
-const API_URL = process.env.API_URL;
+
 
 export const handle: Handle = async({ event, resolve })=>{
     event.locals.user= null;
 
     const token = event.cookies.get("token");
-
+    const API_URL = import.meta.env.VITE_API_URL;
     if (token) {
         try {
-            const res = await fetch(`${API_URL}/auth/me`, {
+            const res = await event.fetch(`${API_URL}/auth/me`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
