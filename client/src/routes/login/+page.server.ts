@@ -1,3 +1,4 @@
+import { redirect } from "@sveltejs/kit";
 import { fail } from "@sveltejs/kit";
 import type { Actions } from "./$types";
 import type { PageServerLoad } from './$types';
@@ -41,18 +42,22 @@ export const actions: Actions = {
         // Récupérer le cookie envoyé par ton backend
         const isProd = process.env.NODE_ENV === "production";
 
-        const setCookie = res.headers.get("set-cookie");
-        if (setCookie) { const token = setCookie.split(";")[0].split("=")[1];
-            // Reposer le cookie côté navigateur
-            cookies.set("token", token, {
-                path: "/",
-                httpOnly: true,
-                sameSite: isProd ? "none" : "lax",
-                secure: isProd,
-                maxAge: 3600
-            });
-        }
-        return { success: "Connexion réalisée avec succès ! Redirection en cours..."}
+        const token = json.data.token;
+
+        cookies.set("token", token, {
+            httpOnly: true,
+            secure: isProd,
+            sameSite: isProd ? "none" : "lax",
+            path: "/",
+            maxAge: 3600
+        });
+
+        cookies.set("flash", "Connexion réussie !", {
+            path: "/",
+            maxAge: 5
+        });
+
+        throw redirect(303, "/");
     }
 }
 

@@ -5,6 +5,7 @@ import { verifyToken } from "../utils/jwt";
 import { sendResponse } from "../utils/sendResponse";
 import { RegisterParams } from "../dto/auth/RegisterParams.dto";
 import { LoginParams } from "../dto/auth/LoginParams.dto";
+import { log } from "node:console";
 
 export class AuthController {
     static async register(
@@ -17,18 +18,20 @@ export class AuthController {
 
             // const isProd = process.env.NODE_ENV === "production";
 
-            res
-                .cookie("token", result.token, {
-                    httpOnly: true,
-                    secure: true,
-                    sameSite: "none",
-                    // secure: isProd,
-                    // sameSite: isProd ? "none" : "lax",
-                    maxAge: 1*60*60*1000,
-                    path: "/"
-                });
+            // res
+            //     .cookie("token", result.token, {
+            //         httpOnly: true,
+            //         secure: isProd,
+            //         sameSite: isProd ? "none" : "lax",
+            //         maxAge: 1*60*60*1000,
+            //         path: "/",
+            //          ...(isProd ? { domain: "site-auteur-ashen.vercel.app" } : {})
+            //     });
             
-            return sendResponse(res, 201, "success","Utilisateur créé avec succès" , result.user);
+            return sendResponse(res, 201, "success","Utilisateur créé avec succès" , {
+                user: result.user,
+                token: result.token
+            });
 
         } catch (error: any) {
             next(error);
@@ -45,18 +48,19 @@ export class AuthController {
 
             const isProd = process.env.NODE_ENV === "production";
             
-            res
-                .cookie("token", result.token, {
-                    httpOnly: true,
-                    // secure: true,
-                    // sameSite: "none",
-                    secure: isProd,
-                    sameSite: isProd ? "none" : "lax",
-                    maxAge: 1*60*60*1000,
-                    path: "/"
-                })
-            
-            sendResponse(res, 200,"success", "Connexion réussie", result.user);
+            // res
+            //     .cookie("token", result.token, {
+            //         httpOnly: true,
+            //         secure: isProd,
+            //         sameSite: isProd ? "none" : "lax",
+            //         maxAge: 1*60*60*1000,
+            //         path: "/",
+            //         ...(isProd ? { domain: "site-auteur-ashen.vercel.app" } : {})
+            //     })
+            sendResponse(res, 200,"success", "Connexion réussie", {
+                user: result.user,
+                token: result.token
+            });
         } catch (error: any) {
             next(error);
         }
@@ -94,12 +98,12 @@ export class AuthController {
         try {
             const isProd = process.env.NODE_ENV === "production";
 
-            res.clearCookie("token", {
-                httpOnly: true,
-                secure: isProd,
-                sameSite: isProd ? "none" : "lax",
-                path: "/"
-            });
+            // res.clearCookie("token", {
+            //     httpOnly: true,
+            //     secure: isProd,
+            //     sameSite: isProd ? "none" : "lax",
+            //     path: "/"
+            // });
             
             return sendResponse(res, 200, "success", "Déconnexion réussie");
 

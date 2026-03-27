@@ -1,13 +1,30 @@
+import { redirect } from "@sveltejs/kit";
 import { fail } from "@sveltejs/kit";
 import type { Actions } from "./$types";
 import type { PageServerLoad } from './$types';
 // @ts-expect-error can't find module
 import { API_URL } from '$env/static/private';
 
-export const load : PageServerLoad = async ({fetch, params}) => {
+export const load : PageServerLoad = async ({fetch, params, locals, cookies}) => {
+
+    if (!locals.user) {
+            cookies.set("flash", "Vous devez être connecté pour accéder à cette page", {
+                path: "/",
+                maxAge: 5
+            });
+            throw redirect(303, "/login");
+    }
+    if (!locals.user.roles?.includes("admin")) {
+        cookies.set("flash", "Accès réservé aux administrateurs", {
+            path: "/",
+            maxAge: 5
+        });
+        throw redirect(303, "/");
+    }
+
     const id = params.id;
     const res = await fetch(`${API_URL}/admin/comments/${id}`,{
-        credentials: "include"
+        headers: { Authorization: `Bearer ${locals.token}` }
     });
 
     if (!res.ok) {
@@ -22,7 +39,7 @@ export const load : PageServerLoad = async ({fetch, params}) => {
 
 export const actions: Actions = {
     default: async( event ) =>{
-        const { request, fetch, params }= event;
+        const { request, fetch, params, locals }= event;
         const id = params.id;
 
         const data = await request.formData();
@@ -41,8 +58,10 @@ export const actions: Actions = {
         try {
             const res = await fetch(`${API_URL}/admin/comments/${id}`,  {
                 method: "PUT",
-                headers: {"Content-Type": "application/json"},
-                credentials: "include",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${locals.token}`
+                },
                 body: JSON.stringify({content, is_visible})
             });
 

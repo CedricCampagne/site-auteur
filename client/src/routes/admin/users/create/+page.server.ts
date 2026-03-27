@@ -1,11 +1,13 @@
 import { fail } from "@sveltejs/kit";
 import type { Actions } from "./$types";
+import { redirect } from "@sveltejs/kit";
+
 // @ts-expect-error can't find module
 import { API_URL } from '$env/static/private';
 
 export const actions: Actions = {
     default: async (event) => {
-        const { request, fetch } = event;
+        const { request, fetch, locals } = event;
 
         const data = await request.formData();
 
@@ -39,7 +41,10 @@ export const actions: Actions = {
         try {
            const res = await fetch(`${API_URL}/admin/users`, {
             method: "POST",
-            headers: { "Content-Type": "application/json"},
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${locals.token}`
+            },
             body: JSON.stringify({username, email, password})
         });
 
@@ -54,3 +59,23 @@ export const actions: Actions = {
         }
     }
 }
+
+export const load = ({ locals, cookies }) => {
+    if (!locals.user) {
+        cookies.set("flash", "Vous devez être connecté pour accéder à cette page", {
+            path: "/",
+            maxAge: 5
+        });
+        throw redirect(303, "/login");
+    }
+
+    if (!locals.user.roles?.includes("admin")) {
+        cookies.set("flash", "Accès réservé aux administrateurs", {
+            path: "/",
+            maxAge: 5
+        });
+        throw redirect(303, "/");
+    }
+
+    return {};
+};
