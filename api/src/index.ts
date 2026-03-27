@@ -33,14 +33,16 @@ console.log("isProd:", process.env.NODE_ENV === "production");
 
 app.use(cors({
   origin: isProd
-    ? ['https://site-auteur-ashen.vercel.app']
+    ? 'https://site-auteur-ashen.vercel.app'
     : 'http://localhost:5173',     
   credentials: true
 }));
 
 app.use(helmet({
   crossOriginResourcePolicy: false,
-  crossOriginOpenerPolicy: false
+  crossOriginOpenerPolicy: false,
+  crossOriginEmbedderPolicy: false
+
 }));
 
 app.use(express.json());
