@@ -6,16 +6,30 @@ import { redirect } from '@sveltejs/kit';
 import { API_URL } from '$env/static/private';
 
 // PageServerLoad type auto de svelteKit pour type load
-export const load: PageServerLoad = async ({ params, fetch }) => {
+export const load: PageServerLoad = async ({ params, fetch, locals, cookies }) => {
+
+    if (!locals.user) {
+        cookies.set("flash", "Vous devez être connecté pour accéder à cette page", {
+            path: "/",
+            maxAge: 5
+        });
+        throw redirect(303, "/login");
+    }
+    if (!locals.user.roles?.includes("admin")) {
+        cookies.set("flash", "Accès réservé aux administrateurs", {
+            path: "/",
+            maxAge: 5
+        });
+        throw redirect(303, "/");
+    }
 
     if (!API_URL) throw new Error("API_URL non définie");
 
     const id = params.id;
 
     const res = await fetch(
-        `${API_URL}/admin/chronicles/${id}`,
-        {
-            credentials: "include",
+        `${API_URL}/admin/chronicles/${id}`,{
+            headers: { Authorization: `Bearer ${locals.token}` }
         }
     );
 
@@ -31,7 +45,7 @@ export const load: PageServerLoad = async ({ params, fetch }) => {
 
 export const actions: Actions = {
     default: async( event ) =>{
-        const { request, fetch, params } = event;
+        const { request, fetch, params, locals } = event;
         const id = params.id;
 
         const data = await request.formData();
@@ -108,8 +122,10 @@ export const actions: Actions = {
         try {
             const res = await fetch(`${API_URL}/admin/chronicles/${id}`,{
                 method: "PUT",
-                headers: {"Content-Type": "application/json"},
-                credentials: "include",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${locals.token}`
+                },
                 body: JSON.stringify({ title, quote, summary, content, cover_url,published_at, is_active })
             });
 

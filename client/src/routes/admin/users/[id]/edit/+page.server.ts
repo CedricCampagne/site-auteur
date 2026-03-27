@@ -5,19 +5,33 @@ import { redirect } from '@sveltejs/kit';
 // @ts-expect-error can't find module
 import { API_URL } from '$env/static/private';
 
-export const load : PageServerLoad = async ({ fetch, params}) => {
-   
+export const load : PageServerLoad = async ({ fetch, params, locals, cookies}) => {
+    
+    if (!locals.user) {
+        cookies.set("flash", "Vous devez être connecté pour accéder à cette page", {
+            path: "/",
+            maxAge: 5
+        });
+        throw redirect(303, "/login");
+    }
+    if (!locals.user.roles?.includes("admin")) {
+        cookies.set("flash", "Accès réservé aux administrateurs", {
+            path: "/",
+            maxAge: 5
+        });
+        throw redirect(303, "/");
+    }
+
     if (!API_URL) throw new Error("API_URL non définie");
 
     const id = params.id;
 
     const res = await fetch(`${API_URL}/admin/users/${id}`, {
-        credentials: "include",
-        headers: {"Content-Type": "application/json"}
+        headers: { Authorization: `Bearer ${locals.token}` }
     });
 
     if(!res.ok){
-        throw redirect(302, '/admin/chronicles');   
+        throw redirect(302, '/admin/users');   
     }
 
     const json = await res.json();
@@ -28,7 +42,7 @@ export const load : PageServerLoad = async ({ fetch, params}) => {
 
 export const actions: Actions = {
     default: async( event ) => {
-        const { request, fetch, params}= event;
+        const { request, fetch, params, locals}= event;
 
         const id = params.id;
         const data = await request.formData();
@@ -77,8 +91,10 @@ export const actions: Actions = {
         try {
             const res = await fetch(`${API_URL}/admin/users/${id}`, {
                 method: "PUT",
-                headers: {"Content-Type": "application/json"},
-                credentials: "include",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${locals.token}`
+                },
                 body: JSON.stringify(body)
             })
             

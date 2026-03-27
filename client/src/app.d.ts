@@ -8,12 +8,13 @@ declare global {
 		//Locals disponibles côté serveur (hooks, load, actions)
 		interface Locals {
 			//Prends tout ce qu’il y a dans User et ajoute un champ token facultatif
-			user: (User & { token?: string }) | null;
+			user: User | null;
+    		token?: string;
 		}
 
 		//PageData disponible côté front (load retournant data)
 		interface PageData {
-			user: (User & { token?: string }) | null;
+			user: User | null;
 			flash?: string;
 		}
 		// interface Error {}

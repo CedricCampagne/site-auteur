@@ -43,6 +43,7 @@ export interface User {
     password:string;
     is_active:boolean;
     created_at: Date | string;
+    roles: string[];
 }
 
 export interface UserForm {
