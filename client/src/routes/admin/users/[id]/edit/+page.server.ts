@@ -2,11 +2,10 @@ import { fail } from "@sveltejs/kit";
 import type { Actions } from "./$types";
 import type { PageServerLoad } from './$types';
 import { redirect } from '@sveltejs/kit';
-// @ts-expect-error can't find module
-import { API_URL } from '$env/static/private';
 
 export const load : PageServerLoad = async ({ fetch, params, locals, cookies}) => {
-    
+    const VITE_API_URL = import.meta.env.VITE_API_URL;
+
     if (!locals.user) {
         cookies.set("flash", "Vous devez être connecté pour accéder à cette page", {
             path: "/",
@@ -22,11 +21,11 @@ export const load : PageServerLoad = async ({ fetch, params, locals, cookies}) =
         throw redirect(303, "/");
     }
 
-    if (!API_URL) throw new Error("API_URL non définie");
+    if (!VITE_API_URL) throw new Error("VITE_API_URL non définie");
 
     const id = params.id;
 
-    const res = await fetch(`${API_URL}/admin/users/${id}`, {
+    const res = await fetch(`${VITE_API_URL}/admin/users/${id}`, {
         headers: { Authorization: `Bearer ${locals.token}` }
     });
 
@@ -42,6 +41,8 @@ export const load : PageServerLoad = async ({ fetch, params, locals, cookies}) =
 
 export const actions: Actions = {
     default: async( event ) => {
+        const VITE_API_URL = import.meta.env.VITE_API_URL;
+
         const { request, fetch, params, locals}= event;
 
         const id = params.id;
@@ -89,7 +90,7 @@ export const actions: Actions = {
         if (password) body.password = password;
 
         try {
-            const res = await fetch(`${API_URL}/admin/users/${id}`, {
+            const res = await fetch(`${VITE_API_URL}/admin/users/${id}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",

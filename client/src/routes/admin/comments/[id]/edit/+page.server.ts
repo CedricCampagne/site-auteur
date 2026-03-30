@@ -2,10 +2,9 @@ import { redirect } from "@sveltejs/kit";
 import { fail } from "@sveltejs/kit";
 import type { Actions } from "./$types";
 import type { PageServerLoad } from './$types';
-// @ts-expect-error can't find module
-import { API_URL } from '$env/static/private';
 
 export const load : PageServerLoad = async ({fetch, params, locals, cookies}) => {
+    const VITE_API_URL = import.meta.env.VITE_API_URL;
 
     if (!locals.user) {
             cookies.set("flash", "Vous devez être connecté pour accéder à cette page", {
@@ -23,7 +22,7 @@ export const load : PageServerLoad = async ({fetch, params, locals, cookies}) =>
     }
 
     const id = params.id;
-    const res = await fetch(`${API_URL}/admin/comments/${id}`,{
+    const res = await fetch(`${VITE_API_URL}/admin/comments/${id}`,{
         headers: { Authorization: `Bearer ${locals.token}` }
     });
 
@@ -39,6 +38,8 @@ export const load : PageServerLoad = async ({fetch, params, locals, cookies}) =>
 
 export const actions: Actions = {
     default: async( event ) =>{
+        const VITE_API_URL = import.meta.env.VITE_API_URL;
+
         const { request, fetch, params, locals }= event;
         const id = params.id;
 
@@ -56,7 +57,7 @@ export const actions: Actions = {
         const is_visible = is_visible_raw === "on" ? true : false;
 
         try {
-            const res = await fetch(`${API_URL}/admin/comments/${id}`,  {
+            const res = await fetch(`${VITE_API_URL}/admin/comments/${id}`,  {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
