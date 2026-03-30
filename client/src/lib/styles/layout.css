@@ -1,6 +1,10 @@
 @import "tailwindcss";
 @import "easymde/dist/easymde.min.css";
 
+html {
+  color-scheme: light;
+}
+
 *, *::before, *::after {
     box-sizing: border-box;
 }
