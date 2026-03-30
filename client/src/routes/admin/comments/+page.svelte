@@ -6,6 +6,8 @@
 	import CommentAdminCard from '$lib/components/CommentAdminCard.svelte';
 
     export let data;
+    
+    const token = data.token;
 
     let comments: Comment[] = data.comments;
     let users: User[] = data.users;
@@ -31,7 +33,9 @@
                 `${import.meta.env.VITE_API_URL}/admin/comments/${id}/toggle`,
                 {
                     method: "PATCH",
-                    credentials: "include"
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
                 }
             );
             
@@ -55,7 +59,9 @@
                 `${import.meta.env.VITE_API_URL}/admin/comments/${id}`,
                 {
                     method: "DELETE",
-                    credentials: "include"
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
                 }
             );
             const json = await res.json();

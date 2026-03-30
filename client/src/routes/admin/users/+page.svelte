@@ -6,13 +6,17 @@
 	import type { User } from '$lib/types.js';
 
     export let data;
+    
     let users = data.users
+    const token = data.token;
 
     async function deleteUser(id:number){
         try {
             const res = await fetch(`${import.meta.env.VITE_API_URL}/admin/users/${id}`, {
                 method: "DELETE",
-                credentials: "include"
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
             })
             const json = await res.json();
             if(json.data! === 1){
@@ -31,7 +35,9 @@
                 `${import.meta.env.VITE_API_URL}/admin/users/${id}/toggle`,
                 {
                     method: "PATCH",
-                    credentials: "include"
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
                 }
             );
             const json = await res.json();
@@ -44,7 +50,7 @@
                 console.error("Erreur toggle");
             }
         } catch (error) {
-            console.error("Erreur toggle");
+            console.error("Erreur toggle",error);
         }
     }
 

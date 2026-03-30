@@ -8,6 +8,8 @@
     import { replaceState } from '$app/navigation';
     export let data;
 
+    const token = data.token;
+
     $: {
         const updated = $page.url.searchParams.get("updated");
         if (updated === "1") {
@@ -31,7 +33,9 @@
                 `${import.meta.env.VITE_API_URL}/admin/chronicles/${id}/toggle`,
                 {
                     method: "PATCH",
-                    credentials: "include"
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
                 }
             );
 
@@ -54,7 +58,9 @@
         try {
             const res = await fetch(`${import.meta.env.VITE_API_URL}/admin/chronicles/${id}`, {
                 method: "DELETE",
-                credentials: "include"
+                headers: {
+                        Authorization: `Bearer ${token}`
+                    }
             })
             const json = await res.json();
             // pour use le retour de .destroy de sequelize du back return nombre de ligne supprimée
