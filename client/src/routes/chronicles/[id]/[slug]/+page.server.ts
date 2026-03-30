@@ -1,51 +1,26 @@
 // +page.server.ts
-import type { Chronicle, Comment, User } from "$lib/types";
+import type { Chronicle, Comment } from "$lib/types";
 import { redirect, fail } from "@sveltejs/kit";
 import type { Actions, PageServerLoad } from "./$types";
-// @ts-expect-error can't find module
-import { API_URL } from '$env/static/private';
 
 export const load: PageServerLoad = async ({ params, fetch, cookies, locals }) => {
-    if (!API_URL) throw new Error("API_URL non définie");
+    const VITE_API_URL = import.meta.env.VITE_API_URL
+    if (!VITE_API_URL) throw new Error("VITE_API_URL non définie");
 
-    // 🔹 Récupérer le token soit depuis locals (hook SSR), soit fallback cookie
-    let token: string | undefined = locals.user?.token || cookies.get("token");
-
-    // 🔹 Vérification token / récupération user côté serveur
-    if (!locals.user && token) {
-        try {
-            const resUser = await fetch(`${API_URL}/auth/me`, {
-                headers: { Authorization: `Bearer ${token}` }
-            });
-
-            if (!resUser.ok) {
-                cookies.set("flash", "Token invalide ou expiré", { path: "/", maxAge: 15 });
-                throw redirect(303, "/login");
-            }
-
-            locals.user = (await resUser.json()).data as User & { token?: string };
-            locals.user.token = token; // 🔹 on garde le token dans locals.user pour fetch suivants
-        } catch (err) {
-            console.error("Erreur fetch /auth/me:", err);
-            cookies.set("flash", "Erreur lors de l'authentification", { path: "/", maxAge: 15 });
-            throw redirect(303, "/login");
-        }
-    }
-
-    // 🔹 Si pas de token ou utilisateur non authentifié
-    if (!locals.user || !token) {
+    //Si pas de token ou utilisateur non authentifié
+    if (!locals.user || !locals.token) {
         cookies.set("flash", "Vous devez être connecté pour accéder à cette page", { path: "/", maxAge: 15 });
         throw redirect(303, "/login");
     }
 
-    token = locals.user.token;
+    const token = locals.token;
 
     const headers = {
         Authorization: `Bearer ${token}`
     };
 
-    // 🔹 Fetch chronique
-    const resChronicle = await fetch(`${API_URL}/chronicles/${params.id}/${params.slug}`, {
+    //Fetch chronique
+    const resChronicle = await fetch(`${VITE_API_URL}/chronicles/${params.id}/${params.slug}`, {
         headers,
         credentials: "include"
     });
@@ -59,8 +34,8 @@ export const load: PageServerLoad = async ({ params, fetch, cookies, locals }) =
     const jsonChronicle = await resChronicle.json();
     const chronicle: Chronicle = jsonChronicle.data!;
 
-    // 🔹 Fetch commentaires
-    const resComments = await fetch(`${API_URL}/chronicles/${params.id}/${params.slug}/comments`, {
+    //Fetch commentaires
+    const resComments = await fetch(`${VITE_API_URL}/chronicles/${params.id}/${params.slug}/comments`, {
         headers,
         credentials: "include"
     });
@@ -74,15 +49,16 @@ export const load: PageServerLoad = async ({ params, fetch, cookies, locals }) =
     return { chronicle, comments, user: locals.user };
 };
 
-// 🔹 Actions pour poster un commentaire
+//Actions pour poster un commentaire
 export const actions: Actions = {
     default: async ({ request, fetch, params, locals, cookies }) => {
-        if (!API_URL) throw new Error("API_URL non définie");
+        const VITE_API_URL = import.meta.env.API_URL
+        if (!VITE_API_URL) throw new Error("VITE_API_URL non définie");
 
         const comment = (await request.formData()).get("comment")?.toString();
         const chronicle_id = Number(params.id);
 
-        if (!locals.user) {
+        if (!locals.user || !locals.token) {
             cookies.set("flash", "Vous devez être connecté pour poster un commentaire", { path: "/", maxAge: 15 });
             throw redirect(303, "/login");
         }
@@ -104,8 +80,8 @@ export const actions: Actions = {
             });
         }
 
-        const token = locals.user.token;
-        const res = await fetch(`${API_URL}/comments`, {
+        const token = locals.token;
+        const res = await fetch(`${VITE_API_URL}/comments`, {
             method: "POST",
             headers: { 
                 "Content-Type": "application/json",
