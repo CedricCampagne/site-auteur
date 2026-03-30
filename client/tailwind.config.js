@@ -1,6 +1,9 @@
 export default {
+  darkMode: false,
   content: ["./src/**/*.{html,js,svelte,ts}"],
   theme: {
-    extend: {},
+    extend: {
+
+    },
   },
 };
