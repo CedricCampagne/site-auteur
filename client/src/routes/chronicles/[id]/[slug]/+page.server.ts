@@ -52,7 +52,7 @@ export const load: PageServerLoad = async ({ params, fetch, cookies, locals }) =
 //Actions pour poster un commentaire
 export const actions: Actions = {
     default: async ({ request, fetch, params, locals, cookies }) => {
-        const VITE_API_URL = import.meta.env.API_URL
+        const VITE_API_URL = import.meta.env.VITE_API_URL
         if (!VITE_API_URL) throw new Error("VITE_API_URL non définie");
 
         const comment = (await request.formData()).get("comment")?.toString();
@@ -81,6 +81,9 @@ export const actions: Actions = {
         }
 
         const token = locals.token;
+
+        console.log(VITE_API_URL);
+
         const res = await fetch(`${VITE_API_URL}/comments`, {
             method: "POST",
             headers: { 
