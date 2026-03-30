@@ -2,11 +2,10 @@ import { fail } from "@sveltejs/kit";
 import type { Actions } from "./$types";
 import type { PageServerLoad } from './$types';
 import { redirect } from '@sveltejs/kit';
-// @ts-expect-error can't find module
-import { API_URL } from '$env/static/private';
 
 // PageServerLoad type auto de svelteKit pour type load
 export const load: PageServerLoad = async ({ params, fetch, locals, cookies }) => {
+    const VITE_API_URL = import.meta.env.VITE_API_URL;
 
     if (!locals.user) {
         cookies.set("flash", "Vous devez être connecté pour accéder à cette page", {
@@ -23,12 +22,12 @@ export const load: PageServerLoad = async ({ params, fetch, locals, cookies }) =
         throw redirect(303, "/");
     }
 
-    if (!API_URL) throw new Error("API_URL non définie");
+    if (!VITE_API_URL) throw new Error("VITE_API_URL non définie");
 
     const id = params.id;
 
     const res = await fetch(
-        `${API_URL}/admin/chronicles/${id}`,{
+        `${VITE_API_URL}/admin/chronicles/${id}`,{
             headers: { Authorization: `Bearer ${locals.token}` }
         }
     );
@@ -45,6 +44,8 @@ export const load: PageServerLoad = async ({ params, fetch, locals, cookies }) =
 
 export const actions: Actions = {
     default: async( event ) =>{
+        const VITE_API_URL = import.meta.env.VITE_API_URL;
+
         const { request, fetch, params, locals } = event;
         const id = params.id;
 
@@ -120,7 +121,7 @@ export const actions: Actions = {
         const is_active = is_active_raw === "on" ? true : false;
 
         try {
-            const res = await fetch(`${API_URL}/admin/chronicles/${id}`,{
+            const res = await fetch(`${VITE_API_URL}/admin/chronicles/${id}`,{
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",

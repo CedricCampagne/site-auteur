@@ -1,8 +1,9 @@
 import type { PageServerLoad } from './$types';
 import { redirect } from '@sveltejs/kit';
 
-
 export const load: PageServerLoad = async ({ fetch, locals, cookies })=>{
+    const VITE_API_URL = import.meta.env.VITE_API_URL;
+    
     if (!locals.user) {
         cookies.set("flash", "Vous devez être connecté pour accéder à cette page", {
             path: "/",
@@ -17,10 +18,10 @@ export const load: PageServerLoad = async ({ fetch, locals, cookies })=>{
         });
         throw redirect(303, "/");
     }
-    const API_URL = import.meta.env.VITE_API_URL;
-    if (!API_URL) throw new Error("API_URL non définie");
+    
+    if (!VITE_API_URL) throw new Error("API_URL non définie");
 
-    const res = await fetch(`${API_URL}/admin/chronicles`, {
+    const res = await fetch(`${VITE_API_URL}/admin/chronicles`, {
        headers: {
             Authorization: `Bearer ${locals.token}`
        }

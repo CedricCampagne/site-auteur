@@ -1,10 +1,9 @@
 import type { PageServerLoad } from './$types';
 import { redirect } from '@sveltejs/kit';
-// @ts-expect-error can't find module
-import { API_URL } from '$env/static/private';
 
 export const load : PageServerLoad = async ({fetch, locals, cookies}) => {
-    
+    const VITE_API_URL = import.meta.env.VITE_API_URL;
+
     if (!locals.user) {
             cookies.set("flash", "Vous devez être connecté pour accéder à cette page", {
                 path: "/",
@@ -12,6 +11,7 @@ export const load : PageServerLoad = async ({fetch, locals, cookies}) => {
             });
             throw redirect(303, "/login");
     }
+    
     if (!locals.user.roles?.includes("admin")) {
         cookies.set("flash", "Accès réservé aux administrateurs", {
             path: "/",
@@ -20,9 +20,9 @@ export const load : PageServerLoad = async ({fetch, locals, cookies}) => {
         throw redirect(303, "/");
     }
 
-    if (!API_URL) throw new Error("API_URL non définie");
+    if (!VITE_API_URL) throw new Error("VITE_API_URL non définie");
 
-    const res = await fetch(`${API_URL}/admin/comments`,{
+    const res = await fetch(`${VITE_API_URL}/admin/comments`,{
        headers: { Authorization: `Bearer ${locals.token}` }
     });
 
@@ -32,7 +32,7 @@ export const load : PageServerLoad = async ({fetch, locals, cookies}) => {
     const jsonComments = await res.json();
     const comments = jsonComments.data!;
 
-    const res2 = await fetch(`${API_URL}/admin/users`,{
+    const res2 = await fetch(`${VITE_API_URL}/admin/users`,{
         headers: { Authorization: `Bearer ${locals.token}` }
     });
 
@@ -42,7 +42,7 @@ export const load : PageServerLoad = async ({fetch, locals, cookies}) => {
     const jsonUsers = await res2.json();
     const users = jsonUsers.data!;
 
-    const res3 = await fetch(`${API_URL}/admin/chronicles`,{ 
+    const res3 = await fetch(`${VITE_API_URL}/admin/chronicles`,{ 
         headers: { Authorization: `Bearer ${locals.token}` }
         });
 

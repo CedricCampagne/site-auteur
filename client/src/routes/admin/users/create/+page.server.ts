@@ -2,11 +2,10 @@ import { fail } from "@sveltejs/kit";
 import type { Actions } from "./$types";
 import { redirect } from "@sveltejs/kit";
 
-// @ts-expect-error can't find module
-import { API_URL } from '$env/static/private';
-
 export const actions: Actions = {
     default: async (event) => {
+        const VITE_API_URL = import.meta.env.VITE_API_URL;
+
         const { request, fetch, locals } = event;
 
         const data = await request.formData();
@@ -39,7 +38,7 @@ export const actions: Actions = {
         }
 
         try {
-           const res = await fetch(`${API_URL}/admin/users`, {
+           const res = await fetch(`${VITE_API_URL}/admin/users`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
