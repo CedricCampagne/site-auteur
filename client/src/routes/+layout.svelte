@@ -3,8 +3,14 @@
     import Footer from '$lib/components/Footer.svelte';
     import favicon from '$lib/assets/favicon.svg';
     import "$lib/styles/layout.css";
+    import { afterNavigate } from '$app/navigation';
 
     export let data;
+
+    afterNavigate(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    
 </script>
 
 <svelte:head>

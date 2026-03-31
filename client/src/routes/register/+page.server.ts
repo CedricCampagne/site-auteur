@@ -10,10 +10,10 @@ export const actions: Actions = {
 
         const data = await request.formData();
 
-        const username = data.get("username")?.toString();
-        const email = data.get("email")?.toString();
-        const password = data.get("password")?.toString();
-        const confirm = data.get("confirm")?.toString();
+        const username = data.get("username")?.toString().trim();
+        const email = data.get("email")?.toString().trim();
+        const password = data.get("password")?.toString().trim();
+        const confirm = data.get("confirm")?.toString().trim();
 
         if (!username || !email || !password || !confirm) {
             return fail(400, {
