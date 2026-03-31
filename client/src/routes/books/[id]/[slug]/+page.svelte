@@ -12,6 +12,24 @@
 
 </script>
 
+<svelte:head>
+    <title>{book.title} – Thriller psychologique de {book.author}</title>
+
+    <meta 
+        name="description" 
+        content={book.summary 
+            ? book.summary.slice(0, 150) + "…" 
+            : `Découvrez ${book.title}, un thriller psychologique de ${book.author}.`
+        } 
+    />
+
+    <!-- Optionnel -->
+    <meta property="og:title" content={book.title + " – Thriller psychologique"} />
+    <meta property="og:description" content={book.summary.slice(0, 150) + "…"} />
+    <meta property="og:image" content={book.cover_url} />
+    <meta property="og:type" content="book" />
+</svelte:head>
+
 {#if book }
     <section class="flex flex-col gap-4 mt-24 pb-8 border-b">
         <div class="flex flex-col items-center gap-24 md:flex-row md:gap-8 md:self-center">

@@ -2,6 +2,14 @@
 
 </script>
 
+<svelte:head>
+    <title>Mentions légales – Katia Campagne</title>
+    <meta 
+        name="description" 
+        content="Mentions légales du site de Katia Campagne : informations sur l’éditeur, l’hébergement, la propriété intellectuelle, les données personnelles et les droits des utilisateurs." 
+    />
+</svelte:head>
+
 <section class="flex flex-col gap-4 mt-24 pb-8 border-b">
     <h2 class="text-5xl font-black text-center mb-16">
         Mentions légales
@@ -10,11 +18,14 @@
     <h3 class="my-4 border-b border-accent2 text-accent1">
         Éditeur du site
     </h3>
+
     <p>
         Ce site est édité par : <strong>Campagne Katia</strong><br>
         Statut : Auteur / Créatrice de contenu<br>
         Adresse : 28130<br>
-        Email : <a href="mailto:[email]"><strong>kaldrixx23@gmail.com</strong></a>
+        Email : <a href="mailto:kaldrixx23@gmail.com"><strong>kaldrixx23@gmail.com</strong></a><br>
+        Ce site est un site personnel à but non commercial.
+
     </p>
 
     <h3 class="my-4 border-b border-accent2 text-accent1">
@@ -27,10 +38,26 @@
     <h3 class="my-4 border-b border-accent2 text-accent1">
         Hébergement du site
     </h3>
+
     <p>
-        Le site est hébergé par : <strong>[Nom de l’hébergeur]</strong><br>
-        Adresse : [Adresse de l’hébergeur]<br>
-        Site web : <a href="[URL hébergeur]" target="_blank" rel="noopener noreferrer">[URL hébergeur]</a>
+        <strong>Front-end (site web)</strong><br>
+        Hébergé par : Vercel Inc.<br>
+        Adresse : 440 N Barranca Ave #4133, Covina, CA 91723, États-Unis<br>
+        Site : <a href="https://vercel.com" target="_blank" rel="noopener noreferrer">https://vercel.com</a>
+    </p>
+
+    <p class="mt-4">
+        <strong>Back-end (API)</strong><br>
+        Hébergé par : Render Inc.<br>
+        Adresse : 655 Montgomery Street, Suite 1600, San Francisco, CA 94111, États-Unis<br>
+        Site : <a href="https://render.com" target="_blank" rel="noopener noreferrer">https://render.com</a>
+    </p>
+
+    <p class="mt-4">
+        <strong>Base de données</strong><br>
+        Hébergée par : Supabase Inc.<br>
+        Adresse : 970 Toa Payoh North #07-04, Singapore 318992<br>
+        Site : <a href="https://supabase.com" target="_blank" rel="noopener noreferrer">https://supabase.com</a>
     </p>
 
     <h3 class="my-4 border-b border-accent2 text-accent1">
@@ -51,7 +78,7 @@
     <ul>
         <li class="md:list-disc md:ml-8">
             <h4 class="my-4">
-                Formulaire de contact / commentaires (prévu)
+                Formulaire de contact / commentaires
             </h4>
             <p>
                 Les informations suivantes pourront être collectées : nom ou pseudonyme, adresse email, contenu du message
@@ -61,7 +88,7 @@
         </li>
         <li class="md:list-disc md:ml-8">
             <h4 class="my-4">
-                Newsletter (prévue)
+                Newsletter
             </h4>
             <p>
                 L’adresse email fournie sera utilisée exclusivement pour l’envoi de la newsletter. Aucune donnée n’est
@@ -89,8 +116,10 @@
         Cookies
     </h3>
     <p>
-        Ce site n’utilise actuellement aucun cookie nécessitant un consentement. Si des outils de mesure d’audience
-        ou de connexion sont ajoutés ultérieurement, une bannière de consentement sera mise en place.
+        Ce site n’utilise actuellement aucun cookie nécessitant un consentement. 
+        Seuls des cookies techniques nécessaires au fonctionnement du site peuvent être utilisés.
+        Si des outils de mesure d’audience ou de connexion sont ajoutés ultérieurement, 
+        une bannière de consentement sera mise en place.
     </p>
 
     <h3 class="my-4 border-b border-accent2 text-accent1">

@@ -39,6 +39,14 @@
 
 </script>
 
+<svelte:head>
+    <title>Administration – Créer une chronique</title>
+    <meta 
+        name="description" 
+        content="Page d’administration permettant d’ajouter une nouvelle chronique : titre, citation, résumé, contenu, image et date de publication."
+    />
+</svelte:head>
+
 <section class="flex flex-col gap-4 mt-24 pb-8 border-b">
     <h2 class="text-4xl font-black text-center mb-4">
         Création d'une chronique

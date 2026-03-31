@@ -41,6 +41,14 @@
     }
 </script>
 
+<svelte:head>
+    <title>Administration – Modifier une chronique</title>
+    <meta 
+        name="description" 
+        content="Page d’administration permettant de modifier une chronique existante : titre, citation, résumé, contenu, image et statut."
+    />
+</svelte:head>
+
 <section class="flex flex-col gap-4 mt-24 pb-8 border-b">
     <h2 class="text-4xl font-black text-center mb-4">
         Modification d'une chronique

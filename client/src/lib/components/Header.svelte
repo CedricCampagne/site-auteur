@@ -26,6 +26,7 @@
                     href={instagramUrl}
                     target="_blank"
                     rel="noopener noreferrer"
+                    aria-label="Lien vers Instagram"
                 >
                     <Icon
                         icon="simple-icons:instagram"

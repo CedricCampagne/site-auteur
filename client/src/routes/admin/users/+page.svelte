@@ -60,8 +60,15 @@
     
 </script>
 
-<section class="flex flex-col gap-6 mt-24 pb-8 border-b">
+<svelte:head>
+    <title>Administration – Gestion des utilisateurs</title>
+    <meta 
+        name="description" 
+        content="Interface d’administration permettant de consulter, ajouter, modifier, activer ou supprimer les utilisateurs du site."
+    />
+</svelte:head>
 
+<section class="flex flex-col gap-6 mt-24 pb-8 border-b">
     {#if $flash}
         <div class="fixed top-90 left-1/2 -translate-x-1/2 bg-green-600 text-white px-4 py-2 rounded shadow-lg z-50">
             {$flash}

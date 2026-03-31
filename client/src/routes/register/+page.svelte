@@ -14,6 +14,14 @@
     });
 </script>
 
+<svelte:head>
+    <title>Créer un compte – Katia Campagne</title>
+    <meta 
+        name="description" 
+        content="Créez votre compte pour accéder à l’espace utilisateur du site de Katia Campagne." 
+    />
+</svelte:head>
+
 <section class="flex flex-col gap-4 mt-24 pb-8 border-b">
     <h2 class="text-5xl font-black text-center mb-4">
         Créer votre compte

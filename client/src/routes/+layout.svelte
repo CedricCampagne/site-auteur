@@ -8,6 +8,7 @@
 </script>
 
 <svelte:head>
+    <title>Katia Campagne – Autrice de thrillers psychologiques</title>
     <link rel="icon" href={favicon} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
@@ -18,7 +19,6 @@
 </svelte:head>
 
 <div class="min-h-screen flex flex-col bg-white">
-
     <!-- Contenu des pages -->
 	<main class="flex-1 bg-bg-main">
 		<div class="max-w-5xl mx-auto px-6">
