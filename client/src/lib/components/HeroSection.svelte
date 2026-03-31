@@ -10,7 +10,17 @@
     }
 </script>
 
-<section class="h-100 bg-cover bg-center relative" style="background-image: url('/images/hero.jpg')">
+<svelte:head>
+    <link 
+        rel="preload" 
+        as="image" 
+        href="/images/hero.webp" 
+        fetchpriority="high"
+    />
+</svelte:head>
+
+
+<section class="h-100 bg-cover bg-center relative" style="background-image: url('/images/hero.webp')">
     <div class="absolute inset-0 bg-steel/30"></div>
     <div class="relative z-10 flex flex-col justify-center items-center md:items-start sm:justify-center h-full text-white px-6 text-center gap-4">
         <h1 class="font-title mb-4 text-3xl sm:text-5xl ">

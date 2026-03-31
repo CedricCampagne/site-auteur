@@ -74,6 +74,14 @@
     }
 </script>
 
+<svelte:head>
+    <title>Administration – Gestion des chroniques</title>
+    <meta 
+        name="description" 
+        content="Interface d’administration permettant de gérer, modifier, publier ou supprimer les chroniques du site."
+    />
+</svelte:head>
+
 <section class="flex flex-col gap-6 mt-24 pb-8 border-b">
     {#if $flash}
         <div class="fixed top-90 left-1/2 -translate-x-1/2 bg-green-600 text-white px-4 py-2 rounded shadow-lg z-50">

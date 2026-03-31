@@ -2,6 +2,15 @@
    import Icon from "@iconify/svelte";
 </script>
 
+
+<svelte:head>
+    <title>Contact – Katia Campagne</title>
+    <meta 
+        name="description" 
+        content="Contactez Katia Campagne pour toute question, remarque ou demande concernant ses livres, ses chroniques ou son univers littéraire." 
+    />
+</svelte:head>
+
 <section class="flex flex-col gap-4 mt-24 pb-8 border-b">
     <h2 class="text-5xl font-black text-center mb-4">
         Me Contacter

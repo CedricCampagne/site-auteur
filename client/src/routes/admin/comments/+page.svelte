@@ -80,6 +80,14 @@
     }
 </script>
 
+<svelte:head>
+    <title>Administration – Gestion des commentaires</title>
+    <meta 
+        name="description" 
+        content="Interface d’administration permettant de consulter, filtrer, modifier, activer ou supprimer les commentaires du site."
+    />
+</svelte:head>
+
 <section class="flex flex-col gap-6 mt-24 pb-8 border-b">
 
     {#if $flash}

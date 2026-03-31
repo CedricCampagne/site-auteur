@@ -2,6 +2,14 @@
 
 </script>
 
+<svelte:head>
+    <title>À propos – Katia Campagne, auteure de thrillers psychologiques</title>
+    <meta 
+        name="description" 
+        content="Découvrez le parcours de Katia Campagne, autrice de thrillers psychologiques. Finaliste et lauréate de concours littéraires, elle explore les zones d’ombre de l’âme humaine à travers ses romans et chroniques." 
+    />
+</svelte:head>
+
 <section class="flex flex-col gap-4 mt-24 pb-8 border-b">
     <div>
         <h2 class="text-5xl font-black text-center mb-4">
@@ -24,7 +32,7 @@
         <div class="w-full mb-20 sm:w-1/3 self-center">
            <div class="w-full sm:w-auto aspect-square rounded-lg overflow-hidden shadow md:aspect-auto md:h-full">
                 <img 
-                    src="/images/katia2.jpg" 
+                    src="/images/katia.webp" 
                     alt="Portrait" 
                     class="w-full h-full object-cover"
                 >

@@ -21,6 +21,24 @@
     }
 </script>
 
+<svelte:head>
+    <title>{chronicle.title} – Chronique de Katia Campagne</title>
+
+    <meta 
+        name="description" 
+        content={chronicle.summary 
+            ? chronicle.summary.slice(0, 150) + "…" 
+            : `Découvrez la chronique « ${chronicle.title} » écrite par Katia Campagne.`
+        } 
+    />
+
+    <!-- OpenGraph (aperçu réseaux sociaux) -->
+    <meta property="og:title" content={chronicle.title + " – Chronique"} />
+    <meta property="og:description" content={chronicle.summary.slice(0, 150) + "…"} />
+    <meta property="og:image" content={chronicle.cover_url} />
+    <meta property="og:type" content="article" />
+</svelte:head>
+
 <section class="flex flex-col gap-4 mt-24 pb-8 border-b">
     <div class="w-full aspect-video overflow-hidden rounded-b-lg">
         <img

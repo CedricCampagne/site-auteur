@@ -20,6 +20,15 @@
     }
 </script>
 
+
+<svelte:head>
+    <title>Connexion – Katia Campagne</title>
+    <meta 
+        name="description" 
+        content="Connectez-vous pour accéder à l’espace administrateur du site de Katia Campagne." 
+    />
+</svelte:head>
+
 <section class="flex flex-col gap-4 mt-24 pb-8 border-b">
     <h2 class="text-5xl font-black text-center mb-4">
         Connectez-Vous

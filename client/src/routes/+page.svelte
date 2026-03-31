@@ -32,6 +32,14 @@
 
 </script>
 
+<svelte:head>
+    <title>Katia Campagne – Auteure de thrillers psychologiques</title>
+    <meta 
+        name="description" 
+        content="Découvrez l’univers de Katia Campagne, autrice de thrillers psychologiques : derniers livres, extraits, chroniques, analyses et actualités littéraires." 
+    />
+</svelte:head>
+
 <HeroSection
 	on:randomExerpt= { pickRandomExcerpt }
 />

@@ -45,6 +45,14 @@
     }
 </script>
 
+<svelte:head>
+    <title>Administration – Modifier un utilisateur</title>
+    <meta 
+        name="description" 
+        content="Page d’administration permettant de modifier un utilisateur : nom, email, mot de passe et statut du compte."
+    />
+</svelte:head>
+
 <section class="flex flex-col gap-4 mt-24 pb-8 border-b">
     <h2 class="text-4xl font-black text-center mb-4">
         Mise a jour de l'utilisateur

@@ -3,8 +3,15 @@
     export let data;
 
     const books = data.books;
-
 </script>
+
+<svelte:head>
+    <title>Bibliographie – Les livres de Katia Campagne</title>
+    <meta 
+        name="description" 
+        content="Découvrez tous les livres de Katia Campagne, auteure de thrillers psychologiques : résumés, années de publication et informations sur chaque roman." 
+    />
+</svelte:head>
 
 <section class="flex flex-col gap-4 mt-24 pb-8 border-b">
     <h2 class="text-5xl font-black text-center mb-4">

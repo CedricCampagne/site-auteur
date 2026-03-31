@@ -20,8 +20,9 @@ async function runSeed() {
         console.log('Connection DB ok');
 
         // En prod on ne fais jamais sync
-        // await sequelize.sync({ force: true});
-        // console.log('Tables synchronisées');
+        if (process.env.NODE_ENV === "development") {
+            await sequelize.sync({ force: true });
+        }
 
         await seedBooks();
         await seedChronicles();
