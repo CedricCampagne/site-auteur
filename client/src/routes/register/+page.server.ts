@@ -41,10 +41,18 @@ export const actions: Actions = {
 
         const json = await res.json();
 
-        if (json.type === "fail") {
-    
+        // Si la requête HTTP a échoué
+        if (!res.ok) {
             return fail(res.status, {
-                error: json.message,
+                error: json.message || "Erreur lors de la création du compte",
+                values: { username, email }
+            });
+        }
+
+        // Si l'API renvoie un type d'erreur
+        if (json.type !== "success") {
+            return fail(res.status, {
+                error: json.message || "Erreur lors de la création du compte",
                 values: { username, email }
             });
         }
