@@ -16,6 +16,14 @@ import { RegisterParams } from "../dto/auth/RegisterParams.dto";
 export class AuthServices {
     static async registerUser(data: RegisterParams): Promise<AuthResult> {
 
+        if (!data.email || !data.username || !data.password) {
+            throw new HttpError(400, "Champs manquants");
+        }
+
+        data.email = data.email.trim().toLowerCase();
+        data.username = data.username.trim();
+        data.password = data.password.trim();
+
         // Vérification du mail
         const existingEmail = await User.findOne({where: {email: data.email}});
         if(existingEmail) {

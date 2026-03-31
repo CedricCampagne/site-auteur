@@ -16,18 +16,6 @@ export class AuthController {
         try {
             const  result = await AuthServices.registerUser(req.body);
 
-            // const isProd = process.env.NODE_ENV === "production";
-
-            // res
-            //     .cookie("token", result.token, {
-            //         httpOnly: true,
-            //         secure: isProd,
-            //         sameSite: isProd ? "none" : "lax",
-            //         maxAge: 1*60*60*1000,
-            //         path: "/",
-            //          ...(isProd ? { domain: "site-auteur-ashen.vercel.app" } : {})
-            //     });
-            
             return sendResponse(res, 201, "success","Utilisateur créé avec succès" , {
                 user: result.user,
                 token: result.token
