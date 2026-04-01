@@ -1,5 +1,5 @@
 <script lang="ts">
-    import Icon from "@iconify/svelte";
+    // import Icon from "@iconify/svelte";
     import { onMount } from "svelte";
     import { fade } from "svelte/transition";
 
@@ -12,6 +12,8 @@
             }, 1500);
         }
     });
+
+    
 </script>
 
 <svelte:head>
@@ -23,7 +25,7 @@
 </svelte:head>
 
 <section class="flex flex-col gap-4 mt-24 pb-8 border-b">
-    <h2 class="text-5xl font-black text-center mb-4">
+    <h2 class="text-5xl font-black text-center mb-10">
         Créer votre compte
     </h2>
 
@@ -31,10 +33,10 @@
         method="POST"
         class="flex flex-col gap-6 items-center"
     >
-        <div class="h-8 flex items-center">
+        <div class="h-20 mb-6 sm:h-8 flex items-center">
             {#if form?.error}
                 <p
-                    class="text-center text-white bg-accent1 rounded-2xl py-1 px-2"
+                    class="text-center text-white bg-accent1 rounded-2xl p-2"
                     transition:fade={{duration:400}}
                 >
                     {form.error}
@@ -42,7 +44,7 @@
             {/if}
             {#if form?.success}
                 <p
-                    class="text-center text-white bg-green-600 rounded-2xl py-1 px-2"
+                    class="text-center text-white bg-green-600 rounded-2xl p-2"
                     transition:fade={{ duration: 400 }}
                 >
                     {form.success}
@@ -58,12 +60,13 @@
                 name="username"
                 value={form?.values?.username ?? ""}
                 autocomplete="username"
+                placeholder=""
                 class="border border-accent2 rounded-md p-3 focus:outline-none focus:border-accent2 peer"
             >
-             <div class="absolute top-10 right-4 flex items-center gap-2 transition-opacity duration-500 peer-placeholder-shown:opacity-100 opacity-0" >
+             <!-- <div class="absolute top-10 right-4 flex items-center gap-2 transition-opacity duration-500 peer-placeholder-shown:opacity-100 opacity-0" >
                 <span class="text-sm text-accent1">Saisir votre Nom</span>
                 <Icon icon="maki:cross" class="text-2xl text-accent1" />
-            </div>
+            </div> -->
         </div>
         <div class="flex flex-col min-w-1/2 relative">
             <label for="email" class="font-title text-title mb-1">Email :</label>
@@ -73,12 +76,13 @@
                 name="email"
                 value={form?.values?.email ?? ""}
                 autocomplete="email"
+                placeholder=""
                 class="border border-accent2 rounded-md p-3 focus:outline-none focus:border-accent2 peer"
             >
-            <div class="absolute top-10 right-4 flex items-center gap-2 transition-opacity duration-200 peer-placeholder-shown:opacity-100 opacity-0" >
+            <!-- <div class="absolute top-10 right-4 flex items-center gap-2 transition-opacity duration-200 peer-placeholder-shown:opacity-100 opacity-0" >
                 <span class="text-sm text-accent1">Saisir votre Email</span>
                 <Icon icon="maki:cross" class="text-2xl text-accent1" />
-            </div>
+            </div> -->
         </div>
         <div class="flex flex-col min-w-1/2 relative">
             <label for="password" class="font-title text-title mb-1">Mot de passe :</label>
@@ -87,12 +91,13 @@
                 id="password"
                 name="password"
                 autocomplete="new-password"
+                placeholder=""
                 class="border border-accent2 rounded-md p-3 focus:outline-none focus:border-accent2 peer"
             >
-            <div class="absolute top-10 right-4 flex items-center gap-2 transition-opacity duration-200 peer-placeholder-shown:opacity-100 opacity-0" >
+            <!-- <div class="absolute top-10 right-4 flex items-center gap-2 transition-opacity duration-200 peer-placeholder-shown:opacity-100 opacity-0" >
                 <span class="text-sm text-accent1">Saisir un mot de passe</span>
                 <Icon icon="maki:cross" class="text-2xl text-accent1" />
-            </div>
+            </div> -->
         </div>
         <div class="flex flex-col min-w-1/2 relative">
             <label for="confirm" class="font-title text-title mb-1">Confirmation :</label>
@@ -101,12 +106,13 @@
                 id="confirm"
                 name="confirm"
                 autocomplete="new-password"
+                placeholder=""
                 class="border border-accent2 rounded-md p-3 focus:outline-none focus:border-accent2 peer"
             >
-            <div class="absolute top-10 right-4 flex items-center gap-2 transition-opacity duration-200 peer-placeholder-shown:opacity-100 opacity-0" >
-                <span class="text-sm text-accent1">Confirmer votre mot de passe</span>
+            <!-- <div class="absolute top-10 right-4 flex items-center gap-2 transition-opacity duration-200 peer-placeholder-shown:opacity-100 opacity-0" >
+                <span class="text-sm text-accent1">Confirmer</span>
                 <Icon icon="maki:cross" class="text-2xl text-accent1" />
-            </div>
+            </div> -->
         </div>
 
         <button

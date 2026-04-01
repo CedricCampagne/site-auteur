@@ -31,7 +31,7 @@
                 </span>
             </button>
             {#if open}
-                <div class="absolute right-0 top-full bg-white border rounded shadow p-3 w-40 z-50 flex flex-col">
+                <div class="absolute top-full bg-white border rounded shadow p-3 w-40 z-50 flex flex-col">
                     {#if user.roles && user.roles.includes("admin")}
                         <a 
                             href="/admin/chronicles"
@@ -64,7 +64,7 @@
                 </span>
             </div>
             {#if open}
-                <div class="absolute right-0 top-full bg-white border rounded shadow p-3 w-30 z-50">
+                <div class="absolute top-full bg-white border rounded shadow p-3 w-30 z-50">
                     <a
                         href="/login"
                         class="block hover:text-accent1 hover:underline underline-offset-4 cursor-pointer text-center "
