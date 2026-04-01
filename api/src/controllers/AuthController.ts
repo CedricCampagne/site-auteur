@@ -5,7 +5,6 @@ import { verifyToken } from "../utils/jwt";
 import { sendResponse } from "../utils/sendResponse";
 import { RegisterParams } from "../dto/auth/RegisterParams.dto";
 import { LoginParams } from "../dto/auth/LoginParams.dto";
-import { log } from "node:console";
 
 export class AuthController {
     static async register(
