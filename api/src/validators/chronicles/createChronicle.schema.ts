@@ -42,7 +42,7 @@ export const createChronicleSchema = Joi.object({
     cover_url: Joi.string()
         .custom((value, helpers) => {
             if (!value.startsWith("http") && !value.startsWith("/")) {
-                return helpers.error("any.invalid");
+                return helpers.error("string.invalidUrl");
             }
             return value;
         })
@@ -55,8 +55,10 @@ export const createChronicleSchema = Joi.object({
     published_at: Joi.date()
         .required()
         .messages({
-            "date.base": "La date de publication doit être une date valide",
-            "any.required": "La date de publication est obligatoire"
+            "string.base": "L’URL de couverture doit être une chaîne de caractères",
+            "string.empty": "L’URL de couverture est obligatoire",
+            "string.invalidUrl": "L’URL doit commencer par http ou /",
+            "any.required": "L’URL de couverture est obligatoire"
         }),
 
     is_active: Joi.boolean()

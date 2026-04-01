@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { ValidationErrorItem } from "joi";
 import { ObjectSchema } from "joi";
+import { sendResponse } from "../utils/sendResponse";
 
 export const validate = <
   TParams = any,
@@ -24,8 +25,7 @@ export const validate = <
 
     if (error) {
       const messages = error.details.map((detail: ValidationErrorItem) => detail.message);
-      console.log("erreur joi", messages)
-      return res.status(400).json({ error: messages });
+      return sendResponse(res, 400, "fail", messages.join(", "));
     }
 
     // Important : on remplace les données par celles nettoyées
