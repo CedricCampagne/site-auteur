@@ -30,8 +30,8 @@
 </svelte:head>
 
 <section class="flex flex-col gap-4 mt-24 pb-8 border-b">
-    <h2 class="text-5xl font-black text-center mb-4">
-        Connectez-Vous
+    <h2 class="text-5xl font-black text-center mb-10">
+        Connectez Vous
     </h2>
 
     <form
@@ -39,10 +39,10 @@
         class="flex flex-col gap-6 items-center"
     >
         <!-- affichage message erreur ou succes -->
-        <div class="h-8 flex items-center">
+        <div class="h-6 mb-6 flex items-center">
             {#if form?.error}
                 <p
-                    class="text-center text-white bg-accent1 rounded-2xl py-1 px-2"
+                    class="text-center text-white bg-accent1 rounded-2xl p-2"
                     transition:fade={{ duration: 400 }}
                 >
                     {form.error}
@@ -67,14 +67,15 @@
                 name="email"
                 value={form?.values?.email ?? ""}
                 autocomplete="email"
+                placeholder=""
                 class="border border-accent2 rounded-md p-3 focus:outline-none focus:border-accent2 peer"
             >
-            <div class="absolute top-10 right-4 flex items-center gap-2 transition-opacity duration-200 peer-placeholder-shown:opacity-100 opacity-0" >
+            <!-- <div class="absolute top-10 right-4 flex items-center gap-2 transition-opacity duration-200 peer-placeholder-shown:opacity-100 opacity-0" >
                 <span class="text-sm text-accent1"
                     >Saisir votre Email
                 </span>
                 <Icon icon="maki:cross" class="text-2xl text-accent1" />
-            </div>
+            </div> -->
         </div>
         <div class="flex flex-col min-w-1/2 relative">
             <label for="password" class="font-title text-title mb-1">Mot de passe :</label>
@@ -83,14 +84,15 @@
                 id="password"
                 name="password"
                 autocomplete="new-password"
+                placeholder=""
                 class="border border-accent2 rounded-md p-3 focus:outline-none focus:border-accent2 peer"
             >
-            <div class="absolute top-10 right-4 flex items-center gap-2 transition-opacity duration-200 peer-placeholder-shown:opacity-100 opacity-0" >
+            <!-- <div class="absolute top-10 right-4 flex items-center gap-2 transition-opacity duration-200 peer-placeholder-shown:opacity-100 opacity-0" >
                 <span class="text-sm text-accent1"
                     >Saisir un mot de passe
                 </span>
                 <Icon icon="maki:cross" class="text-2xl text-accent1" />
-            </div>
+            </div> -->
         </div>
 
         <button

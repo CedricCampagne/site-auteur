@@ -99,7 +99,15 @@
         </nav>        
     </div>
     <!-- Mobile -->
-    <div class="flex md:hidden justify-around items-center">
+    <div class="flex md:hidden justify-between items-center">
+        <!-- Bouton toggle -->
+        <button on:click={() => (isOpen = !isOpen)}>
+            <Icon
+                icon={isOpen ? "ri:close-line" : "ri:menu-line"}
+                class="text-3xl hover:border hover:border-accent1"
+            />
+        </button>
+
         <div class="p-2 flex gap-4">
                 <span class="font-black text-xl">Katia Campagne</span>
                 <a
@@ -113,19 +121,11 @@
                     />
                 </a>
             </div>
-
-        <!-- Bouton toggle -->
-        <button on:click={() => (isOpen = !isOpen)}>
-            <Icon
-                icon={isOpen ? "ri:close-line" : "ri:menu-line"}
-                class="text-3xl hover:border hover:border-accent1"
-            />
-        </button>
     </div>
     <!-- Menu mobile -->
     {#if isOpen}
-        <nav class="absolute top-9 right-6 z-1000 md:hidden mt-2" on:mouseleave={() => (isOpen = !isOpen)}>
-            <ul class="flex flex-col gap-2 p-2 bg-white border rounded-tl-lg rounded-bl-lg shadow">
+        <nav class="absolute top-9 left-6 z-1000 md:hidden mt-2" on:mouseleave={() => (isOpen = !isOpen)}>
+            <ul class="flex flex-col gap-2 p-2 bg-white border rounded-tr-lg rounded-br-lg shadow">
                 <li class="p-2 hover:text-accent1">
                     <a href="/"
                         class={page.url.pathname === "/"

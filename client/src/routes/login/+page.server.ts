@@ -31,8 +31,8 @@ export const actions: Actions = {
 
         const json = await res.json();
 
-        if (json.type === "fail") {
-   
+        // Si la réponse n'est pas OK → erreur (Joi, HttpError, etc.)
+        if (!res.ok) {
             return fail(res.status, {
                 error: json.message,
                 values: { email }
