@@ -17,6 +17,7 @@ import helmet from "helmet";
 
 import mainRouter from "./routes/index.routes";
 import { sequelize } from "./config/database";
+import { connectWithRetry } from "./config/database";
 import { sanitizeBody } from "./middleware/sanitize";
 import { errorHandler } from "./middleware/errorHandler";
 
@@ -53,13 +54,9 @@ app.use("/api", mainRouter);
 app.use(errorHandler);
 
 
+//Nouvelle connexion DB avec retry
 (async () => {
-  try {
-    await sequelize.authenticate();
-    console.log("DB connection successful");
-  } catch (err) {
-    console.error("DB connection error:", err);
-  }
+  await connectWithRetry();
 })();
 
 // test staging

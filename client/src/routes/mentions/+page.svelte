@@ -139,12 +139,12 @@
         <p>
             Portfolio : 
             <a
-                href="https://cedriccampagne.github.io/Portfolio-V2/"
+                href="https://portfolio-one-weld-49.vercel.app/"
                 target="_blank"
                 rel="noopener noreferrer"
                 class="font-black underline underline-offset-2"
             >
-            https://cedriccampagne.github.io/Portfolio-V2/
+            https://portfolio-one-weld-49.vercel.app/
             </a>
         </p>
         <p>
